@@ -24,6 +24,8 @@
 		728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1312BAAE90D00542975 /* SoundListViewModel.swift */; };
 		728CE1342BAAE91600542975 /* SoundListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1332BAAE91600542975 /* SoundListView.swift */; };
 		728CE1362BAAE96E00542975 /* FIleManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1352BAAE96E00542975 /* FIleManagerService.swift */; };
+		728CE1BC2BAC20C700542975 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1BB2BAC20C700542975 /* ImageExtension.swift */; };
+		728CE1BE2BAC225500542975 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1BD2BAC225500542975 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		728CE1312BAAE90D00542975 /* SoundListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModel.swift; sourceTree = "<group>"; };
 		728CE1332BAAE91600542975 /* SoundListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListView.swift; sourceTree = "<group>"; };
 		728CE1352BAAE96E00542975 /* FIleManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIleManagerService.swift; sourceTree = "<group>"; };
+		728CE1BB2BAC20C700542975 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		728CE1BD2BAC225500542975 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 		728CE1002BAAC9FF00542975 /* BeatMaker */ = {
 			isa = PBXGroup;
 			children = (
+				728CE1BA2BAC20B200542975 /* Utilities */,
 				728CE1172BAADA2D00542975 /* Application */,
 				728CE1182BAADC1E00542975 /* Services */,
 				728CE1152BAADA0900542975 /* Core */,
@@ -211,6 +216,15 @@
 			path = Files;
 			sourceTree = "<group>";
 		};
+		728CE1BA2BAC20B200542975 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				728CE1BB2BAC20C700542975 /* ImageExtension.swift */,
+				728CE1BD2BAC225500542975 /* ColorExtension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -294,8 +308,10 @@
 				728CE11C2BAADCBA00542975 /* NetworkService.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
 				728CE11A2BAADC6E00542975 /* SoundPlayerService.swift in Sources */,
+				728CE1BE2BAC225500542975 /* ColorExtension.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,
+				728CE1BC2BAC20C700542975 /* ImageExtension.swift in Sources */,
 				728CE1362BAAE96E00542975 /* FIleManagerService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

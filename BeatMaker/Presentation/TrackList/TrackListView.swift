@@ -55,12 +55,13 @@ struct TrackListView: View {
             })
             .navigationDestination(isPresented: $isShowingPlayTrackView) {
                 if let trackToPlay = selectedTrack {
-                    PlayTrackView(track: trackToPlay)
+                    PlayTrackView(viewModel: PlayTrackViewModel(track: trackToPlay))
                 }
             }
             .sheet(isPresented: $isShowingEditTrackSheet) {
                 if let trackForEditing = selectedTrack {
                     Text("Редактирование трека " + trackForEditing.name)
+                        .presentationDetents([.medium, .large])
                 }
             }
         }
