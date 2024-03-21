@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		630B91952BAC1CE800CA5267 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630B91942BAC1CE800CA5267 /* MainScreenView.swift */; };
+		630B91972BAC1D8400CA5267 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630B91962BAC1D8400CA5267 /* MainScreenViewModel.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
 		728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1032BAAC9FF00542975 /* TrackListView.swift */; };
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630B91942BAC1CE800CA5267 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		630B91962BAC1D8400CA5267 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerApp.swift; sourceTree = "<group>"; };
 		728CE1032BAAC9FF00542975 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
@@ -59,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		630B91932BAC1CB500CA5267 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				630B91942BAC1CE800CA5267 /* MainScreenView.swift */,
+				630B91962BAC1D8400CA5267 /* MainScreenViewModel.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		728CE0F52BAAC9FF00542975 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +113,7 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				630B91932BAC1CB500CA5267 /* MainScreen */,
 				728CE1142BAAD9EA00542975 /* TrackList */,
 				728CE12B2BAAE0D600542975 /* PlayTrack */,
 				728CE11F2BAADD1D00542975 /* TrackEditor */,
@@ -284,9 +298,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				728CE12F2BAAE75000542975 /* PlayTrackViewModel.swift in Sources */,
+				630B91952BAC1CE800CA5267 /* MainScreenView.swift in Sources */,
 				728CE12D2BAAE0E800542975 /* PlayTrackView.swift in Sources */,
 				728CE1342BAAE91600542975 /* SoundListView.swift in Sources */,
 				728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */,
+				630B91972BAC1D8400CA5267 /* MainScreenViewModel.swift in Sources */,
 				728CE1102BAAD06600542975 /* Track.swift in Sources */,
 				728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */,
 				728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */,
