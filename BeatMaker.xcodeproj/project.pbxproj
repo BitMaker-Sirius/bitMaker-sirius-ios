@@ -15,6 +15,8 @@
 		5E45CB482BAD06B700E14B41 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB402BAD06B700E14B41 /* PlaybackService.swift */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
+		63CD48B92BADB9CC0033CF77 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48B62BADB9CC0033CF77 /* MainScreenView.swift */; };
+		63CD48BA2BADB9CC0033CF77 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48B72BADB9CC0033CF77 /* MainScreenViewModel.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
 		728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1032BAAC9FF00542975 /* TrackListView.swift */; };
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		5E45CB402BAD06B700E14B41 /* PlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
+		63CD48B62BADB9CC0033CF77 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		63CD48B72BADB9CC0033CF77 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerApp.swift; sourceTree = "<group>"; };
 		728CE1032BAAC9FF00542975 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,15 @@
 			path = PlaybackService;
 			sourceTree = "<group>";
 		};
+		63CD48B82BADB9CC0033CF77 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				63CD48B62BADB9CC0033CF77 /* MainScreenView.swift */,
+				63CD48B72BADB9CC0033CF77 /* MainScreenViewModel.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		728CE0F52BAAC9FF00542975 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +189,7 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				63CD48B82BADB9CC0033CF77 /* MainScreen */,
 				728CE1142BAAD9EA00542975 /* TrackList */,
 				728CE12B2BAAE0D600542975 /* PlayTrack */,
 				728CE11F2BAADD1D00542975 /* TrackEditor */,
@@ -362,11 +376,13 @@
 			files = (
 				5E45CB442BAD06B700E14B41 /* NetworkManager.swift in Sources */,
 				728CE12F2BAAE75000542975 /* PlayTrackViewModel.swift in Sources */,
+				63CD48BA2BADB9CC0033CF77 /* MainScreenViewModel.swift in Sources */,
 				728CE12D2BAAE0E800542975 /* PlayTrackView.swift in Sources */,
 				728CE1C42BAD812B00542975 /* ImageExtension.swift in Sources */,
 				5E45CB452BAD06B700E14B41 /* VizualizationService.swift in Sources */,
 				728CE1342BAAE91600542975 /* SoundListView.swift in Sources */,
 				728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */,
+				63CD48B92BADB9CC0033CF77 /* MainScreenView.swift in Sources */,
 				5E45CB432BAD06B700E14B41 /* RecordingService.swift in Sources */,
 				5E45CB462BAD06B700E14B41 /* SamplingService.swift in Sources */,
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
