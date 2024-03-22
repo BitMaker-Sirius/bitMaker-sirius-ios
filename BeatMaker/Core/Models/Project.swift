@@ -5,15 +5,15 @@
 //  Created by Nik Y on 20.03.2024.
 //
 
-import SwiftUI
+import Foundation
 
 struct Project: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let image: URL?
-    let upateDate: Date?
-    let bpm: Int
-    let sounds: [Sound]
+    let id: String
+    let name: String?
+    let image: String?
+    let updateDate: Date?
+    let metronomeBpm: Int
+    let preparedSounds: [Sound]
     let tracks: [Track]
     
     static func == (lhs: Project, rhs: Project) -> Bool {
