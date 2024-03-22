@@ -13,7 +13,8 @@ struct TrackEditorView: View {
     
     var body: some View {
         VStack {
-            Text(project.name).font(.title)
+            // some hardcode
+            Text(project.name ?? "some hardcode").font(.title)
             
             if viewModel.selectedSounds.isEmpty {
                 Text("Звуки не выбраны")
@@ -21,13 +22,14 @@ struct TrackEditorView: View {
                 ScrollView(.horizontal) {
                     LazyHStack {
                         ForEach(viewModel.selectedSounds) { sound in
-                            Text("Sound " + sound.name)
+                            // some hardcode
+                            Text("Sound " + (sound.name ?? "some hardcode"))
                         }
                     }
                 }.padding()
             }
             
-            NavigationLink(destination: SoundListView(editorViewModel: viewModel)) {
+            NavigationLink(destination: SoundListView(viewModel: SoundListViewModel(editorViewModel: viewModel, addedToTrackSounds: []))) {
                 Text("Добавить звуки")
             }
         }

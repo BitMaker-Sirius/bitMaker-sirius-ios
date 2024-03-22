@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5E45CB432BAD06B700E14B41 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB362BAD06B700E14B41 /* RecordingService.swift */; };
 		5E45CB442BAD06B700E14B41 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB382BAD06B700E14B41 /* NetworkManager.swift */; };
 		5E45CB452BAD06B700E14B41 /* VizualizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB3A2BAD06B700E14B41 /* VizualizationService.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5E45CB362BAD06B700E14B41 /* RecordingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
 		5E45CB382BAD06B700E14B41 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5E45CB3A2BAD06B700E14B41 /* VizualizationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VizualizationService.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			children = (
 				728CE1332BAAE91600542975 /* SoundListView.swift */,
 				728CE1312BAAE90D00542975 /* SoundListViewModel.swift */,
+				20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */,
 			);
 			path = SoundList;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,
 				5E45CB472BAD06B700E14B41 /* ProjectManager.swift in Sources */,
+				20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */,
 				5E45CB482BAD06B700E14B41 /* PlaybackService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

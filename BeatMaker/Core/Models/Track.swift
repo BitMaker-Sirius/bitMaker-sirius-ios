@@ -8,6 +8,7 @@
 import Foundation
 
 struct Track {
+    let id: String
     let sound: Sound
     let points: [TrackPoint]
 }
