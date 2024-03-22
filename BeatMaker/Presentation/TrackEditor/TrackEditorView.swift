@@ -17,6 +17,8 @@ struct TrackEditorView: View {
             
             if viewModel.selectedSounds.isEmpty {
                 Text("Звуки не выбраны")
+                    .font(customFont: .accentTitle, size: 36)
+                    .foregroundStyle(Color.accentColor)
             } else {
                 ScrollView(.horizontal) {
                     LazyHStack {
@@ -29,6 +31,7 @@ struct TrackEditorView: View {
             
             NavigationLink(destination: SoundListView(editorViewModel: viewModel)) {
                 Text("Добавить звуки")
+                    .font(customFont: .subtitle, size: 20)
             }
         }
     }

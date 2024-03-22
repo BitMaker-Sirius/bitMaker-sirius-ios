@@ -13,13 +13,13 @@ enum CustomFonts: String {
 }
 
 extension Font {
-    static func custom(_ customFont: CustomFonts, size: CGFloat) -> Font {
+    fileprivate static func custom(_ customFont: CustomFonts, size: CGFloat) -> Font {
         Font.custom(customFont.rawValue, size: size)
     }
 }
 
 extension Text {
-    func font(_ customFont: CustomFonts, size: CGFloat) -> Text {
+    func font(customFont: CustomFonts, size: CGFloat) -> Text {
         self.font(Font.custom(customFont, size: size))
     }
 }
