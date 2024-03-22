@@ -9,13 +9,11 @@ import SwiftUI
 
 struct TrackEditorView: View {
     @StateObject var viewModel = TrackEditorViewModel()
-    let track: Track
+    let project: Project
     
     var body: some View {
         VStack {
-            Text(track.name).font(.title)
-            Text(track.description).font(.body)
-                .padding(.bottom, 50)
+            Text(project.name).font(.title)
             
             if viewModel.selectedSounds.isEmpty {
                 Text("Звуки не выбраны")
@@ -33,10 +31,5 @@ struct TrackEditorView: View {
                 Text("Добавить звуки")
             }
         }
-    }
-}
-struct TrackEditorView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrackEditorView(track: Track(name: "Трек", description: "Описание"))
     }
 }
