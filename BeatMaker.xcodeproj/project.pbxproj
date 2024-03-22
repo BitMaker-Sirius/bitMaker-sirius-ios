@@ -18,7 +18,6 @@
 		63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */; };
 		63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */; };
 		63B8E6992BADC916001F3BE2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8E6962BADC916001F3BE2 /* CustomFonts.swift */; };
-		63B8E69C2BADC92C001F3BE2 /* Colors in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E69B2BADC92C001F3BE2 /* Colors */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
 		728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1032BAAC9FF00542975 /* TrackListView.swift */; };
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
@@ -49,7 +48,6 @@
 		63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		63B8E6962BADC916001F3BE2 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
-		63B8E69B2BADC92C001F3BE2 /* Colors */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Colors; sourceTree = "<group>"; };
 		63B8E69D2BADC98A001F3BE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerApp.swift; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 		728CE1372BAAF61400542975 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				63B8E69B2BADC92C001F3BE2 /* Colors */,
 				63B8E6932BADC8F9001F3BE2 /* Fonts */,
 				728CE1052BAACA0100542975 /* Assets.xcassets */,
 			);
@@ -353,7 +350,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63B8E69C2BADC92C001F3BE2 /* Colors in Resources */,
 				63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */,
 				63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */,
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
