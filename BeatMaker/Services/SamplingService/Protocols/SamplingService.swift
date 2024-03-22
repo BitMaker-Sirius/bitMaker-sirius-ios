@@ -7,6 +7,6 @@
 
 import AVFoundation
 
-protocol NetworkManager {
-    
+protocol SamplingService {
+    // Реализация записи Track
 }

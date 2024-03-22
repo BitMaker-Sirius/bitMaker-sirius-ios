@@ -9,10 +9,24 @@
 /* Begin PBXBuildFile section */
 		5E45CB432BAD06B700E14B41 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB362BAD06B700E14B41 /* RecordingService.swift */; };
 		5E45CB442BAD06B700E14B41 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB382BAD06B700E14B41 /* NetworkManager.swift */; };
-		5E45CB452BAD06B700E14B41 /* VizualizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB3A2BAD06B700E14B41 /* VizualizationService.swift */; };
+		5E45CB452BAD06B700E14B41 /* VisualizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB3A2BAD06B700E14B41 /* VisualizationService.swift */; };
 		5E45CB462BAD06B700E14B41 /* SamplingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB3C2BAD06B700E14B41 /* SamplingService.swift */; };
 		5E45CB472BAD06B700E14B41 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB3E2BAD06B700E14B41 /* ProjectManager.swift */; };
 		5E45CB482BAD06B700E14B41 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB402BAD06B700E14B41 /* PlaybackService.swift */; };
+		5E45CB4B2BAD6B2F00E14B41 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB4A2BAD6B2F00E14B41 /* DataStorage.swift */; };
+		5E45CB4D2BAD704400E14B41 /* SoundDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB4C2BAD704400E14B41 /* SoundDataStorage.swift */; };
+		5E45CB502BAD740B00E14B41 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB4F2BAD740B00E14B41 /* ProjectDataStorage.swift */; };
+		5E45CB522BAD748000E14B41 /* ImageDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB512BAD748000E14B41 /* ImageDataStorage.swift */; };
+		5E45CB552BAD754F00E14B41 /* RealmDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB542BAD754F00E14B41 /* RealmDataStorageService.swift */; };
+		5E45CB572BAD758800E14B41 /* FileDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB562BAD758800E14B41 /* FileDataStorageService.swift */; };
+		5E45CB5A2BAD76E200E14B41 /* ProjectPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB592BAD76E200E14B41 /* ProjectPlaybackService.swift */; };
+		5E45CB5C2BAD771B00E14B41 /* SoundPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB5B2BAD771B00E14B41 /* SoundPlaybackService.swift */; };
+		5E45CB5E2BAD774900E14B41 /* TrackPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB5D2BAD774900E14B41 /* TrackPlaybackService.swift */; };
+		5E45CB6A2BAD81A900E14B41 /* VisualizationServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB692BAD81A900E14B41 /* VisualizationServiceImp.swift */; };
+		5E45CB6D2BAD81E200E14B41 /* SamplingServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB6C2BAD81E200E14B41 /* SamplingServiceImp.swift */; };
+		5E45CB702BAD826A00E14B41 /* RecordingServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB6F2BAD826A00E14B41 /* RecordingServiceImp.swift */; };
+		5E45CB762BAD82E200E14B41 /* NetworkManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB752BAD82E200E14B41 /* NetworkManagerImp.swift */; };
+		5E45CB792BAD832400E14B41 /* ProjectManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E45CB782BAD832400E14B41 /* ProjectManagerImp.swift */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
@@ -34,10 +48,24 @@
 /* Begin PBXFileReference section */
 		5E45CB362BAD06B700E14B41 /* RecordingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
 		5E45CB382BAD06B700E14B41 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		5E45CB3A2BAD06B700E14B41 /* VizualizationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VizualizationService.swift; sourceTree = "<group>"; };
+		5E45CB3A2BAD06B700E14B41 /* VisualizationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizationService.swift; sourceTree = "<group>"; };
 		5E45CB3C2BAD06B700E14B41 /* SamplingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplingService.swift; sourceTree = "<group>"; };
 		5E45CB3E2BAD06B700E14B41 /* ProjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
 		5E45CB402BAD06B700E14B41 /* PlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
+		5E45CB4A2BAD6B2F00E14B41 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
+		5E45CB4C2BAD704400E14B41 /* SoundDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDataStorage.swift; sourceTree = "<group>"; };
+		5E45CB4F2BAD740B00E14B41 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
+		5E45CB512BAD748000E14B41 /* ImageDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataStorage.swift; sourceTree = "<group>"; };
+		5E45CB542BAD754F00E14B41 /* RealmDataStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataStorageService.swift; sourceTree = "<group>"; };
+		5E45CB562BAD758800E14B41 /* FileDataStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDataStorageService.swift; sourceTree = "<group>"; };
+		5E45CB592BAD76E200E14B41 /* ProjectPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPlaybackService.swift; sourceTree = "<group>"; };
+		5E45CB5B2BAD771B00E14B41 /* SoundPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlaybackService.swift; sourceTree = "<group>"; };
+		5E45CB5D2BAD774900E14B41 /* TrackPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPlaybackService.swift; sourceTree = "<group>"; };
+		5E45CB692BAD81A900E14B41 /* VisualizationServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizationServiceImp.swift; sourceTree = "<group>"; };
+		5E45CB6C2BAD81E200E14B41 /* SamplingServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplingServiceImp.swift; sourceTree = "<group>"; };
+		5E45CB6F2BAD826A00E14B41 /* RecordingServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingServiceImp.swift; sourceTree = "<group>"; };
+		5E45CB752BAD82E200E14B41 /* NetworkManagerImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerImp.swift; sourceTree = "<group>"; };
+		5E45CB782BAD832400E14B41 /* ProjectManagerImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManagerImp.swift; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,9 +100,10 @@
 		5E45CB342BAD06B700E14B41 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5E45CB532BAD74C500E14B41 /* DataStorageService */,
 				5E45CB352BAD06B700E14B41 /* RecordingService */,
 				5E45CB372BAD06B700E14B41 /* NetworkManager */,
-				5E45CB392BAD06B700E14B41 /* VizualizationService */,
+				5E45CB392BAD06B700E14B41 /* VisualizationService */,
 				5E45CB3B2BAD06B700E14B41 /* SamplingService */,
 				5E45CB3D2BAD06B700E14B41 /* ProjectManager */,
 				5E45CB3F2BAD06B700E14B41 /* PlaybackService */,
@@ -86,7 +115,8 @@
 		5E45CB352BAD06B700E14B41 /* RecordingService */ = {
 			isa = PBXGroup;
 			children = (
-				5E45CB362BAD06B700E14B41 /* RecordingService.swift */,
+				5E45CB6E2BAD825E00E14B41 /* Protocols */,
+				5E45CB6F2BAD826A00E14B41 /* RecordingServiceImp.swift */,
 			);
 			path = RecordingService;
 			sourceTree = "<group>";
@@ -94,23 +124,26 @@
 		5E45CB372BAD06B700E14B41 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				5E45CB382BAD06B700E14B41 /* NetworkManager.swift */,
+				5E45CB742BAD82C800E14B41 /* Protocols */,
+				5E45CB752BAD82E200E14B41 /* NetworkManagerImp.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
 		};
-		5E45CB392BAD06B700E14B41 /* VizualizationService */ = {
+		5E45CB392BAD06B700E14B41 /* VisualizationService */ = {
 			isa = PBXGroup;
 			children = (
-				5E45CB3A2BAD06B700E14B41 /* VizualizationService.swift */,
+				5E45CB682BAD819C00E14B41 /* Protocols */,
+				5E45CB692BAD81A900E14B41 /* VisualizationServiceImp.swift */,
 			);
-			path = VizualizationService;
+			path = VisualizationService;
 			sourceTree = "<group>";
 		};
 		5E45CB3B2BAD06B700E14B41 /* SamplingService */ = {
 			isa = PBXGroup;
 			children = (
-				5E45CB3C2BAD06B700E14B41 /* SamplingService.swift */,
+				5E45CB6B2BAD81D500E14B41 /* Protocols */,
+				5E45CB6C2BAD81E200E14B41 /* SamplingServiceImp.swift */,
 			);
 			path = SamplingService;
 			sourceTree = "<group>";
@@ -118,7 +151,8 @@
 		5E45CB3D2BAD06B700E14B41 /* ProjectManager */ = {
 			isa = PBXGroup;
 			children = (
-				5E45CB3E2BAD06B700E14B41 /* ProjectManager.swift */,
+				5E45CB772BAD831000E14B41 /* Protocols */,
+				5E45CB782BAD832400E14B41 /* ProjectManagerImp.swift */,
 			);
 			path = ProjectManager;
 			sourceTree = "<group>";
@@ -126,7 +160,10 @@
 		5E45CB3F2BAD06B700E14B41 /* PlaybackService */ = {
 			isa = PBXGroup;
 			children = (
-				5E45CB402BAD06B700E14B41 /* PlaybackService.swift */,
+				5E45CB582BAD76C400E14B41 /* Protocols */,
+				5E45CB592BAD76E200E14B41 /* ProjectPlaybackService.swift */,
+				5E45CB5D2BAD774900E14B41 /* TrackPlaybackService.swift */,
+				5E45CB5B2BAD771B00E14B41 /* SoundPlaybackService.swift */,
 			);
 			path = PlaybackService;
 			sourceTree = "<group>";
@@ -134,8 +171,77 @@
 		5E45CB412BAD06B700E14B41 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				5E45CB4E2BAD73B900E14B41 /* Protocols */,
+				5E45CB4C2BAD704400E14B41 /* SoundDataStorage.swift */,
+				5E45CB4F2BAD740B00E14B41 /* ProjectDataStorage.swift */,
+				5E45CB512BAD748000E14B41 /* ImageDataStorage.swift */,
 			);
 			path = DataStorage;
+			sourceTree = "<group>";
+		};
+		5E45CB4E2BAD73B900E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB4A2BAD6B2F00E14B41 /* DataStorage.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5E45CB532BAD74C500E14B41 /* DataStorageService */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB542BAD754F00E14B41 /* RealmDataStorageService.swift */,
+				5E45CB562BAD758800E14B41 /* FileDataStorageService.swift */,
+			);
+			path = DataStorageService;
+			sourceTree = "<group>";
+		};
+		5E45CB582BAD76C400E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB402BAD06B700E14B41 /* PlaybackService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5E45CB682BAD819C00E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB3A2BAD06B700E14B41 /* VisualizationService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5E45CB6B2BAD81D500E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB3C2BAD06B700E14B41 /* SamplingService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5E45CB6E2BAD825E00E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB362BAD06B700E14B41 /* RecordingService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5E45CB742BAD82C800E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB382BAD06B700E14B41 /* NetworkManager.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5E45CB772BAD831000E14B41 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E45CB3E2BAD06B700E14B41 /* ProjectManager.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		728CE0F52BAAC9FF00542975 = {
@@ -355,24 +461,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E45CB442BAD06B700E14B41 /* NetworkManager.swift in Sources */,
+				5E45CB6A2BAD81A900E14B41 /* VisualizationServiceImp.swift in Sources */,
 				728CE12F2BAAE75000542975 /* PlayTrackViewModel.swift in Sources */,
+				5E45CB6D2BAD81E200E14B41 /* SamplingServiceImp.swift in Sources */,
 				728CE12D2BAAE0E800542975 /* PlayTrackView.swift in Sources */,
-				5E45CB452BAD06B700E14B41 /* VizualizationService.swift in Sources */,
+				5E45CB452BAD06B700E14B41 /* VisualizationService.swift in Sources */,
 				728CE1342BAAE91600542975 /* SoundListView.swift in Sources */,
 				728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */,
+				5E45CB522BAD748000E14B41 /* ImageDataStorage.swift in Sources */,
 				5E45CB432BAD06B700E14B41 /* RecordingService.swift in Sources */,
+				5E45CB4B2BAD6B2F00E14B41 /* DataStorage.swift in Sources */,
 				5E45CB462BAD06B700E14B41 /* SamplingService.swift in Sources */,
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
+				5E45CB5C2BAD771B00E14B41 /* SoundPlaybackService.swift in Sources */,
 				728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */,
+				5E45CB5A2BAD76E200E14B41 /* ProjectPlaybackService.swift in Sources */,
 				728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */,
+				5E45CB792BAD832400E14B41 /* ProjectManagerImp.swift in Sources */,
 				5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */,
+				5E45CB502BAD740B00E14B41 /* ProjectDataStorage.swift in Sources */,
 				728CE11E2BAADCCC00542975 /* Sound.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
+				5E45CB552BAD754F00E14B41 /* RealmDataStorageService.swift in Sources */,
 				5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
+				5E45CB762BAD82E200E14B41 /* NetworkManagerImp.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,
+				5E45CB702BAD826A00E14B41 /* RecordingServiceImp.swift in Sources */,
 				5E45CB472BAD06B700E14B41 /* ProjectManager.swift in Sources */,
 				5E45CB482BAD06B700E14B41 /* PlaybackService.swift in Sources */,
+				5E45CB4D2BAD704400E14B41 /* SoundDataStorage.swift in Sources */,
+				5E45CB5E2BAD774900E14B41 /* TrackPlaybackService.swift in Sources */,
+				5E45CB572BAD758800E14B41 /* FileDataStorageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +633,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMaker/Preview Content\"";
-				DEVELOPMENT_TEAM = 6LLQ8A4VCD;
+				DEVELOPMENT_TEAM = S3KD837NRD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -542,7 +662,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMaker/Preview Content\"";
-				DEVELOPMENT_TEAM = 6LLQ8A4VCD;
+				DEVELOPMENT_TEAM = S3KD837NRD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

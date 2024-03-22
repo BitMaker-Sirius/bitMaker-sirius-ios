@@ -7,6 +7,6 @@
 
 import AVFoundation
 
-protocol SamplingService {
-    
+protocol NetworkManager {
+    // Реализация походов в сеть
 }

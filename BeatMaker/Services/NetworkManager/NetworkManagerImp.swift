@@ -1,12 +1,12 @@
 //
-//  SamplingService.swift
+//  NetworkManagerImp.swift
 //  BeatMaker
 //
 //  Created by Александр Фофонов on 22.03.2024.
 //
 
-import AVFoundation
+import Foundation
 
-protocol RecordingService {
+final class NetworkManagerImp: NetworkManager {
     
 }

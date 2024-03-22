@@ -5,8 +5,8 @@
 //  Created by Александр Фофонов on 22.03.2024.
 //
 
-import AVFoundation
+import Foundation
 
-protocol VizualizationService {
-    
+protocol RecordingService {
+    // Реализация записи с микрофона
 }
