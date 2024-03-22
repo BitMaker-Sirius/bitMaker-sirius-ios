@@ -7,9 +7,32 @@
 
 import SwiftUI
 
-struct PlayTrackView: View {
+enum PlayProjectViewEvent {
+    case playTap
+    case nextTap
+    case prevTap
+    case editTap
+    case likeTap
+}
+
+struct PlayProjectViewState {
+    var project: Project
+    var isPlaying: Bool = false
+    var currentTime: Double = 0
+    var totalTime: Double
+    var liked: Bool
+    var formatTime: String
+}
+
+protocol PlayProjectViewModeling: ObservableObject {
+    var state: PlayProjectViewState { get set }
+
+    func handle(_ event: PlayProjectViewEvent)
+}
+
+struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel: PlayTrackViewModel
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         ZStack {
@@ -28,7 +51,7 @@ struct PlayTrackView: View {
                     Spacer()
                     
                     Button {
-                        
+                        viewModel.handle(.editTap)
                     } label: {
                         Image.options.resizable().frame(width: 16, height: 16)
                             .padding(12).background(Color.background_color)
@@ -39,25 +62,28 @@ struct PlayTrackView: View {
                 
                 Spacer()
                 
-                Text(viewModel.track.name)
+                Text(viewModel.state.project.name)
                     .padding(.top, 12)
                 
                 Spacer()
                 
                 HStack(alignment: .center, spacing: 12) {
-                    Text(viewModel.formatTime())
+                    Text(viewModel.state.formatTime)
                        .frame(width: 50, height: 20, alignment: .center)
-                    Slider(value: $viewModel.currentTime, in: 0...viewModel.totalDuration, step: 1)    .animation(.linear(duration: 0.1), value: viewModel.currentTime)
+                    Slider(value: $viewModel.state.currentTime, in: 0...viewModel.state.totalTime, step: 1)
+                        .animation(.linear(duration: 0.1), value: viewModel.state.currentTime)
                     
-                    Button(action: { viewModel.liked.toggle() }) {
-                        (viewModel.liked ? Image("heart-filled_icon") : Image("heart_icon"))
+                    Button {
+                        viewModel.handle(.likeTap)
+                    } label: {
+                        (viewModel.state.liked ? Image("heart-filled_icon") : Image("heart_icon"))
                             .resizable().frame(width: 20, height: 20)
                     }
                 }.padding(30)
                 
                 HStack(alignment: .center) {
                     Button {
-                        
+                        viewModel.handle(.prevTap)
                     } label: {
                         Image.next.resizable().frame(width: 18, height: 18)
                             .rotationEffect(Angle(degrees: 180))
@@ -69,9 +95,9 @@ struct PlayTrackView: View {
                     Spacer()
                     
                     Button {
-                        viewModel.isPlaying.toggle()
+                        viewModel.handle(.playTap)
                     } label: {
-                        (viewModel.isPlaying ? Image.pause : Image.play)
+                        (viewModel.state.isPlaying ? Image.pause : Image.play)
                             .resizable().frame(width: 24, height: 27)
                             .padding(34).background(Color.onBackgroundColor_color)
                             .clipShape(Circle())
@@ -81,7 +107,7 @@ struct PlayTrackView: View {
                     Spacer()
                     
                     Button {
-                        
+                        viewModel.handle(.nextTap)
                     } label: {
                         Image.next.resizable().frame(width: 18, height: 18)
                             .padding(24).background(Color.background_color)
@@ -94,8 +120,8 @@ struct PlayTrackView: View {
     }
 }
 
-struct PlayTrackView_Previews: PreviewProvider {
+struct PlayProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayTrackView(viewModel: PlayTrackViewModel(track: Track(name: "Track name", description: "description")))
+        PlayProjectView(viewModel: PlayProjectViewModel(project: Project(name: "Project 1", image: nil, upateDate: nil, bpm: 120, sounds: [], tracks: [])))
     }
 }
