@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63E2782A2BAD55CB00BC4E75 /* SoundSettingsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E278292BAD55CB00BC4E75 /* SoundSettingsGraphView.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
 		728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1032BAAC9FF00542975 /* TrackListView.swift */; };
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63E278292BAD55CB00BC4E75 /* SoundSettingsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingsGraphView.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerApp.swift; sourceTree = "<group>"; };
 		728CE1032BAAC9FF00542975 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63E278282BAD559500BC4E75 /* SoundSettingsGraph */ = {
+			isa = PBXGroup;
+			children = (
+				63E278292BAD55CB00BC4E75 /* SoundSettingsGraphView.swift */,
+			);
+			path = SoundSettingsGraph;
+			sourceTree = "<group>";
+		};
 		728CE0F52BAAC9FF00542975 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
 				728CE1142BAAD9EA00542975 /* TrackList */,
 				728CE12B2BAAE0D600542975 /* PlayTrack */,
 				728CE11F2BAADD1D00542975 /* TrackEditor */,
@@ -295,6 +306,7 @@
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
 				728CE11A2BAADC6E00542975 /* SoundPlayerService.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
+				63E2782A2BAD55CB00BC4E75 /* SoundSettingsGraphView.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,
 				728CE1362BAAE96E00542975 /* FIleManagerService.swift in Sources */,
 			);

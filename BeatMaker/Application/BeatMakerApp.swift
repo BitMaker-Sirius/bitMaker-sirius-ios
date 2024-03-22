@@ -11,7 +11,7 @@ import SwiftUI
 struct BeatMakerApp: App {
     var body: some Scene {
         WindowGroup {
-            TrackListView()
+            SoundSettingsGraphView()
         }
     }
 }
