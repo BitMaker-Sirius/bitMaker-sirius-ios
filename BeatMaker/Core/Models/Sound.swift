@@ -5,10 +5,11 @@
 //  Created by Nik Y on 20.03.2024.
 //
 
-import Foundation
+import AVFoundation
 
 struct Sound: Identifiable, Hashable {
     let id = UUID()
+    //let audioFile: AVAudioFile
     let name: String
     let emoji: String
 //    let isChosen: Bool

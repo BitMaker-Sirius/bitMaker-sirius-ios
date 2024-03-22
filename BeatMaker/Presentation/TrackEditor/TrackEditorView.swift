@@ -13,15 +13,15 @@ enum PlayTrackViewEvent {
 
 struct TrackEditorViewState {
     var shouldShowPause: Bool
-    var choosenSoundId: String?  
-//    var chooseSound: [Bool]
-//    var chooseSound: UUID
+    var choosenSoundId: String?
+    //    var chooseSound: [Bool]
+    //    var chooseSound: UUID
     var soundsArray: [Sound]
 }
 
 protocol TrackEditorViewModeling: ObservableObject {
     var state: TrackEditorViewState { get }
-
+    
     func handle(_ event: PlayTrackViewEvent)
     
     func setSelectedSound(at index: UUID)
@@ -33,10 +33,10 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     
     @StateObject var viewModel: ViewModel
     
-     let tactCount: Int = 10
-     var tickHeight: CGFloat = 20
-     var tickWidth: CGFloat = 1
-     var barHeight: CGFloat = 1
+    let tactCount: Int = 10
+    var tickHeight: CGFloat = 20
+    var tickWidth: CGFloat = 1
+    var barHeight: CGFloat = 1
     
     @State  var progressValue: Float = 0.5
     @State private var isSave: Bool = false
@@ -53,11 +53,11 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
         VStack {
             ProgressView(value: progressValue)
                 .progressViewStyle(LinearProgressViewStyle(tint: Color("text_color")))
-                .padding(.horizontal, 50)
+                .padding(.horizontal, 40)
                 .padding(.top, 15)
             
             
-            HStack(spacing: 0) {
+            HStack {
                 Button(action: {
                     print("show all used sounds")
                 }) {
@@ -67,10 +67,10 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color("text_color"))
                 }
-                .padding(.leading, 15)
+                .padding(.leading,5)
                 
                 Spacer()
-                ZStack() {
+                ZStack {
                     HStack {
                         ForEach(1..<tactCount) { _ in
                             Rectangle()
@@ -84,14 +84,15 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                             .foregroundColor(Color("text_color"))
                     }
                     .padding(.leading, 8)
-                    .padding(.trailing, 50)
+                    .padding(.trailing, 40)
                     
                     Rectangle()
                         .frame(height: 2)
                         .foregroundColor(Color("text_color"))
                         .padding(.leading, 8)
-                        .padding(.trailing, 50)
+                        .padding(.trailing, 40)
                 }
+                //.padding(.trailing, 30)
             }
             .padding(.bottom, 10)
             
@@ -133,7 +134,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                     ForEach(viewModel.state.soundsArray, id: \.self) {sound in
                         soundView(text: sound.emoji, name: sound.name) {
                             viewModel.setSelectedSound(at: sound.id)
-                            }
+                        }
                         .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color("main_blue").opacity(1) : Color("main_blue").opacity(0), radius: 8, x: 0, y: 4)
                     }
                 }
@@ -198,7 +199,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
         } )
         .navigationDestination(
             isPresented: $isSave) {
-                PlayTrackView(track: Track(name: "", description: ""))
+                PlayProjectView(viewModel: PlayProjectViewModel(project: Project(name: "Project 1", image: nil, upateDate: nil, bpm: 120, sounds: [], tracks: [])))
             }
     }
     

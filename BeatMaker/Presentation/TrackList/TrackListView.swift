@@ -10,24 +10,24 @@ import SwiftUI
 struct TrackListView: View {
     @StateObject var viewModel = TrackListViewModel()
     
-    @State private var trackPath: [Track] = []
-    @State private var selectedTrack: Track?
-    @State private var isShowingPlayTrackView = false
-    @State private var isShowingEditTrackSheet = false
+    @State private var projectPath: [Project] = []
+    @State private var selectedProject: Project?
+    @State private var isShowingPlayProjectView = false
+    @State private var isShowingEditProjectSheet = false
     
     var body: some View {
-        NavigationStack(path: $trackPath) {
+        NavigationStack(path: $projectPath) {
             VStack {
                 LazyVStack {
-                    ForEach(viewModel.tracks) { track in
+                    ForEach(viewModel.projects) { project in
                         VStack {
                             HStack {
-                                Text(track.name)
+                                Text(project.name)
                                 Spacer()
                                 Button {
-                                    selectedTrack = track
-                                    isShowingPlayTrackView = true
-                                    print("Воспроизведение " + track.name)
+                                    selectedProject = project
+                                    isShowingPlayProjectView = true
+                                    print("Воспроизведение " + project.name)
                                 } label: {
                                     Image(systemName: "play.circle")
                                 }
@@ -37,30 +37,33 @@ struct TrackListView: View {
                         .padding()
                         .background()
                         .onTapGesture {
-                            print("Tap on \(track.name)")
-                            trackPath.append(track)
+                            print("Tap on \(project.name)")
+                            projectPath.append(project)
                         }
                         .onLongPressGesture {
-                            selectedTrack = track
-                            isShowingEditTrackSheet = true
-                            print("Long press on \(track.name)")
+                            selectedProject = project
+                            isShowingEditProjectSheet = true
+                            print("Long press on \(project.name)")
                         }
                     }
                 }
                 
                 Spacer()
             }
-            .navigationDestination(for: Track.self, destination: { track in
-                TrackEditorView(viewModel: TrackEditorViewModel()) // TrackEditorView(track: track)
+            .navigationDestination(for: Project.self, destination: { project in
+//                TrackEditorView(project: project)
+                TrackEditorView(viewModel: TrackEditorViewModel())
             })
-            .navigationDestination(isPresented: $isShowingPlayTrackView) {
-                if let trackToPlay = selectedTrack {
-                    PlayTrackView(track: trackToPlay)
+            .navigationDestination(isPresented: $isShowingPlayProjectView) {
+                if let projectToPlay = selectedProject {
+                    PlayProjectView(viewModel: PlayProjectViewModel(project: projectToPlay))
+                        .navigationBarBackButtonHidden()
                 }
             }
-            .sheet(isPresented: $isShowingEditTrackSheet) {
-                if let trackForEditing = selectedTrack {
-                    Text("Редактирование трека " + trackForEditing.name)
+            .sheet(isPresented: $isShowingEditProjectSheet) {
+                if let projectForEditing = selectedProject {
+                    Text("Редактирование трека " + projectForEditing.name)
+                        .presentationDetents([.medium, .large])
                 }
             }
         }

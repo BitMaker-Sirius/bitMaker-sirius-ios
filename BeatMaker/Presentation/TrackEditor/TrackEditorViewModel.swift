@@ -17,7 +17,7 @@ class TrackEditorViewModel: TrackEditorViewModeling {
     var state = TrackEditorViewState(
         shouldShowPause: false,
         choosenSoundId: nil,
-        soundsArray: [Sound(name: "baraban", emoji: "\u{1f600}"), Sound(name: "baraban1", emoji: "\u{1f601}"), Sound(name: "baraban2", emoji: "\u{1f602}"), Sound(name: "baraban3", emoji: "\u{1f603}")]
+        soundsArray: [Sound(name: "baraban", emoji: "\u{1f600}"), Sound(name: "baraban1", emoji: "\u{1f601}"), Sound(name: "baraban2", emoji: "\u{1f602}"), Sound(name: "baraban3", emoji: "\u{1f603}"), Sound(name: "baraban4", emoji: "\u{1f614}"), Sound(name: "baraban5", emoji: "\u{1f605}"), Sound(name: "baraban6", emoji: "\u{1f606}")]
     )
     
     
