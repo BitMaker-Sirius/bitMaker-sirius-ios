@@ -8,9 +8,9 @@
 import Foundation
 
 class SoundListViewModel: ObservableObject {
-    @Published var sounds: [Sound]
+    @Published var sounds: [Sound] = []
     
-    init() {
-        sounds = FIleManagerService.shared.getSounds()
-    }
+//    init() {
+//        sounds = FIleManagerService.shared.getSounds()
+//    }
 }
