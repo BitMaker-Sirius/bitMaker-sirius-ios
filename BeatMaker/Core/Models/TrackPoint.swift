@@ -1,5 +1,5 @@
 //
-//  Track.swift
+//  TrackPoint.swift
 //  BeatMaker
 //
 //  Created by Александр Фофонов on 22.03.2024.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Track {
-    let sound: Sound
-    let points: [TrackPoint]
+struct TrackPoint {
+    let volume: Int
+    let pitch: Int
+    let time: Int
 }
