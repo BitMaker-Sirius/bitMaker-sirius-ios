@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63E2781F2BACE63D00BC4E75 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63E2781E2BACE63D00BC4E75 /* Manrope-Bold.ttf */; };
+		63E278222BACE71100BC4E75 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63E278212BACE71100BC4E75 /* Manrope-Light.ttf */; };
+		63E278242BACE83A00BC4E75 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E278232BACE83A00BC4E75 /* CustomFonts.swift */; };
+		63E278272BACEE1A00BC4E75 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E278262BACEE1A00BC4E75 /* CustomColors.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
 		728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1032BAAC9FF00542975 /* TrackListView.swift */; };
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
@@ -27,6 +31,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63E2781E2BACE63D00BC4E75 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		63E278202BACE67400BC4E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63E278212BACE71100BC4E75 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		63E278232BACE83A00BC4E75 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
+		63E278262BACEE1A00BC4E75 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerApp.swift; sourceTree = "<group>"; };
 		728CE1032BAAC9FF00542975 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
@@ -59,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63E278252BACED9C00BC4E75 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				63E278262BACEE1A00BC4E75 /* CustomColors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
 		728CE0F52BAAC9FF00542975 = {
 			isa = PBXGroup;
 			children = (
@@ -190,9 +207,11 @@
 		728CE1372BAAF61400542975 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				63E278252BACED9C00BC4E75 /* Colors */,
 				728CE1382BAAF62600542975 /* Fonts */,
 				728CE1392BAAF63A00542975 /* Files */,
 				728CE1052BAACA0100542975 /* Assets.xcassets */,
+				63E278202BACE67400BC4E75 /* Info.plist */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -200,6 +219,9 @@
 		728CE1382BAAF62600542975 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				63E278232BACE83A00BC4E75 /* CustomFonts.swift */,
+				63E2781E2BACE63D00BC4E75 /* Manrope-Bold.ttf */,
+				63E278212BACE71100BC4E75 /* Manrope-Light.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -270,9 +292,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E2781F2BACE63D00BC4E75 /* Manrope-Bold.ttf in Resources */,
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
 				728CE1272BAADEE700542975 /* Localizable.strings in Resources */,
 				728CE1062BAACA0100542975 /* Assets.xcassets in Resources */,
+				63E278222BACE71100BC4E75 /* Manrope-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +317,10 @@
 				728CE11E2BAADCCC00542975 /* Sound.swift in Sources */,
 				728CE11C2BAADCBA00542975 /* NetworkService.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
+				63E278272BACEE1A00BC4E75 /* CustomColors.swift in Sources */,
 				728CE11A2BAADC6E00542975 /* SoundPlayerService.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
+				63E278242BACE83A00BC4E75 /* CustomFonts.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,
 				728CE1362BAAE96E00542975 /* FIleManagerService.swift in Sources */,
 			);
@@ -440,6 +466,7 @@
 				DEVELOPMENT_TEAM = 6LLQ8A4VCD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeatMaker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -469,6 +496,7 @@
 				DEVELOPMENT_TEAM = 6LLQ8A4VCD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BeatMaker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
