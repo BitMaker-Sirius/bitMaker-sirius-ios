@@ -10,4 +10,6 @@ import Foundation
 struct Sound: Identifiable, Hashable {
     let id = UUID()
     let name: String
+    let emoji: String
+//    let isChosen: Bool
 }

@@ -11,6 +11,7 @@ class SoundListViewModel: ObservableObject {
     @Published var sounds: [Sound]
     
     init() {
-        sounds = FIleManagerService.shared.getSounds()
+//        sounds = {FIleManagerService.shared.getSounds()}
+        sounds = []
     }
 }

@@ -51,7 +51,7 @@ struct TrackListView: View {
                 Spacer()
             }
             .navigationDestination(for: Track.self, destination: { track in
-                TrackEditorView() // TrackEditorView(track: track)
+                TrackEditorView(viewModel: TrackEditorViewModel()) // TrackEditorView(track: track)
             })
             .navigationDestination(isPresented: $isShowingPlayTrackView) {
                 if let trackToPlay = selectedTrack {

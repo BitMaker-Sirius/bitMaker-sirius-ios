@@ -10,7 +10,7 @@ import Foundation
 class FIleManagerService {
     static var shared = FIleManagerService()
     
-    func getSounds() -> [Sound] {
-        return [Sound(name: "Sound 1"), Sound(name: "Sound 2")]
-    }
+//    func getSounds() -> [Sound] {
+//        return [Sound(name: "Sound 1"), Sound(name: "Sound 2")]
+//    }
 }
