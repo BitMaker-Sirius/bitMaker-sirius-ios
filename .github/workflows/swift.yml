@@ -13,10 +13,14 @@ jobs:
   build:
 
     runs-on: macos-13
+    timeout-minutes: 5
 
     steps:
     - uses: actions/checkout@v3
     
-    - name: Build
-      run: cd bitMaker-sirius-ios
-         xcodebuild build -project BeatMaker.xcodeproj -scheme BeatMaker clean build -sdk iphoneos CODE_SIGNING_ALLOWED=No
+    - name: Install Swiftformat
+    run: brew install swiftformat
+     
+    - name: Format code
+    run: swiftformat --lint --swiftversion 5.5 .
+     
