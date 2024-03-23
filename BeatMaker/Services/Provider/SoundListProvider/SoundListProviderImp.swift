@@ -8,7 +8,7 @@
 import Foundation
 
 final class SoundListProviderImp: SoundListProvider {
-    func getAllSounds(completion: @escaping (([Project]) -> Void)) {
+    func getAllSounds(completion: @escaping ([Project]) -> Void) {
         
     }
     
@@ -16,7 +16,7 @@ final class SoundListProviderImp: SoundListProvider {
         
     }
     
-    func createNewSound(with sound: Sound, completion: @escaping ((String) -> Void)) {
+    func createNewSound(with sound: Sound, completion: @escaping (String) -> Void) {
         
     }
     

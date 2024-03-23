@@ -16,7 +16,7 @@ final class VisualizationProjectProviderImp: VisualizationProjectProvider {
         
     }
     
-    func exportProject(completion: @escaping ((Data) -> Void)) {
+    func exportProject(completion: @escaping (Data) -> Void) {
         
     }
 }

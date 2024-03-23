@@ -8,14 +8,14 @@
 import Foundation
 
 protocol ProjectListProvider {
-    typealias BoolClosure = ((_ isCompleted: Bool) -> Void)
+    typealias BoolClosure = (_ isCompleted: Bool) -> Void
     
-    func getAllProjects(completion: @escaping (([Project]) -> Void))
+    func getAllProjects(completion: @escaping ([Project]) -> Void)
     
     func play(completion: @escaping BoolClosure)
     func stop(completion: @escaping BoolClosure)
     
-    func createNewProject(completion: @escaping ((_ id: String) -> Void))
+    func createNewProject(completion: @escaping (_ id: String) -> Void)
     func editName(by id: String, with name: String, completion: @escaping BoolClosure)
     
     func deleteProject(by id: String, completion: @escaping BoolClosure)

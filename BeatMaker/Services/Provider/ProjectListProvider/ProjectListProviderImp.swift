@@ -8,7 +8,7 @@
 import Foundation
 
 final class ProjectListProviderImp: ProjectListProvider {
-    func getAllProjects(completion: @escaping (([Project]) -> Void)) {
+    func getAllProjects(completion: @escaping ([Project]) -> Void) {
         
     }
     
@@ -20,7 +20,7 @@ final class ProjectListProviderImp: ProjectListProvider {
         
     }
     
-    func createNewProject(completion: @escaping ((String) -> Void)) {
+    func createNewProject(completion: @escaping (String) -> Void) {
         
     }
     

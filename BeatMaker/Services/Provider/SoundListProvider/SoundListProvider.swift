@@ -8,13 +8,13 @@
 import Foundation
 
 protocol SoundListProvider {
-    typealias BoolClosure = ((_ isCompleted: Bool) -> Void)
+    typealias BoolClosure = (_ isCompleted: Bool) -> Void
     
-    func getAllSounds(completion: @escaping (([Project]) -> Void))
+    func getAllSounds(completion: @escaping ([Project]) -> Void)
     
     func play(completion: @escaping BoolClosure)
     
-    func createNewSound(with sound: Sound, completion: @escaping ((_ id: String) -> Void))
+    func createNewSound(with sound: Sound, completion: @escaping (_ id: String) -> Void)
     
     func editName(by id: String, with name: String, completion: @escaping BoolClosure)
     func editEmoji(by id: String, with emoji: String, completion: @escaping BoolClosure)

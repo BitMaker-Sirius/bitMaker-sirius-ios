@@ -8,7 +8,7 @@
 import Foundation
 
 protocol EditProjectProvider {
-    typealias BoolClosure = ((_ isCompleted: Bool) -> Void)
+    typealias BoolClosure = (_ isCompleted: Bool) -> Void
     
     func play(completion: @escaping BoolClosure)
     func stop(completion: @escaping BoolClosure)
