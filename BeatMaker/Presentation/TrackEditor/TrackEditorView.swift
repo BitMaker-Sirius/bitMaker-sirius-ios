@@ -32,6 +32,8 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     
     @StateObject var viewModel: ViewModel
     
+    @Environment(\.dismiss) private var dismiss
+    
     let tactCount: Int = 10
     var tickHeight: CGFloat = 20
     var tickWidth: CGFloat = 1
@@ -174,13 +176,21 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             .padding(.bottom, 15)
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Image(systemName: "chevron.left"),
-                            trailing: Button(action: {
-            isSave.toggle()
-        }) {
-            Text("Визуализация")
-                .foregroundColor(.black)
-        } )
+        .navigationBarItems(
+            leading:
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.black)
+                }),
+            trailing:
+                Button(action: {
+                    isSave.toggle()
+                }) {
+                    Text("Визуализация")
+                        .foregroundColor(.black)
+                } )
         .navigationDestination(
             isPresented: $isSave) {
                 PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 1, name: "Project 1")))
