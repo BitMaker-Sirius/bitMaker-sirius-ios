@@ -8,11 +8,11 @@
 import Foundation
 
 final class TrackPlaybackService: PlaybackService {
+    let soundPlaybackService: SoundPlaybackService
+    
     init(soundPlaybackService: SoundPlaybackService) {
         self.soundPlaybackService = soundPlaybackService
     }
-    
-    let soundPlaybackService: SoundPlaybackService
     
     func play(_ data: Track) {
         // Воспроизведение трека из массива TrackPoint'ов внутри Track с помощью SoundPlaybackService

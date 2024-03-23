@@ -8,29 +8,23 @@
 import Foundation
 
 final class SoundDataStorage: DataStorage {
-    init(service: FileDataStorageService) {
-        self.service = service
-    }
-    
-    let service: FileDataStorageService
-    
-    func get(by id: UUID) -> Sound? {
-        nil
-    }
-    
-    func getAll() -> [Sound] {
-        []
-    }
-    
-    func add(_ data: Sound) {
+    func get(by id: String, completion: @escaping ((Result<Sound, Error>) -> Void)) {
         
     }
     
-    func remove(by id: UUID) {
+    func getAll(completion: @escaping ((Result<[Sound], Error>) -> Void)) {
         
     }
     
-    func update(_ data: Sound) {
+    func save(_ data: Sound, completion: @escaping ((_ id: String?) -> Void)) {
+        
+    }
+    
+    func delete(by id: String, completion: @escaping ((_ isCompleted: Bool) -> Void)) {
+        
+    }
+    
+    func update(by id: String, with data: Sound, completion: @escaping ((_ isCompleted: Bool) -> Void)) {
         
     }
 }

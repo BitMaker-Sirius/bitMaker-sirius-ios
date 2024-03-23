@@ -8,29 +8,23 @@
 import Foundation
 
 final class ProjectDataStorage: DataStorage {
-    init(service: RealmDataStorageService) {
-        self.service = service
-    }
-    
-    let service: RealmDataStorageService
-    
-    func get(by id: UUID) -> Project? {
-        nil
-    }
-    
-    func getAll() -> [Project] {
-        []
-    }
-    
-    func add(_ data: Project) {
+    func get(by id: String, completion: @escaping ((Result<Project, Error>) -> Void)) {
         
     }
     
-    func remove(by id: UUID) {
+    func getAll(completion: @escaping ((Result<[Project], Error>) -> Void)) {
         
     }
     
-    func update(_ data: Project) {
+    func save(_ data: Project, completion: @escaping ((_ id: String?) -> Void)) {
+        
+    }
+    
+    func delete(by id: String, completion: @escaping ((_ isCompleted: Bool) -> Void)) {
+        
+    }
+    
+    func update(by id: String, with data: Project, completion: @escaping ((_ isCompleted: Bool) -> Void)) {
         
     }
 }

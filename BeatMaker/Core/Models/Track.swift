@@ -10,5 +10,6 @@ import Foundation
 struct Track {
     let id: String
     let sound: Sound
+    let isMute: Bool
     let points: [TrackPoint]
 }

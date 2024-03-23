@@ -8,11 +8,11 @@
 import Foundation
 
 final class ProjectPlaybackService: PlaybackService {
+    let trackPlaybackService: TrackPlaybackService
+    
     init(trackPlaybackService: TrackPlaybackService) {
         self.trackPlaybackService = trackPlaybackService
     }
-    
-    let trackPlaybackService: TrackPlaybackService
     
     func play(_ data: Project) {
         // Воспроизведение проекта из массива Track'ов внутри Project с помощью ProjectPlaybackService

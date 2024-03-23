@@ -7,26 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EAF761B2BAE523100C4B065 /* EditProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* EditProjectProvider.swift */; };
+		5EAF761E2BAEBF9700C4B065 /* EditProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* EditProjectProviderImp.swift */; };
+		5EAF76212BAEC03C00C4B065 /* VisualizationProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76202BAEC03C00C4B065 /* VisualizationProjectProvider.swift */; };
+		5EAF76232BAEC09B00C4B065 /* VisualizationProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76222BAEC09B00C4B065 /* VisualizationProjectProviderImp.swift */; };
+		5EAF76262BAEC0D900C4B065 /* ProjectListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76252BAEC0D900C4B065 /* ProjectListProvider.swift */; };
+		5EAF76282BAEC1F700C4B065 /* ProjectListProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76272BAEC1F700C4B065 /* ProjectListProviderImp.swift */; };
+		5EAF762B2BAEC22D00C4B065 /* SoundListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF762A2BAEC22D00C4B065 /* SoundListProvider.swift */; };
+		5EAF762D2BAEC3CA00C4B065 /* SoundListProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF762C2BAEC3CA00C4B065 /* SoundListProviderImp.swift */; };
 		5ECAFA4F2BADA78500FAA2F3 /* SoundPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA2D2BADA78500FAA2F3 /* SoundPlaybackService.swift */; };
 		5ECAFA502BADA78500FAA2F3 /* ProjectPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA2E2BADA78500FAA2F3 /* ProjectPlaybackService.swift */; };
 		5ECAFA512BADA78500FAA2F3 /* TrackPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA2F2BADA78500FAA2F3 /* TrackPlaybackService.swift */; };
 		5ECAFA522BADA78500FAA2F3 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA312BADA78500FAA2F3 /* PlaybackService.swift */; };
 		5ECAFA532BADA78500FAA2F3 /* SamplingServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA332BADA78500FAA2F3 /* SamplingServiceImp.swift */; };
 		5ECAFA542BADA78500FAA2F3 /* SamplingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA352BADA78500FAA2F3 /* SamplingService.swift */; };
-		5ECAFA552BADA78500FAA2F3 /* ProjectManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA372BADA78500FAA2F3 /* ProjectManagerImp.swift */; };
-		5ECAFA562BADA78500FAA2F3 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA392BADA78500FAA2F3 /* ProjectManager.swift */; };
 		5ECAFA572BADA78500FAA2F3 /* NetworkManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA3B2BADA78500FAA2F3 /* NetworkManagerImp.swift */; };
 		5ECAFA582BADA78500FAA2F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA3D2BADA78500FAA2F3 /* NetworkManager.swift */; };
 		5ECAFA592BADA78500FAA2F3 /* VisualizationServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA3F2BADA78500FAA2F3 /* VisualizationServiceImp.swift */; };
 		5ECAFA5A2BADA78500FAA2F3 /* VisualizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA412BADA78500FAA2F3 /* VisualizationService.swift */; };
-		5ECAFA5B2BADA78500FAA2F3 /* RealmDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA432BADA78500FAA2F3 /* RealmDataStorageService.swift */; };
-		5ECAFA5C2BADA78500FAA2F3 /* FileDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA442BADA78500FAA2F3 /* FileDataStorageService.swift */; };
 		5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA462BADA78500FAA2F3 /* RecordingServiceImp.swift */; };
 		5ECAFA5E2BADA78500FAA2F3 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA482BADA78500FAA2F3 /* RecordingService.swift */; };
 		5ECAFA5F2BADA78500FAA2F3 /* ImageDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA4A2BADA78500FAA2F3 /* ImageDataStorage.swift */; };
 		5ECAFA602BADA78500FAA2F3 /* SoundDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA4B2BADA78500FAA2F3 /* SoundDataStorage.swift */; };
 		5ECAFA612BADA78500FAA2F3 /* ProjectDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA4C2BADA78500FAA2F3 /* ProjectDataStorage.swift */; };
 		5ECAFA622BADA78500FAA2F3 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA4E2BADA78500FAA2F3 /* DataStorage.swift */; };
+		5ECAFA642BADDC8E00FAA2F3 /* AudioDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA632BADDC8E00FAA2F3 /* AudioDataStorage.swift */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
@@ -48,26 +53,31 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5EAF761A2BAE523100C4B065 /* EditProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectProvider.swift; sourceTree = "<group>"; };
+		5EAF761D2BAEBF9700C4B065 /* EditProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectProviderImp.swift; sourceTree = "<group>"; };
+		5EAF76202BAEC03C00C4B065 /* VisualizationProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizationProjectProvider.swift; sourceTree = "<group>"; };
+		5EAF76222BAEC09B00C4B065 /* VisualizationProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizationProjectProviderImp.swift; sourceTree = "<group>"; };
+		5EAF76252BAEC0D900C4B065 /* ProjectListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListProvider.swift; sourceTree = "<group>"; };
+		5EAF76272BAEC1F700C4B065 /* ProjectListProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListProviderImp.swift; sourceTree = "<group>"; };
+		5EAF762A2BAEC22D00C4B065 /* SoundListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListProvider.swift; sourceTree = "<group>"; };
+		5EAF762C2BAEC3CA00C4B065 /* SoundListProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListProviderImp.swift; sourceTree = "<group>"; };
 		5ECAFA2D2BADA78500FAA2F3 /* SoundPlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlaybackService.swift; sourceTree = "<group>"; };
 		5ECAFA2E2BADA78500FAA2F3 /* ProjectPlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectPlaybackService.swift; sourceTree = "<group>"; };
 		5ECAFA2F2BADA78500FAA2F3 /* TrackPlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackPlaybackService.swift; sourceTree = "<group>"; };
 		5ECAFA312BADA78500FAA2F3 /* PlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
 		5ECAFA332BADA78500FAA2F3 /* SamplingServiceImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplingServiceImp.swift; sourceTree = "<group>"; };
 		5ECAFA352BADA78500FAA2F3 /* SamplingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplingService.swift; sourceTree = "<group>"; };
-		5ECAFA372BADA78500FAA2F3 /* ProjectManagerImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectManagerImp.swift; sourceTree = "<group>"; };
-		5ECAFA392BADA78500FAA2F3 /* ProjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
 		5ECAFA3B2BADA78500FAA2F3 /* NetworkManagerImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerImp.swift; sourceTree = "<group>"; };
 		5ECAFA3D2BADA78500FAA2F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5ECAFA3F2BADA78500FAA2F3 /* VisualizationServiceImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizationServiceImp.swift; sourceTree = "<group>"; };
 		5ECAFA412BADA78500FAA2F3 /* VisualizationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizationService.swift; sourceTree = "<group>"; };
-		5ECAFA432BADA78500FAA2F3 /* RealmDataStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDataStorageService.swift; sourceTree = "<group>"; };
-		5ECAFA442BADA78500FAA2F3 /* FileDataStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDataStorageService.swift; sourceTree = "<group>"; };
 		5ECAFA462BADA78500FAA2F3 /* RecordingServiceImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingServiceImp.swift; sourceTree = "<group>"; };
 		5ECAFA482BADA78500FAA2F3 /* RecordingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
 		5ECAFA4A2BADA78500FAA2F3 /* ImageDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataStorage.swift; sourceTree = "<group>"; };
 		5ECAFA4B2BADA78500FAA2F3 /* SoundDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundDataStorage.swift; sourceTree = "<group>"; };
 		5ECAFA4C2BADA78500FAA2F3 /* ProjectDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDataStorage.swift; sourceTree = "<group>"; };
 		5ECAFA4E2BADA78500FAA2F3 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
+		5ECAFA632BADDC8E00FAA2F3 /* AudioDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDataStorage.swift; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,16 +114,62 @@
 		5E45CB342BAD06B700E14B41 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5EAF76192BAE51E200C4B065 /* Provider */,
 				5ECAFA492BADA78500FAA2F3 /* DataStorage */,
-				5ECAFA422BADA78500FAA2F3 /* DataStorageService */,
 				5ECAFA3A2BADA78500FAA2F3 /* NetworkManager */,
 				5ECAFA2C2BADA78500FAA2F3 /* PlaybackService */,
-				5ECAFA362BADA78500FAA2F3 /* ProjectManager */,
 				5ECAFA452BADA78500FAA2F3 /* RecordingService */,
 				5ECAFA322BADA78500FAA2F3 /* SamplingService */,
 				5ECAFA3E2BADA78500FAA2F3 /* VisualizationService */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5EAF76192BAE51E200C4B065 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF76292BAEC21B00C4B065 /* SoundListProvider */,
+				5EAF76242BAEC0BF00C4B065 /* ProjectListProvider */,
+				5EAF761F2BAEBFC100C4B065 /* VisualizationProjectProvider */,
+				5EAF761C2BAEBED100C4B065 /* EditProjectProvider */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		5EAF761C2BAEBED100C4B065 /* EditProjectProvider */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF761A2BAE523100C4B065 /* EditProjectProvider.swift */,
+				5EAF761D2BAEBF9700C4B065 /* EditProjectProviderImp.swift */,
+			);
+			path = EditProjectProvider;
+			sourceTree = "<group>";
+		};
+		5EAF761F2BAEBFC100C4B065 /* VisualizationProjectProvider */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF76202BAEC03C00C4B065 /* VisualizationProjectProvider.swift */,
+				5EAF76222BAEC09B00C4B065 /* VisualizationProjectProviderImp.swift */,
+			);
+			path = VisualizationProjectProvider;
+			sourceTree = "<group>";
+		};
+		5EAF76242BAEC0BF00C4B065 /* ProjectListProvider */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF76252BAEC0D900C4B065 /* ProjectListProvider.swift */,
+				5EAF76272BAEC1F700C4B065 /* ProjectListProviderImp.swift */,
+			);
+			path = ProjectListProvider;
+			sourceTree = "<group>";
+		};
+		5EAF76292BAEC21B00C4B065 /* SoundListProvider */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF762A2BAEC22D00C4B065 /* SoundListProvider.swift */,
+				5EAF762C2BAEC3CA00C4B065 /* SoundListProviderImp.swift */,
+			);
+			path = SoundListProvider;
 			sourceTree = "<group>";
 		};
 		5ECAFA2C2BADA78500FAA2F3 /* PlaybackService */ = {
@@ -122,130 +178,73 @@
 				5ECAFA2D2BADA78500FAA2F3 /* SoundPlaybackService.swift */,
 				5ECAFA2E2BADA78500FAA2F3 /* ProjectPlaybackService.swift */,
 				5ECAFA2F2BADA78500FAA2F3 /* TrackPlaybackService.swift */,
-				5ECAFA302BADA78500FAA2F3 /* Protocols */,
+				5ECAFA302BADA78500FAA2F3 /* Protocol */,
 			);
 			path = PlaybackService;
 			sourceTree = "<group>";
 		};
-		5ECAFA302BADA78500FAA2F3 /* Protocols */ = {
+		5ECAFA302BADA78500FAA2F3 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				5ECAFA312BADA78500FAA2F3 /* PlaybackService.swift */,
 			);
-			path = Protocols;
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		5ECAFA322BADA78500FAA2F3 /* SamplingService */ = {
 			isa = PBXGroup;
 			children = (
+				5ECAFA352BADA78500FAA2F3 /* SamplingService.swift */,
 				5ECAFA332BADA78500FAA2F3 /* SamplingServiceImp.swift */,
-				5ECAFA342BADA78500FAA2F3 /* Protocols */,
 			);
 			path = SamplingService;
-			sourceTree = "<group>";
-		};
-		5ECAFA342BADA78500FAA2F3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA352BADA78500FAA2F3 /* SamplingService.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		5ECAFA362BADA78500FAA2F3 /* ProjectManager */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA372BADA78500FAA2F3 /* ProjectManagerImp.swift */,
-				5ECAFA382BADA78500FAA2F3 /* Protocols */,
-			);
-			path = ProjectManager;
-			sourceTree = "<group>";
-		};
-		5ECAFA382BADA78500FAA2F3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA392BADA78500FAA2F3 /* ProjectManager.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5ECAFA3A2BADA78500FAA2F3 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				5ECAFA3D2BADA78500FAA2F3 /* NetworkManager.swift */,
 				5ECAFA3B2BADA78500FAA2F3 /* NetworkManagerImp.swift */,
-				5ECAFA3C2BADA78500FAA2F3 /* Protocols */,
 			);
 			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		5ECAFA3C2BADA78500FAA2F3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA3D2BADA78500FAA2F3 /* NetworkManager.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5ECAFA3E2BADA78500FAA2F3 /* VisualizationService */ = {
 			isa = PBXGroup;
 			children = (
+				5ECAFA412BADA78500FAA2F3 /* VisualizationService.swift */,
 				5ECAFA3F2BADA78500FAA2F3 /* VisualizationServiceImp.swift */,
-				5ECAFA402BADA78500FAA2F3 /* Protocols */,
 			);
 			path = VisualizationService;
-			sourceTree = "<group>";
-		};
-		5ECAFA402BADA78500FAA2F3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA412BADA78500FAA2F3 /* VisualizationService.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		5ECAFA422BADA78500FAA2F3 /* DataStorageService */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA432BADA78500FAA2F3 /* RealmDataStorageService.swift */,
-				5ECAFA442BADA78500FAA2F3 /* FileDataStorageService.swift */,
-			);
-			path = DataStorageService;
 			sourceTree = "<group>";
 		};
 		5ECAFA452BADA78500FAA2F3 /* RecordingService */ = {
 			isa = PBXGroup;
 			children = (
+				5ECAFA482BADA78500FAA2F3 /* RecordingService.swift */,
 				5ECAFA462BADA78500FAA2F3 /* RecordingServiceImp.swift */,
-				5ECAFA472BADA78500FAA2F3 /* Protocols */,
 			);
 			path = RecordingService;
-			sourceTree = "<group>";
-		};
-		5ECAFA472BADA78500FAA2F3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5ECAFA482BADA78500FAA2F3 /* RecordingService.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5ECAFA492BADA78500FAA2F3 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				5ECAFA4D2BADA78500FAA2F3 /* Protocol */,
 				5ECAFA4A2BADA78500FAA2F3 /* ImageDataStorage.swift */,
 				5ECAFA4B2BADA78500FAA2F3 /* SoundDataStorage.swift */,
 				5ECAFA4C2BADA78500FAA2F3 /* ProjectDataStorage.swift */,
-				5ECAFA4D2BADA78500FAA2F3 /* Protocols */,
+				5ECAFA632BADDC8E00FAA2F3 /* AudioDataStorage.swift */,
 			);
 			path = DataStorage;
 			sourceTree = "<group>";
 		};
-		5ECAFA4D2BADA78500FAA2F3 /* Protocols */ = {
+		5ECAFA4D2BADA78500FAA2F3 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				5ECAFA4E2BADA78500FAA2F3 /* DataStorage.swift */,
 			);
-			path = Protocols;
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		728CE0F52BAAC9FF00542975 = {
@@ -498,24 +497,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECAFA512BADA78500FAA2F3 /* TrackPlaybackService.swift in Sources */,
-				5ECAFA5B2BADA78500FAA2F3 /* RealmDataStorageService.swift in Sources */,
 				728CE12F2BAAE75000542975 /* PlayTrackViewModel.swift in Sources */,
 				728CE12D2BAAE0E800542975 /* PlayTrackView.swift in Sources */,
 				5ECAFA542BADA78500FAA2F3 /* SamplingService.swift in Sources */,
 				728CE1C42BAD812B00542975 /* ImageExtension.swift in Sources */,
 				5ECAFA622BADA78500FAA2F3 /* DataStorage.swift in Sources */,
 				5ECAFA5A2BADA78500FAA2F3 /* VisualizationService.swift in Sources */,
+				5EAF76282BAEC1F700C4B065 /* ProjectListProviderImp.swift in Sources */,
 				5ECAFA532BADA78500FAA2F3 /* SamplingServiceImp.swift in Sources */,
 				5ECAFA612BADA78500FAA2F3 /* ProjectDataStorage.swift in Sources */,
 				728CE1342BAAE91600542975 /* SoundListView.swift in Sources */,
+				5EAF762D2BAEC3CA00C4B065 /* SoundListProviderImp.swift in Sources */,
 				5ECAFA4F2BADA78500FAA2F3 /* SoundPlaybackService.swift in Sources */,
+				5EAF762B2BAEC22D00C4B065 /* SoundListProvider.swift in Sources */,
 				728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */,
+				5ECAFA642BADDC8E00FAA2F3 /* AudioDataStorage.swift in Sources */,
+				5EAF76262BAEC0D900C4B065 /* ProjectListProvider.swift in Sources */,
+				5EAF761E2BAEBF9700C4B065 /* EditProjectProviderImp.swift in Sources */,
 				5ECAFA602BADA78500FAA2F3 /* SoundDataStorage.swift in Sources */,
-				5ECAFA562BADA78500FAA2F3 /* ProjectManager.swift in Sources */,
-				5ECAFA5C2BADA78500FAA2F3 /* FileDataStorageService.swift in Sources */,
-				5ECAFA552BADA78500FAA2F3 /* ProjectManagerImp.swift in Sources */,
 				5ECAFA5E2BADA78500FAA2F3 /* RecordingService.swift in Sources */,
+				5EAF761B2BAE523100C4B065 /* EditProjectProvider.swift in Sources */,
 				5ECAFA522BADA78500FAA2F3 /* PlaybackService.swift in Sources */,
+				5EAF76232BAEC09B00C4B065 /* VisualizationProjectProviderImp.swift in Sources */,
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
 				5ECAFA5F2BADA78500FAA2F3 /* ImageDataStorage.swift in Sources */,
 				5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */,
@@ -525,6 +528,7 @@
 				728CE1C52BAD812B00542975 /* ColorExtension.swift in Sources */,
 				5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */,
 				728CE11E2BAADCCC00542975 /* Sound.swift in Sources */,
+				5EAF76212BAEC03C00C4B065 /* VisualizationProjectProvider.swift in Sources */,
 				5ECAFA572BADA78500FAA2F3 /* NetworkManagerImp.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
 				5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */,

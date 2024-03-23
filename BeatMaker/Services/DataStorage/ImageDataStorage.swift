@@ -8,29 +8,23 @@
 import SwiftUI
 
 final class ImageDataStorage: DataStorage {
-    init(service: RealmDataStorageService) {
-        self.service = service
-    }
-    
-    let service: RealmDataStorageService
-    
-    func get(by id: UUID) -> Image? {
-        nil
-    }
-    
-    func getAll() -> [Image] {
-        []
-    }
-    
-    func add(_ data: Image) {
+    func get(by id: String, completion: @escaping ((Result<Image, Error>) -> Void)) {
         
     }
     
-    func remove(by id: UUID) {
+    func getAll(completion: @escaping ((Result<[Image], ErrorType>) -> Void)) {
         
     }
     
-    func update(_ data: Image) {
+    func save(_ data: Image, completion: @escaping ((_ id: String?) -> Void)) {
+        
+    }
+    
+    func delete(by id: String, completion: @escaping ((_ isCompleted: Bool) -> Void)) {
+        
+    }
+    
+    func update(by id: String, with data: Image, completion: @escaping ((_ isCompleted: Bool) -> Void)) {
         
     }
 }
