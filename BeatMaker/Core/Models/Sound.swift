@@ -5,11 +5,23 @@
 //  Created by Nik Y on 20.03.2024.
 //
 
-import Foundation
+import SwiftUI
 
-struct Sound: Identifiable {
+final class Sound: ObservableObject, Identifiable {
     let id: String
     let audioFileId: String?
-    let name: String?
-    let emoji: String?
+    @Published var name: String?
+    @Published var emoji: String?
+    
+    init(
+        id: String,
+        audioFileId: String?,
+        name: String? = nil,
+        emoji: String? = nil
+    ) {
+        self.id = id
+        self.audioFileId = audioFileId
+        self.name = name
+        self.emoji = emoji
+    }
 }

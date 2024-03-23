@@ -13,7 +13,7 @@ struct TrackEditorView: View {
     
     var body: some View {
         VStack {
-            Text(project.name).font(.title)
+            Text(project.name ?? "").font(.title)
             
             if viewModel.selectedSounds.isEmpty {
                 Text("Звуки не выбраны")
@@ -21,7 +21,7 @@ struct TrackEditorView: View {
                 ScrollView(.horizontal) {
                     LazyHStack {
                         ForEach(viewModel.selectedSounds) { sound in
-                            Text("Sound " + sound.name)
+                            Text("Sound " + (sound.name ?? ""))
                         }
                     }
                 }.padding()

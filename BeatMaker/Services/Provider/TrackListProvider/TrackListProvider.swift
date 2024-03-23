@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-protocol SoundListProvider {
+protocol TrackListProvider {
     /// Это свойство слушают  вью модели
-    var soundList: State<[Sound]> { get }
+    var trackList: State<[Track]> { get }
     
-    // Прописать методы, которые взаимодействуют с sound list
+    // Прописать методы, которые взаимодействуют с track list
 }
