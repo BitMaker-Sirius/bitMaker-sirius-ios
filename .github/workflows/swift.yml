@@ -10,6 +10,8 @@ on:
 
 jobs:
   Formate:
+    env:
+      SWIFT_VERSION: '5.5'
     runs-on: macos-13
     timeout-minutes: 5
 
@@ -20,6 +22,9 @@ jobs:
       - name: Install Swiftformat
         run: brew install swiftformat
 
+      - name: Lint code
+        run: swiftformat --lint --swiftversion ${{env.SWIFT_VERSION}} .
+
       - name: Format code
-        run: swiftformat --lint --swiftversion 5.5 .
+        run: swiftformat -i --swiftversion ${{env.SWIFT_VERSION}} .
      
