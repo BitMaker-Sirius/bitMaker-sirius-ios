@@ -63,7 +63,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color("text_color"))
+                        .foregroundColor(.black)
                 }
                 .padding(.leading,10)
                 
