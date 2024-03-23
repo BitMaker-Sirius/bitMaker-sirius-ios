@@ -37,7 +37,6 @@ struct SoundSettingsGraphView: View {
                 }.stroke(Color.black, lineWidth: 1)
                 
                 
-                
                 // Подписи к осям
                 Text("Pitch")
                     .position(x: graphWidth - 30, y: graphHeight/2 + 20)
@@ -67,9 +66,7 @@ struct SoundSettingsGraphView: View {
             }
             .onAppear {
                 // Устанавливаем начальное положение точки в соответствии с начальными значениями Pitch и Volume
-//                selectedPoint = CGPoint(x: 0, y: 10) // Например, начальные значения Pitch=0 и Volume=10
                 selectedPoint = CGPoint(x: pitch, y: volume)
-//                selectedPoint = CGPoint(x: 0, y: (Int(graphHeight/2)))
             }
         }
     }
@@ -79,7 +76,7 @@ struct SoundSettingsGraphView: View {
     }
     
     func mapValueToY(_ value: CGFloat) -> CGFloat {
-        return graphHeight - ((value - 1) / 19 * graphHeight)
+        return graphHeight - (value / 20 * graphHeight)
     }
     
     func mapXToValue(_ x: CGFloat) -> CGFloat {
