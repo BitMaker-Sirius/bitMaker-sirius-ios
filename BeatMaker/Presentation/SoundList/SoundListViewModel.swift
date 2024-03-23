@@ -11,7 +11,7 @@ import SwiftUI
 class SoundListViewModel: ObservableObject, AllSoundsViewModelProtocol {
     
     @Published var state = AllSoundsViewState(addedToTrackSounds: [], allSounds: [])
-    var editorViewModel: TrackEditorViewModel = TrackEditorViewModel()
+    private var editorViewModel: TrackEditorViewModel = TrackEditorViewModel()
     
     func handle(_ event: AllSoundsViewEvent) {
         print(event)
@@ -76,10 +76,3 @@ class SoundListViewModel: ObservableObject, AllSoundsViewModelProtocol {
     }
     
 }
-//class SoundListViewModel: ObservableObject {
-//    @Published var sounds: [Sound] = []
-    
-//    init() {
-//        sounds = FIleManagerService.shared.getSounds()
-//    }
-//}

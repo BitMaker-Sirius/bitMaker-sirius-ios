@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// some hardcode
+/// Constants for view
 enum ConstantsForView {
     static let ImageSize: CGFloat = 40
     static let defaultEmoji = "\u{1f600}"
@@ -16,36 +16,21 @@ enum ConstantsForView {
 
 struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
     
-    @StateObject var viewModel: ViewModel
+    @StateObject private var viewModel: ViewModel
+    // useless propertie, just for mock
+    @State private var username: String = ""
     
     var body: some View {
         
         ScrollView {
-            Button {
-                viewModel.handle(AllSoundsViewEvent.tapAddNewSoundButton)
-            } label: {
-                Text("Добавить звуки в библитеку всех звуков")
-            }
-            .modifier(CellBackground())
-            .padding([.leading, .trailing])
+            
+            addNewSoundsButton
             
             LazyVStack{
                 ForEach(viewModel.state.allSounds) { sound in
                     soundCell(withSound: sound)
                         .contextMenu {
-                            Group {
-                                Button("Поменять эмодзи", systemImage: "music.note") {
-                                    viewModel.handle(.editSoundEmoji)
-                                }
-                                
-                                Button("Поменять название", systemImage: "pencil") {
-                                    viewModel.handle(.editSoundName)
-                                }
-                                
-                                Button("Удалить", systemImage: "trash", role: .destructive) {
-                                    viewModel.handle(.deleteSound)
-                                }
-                            }
+                            longTapOnSoundCellMenu
                         }
                 }
             }
@@ -53,13 +38,10 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
         }
     }
     
-    @State private var username: String = ""
-    
     @ViewBuilder
     func soundCell(withSound sound: Sound) -> some View {
         
         HStack {
-            
             Spacer()
             
             Text(sound.emoji ?? ConstantsForView.defaultEmoji)
@@ -90,7 +72,36 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
         }
     }
     
-    struct CellBackground: ViewModifier {
+    // button of adding new sound to list of all sounds
+    private var addNewSoundsButton: some View {
+        Button {
+            viewModel.handle(AllSoundsViewEvent.tapAddNewSoundButton)
+        } label: {
+            Text("Добавить звуки в библитеку всех звуков")
+        }
+        .modifier(CellBackground())
+        .padding([.leading, .trailing])
+    }
+    
+    // group of buttons from ContextMenu of sound cell
+    private var longTapOnSoundCellMenu: some View {
+        Group {
+            Button("Поменять эмодзи", systemImage: "music.note") {
+                viewModel.handle(.editSoundEmoji)
+            }
+            
+            Button("Поменять название", systemImage: "pencil") {
+                viewModel.handle(.editSoundName)
+            }
+            
+            Button("Удалить", systemImage: "trash", role: .destructive) {
+                viewModel.handle(.deleteSound)
+            }
+        }
+    }
+    
+    // modifier of setting background of cell
+    private struct CellBackground: ViewModifier {
         func body(content: Content) -> some View {
             content
                 .frame(maxWidth: .infinity)
@@ -101,21 +112,3 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
         }
     }
 }
-
-//struct AllSoundsView_Previews: PreviewProvider {
-//    
-//    static var previews: some View {
-//        NavigationStack {
-//            AllSoundsView(viewModel: AllSoundsViewModel(addedToTrackSounds: []))
-//                .navigationBarTitle("Библиотека всех доступных звуков")
-//                .navigationBarTitleDisplayMode(.inline)
-//        }
-//    }
-//}
-
-
-//struct SoundListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SoundListView(editorViewModel: TrackEditorViewModel())
-//    }
-//}
