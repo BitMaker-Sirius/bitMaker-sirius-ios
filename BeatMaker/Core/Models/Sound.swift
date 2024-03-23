@@ -7,9 +7,8 @@
 
 import AVFoundation
 
-struct Sound: Identifiable {
+struct Sound: Identifiable, Hashable {
     let id = UUID()
-    let audioFile: AVAudioFile
     let name: String
     let emoji: String
 }
