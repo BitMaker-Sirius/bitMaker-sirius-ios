@@ -51,7 +51,8 @@ struct TrackListView: View {
                 Spacer()
             }
             .navigationDestination(for: Project.self, destination: { project in
-                TrackEditorView(project: project)
+//                TrackEditorView(project: project)
+                TrackEditorView(viewModel: TrackEditorViewModel())
             })
             .navigationDestination(isPresented: $isShowingPlayProjectView) {
                 if let projectToPlay = selectedProject {
