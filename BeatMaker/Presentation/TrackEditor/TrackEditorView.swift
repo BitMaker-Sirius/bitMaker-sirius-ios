@@ -58,7 +58,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             
             HStack {
                 Button(action: {
-                    print("show all used sounds")
                 }) {
                     Image(systemName: "chevron.down")
                         .resizable()
@@ -106,7 +105,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 Spacer()
                 
                 Button(action: {
-                    print("edit sounds")
                 }) {
                     Text("редактировать")
                         .fontWeight(.thin)
@@ -128,7 +126,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.state.soundsArray, id: \.self) {sound in
-                        soundView(text: sound.emoji, name: sound.name) {
+                        soundView(sound: sound) {
                             viewModel.setSelectedSound(at: sound.id)
                         }
                         .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? .red.opacity(1) : .red.opacity(0), radius: 8, x: 0, y: 0)
@@ -140,7 +138,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             Spacer()
             HStack {
                 Button(action: {
-                    print("record music")
                 }) {
                     Image(systemName: "stop.circle")
                         .resizable()
@@ -151,7 +148,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 }
                 Spacer()
                 Button(action: {
-                    print("stop music")
                     viewModel.handle(.tapButton)
                 }) {
                     Image(systemName: viewModel.state.isPauseActive)
@@ -164,7 +160,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 Spacer()
                 
                 Button(action: {
-                    print("add new sounds")
                 }) {
                     Image(systemName: "plus.circle")
                         .resizable()
@@ -199,18 +194,16 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
 }
 
 struct soundView: View {
-    @State var text:String
-    @State var name:String
+    @State var sound:Sound
     var buttonClicked: (() -> Void)?
     var body: some View {
         VStack {
             Button(action: {
-                print("change music")
                 buttonClicked?()
             }) {
-                Text(text)
+                Text(sound.emoji)
             }
-            Text(name)
+            Text(sound.name)
                 .fontWeight(.thin)
                 .font(.system(size: 11))
                 .foregroundColor(.black)
