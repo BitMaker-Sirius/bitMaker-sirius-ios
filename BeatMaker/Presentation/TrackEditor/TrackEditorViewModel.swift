@@ -9,13 +9,12 @@ import Foundation
 import SwiftUI
 
 
-class TrackEditorViewModel: TrackEditorViewModeling {
-    
-    
+final class TrackEditorViewModel: TrackEditorViewModeling {
     
     @Published
     var state = TrackEditorViewState(
-        shouldShowPause: false,
+        shouldShowPause: false, 
+        isPauseActive: "play.fill",
         choosenSoundId: nil,
         soundsArray: [Sound(name: "baraban", emoji: "\u{1f600}"), Sound(name: "baraban1", emoji: "\u{1f601}"), Sound(name: "baraban2", emoji: "\u{1f602}"), Sound(name: "baraban3", emoji: "\u{1f603}"), Sound(name: "baraban4", emoji: "\u{1f614}"), Sound(name: "baraban5", emoji: "\u{1f605}"), Sound(name: "baraban6", emoji: "\u{1f606}")]
     )
@@ -23,25 +22,15 @@ class TrackEditorViewModel: TrackEditorViewModeling {
     
     func handle(_ event: PlayTrackViewEvent) {
         print("tap")
-        
         switch event {
         case .tapButton:
             state.shouldShowPause.toggle()
+            state.isPauseActive = (state.shouldShowPause ? "pause.fill": "play.fill")
         }
     }
     
-    func setSelectedSound(at id: UUID)  {
+    func setSelectedSound(at id: UUID) {
         state.choosenSoundId = id.uuidString
-        
-        //        state.chooseSound.fill(repeating: false, count: state.chooseSound.count)
-        //        state.chooseSound[index].toggle()
-        //        for (ind, element) in state.chooseSound.enumerated()  {
-        //
-        //            print("\(ind)  \(element)")
-        //        }
-        //        print(state.chooseSound[index])
-        
-        
     }
     
     func areUuidsSimilar(id1: UUID, id2: String) -> Bool {
@@ -52,7 +41,6 @@ class TrackEditorViewModel: TrackEditorViewModeling {
         self.state = state
     }
     
-    ///
     @Published var selectedSounds: [Sound] = []
     
     func addOrRemoveSound(_ sound: Sound) {
@@ -66,6 +54,4 @@ class TrackEditorViewModel: TrackEditorViewModeling {
     func isSoundSelected(_ sound: Sound) -> Bool {
         return selectedSounds.contains(where: { $0.name == sound.name })
     }
-    
-    // Обработка действий пользователя
 }

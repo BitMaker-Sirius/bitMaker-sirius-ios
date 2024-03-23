@@ -13,9 +13,8 @@ enum PlayTrackViewEvent {
 
 struct TrackEditorViewState {
     var shouldShowPause: Bool
+    var isPauseActive: String
     var choosenSoundId: String?
-    //    var chooseSound: [Bool]
-    //    var chooseSound: UUID
     var soundsArray: [Sound]
 }
 
@@ -38,7 +37,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
-    @State  var progressValue: Float = 0.5
+    @State var progressValue: Float = 0.5
     @State private var isSave: Bool = false
     
     let columns: [GridItem] = [
@@ -52,7 +51,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
         
         VStack {
             ProgressView(value: progressValue)
-                .progressViewStyle(LinearProgressViewStyle(tint: Color("text_color")))
+                .progressViewStyle(LinearProgressViewStyle(tint: .black))
                 .padding(.horizontal, 40)
                 .padding(.top, 15)
             
@@ -67,7 +66,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color("text_color"))
                 }
-                .padding(.leading,5)
+                .padding(.leading,10)
                 
                 Spacer()
                 ZStack {
@@ -75,30 +74,27 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         ForEach(1..<tactCount) { _ in
                             Rectangle()
                                 .frame(width: tickWidth, height: tickHeight)
-                                .foregroundColor(Color("text_color"))
+                                .foregroundColor(.black)
                             Spacer()
                         }
                         
                         Rectangle()
                             .frame(width: tickWidth, height: tickHeight)
-                            .foregroundColor(Color("text_color"))
+                            .foregroundColor(.black)
                     }
-                    .padding(.leading, 8)
-                    .padding(.trailing, 40)
                     
                     Rectangle()
                         .frame(height: 2)
-                        .foregroundColor(Color("text_color"))
-                        .padding(.leading, 8)
-                        .padding(.trailing, 40)
+                        .foregroundColor(.black)
                 }
-                //.padding(.trailing, 30)
+                .padding(.leading, 4)
+                .padding(.trailing, 40)
             }
             .padding(.bottom, 10)
             
             Rectangle()
                 .frame(width: 330, height: 330)
-                .foregroundColor(Color("light_blue").opacity(50))
+                .foregroundColor(.gray.opacity(50))
                 .cornerRadius(12)
                 .padding(.horizontal, 15)
                 .shadow(color: Color.black.opacity(0.001), radius: 2, x: 0, y: 4)
@@ -114,7 +110,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 }) {
                     Text("редактировать")
                         .fontWeight(.thin)
-                        .foregroundColor(Color("text_color"))
+                        .foregroundColor(.black)
                 }
             }
             .padding(.horizontal, 15)
@@ -124,7 +120,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             ZStack {
                 Rectangle()
                     .frame(height: 100)
-                    .foregroundColor(Color("light_blue").opacity(50))
+                    .foregroundColor(.gray.opacity(50))
                     .cornerRadius(12)
                     .padding(.horizontal, 15)
                     .shadow(color: Color.black.opacity(0.001), radius: 2, x: 0, y: 4)
@@ -150,7 +146,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40, height: 40)
-                        .foregroundColor(Color("text_color"))
+                        .foregroundColor(.black)
                     
                 }
                 Spacer()
@@ -158,19 +154,11 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                     print("stop music")
                     viewModel.handle(.tapButton)
                 }) {
-                    if viewModel.state.shouldShowPause {
-                        Image(systemName: "pause.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(Color("text_color"))
-                    } else {
-                        Image(systemName: "play.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(Color("text_color"))
-                    }
+                    Image(systemName: viewModel.state.isPauseActive)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.black)
                 }
                 
                 Spacer()
@@ -182,7 +170,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 40)
-                        .foregroundColor(Color("text_color"))
+                        .foregroundColor(.black)
                 }
                 
             }
@@ -194,8 +182,8 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                             trailing: Button(action: {
             isSave.toggle()
         }) {
-            Text("Сохранить")
-                .foregroundColor(Color("text_color"))
+            Text("Визуализация")
+                .foregroundColor(.black)
         } )
         .navigationDestination(
             isPresented: $isSave) {
@@ -225,7 +213,7 @@ struct soundView: View {
             Text(name)
                 .fontWeight(.thin)
                 .font(.system(size: 11))
-                .foregroundColor(Color("text_color"))
+                .foregroundColor(.black)
         }
     }
 }
