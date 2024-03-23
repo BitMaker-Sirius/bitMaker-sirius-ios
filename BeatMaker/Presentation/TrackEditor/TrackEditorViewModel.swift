@@ -6,8 +6,49 @@
 //
 
 import Foundation
+import SwiftUI
 
-class TrackEditorViewModel: ObservableObject {
+
+final class TrackEditorViewModel: TrackEditorViewModeling {
+    
+    @Published
+    var state = TrackEditorViewState(
+        shouldShowPause: false, 
+        isPauseActive: "play.fill",
+        choosenSoundId: nil,
+        soundsArray: [
+            Sound(id: "0", audioFileId: nil, name: "baraban", emoji: "\u{1f600}"),
+            Sound(id: "1", audioFileId: nil, name: "baraban1", emoji: "\u{1f601}"),
+            Sound(id: "2", audioFileId: nil, name: "baraban2", emoji: "\u{1f602}"),
+            Sound(id: "3", audioFileId: nil, name: "baraban3", emoji: "\u{1f603}"),
+            Sound(id: "4", audioFileId: nil, name: "baraban4", emoji: "\u{1f614}"),
+            Sound(id: "5", audioFileId: nil, name: "baraban5", emoji: "\u{1f605}"),
+            Sound(id: "6", audioFileId: nil, name: "baraban6", emoji: "\u{1f606}")
+        ]
+    )
+    
+    
+    func handle(_ event: PlayTrackViewEvent) {
+        print("tap")
+        switch event {
+        case .tapButton:
+            state.shouldShowPause.toggle()
+            state.isPauseActive = (state.shouldShowPause ? "pause.fill": "play.fill")
+        }
+    }
+    
+    func setSelectedSound(at id: UUID) {
+        state.choosenSoundId = id.uuidString
+    }
+    
+    func areUuidsSimilar(id1: UUID, id2: String) -> Bool {
+        return id1.uuidString == id2
+    }
+    
+    init() {
+        self.state = state
+    }
+    
     @Published var selectedSounds: [Sound] = []
     
     func addOrRemoveSound(_ sound: Sound) {
@@ -21,6 +62,4 @@ class TrackEditorViewModel: ObservableObject {
     func isSoundSelected(_ sound: Sound) -> Bool {
         return selectedSounds.contains(where: { $0.name == sound.name })
     }
-    
-    // Обработка действий пользователя
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class Sound: ObservableObject, Identifiable {
+final class Sound: ObservableObject, Identifiable, Hashable {
     let id: String
     let audioFileId: String?
     @Published var name: String?
@@ -23,5 +23,13 @@ final class Sound: ObservableObject, Identifiable {
         self.audioFileId = audioFileId
         self.name = name
         self.emoji = emoji
+    }
+    
+    static func == (lhs: Sound, rhs: Sound) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
