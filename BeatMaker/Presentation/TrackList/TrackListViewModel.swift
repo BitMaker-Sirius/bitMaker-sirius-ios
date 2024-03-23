@@ -8,9 +8,10 @@
 import Foundation
 
 class TrackListViewModel: ObservableObject {
-    @Published var tracks: [Track] = [
-        Track(name: "Трек 1", description: "Описание трека 1"),
-        Track(name: "Трек 2", description: "Описание трека 2")
+    @Published var projects: [Project] = [
+        Project(id: "1", metronomeBpm: 1),
+        Project(id: "1", metronomeBpm: 1),
+        Project(id: "1", metronomeBpm: 1),
     ]
     
     // Обработка действий пользователя

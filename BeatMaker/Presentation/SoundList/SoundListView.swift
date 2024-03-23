@@ -13,7 +13,7 @@ struct SoundListView: View {
     
     var body: some View {
         List(viewModel.sounds) { sound in
-            Text(sound.name)
+            Text(sound.name ?? "")
                 .padding()
                 .background(editorViewModel.isSoundSelected(sound) ? Color.green : Color.clear)
                 .cornerRadius(5)
