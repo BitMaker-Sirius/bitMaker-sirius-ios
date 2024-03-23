@@ -10,7 +10,7 @@ import SwiftUI
 final class Project: ObservableObject, Identifiable, Hashable {
     let id: String
     let metronomeBpm: Int
-    @Published var name: String?
+    @Published var name: String
     @Published var image: String?
     @Published var updateDate: Date?
     @Published var preparedSounds: [Sound]
@@ -19,7 +19,7 @@ final class Project: ObservableObject, Identifiable, Hashable {
     init(
         id: String, 
         metronomeBpm: Int, 
-        name: String? = nil,
+        name: String,
         image: String? = nil,
         updateDate: Date? = nil,
         preparedSounds: [Sound] = [],

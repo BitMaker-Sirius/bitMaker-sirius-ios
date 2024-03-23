@@ -10,13 +10,13 @@ import SwiftUI
 final class Sound: ObservableObject, Identifiable, Hashable {
     let id: String
     let audioFileId: String?
-    @Published var name: String?
+    @Published var name: String
     @Published var emoji: String?
     
     init(
         id: String,
         audioFileId: String?,
-        name: String? = nil,
+        name: String,
         emoji: String? = nil
     ) {
         self.id = id

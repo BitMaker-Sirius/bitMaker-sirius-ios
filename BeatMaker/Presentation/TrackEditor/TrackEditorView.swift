@@ -125,7 +125,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 
                 
                 LazyVGrid(columns: columns) {
-                    ForEach(viewModel.state.soundsArray, id: \.self) {sound in
+                    ForEach(viewModel.state.soundsArray, id: \.self) { sound in
                         soundView(sound: sound) {
                             viewModel.setSelectedSound(at: UUID(uuidString: sound.id) ?? UUID())
                         }
@@ -136,6 +136,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             }
             
             Spacer()
+            
             HStack {
                 Button(action: {
                 }) {
