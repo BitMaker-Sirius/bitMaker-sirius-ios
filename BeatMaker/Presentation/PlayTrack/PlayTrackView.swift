@@ -120,8 +120,3 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
     }
 }
 
-struct PlayProjectView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 1)))
-    }
-}

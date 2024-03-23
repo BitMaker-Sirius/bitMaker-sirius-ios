@@ -39,6 +39,7 @@
 		5ECAFA612BADA78500FAA2F3 /* ProjectDataStorageImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA4C2BADA78500FAA2F3 /* ProjectDataStorageImp.swift */; };
 		5ECAFA622BADA78500FAA2F3 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA4E2BADA78500FAA2F3 /* DataStorage.swift */; };
 		5ECAFA642BADDC8E00FAA2F3 /* AudioDataStorageImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECAFA632BADDC8E00FAA2F3 /* AudioDataStorageImp.swift */; };
+		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
 		63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */; };
@@ -95,6 +96,7 @@
 		5ECAFA4C2BADA78500FAA2F3 /* ProjectDataStorageImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDataStorageImp.swift; sourceTree = "<group>"; };
 		5ECAFA4E2BADA78500FAA2F3 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		5ECAFA632BADDC8E00FAA2F3 /* AudioDataStorageImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDataStorageImp.swift; sourceTree = "<group>"; };
+		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
 		63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 			children = (
 				728CE1332BAAE91600542975 /* SoundListView.swift */,
 				728CE1312BAAE90D00542975 /* SoundListViewModel.swift */,
+				20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */,
 			);
 			path = SoundList;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				5ECAFA502BADA78500FAA2F3 /* ProjectPlaybackService.swift in Sources */,
 				5ECAFA592BADA78500FAA2F3 /* VisualizationServiceImp.swift in Sources */,
 				63B8E6992BADC916001F3BE2 /* CustomFonts.swift in Sources */,
+				20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
