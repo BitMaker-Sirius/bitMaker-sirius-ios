@@ -131,7 +131,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         soundView(text: sound.emoji, name: sound.name) {
                             viewModel.setSelectedSound(at: sound.id)
                         }
-                        .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color("main_blue").opacity(1) : Color("main_blue").opacity(0), radius: 8, x: 0, y: 4)
+                        .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? .red.opacity(1) : .red.opacity(0), radius: 8, x: 0, y: 0)
                     }
                 }
                 .padding(.horizontal, 25)
