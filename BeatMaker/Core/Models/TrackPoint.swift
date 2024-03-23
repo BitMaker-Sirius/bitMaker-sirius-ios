@@ -8,7 +8,7 @@
 import Foundation
 
 struct TrackPoint {
-    let volume: Int
-    let pitch: Int
-    let time: Int
+    let startTime: TimeInterval
+    let volume: Double?
+    let pitch: Double?
 }

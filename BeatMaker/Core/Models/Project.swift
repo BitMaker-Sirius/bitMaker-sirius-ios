@@ -7,15 +7,29 @@
 
 import SwiftUI
 
-struct Project: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let image: URL?
-    let upateDate: Date?
-    let bpm: Int
-    let sounds: [Sound]
-    let tracks: [Track]
+final class Project: ObservableObject, Identifiable, Hashable {
+    let id: String
+    let metronomeBpm: Int
+    @Published var name: String?
+    @Published var image: String?
+    @Published var updateDate: Date?
+    @Published var preparedSounds: [Sound] = []
+    @Published var tracks: [Track] = []
     
+    init(
+        id: String, 
+        metronomeBpm: Int, 
+        name: String? = nil,
+        image: String? = nil,
+        updateDate: Date? = nil
+    ) {
+        self.id = id
+        self.metronomeBpm = metronomeBpm
+        self.name = name
+        self.image = image
+        self.updateDate = updateDate
+    }
+
     static func == (lhs: Project, rhs: Project) -> Bool {
         lhs.id == rhs.id
     }

@@ -16,7 +16,15 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
         shouldShowPause: false, 
         isPauseActive: "play.fill",
         choosenSoundId: nil,
-        soundsArray: [Sound(name: "baraban", emoji: "\u{1f600}"), Sound(name: "baraban1", emoji: "\u{1f601}"), Sound(name: "baraban2", emoji: "\u{1f602}"), Sound(name: "baraban3", emoji: "\u{1f603}"), Sound(name: "baraban4", emoji: "\u{1f614}"), Sound(name: "baraban5", emoji: "\u{1f605}"), Sound(name: "baraban6", emoji: "\u{1f606}")]
+        soundsArray: [
+            Sound(id: "0", audioFileId: nil, name: "baraban", emoji: "\u{1f600}"),
+            Sound(id: "1", audioFileId: nil, name: "baraban1", emoji: "\u{1f601}"),
+            Sound(id: "2", audioFileId: nil, name: "baraban2", emoji: "\u{1f602}"),
+            Sound(id: "3", audioFileId: nil, name: "baraban3", emoji: "\u{1f603}"),
+            Sound(id: "4", audioFileId: nil, name: "baraban4", emoji: "\u{1f614}"),
+            Sound(id: "5", audioFileId: nil, name: "baraban5", emoji: "\u{1f605}"),
+            Sound(id: "6", audioFileId: nil, name: "baraban6", emoji: "\u{1f606}")
+        ]
     )
     
     
