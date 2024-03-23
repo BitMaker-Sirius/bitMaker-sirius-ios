@@ -70,7 +70,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
                 
                 Spacer()
                 
-                Text(viewModel.state.project.name)
+                Text(viewModel.state.project.name ?? "")
                     .padding(.top, 12)
                 
                 Spacer()
@@ -135,6 +135,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
 
 struct PlayProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayProjectView(viewModel: PlayProjectViewModel(project: Project(name: "Project 1", image: nil, upateDate: nil, bpm: 120, sounds: [], tracks: [])))
+        PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 1)))
     }
 }

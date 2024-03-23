@@ -127,9 +127,9 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.state.soundsArray, id: \.self) {sound in
                         soundView(sound: sound) {
-                            viewModel.setSelectedSound(at: sound.id)
+                            viewModel.setSelectedSound(at: UUID(uuidString: sound.id) ?? UUID())
                         }
-                        .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? .red.opacity(1) : .red.opacity(0), radius: 8, x: 0, y: 0)
+                        .shadow(color: viewModel.areUuidsSimilar(id1: UUID(uuidString: sound.id) ?? UUID(), id2: viewModel.state.choosenSoundId ?? "") ? .red.opacity(1) : .red.opacity(0), radius: 8, x: 0, y: 0)
                     }
                 }
                 .padding(.horizontal, 25)
@@ -182,7 +182,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
         } )
         .navigationDestination(
             isPresented: $isSave) {
-                PlayProjectView(viewModel: PlayProjectViewModel(project: Project(name: "Project 1", image: nil, upateDate: nil, bpm: 120, sounds: [], tracks: [])))
+                PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 1, name: "Project 1")))
             }
     }
     
@@ -201,9 +201,9 @@ struct soundView: View {
             Button(action: {
                 buttonClicked?()
             }) {
-                Text(sound.emoji)
+                Text(sound.emoji ?? "")
             }
-            Text(sound.name)
+            Text(sound.name ?? "")
                 .fontWeight(.thin)
                 .font(.system(size: 11))
                 .foregroundColor(.black)
