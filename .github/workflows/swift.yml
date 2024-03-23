@@ -22,9 +22,8 @@ jobs:
       - name: Install Swiftformat
         run: brew install swiftformat
 
-      - name: Lint code
-        run: swiftformat --lint --swiftversion ${{env.SWIFT_VERSION}} .
-
       - name: Format code
         run: swiftformat -i --swiftversion ${{env.SWIFT_VERSION}} .
-     
+
+      - name: Lint code
+        run: swiftformat --lint --swiftversion ${{env.SWIFT_VERSION}} .     
