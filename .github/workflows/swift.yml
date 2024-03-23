@@ -22,8 +22,9 @@ jobs:
       - name: Install Swiftformat
         run: brew install swiftformat
 
-      - name: Format code
-        run: swiftformat -i --swiftversion ${{env.SWIFT_VERSION}} .
+      - name: Build
+        run: cd bitMaker-sirius-ios
+          xcodebuild build -project BeatMaker.xcodeproj -scheme BeatMaker clean build -sdk iphoneos CODE_SIGNING_ALLOWED=No
 
       - name: Lint code
         run: swiftformat --lint --swiftversion ${{env.SWIFT_VERSION}} .     
