@@ -8,5 +8,5 @@
 import Foundation
 
 enum DataStorageError: Error {
-    case `default`
+    case unknown
 }
