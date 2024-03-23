@@ -23,9 +23,3 @@ struct SoundListView: View {
         }
     }
 }
-
-//struct SoundListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SoundListView(editorViewModel: TrackEditorViewModel())
-//    }
-//}

@@ -8,5 +8,4 @@
 import AVFoundation
 
 protocol ProjectManager {
-    
 }
