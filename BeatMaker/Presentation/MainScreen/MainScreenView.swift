@@ -17,6 +17,29 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
     @StateObject
     var mainScreenViewModel: ViewModel
     
+    @State private var currentPosition: CGSize = .zero
+    @State private var newPosition: CGSize = .zero
+    @State private var screenBounds: CGRect = .zero
+    @State private var boundsPosition: CGSize = .zero
+    
+    let heightLimit: CGFloat = 100
+    
+//    @State private var dragOffset = CGSize.zero
+//    @State private var lastOffset: CGFloat = 0
+//    
+//    private var offset: CGFloat {
+//        let minOffset: CGFloat = 200.0
+//        let maxOffset: CGFloat = 600.0
+//        let offset: CGFloat
+////        case .leading:
+//            offset = lastOffset + dragOffset.height
+////            lastOffset = offset - dragOffset.height
+//
+////        case .trailing:
+////            width = lastOffset - dragOffset.width
+//        return offset
+//    }
+    
     private enum GtadientColors {
         static var all: [Color] {
             [
@@ -112,7 +135,6 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
                 }
                 .padding(.bottom, 300)
                 
-                ScrollView {
                     VStack {
                         Text("Мои треки")
                             .font(.largeTitle)
@@ -125,15 +147,29 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
                             TrackRow(trackNumber: index)
                         }
                     }
+                    .onAppear() {
+                           currentPosition = .zero
+                           newPosition = .zero
+                            setTravelLimits()
+                            limitTravel()
+                          }
                     .background(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .padding(.top, UIScreen.main.bounds.height / 2)
-                    
-                }
-                .onAppear {
-                    UIScrollView.appearance().bounces = false
-                    UIScrollView.appearance().showsVerticalScrollIndicator = false
-                }
+                    .offset(y: currentPosition.height)
+                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                        .onChanged { value in
+                            currentPosition = CGSize(width: 0, height: value.translation.height + newPosition.height)
+                            limitTravel()
+                        }
+                        .onEnded(
+                            { value in
+                                currentPosition = CGSize(width: 0, height: value.translation.height + newPosition.height)
+                                limitTravel()
+                                newPosition = currentPosition
+                            }
+                        )
+                    )
             }
             .background(GtadientColors.backgroundColor)
             .onDisappear {
@@ -154,6 +190,19 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
         }
         .frame(height: UIScreen.main.bounds.height)
     }
+    
+    func setTravelLimits() {
+        screenBounds = UIScreen.main.bounds
+        boundsPosition.width = screenBounds.width
+        boundsPosition.height = (screenBounds.height / 2) - heightLimit
+      }
+      
+      func limitTravel() {
+        currentPosition.height = currentPosition.height > boundsPosition.height ? boundsPosition.height: currentPosition.height
+       currentPosition.height = currentPosition.height < -boundsPosition.height ? -boundsPosition.height: currentPosition.height
+        currentPosition.width = currentPosition.width > boundsPosition.width ? boundsPosition.width: currentPosition.width
+        currentPosition.width = currentPosition.width < -boundsPosition.width ? -boundsPosition.width: currentPosition.width
+      }
     
     private func animateCircles() {
         withAnimation(.easeInOut(duration: AnimationProperties.timeDuration), { animator.animate() })
