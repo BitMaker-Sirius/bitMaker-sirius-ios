@@ -11,7 +11,7 @@ struct Track {
     let id: String
     let sound: Sound?
     let points: [TrackPoint]
-    let isMute: Bool = false
+    var isMute: Bool = false
     
     init(id: String, sound: Sound?, points: [TrackPoint]) {
         self.id = id

@@ -10,8 +10,8 @@ import SwiftUI
 struct Sound: Identifiable, Hashable {
     let id: String
     let audioFileId: String?
-    let name: String
-    let emoji: String?
+    var name: String
+    var emoji: String?
     
     init(
         id: String,

@@ -10,11 +10,11 @@ import SwiftUI
 struct Project: Identifiable, Hashable {
     let id: String
     let metronomeBpm: Int
-    let name: String
-    let image: String?
-    let updateDate: Date?
-    let preparedSounds: [Sound]
-    let tracks: [Track]
+    var name: String
+    var image: String?
+    var updateDate: Date?
+    var preparedSounds: [Sound]
+    var tracks: [Track]
     
     init(
         id: String, 
