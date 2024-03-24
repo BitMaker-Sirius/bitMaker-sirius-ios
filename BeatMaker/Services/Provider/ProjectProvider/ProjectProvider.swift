@@ -8,8 +8,8 @@
 import SwiftUI
 
 protocol ProjectProvider {
-    /// Это свойство слушают  вью модели
-    var project: StateObject<Project> { get }
+    /// Это свойство меняет провайдер
+    var project: Project { get }
     
     // Прописать методы, которые взаимодействуют с project
 }

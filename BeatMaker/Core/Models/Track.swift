@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-final class Track: ObservableObject {
+struct Track {
     let id: String
     let sound: Sound?
     let points: [TrackPoint]
-    @Published var isMute: Bool = false
+    let isMute: Bool = false
     
     init(id: String, sound: Sound?, points: [TrackPoint]) {
         self.id = id

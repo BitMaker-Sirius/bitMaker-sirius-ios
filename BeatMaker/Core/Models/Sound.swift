@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-final class Sound: ObservableObject, Identifiable, Hashable {
+struct Sound: Identifiable, Hashable {
     let id: String
     let audioFileId: String?
-    @Published var name: String
-    @Published var emoji: String?
+    let name: String
+    let emoji: String?
     
     init(
         id: String,

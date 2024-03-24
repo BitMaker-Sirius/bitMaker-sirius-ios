@@ -8,9 +8,9 @@
 import SwiftUI
 
 final class ProjectListProviderImp: ProjectListProvider {
-    var projectList: State<[Project]>
+    var projectList: [Project]
     
     init(projectList: [Project]) {
-        self.projectList = State(wrappedValue: projectList)
+        self.projectList = projectList
     }
 }

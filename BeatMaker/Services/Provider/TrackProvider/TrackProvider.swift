@@ -8,8 +8,8 @@
 import SwiftUI
 
 protocol TrackProvider {
-    /// Это свойство слушают  вью модели
-    var track: StateObject<Track> { get }
+    /// Это свойство меняет провайдер
+    var track: Track { get }
     
     // Прописать методы, которые взаимодействуют с track
 }

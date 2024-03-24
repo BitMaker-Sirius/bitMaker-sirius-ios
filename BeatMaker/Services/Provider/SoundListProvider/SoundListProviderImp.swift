@@ -8,9 +8,9 @@
 import SwiftUI
 
 final class SoundListProviderImp: SoundListProvider {
-    var soundList: State<[Sound]>
+    var soundList: [Sound]
     
     init(soundList: [Sound]) {
-        self.soundList = State(wrappedValue: soundList)
+        self.soundList = soundList
     }
 }
