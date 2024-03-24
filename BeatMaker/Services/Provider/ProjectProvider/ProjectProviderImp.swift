@@ -8,9 +8,9 @@
 import SwiftUI
 
 final class ProjectProviderImp: ProjectProvider {
-    var project: StateObject<Project>
+    var project: Project
     
     init(project: Project) {
-        self.project = StateObject(wrappedValue: project)
+        self.project = project
     }
 }

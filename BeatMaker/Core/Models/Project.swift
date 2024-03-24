@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-final class Project: ObservableObject, Identifiable, Hashable {
+struct Project: Identifiable, Hashable {
     let id: String
     let metronomeBpm: Int
-    @Published var name: String
-    @Published var image: String?
-    @Published var updateDate: Date?
-    @Published var preparedSounds: [Sound]
-    @Published var tracks: [Track]
+    var name: String
+    var image: String?
+    var updateDate: Date?
+    var preparedSounds: [Sound]
+    var tracks: [Track]
     
     init(
         id: String, 

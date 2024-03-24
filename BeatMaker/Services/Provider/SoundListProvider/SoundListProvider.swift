@@ -8,8 +8,8 @@
 import SwiftUI
 
 protocol SoundListProvider {
-    /// Это свойство слушают  вью модели
-    var soundList: State<[Sound]> { get }
+    /// Это свойство меняет провайдер
+    var soundList: [Sound] { get }
     
     // Прописать методы, которые взаимодействуют с sound list
 }

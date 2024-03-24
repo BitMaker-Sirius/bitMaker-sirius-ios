@@ -8,9 +8,9 @@
 import SwiftUI
 
 final class TrackListProviderImp: TrackListProvider {
-    var trackList: State<[Track]>
+    var trackList: [Track]
     
     init(trackList: [Track]) {
-        self.trackList = State(wrappedValue: trackList)
+        self.trackList = trackList
     }
 }
