@@ -8,8 +8,7 @@
 import SwiftUI
 
 protocol ProjectProvider {
-    /// Это свойство меняет провайдер
-    var project: Project { get }
+    func loadData(by id: String, completion: @escaping (Result<Project, DataStorageError>) -> Void)
     
     // Прописать методы, которые взаимодействуют с project
 }

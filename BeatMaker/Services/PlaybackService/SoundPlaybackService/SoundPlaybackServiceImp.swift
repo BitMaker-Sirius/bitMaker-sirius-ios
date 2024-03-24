@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SoundPlaybackService: PlaybackService {
+final class SoundPlaybackServiceImp: SoundPlaybackService {
     func play(_ data: Sound) {
         
     }

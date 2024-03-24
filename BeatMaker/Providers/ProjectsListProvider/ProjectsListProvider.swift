@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-protocol ProjectListProvider {
-    /// Это свойство меняет провайдер
-    var projectList: [Project] { get }
+protocol ProjectsListProvider {
+    func loadData(completion: @escaping (Result<[Project], DataStorageError>) -> Void)
     
     // Прописать методы, которые взаимодействуют с project list
 }
