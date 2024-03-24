@@ -119,4 +119,3 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
         }
     }
 }
-
