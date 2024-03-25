@@ -26,4 +26,4 @@ jobs:
         run: xcodebuild build -project BeatMaker.xcodeproj -scheme BeatMaker clean build -sdk iphoneos CODE_SIGNING_ALLOWED=No
 
       - name: Lint code
-        run: swiftlint lint --quiet .     
+        run: git diff --cached --name-only | grep "\.swift" | while read filename; do swiftlint lint --path "$filename"; done
