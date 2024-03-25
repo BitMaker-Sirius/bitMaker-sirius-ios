@@ -24,22 +24,6 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
     
     let heightLimit: CGFloat = 100
     
-//    @State private var dragOffset = CGSize.zero
-//    @State private var lastOffset: CGFloat = 0
-//    
-//    private var offset: CGFloat {
-//        let minOffset: CGFloat = 200.0
-//        let maxOffset: CGFloat = 600.0
-//        let offset: CGFloat
-////        case .leading:
-//            offset = lastOffset + dragOffset.height
-////            lastOffset = offset - dragOffset.height
-//
-////        case .trailing:
-////            width = lastOffset - dragOffset.width
-//        return offset
-//    }
-    
     private enum GtadientColors {
         static var all: [Color] {
             [
@@ -144,7 +128,10 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
                         Spacer()
                         
                         ForEach(1..<11) { index in
-                            TrackRow(trackNumber: index)
+                            TrackRow(
+                                mainScreenViewModel: mainScreenViewModel,
+                                trackNumber: index
+                            )
                         }
                     }
                     .onAppear() {
@@ -216,6 +203,7 @@ struct MainScreenPreviews: PreviewProvider {
 }
 
 struct TrackRow: View {
+    var mainScreenViewModel: any MainScreenViewObservable
     var trackNumber: Int
     
     var body: some View {
@@ -237,6 +225,12 @@ struct TrackRow: View {
                 .frame(width: 40, height: 40)
                 .foregroundColor(.black)
                 .padding(.trailing, 50)
+                .gesture(
+                    TapGesture()
+                        .onEnded {
+                            mainScreenViewModel.handle(.tapPlayTrackButton)
+                        }
+                )
         }
         .padding(.leading)
     }

@@ -9,6 +9,7 @@ import Foundation
 
 enum MainScreenViewEvent {
     case tapCreateTrackButton
+    case tapPlayTrackButton
 }
 
 struct MainScreenViewState {
@@ -33,9 +34,11 @@ class MainScreenViewModel: MainScreenViewObservable {
     
     func handle(_ event: MainScreenViewEvent) {
         switch event {
-        case .tapCreateTrackButton:
-            print("tapCreateTrackButton")
-//            state.shouldShowCreateTrackScreen.toggle()
+            case .tapCreateTrackButton:
+                print("tapCreateTrackButton")
+                
+            case .tapPlayTrackButton:
+                print("tapPlayTrackButton")
         }
     }
 }
