@@ -49,7 +49,7 @@ struct TrackListView: View {
                 
                 Spacer()
             }
-            .navigationDestination(for: Project.self, destination: { project in
+            .navigationDestination(for: Project.self, destination: { _ in
 //                TrackEditorView(project: project)
                 TrackEditorView(viewModel: TrackEditorViewModel())
             })

@@ -9,6 +9,9 @@ disabled_rules:
   - trailing_closure
   - opening_brace
   - statement_position
+  - empty_first_line
+  - colon
+  - multiple_closures_with_trailing_closure
 
 opt_in_rules:
   - array_init

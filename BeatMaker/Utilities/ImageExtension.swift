@@ -12,7 +12,7 @@ extension Image {
     static let play = Image("play_icon")
     static let pause = Image("pause_icon")
     static let heart = Image("heart_icon")
-    static let heart_filled = Image("heart-filled_icon")
+    static let heartFilled = Image("heart-filled_icon")
     static let next = Image("next_icon")
-    static let back_arrow = Image("backArrow_icon")
+    static let backArrow = Image("backArrow_icon")
 }
