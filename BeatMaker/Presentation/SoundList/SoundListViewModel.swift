@@ -11,7 +11,7 @@ import SwiftUI
 class SoundListViewModel: ObservableObject, AllSoundsViewModelProtocol {
     
     @Published var state = AllSoundsViewState(addedToTrackSounds: [], allSounds: [])
-    private var editorViewModel: TrackEditorViewModel = TrackEditorViewModel()
+    var editorViewModel: TrackEditorViewModel = TrackEditorViewModel()
     
     func handle(_ event: AllSoundsViewEvent) {
         print(event)

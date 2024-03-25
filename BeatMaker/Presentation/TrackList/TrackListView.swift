@@ -49,6 +49,7 @@ struct TrackListView: View {
                 
                 Spacer()
             }
+//            .navigationBarBackButtonHidden(true)
             .navigationDestination(for: Project.self, destination: { project in
 //                TrackEditorView(project: project)
                 TrackEditorView(viewModel: TrackEditorViewModel())

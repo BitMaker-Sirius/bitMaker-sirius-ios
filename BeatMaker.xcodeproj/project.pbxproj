@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007AE1192BB196D200E4367E /* UsedSoundsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1182BB196D200E4367E /* UsedSoundsListView.swift */; };
+		007AE11B2BB196D900E4367E /* UsedSoundsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */; };
+		007AE11E2BB1ACB300E4367E /* ButtomSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */; };
+		007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11F2BB1AD3700E4367E /* TrackView.swift */; };
 		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
@@ -67,6 +71,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		007AE1182BB196D200E4367E /* UsedSoundsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedSoundsListView.swift; sourceTree = "<group>"; };
+		007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedSoundsListViewModel.swift; sourceTree = "<group>"; };
+		007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSoundView.swift; sourceTree = "<group>"; };
+		007AE11F2BB1AD3700E4367E /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
@@ -140,6 +148,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		007AE1172BB196A900E4367E /* UsedSoundsList */ = {
+			isa = PBXGroup;
+			children = (
+				007AE1182BB196D200E4367E /* UsedSoundsListView.swift */,
+				007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */,
+			);
+			path = UsedSoundsList;
+			sourceTree = "<group>";
+		};
+		007AE11C2BB1AC9C00E4367E /* ComponentView */ = {
+			isa = PBXGroup;
+			children = (
+				007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */,
+				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
+			);
+			path = ComponentView;
+			sourceTree = "<group>";
+		};
 		5E45CB342BAD06B700E14B41 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +444,8 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				007AE11C2BB1AC9C00E4367E /* ComponentView */,
+				007AE1172BB196A900E4367E /* UsedSoundsList */,
 				728CE1142BAAD9EA00542975 /* TrackList */,
 				728CE12B2BAAE0D600542975 /* PlayTrack */,
 				728CE11F2BAADD1D00542975 /* TrackEditor */,
@@ -592,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECAFA512BADA78500FAA2F3 /* TrackPlaybackServiceImp.swift in Sources */,
+				007AE11E2BB1ACB300E4367E /* ButtomSoundView.swift in Sources */,
 				728CE12F2BAAE75000542975 /* PlayTrackViewModel.swift in Sources */,
 				728CE12D2BAAE0E800542975 /* PlayTrackView.swift in Sources */,
 				5ECAFA542BADA78500FAA2F3 /* SamplingService.swift in Sources */,
@@ -628,6 +657,8 @@
 				5ECAFA582BADA78500FAA2F3 /* NetworkManager.swift in Sources */,
 				728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */,
 				728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */,
+				007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */,
+				007AE11B2BB196D900E4367E /* UsedSoundsListViewModel.swift in Sources */,
 				728CE1C52BAD812B00542975 /* ColorExtension.swift in Sources */,
 				5ECF79F82BB0A0550014896D /* ProjectPlaybackService.swift in Sources */,
 				5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */,
@@ -636,6 +667,7 @@
 				5EAF763D2BAF0F9A00C4B065 /* AudioDataStorage.swift in Sources */,
 				5EAF76342BAF0CAF00C4B065 /* ImageDataStorage.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
+				007AE1192BB196D200E4367E /* UsedSoundsListView.swift in Sources */,
 				5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,

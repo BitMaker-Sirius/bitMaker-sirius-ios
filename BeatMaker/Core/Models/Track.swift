@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Track {
+struct Track: Hashable {
     let id: String
     let sound: Sound?
     let points: [TrackPoint]
@@ -17,5 +17,13 @@ struct Track {
         self.id = id
         self.sound = sound
         self.points = points
+    }
+    
+    static func == (lhs: Track, rhs: Track) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
