@@ -7,23 +7,13 @@
 
 import SwiftUI
 
-enum AnimationProperties {
+private enum AnimationProperties {
     static let animationSpeed: Double = 4
     static let timeDuration: Double = 3
     static let blurRadius: Double = 130
 }
 
 struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
-    @StateObject
-    var mainScreenViewModel: ViewModel
-    
-    @State private var currentPosition: CGSize = .zero
-    @State private var newPosition: CGSize = .zero
-    @State private var screenBounds: CGRect = .zero
-    @State private var boundsPosition: CGSize = .zero
-    
-    let heightLimit: CGFloat = 100
-    
     private enum GtadientColors {
         static var all: [Color] {
             [
@@ -44,6 +34,16 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
             )
         }
     }
+    
+    @StateObject
+    var mainScreenViewModel: ViewModel
+    
+    @State private var currentPosition: CGSize = .zero
+    @State private var newPosition: CGSize = .zero
+    @State private var screenBounds: CGRect = .zero
+    @State private var boundsPosition: CGSize = .zero
+    
+    private let heightLimit: CGFloat = 100
     
     private struct MovingCircle: Shape {
         var originOffset: CGPoint
@@ -178,61 +178,21 @@ struct MainScreenView<ViewModel: MainScreenViewObservable>: View {
         .frame(height: UIScreen.main.bounds.height)
     }
     
-    func setTravelLimits() {
+    private func setTravelLimits() {
         screenBounds = UIScreen.main.bounds
         boundsPosition.width = screenBounds.width
         boundsPosition.height = (screenBounds.height / 2) - heightLimit
       }
       
-      func limitTravel() {
+    private func limitTravel() {
         currentPosition.height = currentPosition.height > boundsPosition.height ? boundsPosition.height: currentPosition.height
-       currentPosition.height = currentPosition.height < -boundsPosition.height ? -boundsPosition.height: currentPosition.height
+        currentPosition.height = currentPosition.height < -boundsPosition.height ? -boundsPosition.height: currentPosition.height
         currentPosition.width = currentPosition.width > boundsPosition.width ? boundsPosition.width: currentPosition.width
         currentPosition.width = currentPosition.width < -boundsPosition.width ? -boundsPosition.width: currentPosition.width
-      }
+    }
     
     private func animateCircles() {
         withAnimation(.easeInOut(duration: AnimationProperties.timeDuration), { animator.animate() })
-    }
-}
-
-struct MainScreenPreviews: PreviewProvider {
-    static var previews: some View {
-        MainScreenView(mainScreenViewModel: MainScreenViewModel())
-    }
-}
-
-struct TrackRow: View {
-    var mainScreenViewModel: any MainScreenViewObservable
-    var trackNumber: Int
-    
-    var body: some View {
-        HStack {
-            ZStack {
-                Circle()
-                    .fill(Color.green)
-                    .frame(width: 50, height: 50)
-                    .padding()
-                Text("😎")
-                    .frame(width: 35, height: 35, alignment: .center)
-                    .padding()
-            }
-            Text("Трек \(trackNumber)")
-                .padding()
-            Spacer()
-            Image(systemName: "play.circle")
-                .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(.black)
-                .padding(.trailing, 50)
-                .gesture(
-                    TapGesture()
-                        .onEnded {
-                            mainScreenViewModel.handle(.tapPlayTrackButton)
-                        }
-                )
-        }
-        .padding(.leading)
     }
 }
 
