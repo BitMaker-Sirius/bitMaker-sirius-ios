@@ -119,7 +119,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                                 ButtomSoundView(sound: sound) {
                                     viewModel.setSelectedSound(at: sound.id)
                                 }
-                                .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.red.opacity(1) : Color.red.opacity(0), radius: 8, x: 0, y: 0)
+                                .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.onBackgroundColor.opacity(1) : Color.onBackgroundColor.opacity(0), radius: 8, x: 0, y: 0)
                             }
                             .padding(.top, 5)
                         }
