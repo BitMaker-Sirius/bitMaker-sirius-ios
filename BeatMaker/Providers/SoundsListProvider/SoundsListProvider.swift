@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-protocol SoundListProvider {
-    /// Это свойство меняет провайдер
-    var soundList: [Sound] { get }
+protocol SoundsListProvider {
+    func loadData(completion: @escaping (Result<[Sound], DataStorageError>) -> Void)
     
     // Прописать методы, которые взаимодействуют с sound list
 }

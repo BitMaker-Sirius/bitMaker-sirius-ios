@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class ProjectPlaybackService: PlaybackService {
-    let trackPlaybackService: TrackPlaybackService
+final class ProjectPlaybackServiceImp: ProjectPlaybackService {
+    let trackPlaybackService: any TrackPlaybackService
     
-    init(trackPlaybackService: TrackPlaybackService) {
+    init(trackPlaybackService: any TrackPlaybackService) {
         self.trackPlaybackService = trackPlaybackService
     }
     
