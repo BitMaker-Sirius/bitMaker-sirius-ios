@@ -8,5 +8,5 @@
 import AVFoundation
 
 protocol SamplingService {
-    
+    // Реализация записи Track
 }

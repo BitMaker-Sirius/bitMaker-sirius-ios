@@ -7,6 +7,6 @@
 
 import AVFoundation
 
-protocol ProjectManager {
-    
+protocol NetworkManager {
+    // Реализация походов в сеть
 }

@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct Project: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let image: URL?
-    let upateDate: Date?
-    let bpm: Int
-    let sounds: [Sound]
-    let tracks: [Track]
+    let id: String
+    let metronomeBpm: Int
+    var name: String
+    var image: String?
+    var updateDate: Date?
+    var preparedSounds: [Sound]
+    var tracks: [Track]
     
+    init(
+        id: String, 
+        metronomeBpm: Int, 
+        name: String,
+        image: String? = nil,
+        updateDate: Date? = nil,
+        preparedSounds: [Sound] = [],
+        tracks: [Track] = []
+    ) {
+        self.id = id
+        self.metronomeBpm = metronomeBpm
+        self.name = name
+        self.image = image
+        self.updateDate = updateDate
+        self.preparedSounds = preparedSounds
+        self.tracks = tracks
+    }
+
     static func == (lhs: Project, rhs: Project) -> Bool {
         lhs.id == rhs.id
     }
