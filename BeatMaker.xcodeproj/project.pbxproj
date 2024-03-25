@@ -12,6 +12,7 @@
 		007AE11E2BB1ACB300E4367E /* ButtomSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */; };
 		007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11F2BB1AD3700E4367E /* TrackView.swift */; };
 		007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */; };
+		007AE1402BB23DE500E4367E /* MainScreen in Resources */ = {isa = PBXBuildFile; fileRef = 007AE13F2BB23DE500E4367E /* MainScreen */; };
 		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
@@ -80,6 +81,7 @@
 		007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSoundView.swift; sourceTree = "<group>"; };
 		007AE11F2BB1AD3700E4367E /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorViewModelProtocol.swift; sourceTree = "<group>"; };
+		007AE13F2BB23DE500E4367E /* MainScreen */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MainScreen; sourceTree = "<group>"; };
 		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
@@ -172,6 +174,16 @@
 				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
 			);
 			path = ComponentView;
+			sourceTree = "<group>";
+		};
+		007AE13E2BB23D9700E4367E /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				63CD48C02BB1B3A40033CF77 /* TrackRowView.swift */,
+				63CD48BC2BB18C210033CF77 /* MainScreenViewModel.swift */,
+				63CD48BB2BB18C210033CF77 /* MainScreenView.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		5E45CB342BAD06B700E14B41 /* Services */ = {
@@ -405,21 +417,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		63CD48BD2BB18C210033CF77 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				63CD48BB2BB18C210033CF77 /* MainScreenView.swift */,
-				63CD48BC2BB18C210033CF77 /* MainScreenViewModel.swift */,
-				63CD48C02BB1B3A40033CF77 /* TrackRowView.swift */,
-			);
-			path = MainScreen;
-			sourceTree = "<group>";
-		};
 		728CE0F52BAAC9FF00542975 = {
 			isa = PBXGroup;
 			children = (
 				728CE1002BAAC9FF00542975 /* BeatMaker */,
 				728CE0FF2BAAC9FF00542975 /* Products */,
+				007AE13E2BB23D9700E4367E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -462,6 +465,7 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				007AE13F2BB23DE500E4367E /* MainScreen */,
 				007AE11C2BB1AC9C00E4367E /* ComponentView */,
 				007AE1172BB196A900E4367E /* UsedSoundsList */,
 				728CE1142BAAD9EA00542975 /* TrackList */,
@@ -626,6 +630,7 @@
 				63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */,
 				63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */,
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
+				007AE1402BB23DE500E4367E /* MainScreen in Resources */,
 				728CE1272BAADEE700542975 /* Localizable.strings in Resources */,
 				728CE1062BAACA0100542975 /* Assets.xcassets in Resources */,
 			);
