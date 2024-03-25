@@ -16,9 +16,9 @@ enum ConstantsForView {
 
 struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
     
-    @StateObject var viewModel: ViewModel
+    @StateObject  var viewModel: ViewModel
     // useless propertie, just for mock
-    @State var username: String = ""
+    @State  var username: String = ""
     
     var body: some View {
         
@@ -73,7 +73,7 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
     }
     
     // button of adding new sound to list of all sounds
-    var addNewSoundsButton: some View {
+     var addNewSoundsButton: some View {
         Button {
             viewModel.handle(AllSoundsViewEvent.tapAddNewSoundButton)
         } label: {
@@ -84,7 +84,7 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
     }
     
     // group of buttons from ContextMenu of sound cell
-    var longTapOnSoundCellMenu: some View {
+     var longTapOnSoundCellMenu: some View {
         Group {
             Button("Поменять эмодзи", systemImage: "music.note") {
                 viewModel.handle(.editSoundEmoji)

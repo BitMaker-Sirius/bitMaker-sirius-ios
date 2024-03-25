@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct trackView: View {
+struct TrackView: View {
     @State var sound:Sound
     var buttonClicked: (() -> Void)?
     var body: some View {

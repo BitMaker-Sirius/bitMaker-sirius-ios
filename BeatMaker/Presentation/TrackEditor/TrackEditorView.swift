@@ -7,31 +7,6 @@
 
 import SwiftUI
 
-enum PlayTrackViewEvent {
-    case tapButton
-    case tapChervon
-}
-
-struct TrackEditorViewState {
-    var shouldShowPause: Bool
-    var isPauseActive: String
-    var isChervonDown: Bool
-    var chervonDirection: String
-    var choosenSoundId: String?
-    var soundsArray: [Sound]
-}
-
-protocol TrackEditorViewModeling: ObservableObject {
-    var state: TrackEditorViewState { get }
-    
-    func handle(_ event: PlayTrackViewEvent)
-    
-    func setSelectedSound(at index: String)
-    
-    func areUuidsSimilar(id1: String, id2: String) -> Bool
-    
-}
-
 struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     
     @StateObject var viewModel: ViewModel
@@ -99,7 +74,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                     }
                     .padding(.leading, 4)
                     .padding(.trailing, 40)
-                    //.padding(.trailing, 30)
                 }
                 .padding(.bottom, 10)
             }
@@ -142,7 +116,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         
                         LazyVGrid(columns: columns) {
                             ForEach(viewModel.state.soundsArray, id: \.self) {sound in
-                                buttomSoundView(sound: sound) {
+                                ButtomSoundView(sound: sound) {
                                     viewModel.setSelectedSound(at: sound.id)
                                 }
                                 .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.red.opacity(1) : Color.red.opacity(0), radius: 8, x: 0, y: 0)
@@ -169,7 +143,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         Button(action: {
                             viewModel.handle(.tapButton)
                         }) {
-                            Image(systemName: viewModel.state.isPauseActive)
+                            Image(systemName: viewModel.state.pauseState)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 40)
@@ -205,10 +179,12 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             }
             .background(Color.backgroundColorForScreen)
             .onTapGesture {
-                print("qwe")
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                if self.isShowingUsedTreckView == true {
+                    viewModel.handle(.tapChervon)
+                }
                 self.isShowingUsedTreckView = false
-                viewModel.handle(.tapChervon)
+                
             }
         }
         

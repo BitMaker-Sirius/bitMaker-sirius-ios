@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct buttomSoundView: View {
+struct ButtomSoundView: View {
     @State var sound:Sound
     var buttonClicked: (() -> Void)?
     var body: some View {

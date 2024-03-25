@@ -14,7 +14,7 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
     @Published
     var state = TrackEditorViewState(
         shouldShowPause: false,
-        isPauseActive: "play.fill",
+        pauseState: "play.fill",
         isChervonDown: false,
         chervonDirection: "chevron.down",
         choosenSoundId: nil,
@@ -30,11 +30,10 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
     )
     
     func handle(_ event: PlayTrackViewEvent) {
-        print("tap")
         switch event {
         case .tapButton:
             state.shouldShowPause.toggle()
-            state.isPauseActive = (state.shouldShowPause ? "pause.fill": "play.fill")
+            state.pauseState = (state.shouldShowPause ? "pause.fill": "play.fill")
         case .tapChervon:
             state.isChervonDown.toggle()
             state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")

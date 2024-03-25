@@ -25,7 +25,10 @@ final class UsedTreckViewModel: UsedTreckViewModeling {
     )
     
     func shouldDeleteTreck(index: String) {
-        state.usedSoundsArray.remove(at: Int(index)!)
+        if Int(index)! >= 0 && Int(index)! < state.usedSoundsArray.count {
+            state.usedSoundsArray.remove(at: Int(index)!)
+        }
+        
     }
     
     init() {
