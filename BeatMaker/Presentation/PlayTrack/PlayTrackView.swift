@@ -48,8 +48,10 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
             
             VStack(alignment: .center, spacing: 0) {
                 HStack(alignment: .center) {
-                    Button(action: { dismiss() }) {
-                        Image.back_arrow.resizable().frame(width: 20, height: 20)
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image.backArrow.resizable().frame(width: 20, height: 20)
                             .offset(x: 2)
                             .padding(8).background(Color.backgroundColor)
                             .cornerRadius(20)
