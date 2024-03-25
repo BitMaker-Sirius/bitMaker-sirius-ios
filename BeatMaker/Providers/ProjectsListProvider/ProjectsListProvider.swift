@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-protocol ProjectListProvider {
-    /// Это свойство слушают  вью модели
-    var projectList: State<[Project]> { get }
+protocol ProjectsListProvider {
+    func loadData(completion: @escaping (Result<[Project], DataStorageError>) -> Void)
     
     // Прописать методы, которые взаимодействуют с project list
 }
