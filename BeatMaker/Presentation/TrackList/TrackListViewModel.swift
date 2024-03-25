@@ -13,6 +13,4 @@ class TrackListViewModel: ObservableObject {
         Project(metronomeBpm: 1, name: "2"),
         Project(metronomeBpm: 1, name: "3"),
     ]
-    
-    // Обработка действий пользователя
 }
