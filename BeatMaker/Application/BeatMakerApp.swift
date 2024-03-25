@@ -11,7 +11,9 @@ import SwiftUI
 struct BeatMakerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let mainScreenViewModel = MainScreenViewModel()
+            
+            MainScreenView(mainScreenViewModel: mainScreenViewModel)
         }
     }
 }
