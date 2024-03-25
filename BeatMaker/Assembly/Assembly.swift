@@ -56,7 +56,7 @@ final class Assembly {
     }()
     
     private lazy var soundDataStorage: any SoundDataStorage = {
-        SoundDataStorageImp()
+        SoundDataStorageImp(realmManager: realmManager)
     }()
     
     private lazy var aundioDataStorage: any AudioDataStorage = {
