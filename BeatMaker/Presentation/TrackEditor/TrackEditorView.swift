@@ -200,9 +200,9 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
 }
 
 
-#Preview {
-    TrackEditorView(viewModel: TrackEditorViewModel())
-}
+//#Preview {
+//    TrackEditorView(viewModel: TrackEditorViewModel())
+//}
 
 struct soundView: View {
     @State var sound:Sound

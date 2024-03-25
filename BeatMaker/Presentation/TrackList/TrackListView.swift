@@ -55,7 +55,7 @@ struct TrackListView: View {
             })
             .navigationDestination(isPresented: $isShowingPlayProjectView) {
                 if let projectToPlay = selectedProject {
-                    PlayProjectView(viewModel: PlayProjectViewModel(project: projectToPlay))
+                    PlayProjectView(viewModel: PlayProjectViewModel(project: projectToPlay, projectList: viewModel.projects))
                         .navigationBarBackButtonHidden()
                 }
             }
