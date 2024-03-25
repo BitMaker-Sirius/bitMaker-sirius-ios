@@ -8,5 +8,5 @@
 import AVFoundation
 
 protocol NetworkManager {
-    
+    // Реализация походов в сеть
 }
