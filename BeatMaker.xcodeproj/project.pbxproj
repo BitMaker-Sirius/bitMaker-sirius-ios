@@ -45,6 +45,13 @@
 		5ECF7A012BB0AB430014896D /* Assembly+EnvironmentValuesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECF7A002BB0AB430014896D /* Assembly+EnvironmentValuesExtension.swift */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
+		5EF976512BB0FCB30015A54C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF976502BB0FCB30015A54C /* Realm */; };
+		5EF976532BB0FCB30015A54C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF976522BB0FCB30015A54C /* RealmSwift */; };
+		5EF976572BB0FCEF0015A54C /* ProjectObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF976562BB0FCEF0015A54C /* ProjectObject.swift */; };
+		5EF976592BB0FCF90015A54C /* SoundObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF976582BB0FCF90015A54C /* SoundObject.swift */; };
+		5EF9765B2BB0FD040015A54C /* TrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9765A2BB0FD040015A54C /* TrackObject.swift */; };
+		5EF9765D2BB0FD0F0015A54C /* TrackPointObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9765C2BB0FD0F0015A54C /* TrackPointObject.swift */; };
+		5EF976602BB17E2A0015A54C /* ResultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9765F2BB17E2A0015A54C /* ResultsExtension.swift */; };
 		63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */; };
 		63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */; };
 		63B8E6992BADC916001F3BE2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8E6962BADC916001F3BE2 /* CustomFonts.swift */; };
@@ -106,6 +113,11 @@
 		5ECF7A002BB0AB430014896D /* Assembly+EnvironmentValuesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assembly+EnvironmentValuesExtension.swift"; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
+		5EF976562BB0FCEF0015A54C /* ProjectObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectObject.swift; sourceTree = "<group>"; };
+		5EF976582BB0FCF90015A54C /* SoundObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundObject.swift; sourceTree = "<group>"; };
+		5EF9765A2BB0FD040015A54C /* TrackObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackObject.swift; sourceTree = "<group>"; };
+		5EF9765C2BB0FD0F0015A54C /* TrackPointObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPointObject.swift; sourceTree = "<group>"; };
+		5EF9765F2BB17E2A0015A54C /* ResultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsExtension.swift; sourceTree = "<group>"; };
 		63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		63B8E6962BADC916001F3BE2 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
@@ -134,6 +146,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EF976532BB0FCB30015A54C /* RealmSwift in Frameworks */,
+				5EF976512BB0FCB30015A54C /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +315,8 @@
 		5ECF79EC2BB09E270014896D /* RealmManager */ = {
 			isa = PBXGroup;
 			children = (
+				5EF9765E2BB17E030015A54C /* Extensionals */,
+				5EF976552BB0FCDF0015A54C /* Models */,
 			);
 			path = RealmManager;
 			sourceTree = "<group>";
@@ -359,6 +375,25 @@
 				5ECAFA2F2BADA78500FAA2F3 /* TrackPlaybackServiceImp.swift */,
 			);
 			path = TrackPlaybackService;
+			sourceTree = "<group>";
+		};
+		5EF976552BB0FCDF0015A54C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5EF976562BB0FCEF0015A54C /* ProjectObject.swift */,
+				5EF976582BB0FCF90015A54C /* SoundObject.swift */,
+				5EF9765A2BB0FD040015A54C /* TrackObject.swift */,
+				5EF9765C2BB0FD0F0015A54C /* TrackPointObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5EF9765E2BB17E030015A54C /* Extensionals */ = {
+			isa = PBXGroup;
+			children = (
+				5EF9765F2BB17E2A0015A54C /* ResultsExtension.swift */,
+			);
+			path = Extensionals;
 			sourceTree = "<group>";
 		};
 		63B8E6932BADC8F9001F3BE2 /* Fonts */ = {
@@ -533,6 +568,10 @@
 			dependencies = (
 			);
 			name = BeatMaker;
+			packageProductDependencies = (
+				5EF976502BB0FCB30015A54C /* Realm */,
+				5EF976522BB0FCB30015A54C /* RealmSwift */,
+			);
 			productName = BeatMaker;
 			productReference = 728CE0FE2BAAC9FF00542975 /* BeatMaker.app */;
 			productType = "com.apple.product-type.application";
@@ -562,6 +601,9 @@
 				ru,
 			);
 			mainGroup = 728CE0F52BAAC9FF00542975;
+			packageReferences = (
+				5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 728CE0FF2BAAC9FF00542975 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -598,10 +640,13 @@
 				728CE1C42BAD812B00542975 /* ImageExtension.swift in Sources */,
 				5ECAFA622BADA78500FAA2F3 /* DataStorage.swift in Sources */,
 				5ECAFA5A2BADA78500FAA2F3 /* VisualizationService.swift in Sources */,
+				5EF9765D2BB0FD0F0015A54C /* TrackPointObject.swift in Sources */,
 				5EAF76282BAEC1F700C4B065 /* ProjectsListProviderImp.swift in Sources */,
 				5ECAFA532BADA78500FAA2F3 /* SamplingServiceImp.swift in Sources */,
 				5ECAFA612BADA78500FAA2F3 /* ProjectDataStorageImp.swift in Sources */,
+				5EF9765B2BB0FD040015A54C /* TrackObject.swift in Sources */,
 				728CE1342BAAE91600542975 /* SoundListView.swift in Sources */,
+				5EF976602BB17E2A0015A54C /* ResultsExtension.swift in Sources */,
 				5EAF76372BAF0D2700C4B065 /* SoundDataStorage.swift in Sources */,
 				5EAF762D2BAEC3CA00C4B065 /* SoundsListProviderImp.swift in Sources */,
 				5EAF763A2BAF0F6A00C4B065 /* ProjectDataStorage.swift in Sources */,
@@ -619,9 +664,11 @@
 				5ECAFA602BADA78500FAA2F3 /* SoundDataStorageImp.swift in Sources */,
 				5ECAFA5E2BADA78500FAA2F3 /* RecordingService.swift in Sources */,
 				5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */,
+				5EF976572BB0FCEF0015A54C /* ProjectObject.swift in Sources */,
 				5ECF79FC2BB0A6A30014896D /* ContentView.swift in Sources */,
 				5ECAFA522BADA78500FAA2F3 /* PlaybackService.swift in Sources */,
 				5ECF79F62BB0A0150014896D /* TrackPlaybackService.swift in Sources */,
+				5EF976592BB0FCF90015A54C /* SoundObject.swift in Sources */,
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
 				5ECAFA5F2BADA78500FAA2F3 /* ImageDataStorageImp.swift in Sources */,
 				5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */,
@@ -857,6 +904,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.49.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5EF976502BB0FCB30015A54C /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		5EF976522BB0FCB30015A54C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 728CE0F62BAAC9FF00542975 /* Project object */;
 }

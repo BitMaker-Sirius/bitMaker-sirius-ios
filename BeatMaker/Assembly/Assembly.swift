@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 final class Assembly {
     // MARK: Views
@@ -51,7 +52,7 @@ final class Assembly {
     // MARK: DataStorages
     
     private lazy var projectDataStorage: any ProjectDataStorage = {
-        ProjectDataStorageImp()
+        ProjectDataStorageImp(realmManager: realmManager)
     }()
     
     private lazy var soundDataStorage: any SoundDataStorage = {
@@ -68,7 +69,10 @@ final class Assembly {
     
     // MARK: DataManagers
     
+    private lazy var realmManager: Realm? = {
+        try? Realm()
+    }()
+    
     // FileManager
-    // Realm
     // NetworkManager
 }

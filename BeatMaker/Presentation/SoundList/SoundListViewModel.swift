@@ -36,12 +36,10 @@ class SoundListViewModel: ObservableObject, AllSoundsViewModelProtocol {
     init(editorViewModel: TrackEditorViewModel, addedToTrackSounds: [Sound]) {
         state.addedToTrackSounds = addedToTrackSounds
         state.allSounds = [
-            Sound(id: UUID().uuidString,
-                  audioFileId: UUID().uuidString,
+            Sound(audioFileId: UUID().uuidString,
                   name: "first",
                   emoji: "\u{1f600}"),
-            Sound(id: UUID().uuidString,
-                  audioFileId: UUID().uuidString,
+            Sound(audioFileId: UUID().uuidString,
                   name: "first",
                   emoji: "\u{1f600}")
         ]

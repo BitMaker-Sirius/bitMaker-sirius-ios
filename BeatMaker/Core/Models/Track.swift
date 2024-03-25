@@ -6,16 +6,31 @@
 //
 
 import SwiftUI
+import Foundation
 
-struct Track {
+final class Track: ObservableObject {
     let id: String
     let sound: Sound?
-    let points: [TrackPoint]
-    var isMute: Bool = false
+    @Published var points: [TrackPoint]
+    @Published var isMute: Bool
     
-    init(id: String, sound: Sound?, points: [TrackPoint]) {
-        self.id = id
+    /// Используется при обновлении Track
+    init(
+        sound: Sound?,
+        points: [TrackPoint],
+        isMute: Bool = false
+    ) {
+        self.id = UUID().uuidString
         self.sound = sound
         self.points = points
+        self.isMute = isMute
+    }
+    
+    /// Используется для перевода в domain model
+    init(from trackObject: TrackObject) {
+        self.id = trackObject.id
+        self.sound = Sound(from: trackObject.sound)
+        self.points = trackObject.points.map { TrackPoint(from: $0) }
+        self.isMute = trackObject.isMute
     }
 }

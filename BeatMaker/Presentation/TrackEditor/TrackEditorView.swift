@@ -193,7 +193,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 } )
         .navigationDestination(
             isPresented: $isSave) {
-                PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 1, name: "Project 1")))
+                PlayProjectView(viewModel: PlayProjectViewModel(project: Project(metronomeBpm: 1, name: "Project 1")))
             }
     }
     
