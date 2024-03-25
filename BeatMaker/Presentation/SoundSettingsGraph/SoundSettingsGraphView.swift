@@ -7,21 +7,44 @@
 
 import SwiftUI
 
-struct SoundSettingsGraphView: View {
-    @State private var selectedPoint: CGPoint = .zero
-    
-    @State private var pitch: CGFloat = 0
-    @State private var volume: CGFloat = 10
-    
+enum SoundSettingsGraphEvent {
+    case tappedOnGraph(x: CGPoint)
+}
+
+struct SoundSettingsGraphViewState {
+    var shouldMovePoint: Bool
+    var selectedPoint: CGPoint
+    var pitch: CGFloat
+    var volume: CGFloat
+
+}
+
+protocol SoundSettingsGraphViewModeling: ObservableObject {
+    var state: SoundSettingsGraphViewState { get set}
+    func handle(_ event: SoundSettingsGraphEvent)
+    func mapValueToX() -> CGFloat
+    func mapValueToY() -> CGFloat
+    func mapXToValue(_ x: CGFloat) -> CGFloat
+    func mapYToValue(_ y: CGFloat) -> CGFloat
+    func changeParams(currentPoint: CGPoint)
+}
+
+struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View {
+    @ObservedObject var soundSettingsGraphViewModel: ViewModel
+
+    @State private var duration: Double = 3
+    @State var resetWorkItem: DispatchWorkItem?
+
     // Фиксируем размеры графика
     let graphWidth: CGFloat = 330
     let graphHeight: CGFloat = 330
-
+    
     var body: some View {
         VStack {
             // Отображаем координаты выбранной точки у самой точки
-            if selectedPoint != .zero {
-                Text("Pitch: \(Int(selectedPoint.x)), Volume: \(Int(selectedPoint.y))")
+            if soundSettingsGraphViewModel.state.selectedPoint != .zero {
+                Text("Pitch: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Volume: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
+                    .font(customFont: .accentTitle, size: 15)
                     .padding(5)
                     .background(Color.white)
                     .cornerRadius(5)
@@ -34,62 +57,55 @@ struct SoundSettingsGraphView: View {
                     
                     path.move(to: CGPoint(x: graphWidth/2, y: 0))
                     path.addLine(to: CGPoint(x: graphWidth/2, y: graphHeight))
-                }.stroke(Color.black, lineWidth: 1)
+                }.stroke(Color(red: 122/255, green: 138/255, blue: 169/255), lineWidth: 1)
                 
                 
                 // Подписи к осям
                 Text("Pitch")
+                    .font(customFont: .subtitle, size: 15)
                     .position(x: graphWidth - 30, y: graphHeight/2 + 20)
                 Text("Volume")
+                    .font(customFont: .subtitle, size: 15)
                     .position(x: graphWidth/2 - 50, y: 15)
                 
                 // Рисуем выбранную точку с анимацией
                 Circle()
-                    .fill(Color.red)
+                    .fill(Color(red: 122/255, green: 138/255, blue: 169/255))
                     .frame(width: 10, height: 10)
-                    .position(x: mapValueToX(selectedPoint.x),
-                              y: mapValueToY(selectedPoint.y))
-                    .animation(.easeInOut, value: selectedPoint)
+                    .position(x: soundSettingsGraphViewModel.mapValueToX(),
+                              y: soundSettingsGraphViewModel.mapValueToY())
+                    .animation(.easeInOut, value: soundSettingsGraphViewModel.state.selectedPoint)
             }
             .frame(width: graphWidth, height: graphHeight)
-            .background(.white)
+            .background(Color(red: 246/255, green: 248/255, blue: 254/255))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .onTapGesture { value in
-                pitch = min(max(mapXToValue(value.x), -2400), 2400)
-                volume = min(max(mapYToValue(value.y), 0), 20)
-                self.selectedPoint = CGPoint(x: pitch, y: volume)
-                // На сколько нужно отсрочить возврат точки?
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    pitch = 0
-                    volume = 10
-                    self.selectedPoint = CGPoint(x: pitch, y: volume)
+                soundSettingsGraphViewModel.changeParams(currentPoint: value)
+                resetWorkItem?.cancel()
+
+                // Создаем новый DispatchWorkItem
+                let workItem = DispatchWorkItem {
+                    var point = CGPoint(x: 0, y: 10)
+                    soundSettingsGraphViewModel.state.pitch = 0
+                    soundSettingsGraphViewModel.state.volume = 10
+                    soundSettingsGraphViewModel.state.selectedPoint = CGPoint(x: 0, y: 10)
                 }
+                
+                // Сохраняем новый DispatchWorkItem для возможной отмены в будущем
+                self.resetWorkItem = workItem
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: workItem)
+
             }
             .onAppear {
                 // Устанавливаем начальное положение точки в соответствии с начальными значениями Pitch и Volume
-                selectedPoint = CGPoint(x: pitch, y: volume)
+                soundSettingsGraphViewModel.state.selectedPoint = CGPoint(x: 0, y: 10)
             }
         }
     }
-    
-    func mapValueToX(_ value: CGFloat) -> CGFloat {
-        return (value + 2400) / 4800 * graphWidth
-    }
-    
-    func mapValueToY(_ value: CGFloat) -> CGFloat {
-        return graphHeight - (value / 20 * graphHeight)
-    }
-    
-    func mapXToValue(_ x: CGFloat) -> CGFloat {
-        return x / graphWidth * 4800 - 2400
-    }
-    
-    func mapYToValue(_ y: CGFloat) -> CGFloat {
-        return (graphHeight - y) / graphHeight * 19 + 1
+}
+
+struct SoundSettingsGraph_Previews: PreviewProvider {
+    static var previews: some View {
+        SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel())
     }
 }
-//
-//struct SoundSettingsGraph_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SoundSettingsGraphView()
-//    }
-//}
