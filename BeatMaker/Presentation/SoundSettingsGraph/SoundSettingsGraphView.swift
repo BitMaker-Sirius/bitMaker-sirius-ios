@@ -12,7 +12,6 @@ enum SoundSettingsGraphEvent {
 }
 
 struct SoundSettingsGraphViewState {
-    var shouldMovePoint: Bool
     var selectedPoint: CGPoint
     var pitch: CGFloat
     var volume: CGFloat
@@ -21,7 +20,6 @@ struct SoundSettingsGraphViewState {
 
 protocol SoundSettingsGraphViewModeling: ObservableObject {
     var state: SoundSettingsGraphViewState { get set}
-    func handle(_ event: SoundSettingsGraphEvent)
     func mapValueToX() -> CGFloat
     func mapValueToY() -> CGFloat
     func mapXToValue(_ x: CGFloat) -> CGFloat
@@ -31,7 +29,6 @@ protocol SoundSettingsGraphViewModeling: ObservableObject {
 
 struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View {
     @ObservedObject var soundSettingsGraphViewModel: ViewModel
-
     @State private var duration: Double = 0.6
     @State var resetWorkItem: DispatchWorkItem?
     @State var animate: Bool = false
@@ -59,7 +56,6 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View {
                     path.addLine(to: CGPoint(x: graphWidth/2, y: graphHeight))
                 }.stroke(Color(red: 122/255, green: 138/255, blue: 169/255), lineWidth: 1)
                 
-                
                 // Подписи к осям
                 Text("Pitch")
                     .font(customFont: .subtitle, size: 15)
@@ -76,7 +72,7 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View {
                     .position(x: soundSettingsGraphViewModel.mapValueToX(), y: soundSettingsGraphViewModel.mapValueToY())
             }
             .frame(width: graphWidth, height: graphHeight)
-            .background(Color(red: 246/255, green: 248/255, blue: 254/255))
+            .background(Color.background_color)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .onTapGesture { value in
                 // Генерация вибрации

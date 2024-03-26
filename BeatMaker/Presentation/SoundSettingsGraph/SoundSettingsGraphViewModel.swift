@@ -11,51 +11,19 @@ protocol SoundSettingsGraphProviderObserver: AnyObject {
     func handle(pointCoordinatesDidChanged coordinate: CGPoint)
 }
 
-class SoundSettingsGraphProvider {
-    weak var observer: SoundSettingsGraphProviderObserver?
-    var selectedPoint: CGPoint
-    var pitch: CGFloat = 0
-    var volume: CGFloat = 10
-    
-    init(selectedPoint: CGPoint, pitch: CGFloat, volume: CGFloat) {
-        self.pitch = pitch
-        self.selectedPoint = selectedPoint
-        self.volume = volume
-        self.observer?.handle(pointCoordinatesDidChanged: selectedPoint)
-    }
-}
-
 class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
     let graphWidth: CGFloat = 330
     let graphHeight: CGFloat = 330
     
     @Published
     var state = SoundSettingsGraphViewState(
-        shouldMovePoint: false,
         selectedPoint: CGPoint(x: 0, y: 10),
         pitch: 0,
         volume: 10
     )
     
-    private lazy var soundSettingsGraphProvider: SoundSettingsGraphProvider = {
-        let provider = SoundSettingsGraphProvider(selectedPoint: state.selectedPoint, pitch: state.pitch, volume: state.volume)
-        provider.observer = self
-        return provider
-    }()
-    
     init() {
         self.state = state
-        state.pitch = soundSettingsGraphProvider.pitch
-        state.volume = soundSettingsGraphProvider.volume
-        state.selectedPoint = soundSettingsGraphProvider.selectedPoint
-    }
-
-    func handle(_ event: SoundSettingsGraphEvent) {
-        switch event {
-        case .tappedOnGraph:
-            state.shouldMovePoint = true
-            // А тут что????????
-        }
     }
     
     func changeParams(currentPoint: CGPoint) {
