@@ -13,8 +13,10 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
     
     @Published
     var state = TrackEditorViewState(
-        shouldShowPause: false, 
-        isPauseActive: "play.fill",
+        shouldShowPause: false,
+        pauseState: "play.fill",
+        isChervonDown: false,
+        chervonDirection: "chevron.down",
         choosenSoundId: nil,
         soundsArray: [
             Sound(id: "0", audioFileId: nil, name: "baraban", emoji: "\u{1f600}"),
@@ -27,22 +29,23 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
         ]
     )
     
-    
     func handle(_ event: PlayTrackViewEvent) {
-        print("tap")
         switch event {
         case .tapButton:
             state.shouldShowPause.toggle()
-            state.isPauseActive = (state.shouldShowPause ? "pause.fill": "play.fill")
+            state.pauseState = (state.shouldShowPause ? "pause.fill": "play.fill")
+        case .tapChervon:
+            state.isChervonDown.toggle()
+            state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")
         }
     }
     
-    func setSelectedSound(at id: UUID) {
-        state.choosenSoundId = id.uuidString
+    func setSelectedSound(at id: String) {
+        state.choosenSoundId = id
     }
     
-    func areUuidsSimilar(id1: UUID, id2: String) -> Bool {
-        return id1.uuidString == id2
+    func areUuidsSimilar(id1: String, id2: String) -> Bool {
+        return id1 == id2
     }
     
     init() {

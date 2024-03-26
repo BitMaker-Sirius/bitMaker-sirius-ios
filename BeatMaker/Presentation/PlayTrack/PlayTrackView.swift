@@ -136,5 +136,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
         .onAppear {
             viewModel.countTotalTime()
         }
+        .navigationBarBackButtonHidden()
     }
 }
