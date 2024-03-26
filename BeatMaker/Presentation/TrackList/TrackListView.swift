@@ -21,12 +21,12 @@ struct TrackListView: View {
                     ForEach(viewModel.projects) { project in
                         VStack {
                             HStack {
-                                Text(project.name ?? "")
+                                Text(project.name)
                                 Spacer()
                                 Button {
                                     selectedProject = project
                                     isShowingPlayProjectView = true
-                                    print("Воспроизведение " + (project.name ?? ""))
+                                    print("Воспроизведение " + (project.name))
                                 } label: {
                                     Image(systemName: "play.circle")
                                 }
@@ -55,13 +55,13 @@ struct TrackListView: View {
             })
             .navigationDestination(isPresented: $isShowingPlayProjectView) {
                 if let projectToPlay = selectedProject {
-                    PlayProjectView(viewModel: PlayProjectViewModel(project: projectToPlay, projectList: viewModel.projects))
+                    PlayProjectView(projectId: "0", viewModel: PlayProjectViewModel(project: projectToPlay, projectList: viewModel.projects))
                         .navigationBarBackButtonHidden()
                 }
             }
             .sheet(isPresented: $isShowingEditProjectSheet) {
                 if let projectForEditing = selectedProject {
-                    Text("Редактирование трека " + (projectForEditing.name ?? ""))
+                    Text("Редактирование трека " + (projectForEditing.name))
                         .presentationDetents([.medium, .large])
                 }
             }

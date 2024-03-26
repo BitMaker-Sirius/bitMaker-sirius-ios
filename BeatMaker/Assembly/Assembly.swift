@@ -20,7 +20,11 @@ final class Assembly {
     }
     
     func projectEditorView(projectId: String?) -> TrackEditorView<some TrackEditorViewModeling> {
-        TrackEditorView(projectId: projectId, viewModel: self.projectEditorModel)
+        TrackEditorView(projectId: projectId, viewModel: self.projectEditorViewModel)
+    }
+    
+    func playProjectView(projectId: String) -> PlayProjectView<some PlayProjectViewModeling> {
+        PlayProjectView(projectId: projectId, viewModel: self.playProjectViewModel)
     }
     
     // MARK: ViewModels
@@ -32,8 +36,12 @@ final class Assembly {
         )
     }()
     
-    private lazy var projectEditorModel: TrackEditorViewModel = {
+    private lazy var projectEditorViewModel: TrackEditorViewModel = {
         TrackEditorViewModel()
+    }()
+    
+    private lazy var playProjectViewModel: PlayProjectViewModel = {
+        PlayProjectViewModel()
     }()
     
     // MARK: Providers

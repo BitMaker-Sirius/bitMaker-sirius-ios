@@ -8,7 +8,7 @@
 import SwiftUI
 import Foundation
 
-final class Track: ObservableObject {
+final class Track: ObservableObject, Hashable {
     let id: String
     let sound: Sound?
     @Published var points: [TrackPoint]
@@ -32,5 +32,13 @@ final class Track: ObservableObject {
         self.sound = Sound(from: trackObject.sound)
         self.points = trackObject.points.map { TrackPoint(from: $0) }
         self.isMute = trackObject.isMute
+    }
+    
+    static func == (lhs: Track, rhs: Track) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

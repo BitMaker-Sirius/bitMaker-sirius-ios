@@ -6,27 +6,35 @@
 //
 
 import Foundation
+import SwiftUI
 
 class PlayProjectViewModel: PlayProjectViewModeling {
+    @Environment(\.router) var router: Router
     @Published var state: PlayProjectViewState
     
     func handle(_ event: PlayProjectViewEvent) {
         switch event {
-            case .playTap:
-                playTap()
-            case .nextTap:
-                nextTap()
-            case .prevTap:
-                prevTap()
-            case .editTap:
-                editTap()
-            case .likeTap:
-                likeTap()
+        case .playTap:
+            playTap()
+        case .nextTap:
+            nextTap()
+        case .prevTap:
+            prevTap()
+        case .editTap:
+            editTap()
+        case .likeTap:
+            likeTap()
+        case .backTap:
+            backTap()
         }
     }
     
     // MARK: Init
-    init(project: Project, projectList: [Project] = []) {
+    // Переделать под провайдер
+    init(
+        project: Project = .init(metronomeBpm: 100, name: "name"),
+        projectList: [Project] = []
+    ) {
         let isList = projectList.count > 1
         self.projectList = projectList
         currentProjectIndex = projectList.firstIndex(of: project) ?? 0
@@ -78,6 +86,12 @@ class PlayProjectViewModel: PlayProjectViewModeling {
     private func likeTap() {
         state.liked.toggle()
         // TODO: Добавить изменение модели через какой-то сервис
+    }
+    
+    private func backTap() {
+        while router.path.count != 0 {
+          router.path.removeLast()
+        }
     }
     
     private func startPlayback() {

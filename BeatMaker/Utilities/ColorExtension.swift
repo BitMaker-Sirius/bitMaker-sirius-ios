@@ -11,6 +11,7 @@ import UIKit
 extension Color {
     static let backgroundColor = Color.adaptive(light: "EFF0F9", dark: "282C31")
     static let onBackgroundColor = Color.adaptive(light: "282C31", dark: "EFF0F9")
+    static let backgroundColorForScreen = Color.adaptive(light: "FFFFFF", dark: "000000")
 }
 
 extension Color {

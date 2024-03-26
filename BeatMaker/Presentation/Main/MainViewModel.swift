@@ -29,6 +29,7 @@ protocol MainViewModel: ObservableObject {
 
 final class MainViewModelImp: MainViewModel {
     @Environment(\.router) var router: Router
+    
     let projectsListProvider: ProjectsListProvider
     let projectPlaybackService: any ProjectPlaybackService
     
@@ -75,6 +76,6 @@ final class MainViewModelImp: MainViewModel {
     }
     
     private func toPlayProjectView(with projectId: String) {
-        // Переход через router
+        router.path.append(Route.playProject(projectId: projectId))
     }
 }
