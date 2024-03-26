@@ -12,6 +12,9 @@
 		007AE11E2BB1ACB300E4367E /* ButtomSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */; };
 		007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11F2BB1AD3700E4367E /* TrackView.swift */; };
 		007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */; };
+		00E4BFD22BB2C224007C3E89 /* TrackRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */; };
+		00E4BFD32BB2C224007C3E89 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD02BB2C224007C3E89 /* MainScreenView.swift */; };
+		00E4BFD42BB2C224007C3E89 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */; };
 		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
@@ -53,9 +56,6 @@
 		63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */; };
 		63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */; };
 		63B8E6992BADC916001F3BE2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8E6962BADC916001F3BE2 /* CustomFonts.swift */; };
-		63CD48BE2BB18C210033CF77 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48BB2BB18C210033CF77 /* MainScreenView.swift */; };
-		63CD48BF2BB18C210033CF77 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48BC2BB18C210033CF77 /* MainScreenViewModel.swift */; };
-		63CD48C12BB1B3A40033CF77 /* TrackRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48C02BB1B3A40033CF77 /* TrackRowView.swift */; };
 		728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */; };
 		728CE1042BAAC9FF00542975 /* TrackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1032BAAC9FF00542975 /* TrackListView.swift */; };
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
@@ -80,6 +80,9 @@
 		007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSoundView.swift; sourceTree = "<group>"; };
 		007AE11F2BB1AD3700E4367E /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorViewModelProtocol.swift; sourceTree = "<group>"; };
+		00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRowView.swift; sourceTree = "<group>"; };
+		00E4BFD02BB2C224007C3E89 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
@@ -122,9 +125,6 @@
 		63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		63B8E6962BADC916001F3BE2 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
-		63CD48BB2BB18C210033CF77 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
-		63CD48BC2BB18C210033CF77 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
-		63CD48C02BB1B3A40033CF77 /* TrackRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRowView.swift; sourceTree = "<group>"; };
 		728CE0FE2BAAC9FF00542975 /* BeatMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		728CE1012BAAC9FF00542975 /* BeatMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerApp.swift; sourceTree = "<group>"; };
 		728CE1032BAAC9FF00542975 /* TrackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListView.swift; sourceTree = "<group>"; };
@@ -172,6 +172,16 @@
 				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
 			);
 			path = ComponentView;
+			sourceTree = "<group>";
+		};
+		00E4BFCE2BB2C20F007C3E89 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				00E4BFD02BB2C224007C3E89 /* MainScreenView.swift */,
+				00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */,
+				00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */,
+			);
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		5E45CB342BAD06B700E14B41 /* Services */ = {
@@ -405,16 +415,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		63CD48BD2BB18C210033CF77 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				63CD48BB2BB18C210033CF77 /* MainScreenView.swift */,
-				63CD48BC2BB18C210033CF77 /* MainScreenViewModel.swift */,
-				63CD48C02BB1B3A40033CF77 /* TrackRowView.swift */,
-			);
-			path = MainScreen;
-			sourceTree = "<group>";
-		};
 		728CE0F52BAAC9FF00542975 = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +462,7 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				00E4BFCE2BB2C20F007C3E89 /* MainScreen */,
 				007AE11C2BB1AC9C00E4367E /* ComponentView */,
 				007AE1172BB196A900E4367E /* UsedSoundsList */,
 				728CE1142BAAD9EA00542975 /* TrackList */,
@@ -649,7 +650,6 @@
 				5EAF76282BAEC1F700C4B065 /* ProjectsListProviderImp.swift in Sources */,
 				5ECAFA532BADA78500FAA2F3 /* SamplingServiceImp.swift in Sources */,
 				5ECAFA612BADA78500FAA2F3 /* ProjectDataStorageImp.swift in Sources */,
-				63CD48C12BB1B3A40033CF77 /* TrackRowView.swift in Sources */,
 				728CE1342BAAE91600542975 /* SoundListView.swift in Sources */,
 				5EAF76372BAF0D2700C4B065 /* SoundDataStorage.swift in Sources */,
 				5EAF762D2BAEC3CA00C4B065 /* SoundsListProviderImp.swift in Sources */,
@@ -674,8 +674,10 @@
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
 				5ECAFA5F2BADA78500FAA2F3 /* ImageDataStorageImp.swift in Sources */,
 				007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */,
+				00E4BFD22BB2C224007C3E89 /* TrackRowView.swift in Sources */,
 				5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */,
 				5ECAFA582BADA78500FAA2F3 /* NetworkManager.swift in Sources */,
+				00E4BFD32BB2C224007C3E89 /* MainScreenView.swift in Sources */,
 				728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */,
 				728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */,
 				007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */,
@@ -684,9 +686,8 @@
 				5ECF79F82BB0A0550014896D /* ProjectPlaybackService.swift in Sources */,
 				5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */,
 				728CE11E2BAADCCC00542975 /* Sound.swift in Sources */,
-				63CD48BF2BB18C210033CF77 /* MainScreenViewModel.swift in Sources */,
 				5ECAFA572BADA78500FAA2F3 /* NetworkManagerImp.swift in Sources */,
-				63CD48BE2BB18C210033CF77 /* MainScreenView.swift in Sources */,
+				00E4BFD42BB2C224007C3E89 /* MainScreenViewModel.swift in Sources */,
 				5EAF763D2BAF0F9A00C4B065 /* AudioDataStorage.swift in Sources */,
 				5EAF76342BAF0CAF00C4B065 /* ImageDataStorage.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
@@ -838,7 +839,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMaker/Preview Content\"";
-				DEVELOPMENT_TEAM = S3KD837NRD;
+				DEVELOPMENT_TEAM = 88J8J7P9S6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeatMaker/Info.plist;
@@ -868,7 +869,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMaker/Preview Content\"";
-				DEVELOPMENT_TEAM = S3KD837NRD;
+				DEVELOPMENT_TEAM = 88J8J7P9S6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeatMaker/Info.plist;
