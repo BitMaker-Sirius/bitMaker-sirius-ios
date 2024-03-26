@@ -7,27 +7,31 @@
 
 import SwiftUI
 
-final class Project: ObservableObject, Identifiable, Hashable {
+struct Project: Identifiable, Hashable {
     let id: String
     let metronomeBpm: Int
-    @Published var name: String?
-    @Published var image: String?
-    @Published var updateDate: Date?
-    @Published var preparedSounds: [Sound] = []
-    @Published var tracks: [Track] = []
+    var name: String
+    var image: String?
+    var updateDate: Date?
+    var preparedSounds: [Sound]
+    var tracks: [Track]
     
     init(
         id: String, 
         metronomeBpm: Int, 
-        name: String? = nil,
+        name: String,
         image: String? = nil,
-        updateDate: Date? = nil
+        updateDate: Date? = nil,
+        preparedSounds: [Sound] = [],
+        tracks: [Track] = []
     ) {
         self.id = id
         self.metronomeBpm = metronomeBpm
         self.name = name
         self.image = image
         self.updateDate = updateDate
+        self.preparedSounds = preparedSounds
+        self.tracks = tracks
     }
 
     static func == (lhs: Project, rhs: Project) -> Bool {

@@ -6,11 +6,73 @@
 //
 
 import Foundation
+import SwiftUI
 
-class SoundListViewModel: ObservableObject {
-    @Published var sounds: [Sound] = []
+class SoundListViewModel: ObservableObject, AllSoundsViewModelProtocol {
     
-//    init() {
-//        sounds = FIleManagerService.shared.getSounds()
-//    }
+    @Published var state = AllSoundsViewState(addedToTrackSounds: [], allSounds: [])
+    var editorViewModel: TrackEditorViewModel = TrackEditorViewModel()
+    
+    func handle(_ event: AllSoundsViewEvent) {
+        print(event)
+        switch event {
+        case .deleteSound:
+            deleteSound()
+        case .tapAddToTrackButton:
+            tapAddToTrackButton()
+        case .tapAddNewSoundButton:
+            tapAddNewSoundButton()
+        case .tapOnCellPlayButton:
+            tapOnCellPlayButton()
+        case .tapOnCell:
+            tapOnCell()
+        case .editSoundName:
+            editSoundName()
+        case .editSoundEmoji:
+            editSoundEmoji()
+        }
+    }
+    
+    init(editorViewModel: TrackEditorViewModel, addedToTrackSounds: [Sound]) {
+        state.addedToTrackSounds = addedToTrackSounds
+        state.allSounds = [
+            Sound(id: UUID().uuidString,
+                  audioFileId: UUID().uuidString,
+                  name: "first",
+                  emoji: "\u{1f600}"),
+            Sound(id: UUID().uuidString,
+                  audioFileId: UUID().uuidString,
+                  name: "first",
+                  emoji: "\u{1f600}")
+        ]
+    }
+    
+    private func deleteSound() {
+        
+    }
+    
+    private func tapAddToTrackButton() {
+        
+    }
+    
+    private func tapAddNewSoundButton() {
+        
+    }
+    
+    private func tapOnCellPlayButton() {
+        
+    }
+    
+    private func tapOnCell() {
+        
+    }
+    
+    private func editSoundName() {
+        
+    }
+    
+    private func editSoundEmoji() {
+        
+    }
+    
 }

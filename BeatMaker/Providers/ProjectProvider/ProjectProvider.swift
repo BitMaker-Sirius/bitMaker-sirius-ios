@@ -8,8 +8,7 @@
 import SwiftUI
 
 protocol ProjectProvider {
-    /// Это свойство слушают  вью модели
-    var project: StateObject<Project> { get }
+    func loadData(by id: String, completion: @escaping (Result<Project, DataStorageError>) -> Void)
     
     // Прописать методы, которые взаимодействуют с project
 }

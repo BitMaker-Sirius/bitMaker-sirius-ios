@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class TrackPlaybackService: PlaybackService {
-    let soundPlaybackService: SoundPlaybackService
+final class TrackPlaybackServiceImp: TrackPlaybackService {
+    let soundPlaybackService: any SoundPlaybackService
     
-    init(soundPlaybackService: SoundPlaybackService) {
+    init(soundPlaybackService: any SoundPlaybackService) {
         self.soundPlaybackService = soundPlaybackService
     }
     

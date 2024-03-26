@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-protocol SoundListProvider {
-    /// Это свойство слушают  вью модели
-    var soundList: State<[Sound]> { get }
+protocol SoundsListProvider {
+    func loadData(completion: @escaping (Result<[Sound], DataStorageError>) -> Void)
     
     // Прописать методы, которые взаимодействуют с sound list
 }

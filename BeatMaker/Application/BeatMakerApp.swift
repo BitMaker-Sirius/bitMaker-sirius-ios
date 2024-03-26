@@ -11,7 +11,9 @@ import SwiftUI
 struct BeatMakerApp: App {
     var body: some Scene {
         WindowGroup {
-            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel())
+            let mainScreenViewModel = MainScreenViewModel()
+            
+            MainScreenView(mainScreenViewModel: mainScreenViewModel)
         }
     }
 }

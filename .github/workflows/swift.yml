@@ -1,0 +1,29 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Code Formatter
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Formate:
+    env:
+      SWIFT_VERSION: '5.5'
+    runs-on: macos-13
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Swiftformat
+        run: brew install swiftlint
+
+      - name: Build
+        run: xcodebuild build -project BeatMaker.xcodeproj -scheme BeatMaker clean build -sdk iphoneos CODE_SIGNING_ALLOWED=No
+
+      - name: Lint code
+        run: git diff --cached --name-only | grep "\.swift" | while read filename; do swiftlint lint --path "$filename"; done
