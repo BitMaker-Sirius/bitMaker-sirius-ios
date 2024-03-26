@@ -5,14 +5,13 @@
 //  Created by Ирина Печик on 25.03.2024.
 //
 
-import Foundation
+import SwiftUI
 
 protocol SoundSettingsGraphProviderObserver: AnyObject {
     func handle(pointCoordinatesDidChanged coordinate: CGPoint)
 }
 
 class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
-    
     @Published
     var state = SoundSettingsGraphViewState(
         selectedPoint: CGPoint(x: 0, y: 10),
@@ -26,31 +25,40 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
         graphWidth: CGFloat(330)
     )
     
+    private let pitchValue: CGFloat = 2400
+    private let minVolumeValue: CGFloat = 0
+    private let maxVolumeValue: CGFloat = 20
+    
     init() {
         self.state = state
         self.viewState = viewState
     }
     
     func changeParams(currentPoint: CGPoint) {
-        state.pitch = min(max(mapXToValue(currentPoint.x), -2400), 2400)
-        state.volume = min(max(mapYToValue(currentPoint.y), 0), 20)
+        state.pitch = min(max(mapXToValue(currentPoint.x), -pitchValue), pitchValue)
+        state.volume = min(max(mapYToValue(currentPoint.y), minVolumeValue), maxVolumeValue)
         state.selectedPoint = CGPoint(x: state.pitch, y: state.volume)
     }
     
     func mapValueToX() -> CGFloat {
-        return (state.selectedPoint.x + 2400) / 4800 * viewState.graphWidth
+        return (state.selectedPoint.x + pitchValue) / (2 * pitchValue) * viewState.graphWidth
     }
     
     func mapValueToY() -> CGFloat {
-        return viewState.graphHeight - (state.selectedPoint.y / 20 * viewState.graphHeight)
+        return viewState.graphHeight - (state.selectedPoint.y / maxVolumeValue * viewState.graphHeight)
     }
     
     func mapXToValue(_ x: CGFloat) -> CGFloat {
-        return x / viewState.graphWidth * 4800 - 2400
+        return x / viewState.graphWidth * (2 * pitchValue) - pitchValue
     }
     
     func mapYToValue(_ y: CGFloat) -> CGFloat {
-        return (viewState.graphHeight - y) / viewState.graphHeight * 19 + 1
+        return (viewState.graphHeight - y) / viewState.graphHeight * maxVolumeValue
+    }
+    
+    func makeVibration() {
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
     }
     
 }

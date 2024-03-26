@@ -31,13 +31,14 @@ protocol SoundSettingsGraphViewModeling: ObservableObject {
     func mapXToValue(_ x: CGFloat) -> CGFloat
     func mapYToValue(_ y: CGFloat) -> CGFloat
     func changeParams(currentPoint: CGPoint)
+    func makeVibration()
 }
 
 struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
     @ObservedObject var soundSettingsGraphViewModel: ViewModel
     @State private var duration: Double = 0.6
-    @State var resetWorkItem: DispatchWorkItem?
-    @State var animate: Bool = false
+    @State private var resetWorkItem: DispatchWorkItem?
+    @State private var animate: Bool = false
     
     var body: some View {
         VStack {
@@ -68,8 +69,8 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
                         .font(customFont: .subtitle, size: 15)
                         .position(x: soundSettingsGraphViewModel.viewState.graphWidth/2 - 50, y: 15)
                     Circle()
-                        .fill(RadialGradient(gradient: Gradient(colors: [Color(red: 4/255, green: 18/255, blue: 150/255), Color(red: 246/255, green: 248/255, blue: 254/255)]), center: .center, startRadius: 0, endRadius: 5))
-                        .frame(width: 10, height: 10)
+                        .fill(RadialGradient(gradient: Gradient(colors: [Color(red: 4/255, green: 18/255, blue: 150/255), Color(red: 246/255, green: 248/255, blue: 254/255)]), center: .center, startRadius: 2, endRadius: 7))
+                        .frame(width: 13, height: 13)
                         .scaleEffect(animate ? 9: 1)
                         .opacity(animate ? 0.5 : 0)
                         .animation(.easeInOut, value: animate)
@@ -80,8 +81,7 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .onTapGesture { value in
                     // Генерация вибрации
-                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                    impactMed.impactOccurred()
+                    soundSettingsGraphViewModel.makeVibration()
                     
                     soundSettingsGraphViewModel.changeParams(currentPoint: value)
                     resetWorkItem?.cancel()
