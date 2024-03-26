@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct TrackRow: View {
-    var mainScreenViewModel: any MainScreenViewObservable
-    var trackNumber: Int
+struct ProjectRow<ParentViewModel: MainViewModel>: View {
+    @ObservedObject var parentViewModel: ParentViewModel
+    @ObservedObject var project: Project
     
     var body: some View {
         HStack {
@@ -18,14 +18,18 @@ struct TrackRow: View {
                     .fill(Color.green)
                     .frame(width: 50, height: 50)
                     .padding()
-                Text("😎")
+                // TODO: Реализовать подгрузку картинки
+                Text(["🤪", "😎", "🤩", "🥳", "🥹", "😇", "🤯", "🤔"].randomElement() ?? "😎")
                     .frame(width: 35, height: 35, alignment: .center)
                     .padding()
             }
-            Text("Трек \(trackNumber)")
+            
+            Text(project.name)
                 .padding()
+            
             Spacer()
-            Image(systemName: "play.circle")
+            
+            Image(systemName: project.isPlaying ? "stop.circle" : "play.circle")
                 .resizable()
                 .frame(width: 40, height: 40)
                 .foregroundColor(.black)
@@ -33,7 +37,7 @@ struct TrackRow: View {
                 .gesture(
                     TapGesture()
                         .onEnded {
-                            mainScreenViewModel.handle(.tapPlayTrackButton)
+                            parentViewModel.handle(.tapPlayProjectButton(projectId: project.id))
                         }
                 )
         }

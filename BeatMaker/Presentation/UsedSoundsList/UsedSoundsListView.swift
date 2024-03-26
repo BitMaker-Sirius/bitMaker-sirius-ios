@@ -35,7 +35,7 @@ struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
             ScrollView {
                 ForEach(viewModel.state.usedSoundsArray, id: \.self) { track in
                     HStack {
-                        TrackView(sound: track.sound ?? Sound(id: "0", audioFileId: nil, name: "hype"))
+                        TrackView(sound: track.sound ?? Sound(audioFileId: nil, name: "hype"))
                         
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
