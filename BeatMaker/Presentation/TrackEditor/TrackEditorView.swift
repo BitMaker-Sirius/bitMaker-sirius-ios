@@ -7,31 +7,9 @@
 
 import SwiftUI
 
-enum PlayTrackViewEvent {
-    case tapButton
-}
-
-struct TrackEditorViewState {
-    var shouldShowPause: Bool
-    var isPauseActive: String
-    var choosenSoundId: String?
-    var soundsArray: [Sound]
-}
-
-protocol TrackEditorViewModeling: ObservableObject {
-    var state: TrackEditorViewState { get }
-    
-    func handle(_ event: PlayTrackViewEvent)
-    
-    func setSelectedSound(at index: UUID)
-    
-    func areUuidsSimilar(id1: UUID, id2: String) -> Bool
-}
-
 struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     
     @StateObject var viewModel: ViewModel
-    
     @Environment(\.dismiss) private var dismiss
     
     let tactCount: Int = 10
@@ -39,8 +17,11 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
-    @State var progressValue: Float = 0.5
-    @State private var isSave: Bool = false
+    @State  var progressValue: Float = 0.5
+    @State private var isVisualize: Bool = false
+    @State private var isShowingUsedTreckView = false
+    @State private var isShowingAllTreckListView = false
+    @State private var isBlurEnabled = false
     
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -53,171 +34,184 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
         
         VStack {
             ProgressView(value: progressValue)
-                .progressViewStyle(LinearProgressViewStyle(tint: .black))
+                .progressViewStyle(LinearProgressViewStyle(tint: Color.onBackgroundColor))
                 .padding(.horizontal, 40)
                 .padding(.top, 15)
             
-            
-            HStack {
-                Button(action: {
-                }) {
-                    Image(systemName: "chevron.down")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(.black)
-                }
-                .padding(.leading,10)
-                
-                Spacer()
-                ZStack {
-                    HStack {
-                        ForEach(1..<tactCount) { _ in
+            VStack {
+                HStack {
+                    Button(action: {
+                        isShowingUsedTreckView.toggle()
+                        isBlurEnabled.toggle()
+                        viewModel.handle(.tapChervon)
+                    }) {
+                        Image(systemName: viewModel.state.chervonDirection)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color.onBackgroundColor)
+                    }
+                    .padding(.leading,10)
+                    
+                    Spacer()
+                    ZStack {
+                        HStack {
+                            ForEach(1..<tactCount) { _ in
+                                Rectangle()
+                                    .frame(width: tickWidth, height: tickHeight)
+                                    .foregroundColor(Color.onBackgroundColor)
+                                Spacer()
+                            }
+                            
                             Rectangle()
                                 .frame(width: tickWidth, height: tickHeight)
-                                .foregroundColor(.black)
-                            Spacer()
+                                .foregroundColor(Color.onBackgroundColor)
                         }
                         
                         Rectangle()
-                            .frame(width: tickWidth, height: tickHeight)
-                            .foregroundColor(.black)
+                            .frame(height: 2)
+                            .foregroundColor(Color.onBackgroundColor)
                     }
-                    
-                    Rectangle()
-                        .frame(height: 2)
-                        .foregroundColor(.black)
+                    .padding(.leading, 4)
+                    .padding(.trailing, 40)
                 }
-                .padding(.leading, 4)
-                .padding(.trailing, 40)
+                .padding(.bottom, 10)
             }
-            .padding(.bottom, 10)
-            
-            Rectangle()
-                .frame(width: 330, height: 330)
-                .foregroundColor(.gray.opacity(50))
-                .cornerRadius(12)
-                .padding(.horizontal, 15)
-                .shadow(color: Color.black.opacity(0.001), radius: 2, x: 0, y: 4)
-            
-            HStack {
-                Text("Звуки")
-                    .bold()
-                
-                Spacer()
-                
-                Button(action: {
-                }) {
-                    Text("редактировать")
-                        .fontWeight(.thin)
-                        .foregroundColor(.black)
-                }
-            }
-            .padding(.horizontal, 15)
-            .padding(.top, 15)
-            .padding(.bottom, 5)
             
             ZStack {
-                Rectangle()
-                    .frame(height: 100)
-                    .foregroundColor(.gray.opacity(50))
-                    .cornerRadius(12)
-                    .padding(.horizontal, 15)
-                    .shadow(color: Color.black.opacity(0.001), radius: 2, x: 0, y: 4)
-                
-                
-                LazyVGrid(columns: columns) {
-                    ForEach(viewModel.state.soundsArray, id: \.self) { sound in
-                        soundView(sound: sound) {
-                            viewModel.setSelectedSound(at: UUID(uuidString: sound.id) ?? UUID())
-                        }
-                        .shadow(color: viewModel.areUuidsSimilar(id1: UUID(uuidString: sound.id) ?? UUID(), id2: viewModel.state.choosenSoundId ?? "") ? .red.opacity(1) : .red.opacity(0), radius: 8, x: 0, y: 0)
-                    }
-                }
-                .padding(.horizontal, 25)
-            }
-            
-            Spacer()
-            
-            HStack {
-                Button(action: {
-                }) {
-                    Image(systemName: "stop.circle")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.black)
+                VStack {
+                    Rectangle()
+                        .frame(width: 330, height: 330)
+                        .foregroundColor(Color.backgroundColor)
+                        .cornerRadius(12)
+                        .padding(.horizontal, 15)
+                        .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                     
+                    HStack {
+                        Text("Звуки")
+                            .bold()
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                        }) {
+                            Text("редактировать")
+                                .fontWeight(.thin)
+                                .foregroundColor(Color.onBackgroundColor)
+                        }
+                        .allowsHitTesting(!isShowingUsedTreckView)
+                    }
+                    .padding(.horizontal, 15)
+                    .padding(.top, 15)
+                    .padding(.bottom, 5)
+                    
+                    ZStack {
+                        Rectangle()
+                            .frame(height: 100)
+                            .foregroundColor(Color.backgroundColor)
+                            .cornerRadius(12)
+                            .padding(.horizontal, 15)
+                            .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
+                        
+                        
+                        LazyVGrid(columns: columns) {
+                            ForEach(viewModel.state.soundsArray, id: \.self) {sound in
+                                ButtomSoundView(sound: sound) {
+                                    viewModel.setSelectedSound(at: sound.id)
+                                }
+                                .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.onBackgroundColor.opacity(1) : Color.onBackgroundColor.opacity(0), radius: 8, x: 0, y: 0)
+                            }
+                            .padding(.top, 5)
+                        }
+                        .allowsHitTesting(!isShowingUsedTreckView)
+                        .padding(.horizontal, 25)
+                    }
+                    
+                    Spacer()
+                    HStack {
+                        Button(action: {
+                        }) {
+                            Image(systemName: "stop.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(Color.onBackgroundColor)
+                            
+                        }
+                        Spacer()
+                        
+                        Button(action: {
+                            viewModel.handle(.tapButton)
+                        }) {
+                            Image(systemName: viewModel.state.pauseState)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(Color.onBackgroundColor)
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            isShowingAllTreckListView.toggle()
+                        }) {
+                            Image(systemName: "plus.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 40)
+                                .foregroundColor(Color.onBackgroundColor)
+                        }
+                        
+                    }
+                    .allowsHitTesting(!isShowingUsedTreckView)
+                    .padding(.horizontal, 70)
+                    .padding(.bottom, 15)
                 }
-                Spacer()
-                Button(action: {
-                    viewModel.handle(.tapButton)
-                }) {
-                    Image(systemName: viewModel.state.isPauseActive)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.black)
-                }
+                .blur(radius: isShowingUsedTreckView ? 3 : 0).animation(.default)
                 
-                Spacer()
-                
-                Button(action: {
-                }) {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 30, height: 40)
-                        .foregroundColor(.black)
+                if isShowingUsedTreckView {
+                    UsedTreckView(viewModel: UsedTreckViewModel())
+                        .onTapGesture {
+                            
+                        }
+                        .padding(.horizontal, 50)
                 }
+            }
+            .background(Color.backgroundColorForScreen)
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                if self.isShowingUsedTreckView == true {
+                    viewModel.handle(.tapChervon)
+                }
+                self.isShowingUsedTreckView = false
                 
             }
-            .padding(.horizontal, 70)
-            .padding(.bottom, 15)
         }
+        
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(
-            leading:
-                Button(action: {
-                    dismiss()
-                }, label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                }),
-            trailing:
-                Button(action: {
-                    isSave.toggle()
-                }) {
-                    Text("Визуализация")
-                        .foregroundColor(.black)
-                } )
-        .navigationDestination(
-            isPresented: $isSave) {
-                PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 1, name: "Project 1")))
-            }
-    }
-    
-}
-
-
-//#Preview {
-//    TrackEditorView(viewModel: TrackEditorViewModel())
-//}
-
-struct soundView: View {
-    @State var sound:Sound
-    var buttonClicked: (() -> Void)?
-    var body: some View {
-        VStack {
-            Button(action: {
-                buttonClicked?()
-            }) {
-                Text(sound.emoji ?? "")
-            }
-            Text(sound.name ?? "")
-                .fontWeight(.thin)
-                .font(.system(size: 11))
-                .foregroundColor(.black)
+        .navigationBarItems(leading: Button(action: {
+            dismiss()
+        }) {
+            Image(systemName: "chevron.left")
+                .foregroundColor(Color.onBackgroundColor)
+        } ,
+                            trailing: Button(action: {
+            isVisualize.toggle()
+        }) {
+            Text("Визуализация")
+                .foregroundColor(Color.onBackgroundColor)
+        } )
+        .navigationDestination(isPresented: $isVisualize) {
+            PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 120, name: "HYPEEEE")))
+        }
+        .navigationDestination(isPresented: $isShowingAllTreckListView) {
+            SoundListView(viewModel: SoundListViewModel(editorViewModel: TrackEditorViewModel(), addedToTrackSounds: []))
         }
     }
 }
+
+#Preview {
+    TrackEditorView(viewModel: TrackEditorViewModel())
+}
+
+//TODO: поставить заглушки на другие звуки во время записи
