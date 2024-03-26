@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
-    
+    // Если передали nil, то создание трека, иначе редактирование
+    var projectId: String?
     @StateObject var viewModel: ViewModel
     @Environment(\.dismiss) private var dismiss
     
@@ -202,7 +203,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 .foregroundColor(Color.onBackgroundColor)
         } )
         .navigationDestination(isPresented: $isVisualize) {
-            PlayProjectView(viewModel: PlayProjectViewModel(project: Project(id: "1", metronomeBpm: 120, name: "HYPEEEE")))
+            PlayProjectView(projectId: "0", viewModel: PlayProjectViewModel(project: Project(metronomeBpm: 120, name: "HYPEEEE")))
         }
         .navigationDestination(isPresented: $isShowingAllTreckListView) {
             SoundListView(viewModel: SoundListViewModel(editorViewModel: TrackEditorViewModel(), addedToTrackSounds: []))

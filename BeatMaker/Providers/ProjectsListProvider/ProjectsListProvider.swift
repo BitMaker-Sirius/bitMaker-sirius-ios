@@ -9,6 +9,4 @@ import SwiftUI
 
 protocol ProjectsListProvider {
     func loadData(completion: @escaping (Result<[Project], DataStorageError>) -> Void)
-    
-    // Прописать методы, которые взаимодействуют с project list
 }

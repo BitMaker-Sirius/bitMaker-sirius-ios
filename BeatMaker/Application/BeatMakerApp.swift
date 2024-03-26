@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct BeatMakerApp: App {
+    @Environment(\.router) var router: Router
+    
     var body: some Scene {
         WindowGroup {
-            let mainScreenViewModel = MainScreenViewModel()
-            
-            MainScreenView(mainScreenViewModel: mainScreenViewModel)
+            router.assembly.rootView()
         }
     }
 }

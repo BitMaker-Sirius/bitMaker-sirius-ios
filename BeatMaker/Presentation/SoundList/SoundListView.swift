@@ -50,7 +50,7 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
             Spacer()
             
             VStack {
-                Text(sound.name ?? ConstantsForView.defaultName)
+                Text(sound.name)
                 Text("Нажмите для добавления")
             }
             

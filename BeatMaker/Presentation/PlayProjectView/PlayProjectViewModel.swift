@@ -6,9 +6,10 @@
 //
 
 import Foundation
-import Combine
+import SwiftUI
 
 class PlayProjectViewModel: PlayProjectViewModeling {
+    @Environment(\.router) var router: Router
     @Published var state: PlayProjectViewState
     let soundPlaybackService: SoundPlaybackServiceImp
     let trackPlaybackService: TrackPlaybackServiceImp
@@ -26,6 +27,8 @@ class PlayProjectViewModel: PlayProjectViewModeling {
             editTap()
         case .likeTap:
             likeTap()
+        case .backTap:
+            backTap()
         }
     }
     
@@ -34,7 +37,7 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         soundPlaybackService = SoundPlaybackServiceImp()
         trackPlaybackService = TrackPlaybackServiceImp(soundPlaybackService: soundPlaybackService)
         projectPlaybackService = ProjectPlaybackServiceImp(trackPlaybackService: trackPlaybackService)
-        
+
         let isList = projectList.count > 1
         self.projectList = projectList
         currentProjectIndex = projectList.firstIndex(of: project) ?? 0
@@ -98,6 +101,12 @@ class PlayProjectViewModel: PlayProjectViewModeling {
     private func likeTap() {
         state.liked.toggle()
         // TODO: Добавить изменение модели через какой-то сервис
+    }
+    
+    private func backTap() {
+        while router.path.count != 0 {
+          router.path.removeLast()
+        }
     }
     
     private func startPlayback() {

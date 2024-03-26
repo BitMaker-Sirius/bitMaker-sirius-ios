@@ -54,6 +54,4 @@ class TrackListViewModel: ObservableObject {
         
         projects = [testProject1, testProject2, testProject3]
     }
-    
-    // Обработка действий пользователя
 }
