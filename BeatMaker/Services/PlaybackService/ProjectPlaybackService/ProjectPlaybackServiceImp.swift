@@ -5,7 +5,7 @@
 //  Created by Александр Фофонов on 22.03.2024.
 //
 
-import AVFoundation
+import Foundation
 
 final class ProjectPlaybackServiceImp: ProjectPlaybackService {
     private let trackPlaybackService: any TrackPlaybackService

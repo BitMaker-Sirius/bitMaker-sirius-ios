@@ -29,7 +29,6 @@ protocol PlayProjectViewModeling: ObservableObject {
     var state: PlayProjectViewState { get }
     
     func handle(_ event: PlayProjectViewEvent)
-    func countTotalTime()
 }
 
 struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
@@ -132,9 +131,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
                     }
                 }.padding(.horizontal, 32)
             }.padding(.bottom, 24)
-        }
-        .onAppear {
-            viewModel.countTotalTime()
         }
         .navigationBarBackButtonHidden()
     }

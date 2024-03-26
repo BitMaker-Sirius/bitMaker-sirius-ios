@@ -29,11 +29,6 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         }
     }
     
-    func countTotalTime() {
-        let totalBars = 20
-        state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(state.project.metronomeBpm)
-    }
-    
     // MARK: Init
     init(project: Project, projectList: [Project] = []) {
         soundPlaybackService = SoundPlaybackServiceImp()
@@ -44,6 +39,7 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         self.projectList = projectList
         currentProjectIndex = projectList.firstIndex(of: project) ?? 0
         state = .init(project: project, totalTime: 30, liked: false, formatTime: "00:00", isList: isList)
+        countTotalTime()
     }
     
     // MARK: Private fields
@@ -55,6 +51,11 @@ class PlayProjectViewModel: PlayProjectViewModeling {
     private let timerPlus = 0.2
     
     // MARK: Private methods
+    private func countTotalTime() {
+        let totalBars = 20
+        state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(state.project.metronomeBpm)
+    }
+    
     private func playTap() {
         state.isPlaying.toggle()
         // TODO: Добавить остановку/запуск музыки через какой-то сервис
