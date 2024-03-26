@@ -19,6 +19,7 @@ struct TrackEditorViewState {
     var chervonDirection: String
     var choosenSoundId: String?
     var soundsArray: [Sound]
+    var progressValue: Float
 }
 
 protocol TrackEditorViewModeling: ObservableObject {

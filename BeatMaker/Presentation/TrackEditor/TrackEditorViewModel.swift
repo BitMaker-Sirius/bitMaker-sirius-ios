@@ -27,7 +27,8 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
             Sound(id: "4", audioFileId: nil, name: "baraban4", emoji: "\u{1f614}"),
             Sound(id: "5", audioFileId: nil, name: "baraban5", emoji: "\u{1f605}"),
             Sound(id: "6", audioFileId: nil, name: "baraban6", emoji: "\u{1f606}")
-        ]
+        ],
+        progressValue: 0.5
     )
     
     func handle(_ event: PlayTrackViewEvent) {

@@ -18,7 +18,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
-    @State  var progressValue: Float = 0.5
+//    @State  var progressValue: Float = 0.5
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTreckView = false
     @State private var isShowingAllTreckListView = false
@@ -34,7 +34,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     var body: some View {
         
         VStack {
-            ProgressView(value: progressValue)
+            ProgressView(value: viewModel.state.progressValue)
                 .progressViewStyle(LinearProgressViewStyle(tint: Color.onBackgroundColor))
                 .padding(.horizontal, 40)
                 .padding(.top, 15)
