@@ -73,7 +73,6 @@
 		728CE1062BAACA0100542975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1052BAACA0100542975 /* Assets.xcassets */; };
 		728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1082BAACA0100542975 /* Preview Assets.xcassets */; };
 		728CE1102BAAD06600542975 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE10F2BAAD06600542975 /* Project.swift */; };
-		728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1112BAAD98A00542975 /* TrackListViewModel.swift */; };
 		728CE11E2BAADCCC00542975 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE11D2BAADCCC00542975 /* Sound.swift */; };
 		728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1202BAADD3000542975 /* TrackEditorView.swift */; };
 		728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1222BAADD5B00542975 /* TrackEditorViewModel.swift */; };
@@ -158,7 +157,6 @@
 		728CE1052BAACA0100542975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		728CE1082BAACA0100542975 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		728CE10F2BAAD06600542975 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		728CE1112BAAD98A00542975 /* TrackListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewModel.swift; sourceTree = "<group>"; };
 		728CE11D2BAADCCC00542975 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		728CE1202BAADD3000542975 /* TrackEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorView.swift; sourceTree = "<group>"; };
 		728CE1222BAADD5B00542975 /* TrackEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorViewModel.swift; sourceTree = "<group>"; };
@@ -571,7 +569,6 @@
 			isa = PBXGroup;
 			children = (
 				728CE1032BAAC9FF00542975 /* TrackListView.swift */,
-				728CE1112BAAD98A00542975 /* TrackListViewModel.swift */,
 			);
 			path = TrackList;
 			sourceTree = "<group>";
@@ -803,7 +800,6 @@
 				5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */,
 				5ECAFA582BADA78500FAA2F3 /* NetworkManager.swift in Sources */,
 				728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */,
-				728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */,
 				007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */,
 				007AE11B2BB196D900E4367E /* UsedSoundsListViewModel.swift in Sources */,
 				728CE1C52BAD812B00542975 /* ColorExtension.swift in Sources */,
