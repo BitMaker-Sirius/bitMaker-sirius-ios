@@ -12,8 +12,6 @@ protocol SoundSettingsGraphProviderObserver: AnyObject {
 }
 
 class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
-    let graphWidth: CGFloat = 330
-    let graphHeight: CGFloat = 330
     
     @Published
     var state = SoundSettingsGraphViewState(
@@ -22,8 +20,15 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
         volume: 10
     )
     
+    @Published
+    var viewState = SoundSettingsViewParamsState (
+        graphHeight: CGFloat(330),
+        graphWidth: CGFloat(330)
+    )
+    
     init() {
         self.state = state
+        self.viewState = viewState
     }
     
     func changeParams(currentPoint: CGPoint) {
@@ -33,19 +38,19 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
     }
     
     func mapValueToX() -> CGFloat {
-        return (state.selectedPoint.x + 2400) / 4800 * graphWidth
+        return (state.selectedPoint.x + 2400) / 4800 * viewState.graphWidth
     }
     
     func mapValueToY() -> CGFloat {
-        return graphHeight - (state.selectedPoint.y / 20 * graphHeight)
+        return viewState.graphHeight - (state.selectedPoint.y / 20 * viewState.graphHeight)
     }
     
     func mapXToValue(_ x: CGFloat) -> CGFloat {
-        return x / graphWidth * 4800 - 2400
+        return x / viewState.graphWidth * 4800 - 2400
     }
     
     func mapYToValue(_ y: CGFloat) -> CGFloat {
-        return (graphHeight - y) / graphHeight * 19 + 1
+        return (viewState.graphHeight - y) / viewState.graphHeight * 19 + 1
     }
     
 }
