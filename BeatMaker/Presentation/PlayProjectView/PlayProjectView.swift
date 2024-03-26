@@ -18,7 +18,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
     
     @State private var sliderValue: CGFloat = .zero {
         didSet {
-
+            
         }
     }
     
@@ -59,10 +59,10 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                 
                 HStack(alignment: .center, spacing: 12) {
                     Text(viewModel.state.formatTime)
-                       .frame(width: 50, height: 20, alignment: .leading)
-                    Slider(value: $sliderValue, in: 0...viewModel.state.totalTime, step: 1)
-                        .animation(.linear(duration: 0.1), value: viewModel.state.currentTime)
-                        
+                        .frame(width: 50, height: 20, alignment: .leading)
+                    ProgressView(value: viewModel.state.currentTime, total: viewModel.state.totalTime)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .padding()
                     Button {
                         viewModel.handle(.likeTap)
                     } label: {

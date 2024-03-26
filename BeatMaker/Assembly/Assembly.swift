@@ -45,7 +45,11 @@ final class Assembly {
     }()
     
     private lazy var playProjectViewModel: PlayProjectViewModelImp = {
-        PlayProjectViewModelImp(projectProvider: projectProvider, projectsListProvider: projectsListProvider)
+        PlayProjectViewModelImp(
+            projectProvider: projectProvider,
+            projectsListProvider: projectsListProvider, 
+            projectPlaybackService: projectPlaybackService
+        )
     }()
     
     private lazy var soundsListViewModel: SoundsListViewModelImp = {
