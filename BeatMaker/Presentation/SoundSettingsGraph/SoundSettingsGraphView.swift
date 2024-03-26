@@ -32,7 +32,7 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View {
     @State private var duration: Double = 0.6
     @State var resetWorkItem: DispatchWorkItem?
     @State var animate: Bool = false
-    // Фиксируем размеры графика
+
     let graphWidth: CGFloat = 330
     let graphHeight: CGFloat = 330
     
@@ -40,7 +40,7 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View {
         VStack {
             // Отображаем координаты выбранной точки у самой точки
             if soundSettingsGraphViewModel.state.selectedPoint != .zero {
-                Text("Pitch: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Volume: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
+                Text("Тон: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Громкость: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
                     .font(customFont: .accentTitle, size: 15)
                     .padding(5)
                     .background(Color.white)
