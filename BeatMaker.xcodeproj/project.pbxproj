@@ -51,6 +51,7 @@
 		5ECF79FA2BB0A08E0014896D /* SoundPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECF79F92BB0A08E0014896D /* SoundPlaybackService.swift */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
+		63A4CCDD2BB179DB007E0D73 /* SoundSettingsGraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4CCDC2BB179DB007E0D73 /* SoundSettingsGraphViewModel.swift */; };
 		5EF976512BB0FCB30015A54C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF976502BB0FCB30015A54C /* Realm */; };
 		5EF976532BB0FCB30015A54C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF976522BB0FCB30015A54C /* RealmSwift */; };
 		5EF976572BB0FCEF0015A54C /* ProjectObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF976562BB0FCEF0015A54C /* ProjectObject.swift */; };
@@ -63,6 +64,7 @@
 		63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */; };
 		63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */; };
 		63B8E6992BADC916001F3BE2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8E6962BADC916001F3BE2 /* CustomFonts.swift */; };
+		63E2782A2BAD55CB00BC4E75 /* SoundSettingsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E278292BAD55CB00BC4E75 /* SoundSettingsGraphView.swift */; };
 		63CD48BE2BB18C210033CF77 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48BB2BB18C210033CF77 /* MainView.swift */; };
 		63CD48BF2BB18C210033CF77 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48BC2BB18C210033CF77 /* MainViewModel.swift */; };
 		63CD48C12BB1B3A40033CF77 /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48C02BB1B3A40033CF77 /* ProjectRowView.swift */; };
@@ -130,6 +132,7 @@
 		5ECF79F92BB0A08E0014896D /* SoundPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlaybackService.swift; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
+		63A4CCDC2BB179DB007E0D73 /* SoundSettingsGraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingsGraphViewModel.swift; sourceTree = "<group>"; };
 		5EF976562BB0FCEF0015A54C /* ProjectObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectObject.swift; sourceTree = "<group>"; };
 		5EF976582BB0FCF90015A54C /* SoundObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundObject.swift; sourceTree = "<group>"; };
 		5EF9765A2BB0FD040015A54C /* TrackObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackObject.swift; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 		63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		63B8E6962BADC916001F3BE2 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
+		63B8E69D2BADC98A001F3BE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63E278292BAD55CB00BC4E75 /* SoundSettingsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingsGraphView.swift; sourceTree = "<group>"; };
 		63CD48BB2BB18C210033CF77 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		63CD48BC2BB18C210033CF77 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		63CD48C02BB1B3A40033CF77 /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
@@ -472,6 +477,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		63E278282BAD559500BC4E75 /* SoundSettingsGraph */ = {
+			isa = PBXGroup;
+			children = (
+				63E278292BAD55CB00BC4E75 /* SoundSettingsGraphView.swift */,
+				63A4CCDC2BB179DB007E0D73 /* SoundSettingsGraphViewModel.swift */,
+			);
+			path = SoundSettingsGraph;
+			sourceTree = "<group>";
+		};
 		63CD48BD2BB18C210033CF77 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,6 +544,8 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
+				00E4BFCE2BB2C20F007C3E89 /* MainScreen */,
 				5EF976622BB215770015A54C /* Base */,
 				63CD48BD2BB18C210033CF77 /* Main */,
 				007AE11C2BB1AC9C00E4367E /* ComponentView */,
@@ -749,6 +765,7 @@
 				5EF976572BB0FCEF0015A54C /* ProjectObject.swift in Sources */,
 				5E4ECEE02BB2BB60000F4F22 /* RootView.swift in Sources */,
 				5ECAFA522BADA78500FAA2F3 /* PlaybackService.swift in Sources */,
+				63A4CCDD2BB179DB007E0D73 /* SoundSettingsGraphViewModel.swift in Sources */,
 				5ECF79F62BB0A0150014896D /* TrackPlaybackService.swift in Sources */,
 				5EF976592BB0FCF90015A54C /* SoundObject.swift in Sources */,
 				5EF976662BB216600015A54C /* BaseViewState.swift in Sources */,
@@ -778,6 +795,7 @@
 				007AE1192BB196D200E4367E /* UsedSoundsListView.swift in Sources */,
 				5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
+				63E2782A2BAD55CB00BC4E75 /* SoundSettingsGraphView.swift in Sources */,
 				728CE1212BAADD3000542975 /* TrackEditorView.swift in Sources */,
 				5ECAFA502BADA78500FAA2F3 /* ProjectPlaybackServiceImp.swift in Sources */,
 				5ECAFA592BADA78500FAA2F3 /* VisualizationServiceImp.swift in Sources */,
@@ -920,6 +938,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMaker/Preview Content\"";
@@ -940,6 +959,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yakun.BeatMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -951,7 +971,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BeatMaker/Preview Content\"";
 				DEVELOPMENT_TEAM = S3KD837NRD;
@@ -971,6 +992,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yakun.BeatMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
