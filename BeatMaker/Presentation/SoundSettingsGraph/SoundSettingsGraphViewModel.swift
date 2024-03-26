@@ -65,10 +65,10 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
         do {
             //
             var pitchEffectValue1 = (state.pitch + 2401) / 2400
-            //var volumeEffectValue1 = 
+            var volumeEffectValue1 = state.volume /*/ 20*/
             guard let player = audioPlayer else { return }
-            player.volume = Float(state.volume)
-            player.rate = Float(state.pitch)
+            player.volume = Float(volumeEffectValue1)
+            player.rate = 0.1/*Float(state.pitch )*/
             player.play()
         }
     }
