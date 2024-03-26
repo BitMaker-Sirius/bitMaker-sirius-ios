@@ -11,6 +11,9 @@ import SwiftUI
 class PlayProjectViewModel: PlayProjectViewModeling {
     @Environment(\.router) var router: Router
     @Published var state: PlayProjectViewState
+    let soundPlaybackService: SoundPlaybackServiceImp
+    let trackPlaybackService: TrackPlaybackServiceImp
+    let projectPlaybackService: ProjectPlaybackServiceImp
     
     func handle(_ event: PlayProjectViewEvent) {
         switch event {
@@ -30,23 +33,32 @@ class PlayProjectViewModel: PlayProjectViewModeling {
     }
     
     // MARK: Init
-    // Переделать под провайдер
-    init(
-        project: Project = .init(metronomeBpm: 100, name: "name"),
-        projectList: [Project] = []
-    ) {
+    init(project: Project, projectList: [Project] = []) {
+        soundPlaybackService = SoundPlaybackServiceImp()
+        trackPlaybackService = TrackPlaybackServiceImp(soundPlaybackService: soundPlaybackService)
+        projectPlaybackService = ProjectPlaybackServiceImp(trackPlaybackService: trackPlaybackService)
+
         let isList = projectList.count > 1
         self.projectList = projectList
         currentProjectIndex = projectList.firstIndex(of: project) ?? 0
         state = .init(project: project, totalTime: 30, liked: false, formatTime: "00:00", isList: isList)
+        countTotalTime()
     }
     
     // MARK: Private fields
-    private var timer: Timer?
+    private var playbackTimer: Timer?
     private var projectList: [Project]
     private var currentProjectIndex: Int
     
+    // MARK: Settings fields
+    private let timerPlus = 0.2
+    
     // MARK: Private methods
+    private func countTotalTime() {
+        let totalBars = 20
+        state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(state.project.metronomeBpm)
+    }
+    
     private func playTap() {
         state.isPlaying.toggle()
         // TODO: Добавить остановку/запуск музыки через какой-то сервис
@@ -59,12 +71,15 @@ class PlayProjectViewModel: PlayProjectViewModeling {
     
     private func nextTap() {
         guard state.isList else { return }
+        stopPlayback()
         currentProjectIndex = (currentProjectIndex + 1) % projectList.count
         updateCurrentProject()
     }
     
     private func prevTap() {
         guard state.isList else { return }
+        stopPlayback()
+        projectPlaybackService.stop(state.project)
         currentProjectIndex = (currentProjectIndex - 1 + projectList.count) % projectList.count
         updateCurrentProject()
     }
@@ -79,7 +94,7 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         state.currentTime = 0
         state.formatTime = formatTime(0)
         state.isPlaying = true
-        stopPlayback()
+        countTotalTime()
         startPlayback()
     }
     
@@ -95,24 +110,29 @@ class PlayProjectViewModel: PlayProjectViewModeling {
     }
     
     private func startPlayback() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] _ in
-            guard let self = self, state.isPlaying else { return }
-            
-            DispatchQueue.main.async {
-                let nextSliderValue = self.state.currentTime + 1
-                if nextSliderValue <= self.state.totalTime {
-                    self.state.currentTime = nextSliderValue
-                    self.state.formatTime = self.formatTime(nextSliderValue)
-                } else {
-                    self.state.currentTime = 0
-                }
-            }
+        projectPlaybackService.play(state.project)
+        playbackTimer?.invalidate()
+        playbackTimer = Timer.scheduledTimer(timeInterval: timerPlus, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateCurrentTime() {
+        if state.currentTime < state.totalTime {
+            state.currentTime += timerPlus
+            state.formatTime = formatTime(state.currentTime)
+        } else {
+            projectPlaybackService.stop(state.project)
+            projectPlaybackService.play(state.project)
+            state.currentTime = 0
+            state.formatTime = formatTime(state.currentTime)
         }
     }
     
     private func stopPlayback() {
-        timer?.invalidate()
-        timer = nil
+        projectPlaybackService.stop(state.project)
+        playbackTimer?.invalidate()
+        playbackTimer = nil
+        state.currentTime = 0
+        state.formatTime = formatTime(state.currentTime)
     }
     
     private func formatTime(_ time: Double) -> String {
