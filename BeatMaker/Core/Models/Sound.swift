@@ -14,6 +14,9 @@ final class Sound: ObservableObject, Identifiable, Hashable {
     @Published var name: String
     @Published var emoji: String?
     
+    /// Свойство для управления воспроизведением
+    @Published var isPlaying: Bool = false
+    
     /// Используется при создании Sound, сам назначает id
     init(
         audioFileId: String?,

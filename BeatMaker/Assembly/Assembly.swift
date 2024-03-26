@@ -5,21 +5,36 @@
 //  Created by Александр Фофонов on 24.03.2024.
 //
 
-import Foundation
+import SwiftUI
 import RealmSwift
 
 final class Assembly {
     // MARK: Views
     
-    // PlayProjectView
-    // EditProjectView
-    // ...
+    func rootView() -> RootView {
+        RootView()
+    }
+    
+    func mainView() -> MainView<some MainViewModel> {
+        MainView(viewModel: mainViewModel)
+    }
+    
+    func projectEditorView(projectId: String?) -> TrackEditorView<some TrackEditorViewModeling> {
+        TrackEditorView(projectId: projectId, viewModel: self.projectEditorModel)
+    }
     
     // MARK: ViewModels
     
-    // PlayProjectVM
-    // EditProjectVM
-    // ...
+    private lazy var mainViewModel: MainViewModelImp = {
+        MainViewModelImp(
+            projectsListProvider: projectsListProvider,
+            projectPlaybackService: projectPlaybackService
+        )
+    }()
+    
+    private lazy var projectEditorModel: TrackEditorViewModel = {
+        TrackEditorViewModel()
+    }()
     
     // MARK: Providers
     

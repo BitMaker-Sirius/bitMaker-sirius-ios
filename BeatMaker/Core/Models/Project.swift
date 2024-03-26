@@ -17,6 +17,9 @@ final class Project: ObservableObject, Identifiable, Hashable {
     @Published var preparedSounds: [Sound]
     @Published var tracks: [Track]
     
+    /// Свойство для управления воспроизведением
+    @Published var isPlaying: Bool = false
+    
     /// Используется при создании Project, сам назначает id
     init(
         metronomeBpm: Int,

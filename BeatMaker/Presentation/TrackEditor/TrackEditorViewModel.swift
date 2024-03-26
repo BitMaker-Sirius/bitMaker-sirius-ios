@@ -10,6 +10,7 @@ import SwiftUI
 
 
 final class TrackEditorViewModel: TrackEditorViewModeling {
+    @Environment(\.router) var router: Router
     
     @Published
     var state = TrackEditorViewState(
