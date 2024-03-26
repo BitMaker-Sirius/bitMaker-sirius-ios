@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 
 final class TrackEditorViewModel: TrackEditorViewModeling {
@@ -48,9 +49,40 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
         return id1 == id2
     }
     
-    init() {
-        self.state = state
-    }
+    var audioPlayer: AVAudioPlayer?
+
+      @Published var isPlaying = false
+
+      init() {
+          self.state = state
+        if let sound = Bundle.main.path(forResource: "piano2", ofType: "mp3") {
+          do {
+            self.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound))
+          } catch {
+            print("AVAudioPlayer could not be instantiated.")
+          }
+        } else {
+          print("Audio file could not be found.")
+        }
+      }
+
+      func playOrPause() {
+        guard let player = audioPlayer else { return }
+
+        if player.isPlaying {
+            print("pause")
+          player.pause()
+          isPlaying = false
+        } else {
+            print("playy")
+          player.play()
+          isPlaying = true
+        }
+      }
+    
+//    init() {
+//        self.state = state
+//    }
     
     @Published var selectedSounds: [Sound] = []
     

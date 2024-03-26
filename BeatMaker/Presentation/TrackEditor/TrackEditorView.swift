@@ -142,6 +142,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         
                         Button(action: {
                             viewModel.handle(.tapButton)
+                            viewModel.playOrPause()
                         }) {
                             Image(systemName: viewModel.state.pauseState)
                                 .resizable()

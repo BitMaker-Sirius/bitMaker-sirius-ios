@@ -30,4 +30,6 @@ protocol TrackEditorViewModeling: ObservableObject {
     
     func areUuidsSimilar(id1: String, id2: String) -> Bool
     
+    func playOrPause() 
+    
 }

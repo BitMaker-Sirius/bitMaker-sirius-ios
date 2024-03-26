@@ -11,9 +11,10 @@ import SwiftUI
 struct BeatMakerApp: App {
     var body: some Scene {
         WindowGroup {
-            let mainScreenViewModel = MainScreenViewModel()
-            
-            MainScreenView(mainScreenViewModel: mainScreenViewModel)
+//            let mainScreenViewModel = MainScreenViewModel()
+//            
+//            MainScreenView(mainScreenViewModel: mainScreenViewModel)
+            TrackEditorView(viewModel: TrackEditorViewModel())
         }
     }
 }

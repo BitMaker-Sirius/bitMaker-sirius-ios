@@ -15,6 +15,7 @@
 		00E4BFD22BB2C224007C3E89 /* TrackRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */; };
 		00E4BFD42BB2C224007C3E89 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */; };
 		00E4BFDA2BB2C795007C3E89 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD92BB2C795007C3E89 /* MainScreenView.swift */; };
+		00E4BFDE2BB2DE2A007C3E89 /* piano2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00E4BFDD2BB2DE2A007C3E89 /* piano2.mp3 */; };
 		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
@@ -83,6 +84,7 @@
 		00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRowView.swift; sourceTree = "<group>"; };
 		00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		00E4BFD92BB2C795007C3E89 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		00E4BFDD2BB2DE2A007C3E89 /* piano2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano2.mp3; sourceTree = "<group>"; };
 		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		728CE1002BAAC9FF00542975 /* BeatMaker */ = {
 			isa = PBXGroup;
 			children = (
+				00E4BFDD2BB2DE2A007C3E89 /* piano2.mp3 */,
 				5ECF79F02BB09EE50014896D /* Info.plist */,
 				728CE1172BAADA2D00542975 /* Application */,
 				728CE1132BAAD9C700542975 /* Presentation */,
@@ -629,6 +632,7 @@
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
 				728CE1272BAADEE700542975 /* Localizable.strings in Resources */,
 				728CE1062BAACA0100542975 /* Assets.xcassets in Resources */,
+				00E4BFDE2BB2DE2A007C3E89 /* piano2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
