@@ -13,8 +13,8 @@
 		007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11F2BB1AD3700E4367E /* TrackView.swift */; };
 		007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */; };
 		00E4BFD22BB2C224007C3E89 /* TrackRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */; };
-		00E4BFD32BB2C224007C3E89 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD02BB2C224007C3E89 /* MainScreenView.swift */; };
 		00E4BFD42BB2C224007C3E89 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */; };
+		00E4BFD62BB2C493007C3E89 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4BFD52BB2C493007C3E89 /* MainScreenView.swift */; };
 		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
@@ -83,6 +83,7 @@
 		00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRowView.swift; sourceTree = "<group>"; };
 		00E4BFD02BB2C224007C3E89 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		00E4BFD52BB2C493007C3E89 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScreenView.swift; path = ../../../../../.Trash/MainScreenView.swift; sourceTree = "<group>"; };
 		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
@@ -174,10 +175,18 @@
 			path = ComponentView;
 			sourceTree = "<group>";
 		};
-		00E4BFCE2BB2C20F007C3E89 /* MainScreen */ = {
+		007AE13E2BB23D9700E4367E /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				00E4BFD02BB2C224007C3E89 /* MainScreenView.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		00E4BFCE2BB2C20F007C3E89 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				00E4BFD52BB2C493007C3E89 /* MainScreenView.swift */,
 				00E4BFD12BB2C224007C3E89 /* MainScreenViewModel.swift */,
 				00E4BFCF2BB2C224007C3E89 /* TrackRowView.swift */,
 			);
@@ -420,6 +429,7 @@
 			children = (
 				728CE1002BAAC9FF00542975 /* BeatMaker */,
 				728CE0FF2BAAC9FF00542975 /* Products */,
+				007AE13E2BB23D9700E4367E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -670,6 +680,7 @@
 				5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */,
 				5ECF79FC2BB0A6A30014896D /* ContentView.swift in Sources */,
 				5ECAFA522BADA78500FAA2F3 /* PlaybackService.swift in Sources */,
+				00E4BFD62BB2C493007C3E89 /* MainScreenView.swift in Sources */,
 				5ECF79F62BB0A0150014896D /* TrackPlaybackService.swift in Sources */,
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
 				5ECAFA5F2BADA78500FAA2F3 /* ImageDataStorageImp.swift in Sources */,
@@ -677,7 +688,6 @@
 				00E4BFD22BB2C224007C3E89 /* TrackRowView.swift in Sources */,
 				5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */,
 				5ECAFA582BADA78500FAA2F3 /* NetworkManager.swift in Sources */,
-				00E4BFD32BB2C224007C3E89 /* MainScreenView.swift in Sources */,
 				728CE1022BAAC9FF00542975 /* BeatMakerApp.swift in Sources */,
 				728CE1122BAAD98A00542975 /* TrackListViewModel.swift in Sources */,
 				007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */,
