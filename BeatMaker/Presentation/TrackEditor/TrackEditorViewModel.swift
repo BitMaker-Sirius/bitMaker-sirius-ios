@@ -50,8 +50,10 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
     }
     
     var audioPlayer: AVAudioPlayer?
+    var sengine: AVAudioEngine?
 
       @Published var isPlaying = false
+    
 
       init() {
           self.state = state
@@ -71,7 +73,7 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
 
         if player.isPlaying {
             print("pause")
-          player.pause()
+          player.stop()
           isPlaying = false
         } else {
             print("playy")
@@ -79,6 +81,16 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
           isPlaying = true
         }
       }
+    
+//    func playAudio(pitchEffectValue: Float = 100, volumeEffectValue: Float = 0.5) { // volume до 1
+//        do {
+//            //
+//            guard let player = audioPlayer else { return }
+//            player.volume = volumeEffectValue
+//            player.rate = pitchEffectValue
+//            player.play()
+//        }
+//    }
     
 //    init() {
 //        self.state = state

@@ -10,6 +10,7 @@ import SwiftUI
 struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     
     @StateObject var viewModel: ViewModel
+    @StateObject var viewModelSoundDescription =  SoundSettingsGraphViewModel()
     @Environment(\.dismiss) private var dismiss
     
     let tactCount: Int = 10
@@ -80,12 +81,14 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
             
             ZStack {
                 VStack {
-                    Rectangle()
-                        .frame(width: 330, height: 330)
-                        .foregroundColor(Color.backgroundColor)
-                        .cornerRadius(12)
-                        .padding(.horizontal, 15)
-                        .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
+//                    Rectangle()
+//                        .frame(width: 330, height: 330)
+//                        .foregroundColor(Color.backgroundColor)
+//                        .cornerRadius(12)
+//                        .padding(.horizontal, 15)
+//                        .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
+                    SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel())
+                    
                     
                     HStack {
                         Text("Звуки")
@@ -118,6 +121,8 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                             ForEach(viewModel.state.soundsArray, id: \.self) {sound in
                                 ButtomSoundView(sound: sound) {
                                     viewModel.setSelectedSound(at: sound.id)
+                                    viewModel.playOrPause()
+
                                 }
                                 .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.onBackgroundColor.opacity(1) : Color.onBackgroundColor.opacity(0), radius: 8, x: 0, y: 0)
                             }
