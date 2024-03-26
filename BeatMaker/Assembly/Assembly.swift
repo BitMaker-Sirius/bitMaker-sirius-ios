@@ -41,7 +41,7 @@ final class Assembly {
     }()
     
     private lazy var playProjectViewModel: PlayProjectViewModel = {
-        PlayProjectViewModel()
+        PlayProjectViewModel(project: Project(metronomeBpm: 120, name: "Test"))
     }()
     
     // MARK: Providers
