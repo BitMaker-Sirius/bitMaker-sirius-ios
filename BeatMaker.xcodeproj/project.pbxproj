@@ -84,11 +84,6 @@
 		728CE1342BAAE91600542975 /* SoundListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1332BAAE91600542975 /* SoundListView.swift */; };
 		728CE1C42BAD812B00542975 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1C22BAD812B00542975 /* ImageExtension.swift */; };
 		728CE1C52BAD812B00542975 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1C32BAD812B00542975 /* ColorExtension.swift */; };
-		72CA28F02BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28EC2BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 */; };
-		72CA28F12BB1EBFA0048B253 /* iphone-sms.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28ED2BB1EBFA0048B253 /* iphone-sms.mp3 */; };
-		72CA28F22BB1EBFA0048B253 /* sms-for-samsung.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28EE2BB1EBFA0048B253 /* sms-for-samsung.mp3 */; };
-		72CA28F42BB2081B0048B253 /* s6-edge-sms.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */; };
-		72CA28F62BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,11 +165,6 @@
 		728CE1332BAAE91600542975 /* SoundListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListView.swift; sourceTree = "<group>"; };
 		728CE1C22BAD812B00542975 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		728CE1C32BAD812B00542975 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		72CA28EC2BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alarm-ringing-for-sms.mp3"; sourceTree = "<group>"; };
-		72CA28ED2BB1EBFA0048B253 /* iphone-sms.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "iphone-sms.mp3"; sourceTree = "<group>"; };
-		72CA28EE2BB1EBFA0048B253 /* sms-for-samsung.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sms-for-samsung.mp3"; sourceTree = "<group>"; };
-		72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "s6-edge-sms.mp3"; sourceTree = "<group>"; };
-		72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "long-sound-on-sms-11-seconds-about-china.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,7 +524,6 @@
 				5ECF79EF2BB09E630014896D /* DataStorages */,
 				5ECF79EB2BB09E160014896D /* DataManagers */,
 				5E45CB342BAD06B700E14B41 /* Services */,
-				72CA28EF2BB1EBFA0048B253 /* sounds */,
 				728CE1C12BAD812B00542975 /* Utilities */,
 				728CE1242BAADE3300542975 /* Localization */,
 				728CE1372BAAF61400542975 /* Sources */,
@@ -658,18 +647,6 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		72CA28EF2BB1EBFA0048B253 /* sounds */ = {
-			isa = PBXGroup;
-			children = (
-				72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */,
-				72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */,
-				72CA28EC2BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 */,
-				72CA28ED2BB1EBFA0048B253 /* iphone-sms.mp3 */,
-				72CA28EE2BB1EBFA0048B253 /* sms-for-samsung.mp3 */,
-			);
-			path = sounds;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -739,12 +716,7 @@
 				63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */,
 				63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */,
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
-				72CA28F22BB1EBFA0048B253 /* sms-for-samsung.mp3 in Resources */,
-				72CA28F42BB2081B0048B253 /* s6-edge-sms.mp3 in Resources */,
-				72CA28F02BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 in Resources */,
 				728CE1272BAADEE700542975 /* Localizable.strings in Resources */,
-				72CA28F62BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 in Resources */,
-				72CA28F12BB1EBFA0048B253 /* iphone-sms.mp3 in Resources */,
 				728CE1062BAACA0100542975 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

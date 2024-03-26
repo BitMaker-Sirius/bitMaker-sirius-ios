@@ -7,10 +7,4 @@
 
 import Foundation
 
-//protocol SoundPlaybackService: PlaybackService where PlayingDataType == Sound {}
-
-protocol SoundPlaybackService: AnyObject {
-    func playSound(url: URL, atTime time: TimeInterval, volume: Float, pitch: Float)
-
-    func stopAllSounds()
-}
+protocol SoundPlaybackService: PlaybackService where PlayingDataType == Sound {}

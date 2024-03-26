@@ -5,26 +5,20 @@
 //  Created by Александр Фофонов on 22.03.2024.
 //
 
-import AVFoundation
+import Foundation
 
 final class TrackPlaybackServiceImp: TrackPlaybackService {
-    private let soundPlaybackService: SoundPlaybackService
+    let soundPlaybackService: any SoundPlaybackService
     
-    init(soundPlaybackService: SoundPlaybackService) {
+    init(soundPlaybackService: any SoundPlaybackService) {
         self.soundPlaybackService = soundPlaybackService
     }
     
     func play(_ data: Track) {
-        guard let sound = data.sound, let soundUrl = Bundle.main.url(forResource: sound.audioFileId, withExtension: "mp3"), !data.isMute else { return }
-        
-        data.points.forEach { point in
-            let volume = Float(point.volume ?? 1.0)
-            let pitch = Float(point.pitch ?? 0.0)
-            soundPlaybackService.playSound(url: soundUrl, atTime: point.startTime, volume: volume, pitch: pitch)
-        }
+        // Воспроизведение трека из массива TrackPoint'ов внутри Track с помощью SoundPlaybackService
     }
     
     func stop(_ data: Track) {
-        soundPlaybackService.stopAllSounds()
+        
     }
 }
