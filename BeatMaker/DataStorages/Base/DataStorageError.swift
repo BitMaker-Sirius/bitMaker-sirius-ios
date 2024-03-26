@@ -9,4 +9,6 @@ import Foundation
 
 enum DataStorageError: Error {
     case unknown
+    case storageUnavailable
+    case dataNotExist
 }

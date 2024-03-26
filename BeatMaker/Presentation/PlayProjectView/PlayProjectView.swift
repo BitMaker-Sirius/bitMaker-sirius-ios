@@ -13,6 +13,7 @@ enum PlayProjectViewEvent {
     case prevTap
     case editTap
     case likeTap
+    case backTap
 }
 
 struct PlayProjectViewState {
@@ -32,7 +33,7 @@ protocol PlayProjectViewModeling: ObservableObject {
 }
 
 struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
-    @Environment(\.dismiss) var dismiss
+    let projectId: String
     @StateObject var viewModel: ViewModel
     
     @State
@@ -49,7 +50,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
             VStack(alignment: .center, spacing: 0) {
                 HStack(alignment: .center) {
                     Button(action: {
-                        dismiss()
+                        viewModel.handle(.backTap)
                     }) {
                         Image.backArrow.resizable().frame(width: 20, height: 20)
                             .offset(x: 2)
@@ -72,7 +73,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
                 
                 Spacer()
                 
-                Text(viewModel.state.project.name ?? "")
+                Text(viewModel.state.project.name)
                     .padding(.top, 12)
                 
                 Spacer()

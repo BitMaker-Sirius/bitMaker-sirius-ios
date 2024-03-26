@@ -5,20 +5,44 @@
 //  Created by Александр Фофонов on 24.03.2024.
 //
 
-import Foundation
+import SwiftUI
+import RealmSwift
 
 final class Assembly {
     // MARK: Views
     
-    // PlayProjectView
-    // EditProjectView
-    // ...
+    func rootView() -> RootView {
+        RootView()
+    }
+    
+    func mainView() -> MainView<some MainViewModel> {
+        MainView(viewModel: mainViewModel)
+    }
+    
+    func projectEditorView(projectId: String?) -> TrackEditorView<some TrackEditorViewModeling> {
+        TrackEditorView(projectId: projectId, viewModel: self.projectEditorViewModel)
+    }
+    
+    func playProjectView(projectId: String) -> PlayProjectView<some PlayProjectViewModeling> {
+        PlayProjectView(projectId: projectId, viewModel: self.playProjectViewModel)
+    }
     
     // MARK: ViewModels
     
-    // PlayProjectVM
-    // EditProjectVM
-    // ...
+    private lazy var mainViewModel: MainViewModelImp = {
+        MainViewModelImp(
+            projectsListProvider: projectsListProvider,
+            projectPlaybackService: projectPlaybackService
+        )
+    }()
+    
+    private lazy var projectEditorViewModel: TrackEditorViewModel = {
+        TrackEditorViewModel()
+    }()
+    
+    private lazy var playProjectViewModel: PlayProjectViewModel = {
+        PlayProjectViewModel()
+    }()
     
     // MARK: Providers
     
@@ -51,11 +75,11 @@ final class Assembly {
     // MARK: DataStorages
     
     private lazy var projectDataStorage: any ProjectDataStorage = {
-        ProjectDataStorageImp()
+        ProjectDataStorageImp(realmManager: realmManager)
     }()
     
     private lazy var soundDataStorage: any SoundDataStorage = {
-        SoundDataStorageImp()
+        SoundDataStorageImp(realmManager: realmManager)
     }()
     
     private lazy var aundioDataStorage: any AudioDataStorage = {
@@ -68,7 +92,10 @@ final class Assembly {
     
     // MARK: DataManagers
     
+    private lazy var realmManager: Realm? = {
+        try? Realm()
+    }()
+    
     // FileManager
-    // Realm
     // NetworkManager
 }
