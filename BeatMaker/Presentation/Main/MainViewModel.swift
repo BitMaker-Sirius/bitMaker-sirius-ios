@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 enum MainViewEvent {
+    case onLoadData
+    
     case tapCreateProjectButton
     case tapEditProjectButton(projectId: String)
     case tapPlayProjectButton(projectId: String)
@@ -23,20 +25,17 @@ protocol MainViewModel: ObservableObject {
     var state: MainViewState { get }
     
     func handle(_ event: MainViewEvent)
-    
-    func loadData()
 }
 
 final class MainViewModelImp: MainViewModel {
     @Environment(\.router) var router: Router
-    
-    let projectsListProvider: ProjectsListProvider
-    let projectPlaybackService: any ProjectPlaybackService
-    
     @Published var state = MainViewState(
         indicatorViewState: .loading,
         projectsList: []
     )
+    
+    let projectsListProvider: ProjectsListProvider
+    let projectPlaybackService: any ProjectPlaybackService
     
     init(
         projectsListProvider: ProjectsListProvider,
@@ -48,6 +47,8 @@ final class MainViewModelImp: MainViewModel {
     
     func handle(_ event: MainViewEvent) {
         switch event {
+        case .onLoadData:
+            loadData()
         case .tapCreateProjectButton:
             toProjectEditorView(with: nil)
         case .tapPlayProjectButton(let projectId):
@@ -57,7 +58,7 @@ final class MainViewModelImp: MainViewModel {
         }
     }
     
-    func loadData() {
+    private func loadData() {
         state.indicatorViewState = .loading
         
         projectsListProvider.loadData { [weak self] result in
@@ -70,6 +71,8 @@ final class MainViewModelImp: MainViewModel {
             }
         }
     }
+    
+    // MARK: Routing
     
     private func toProjectEditorView(with projectId: String?) {
         router.path.append(Route.projectEditor(projectId: projectId))

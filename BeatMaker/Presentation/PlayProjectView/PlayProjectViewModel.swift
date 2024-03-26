@@ -8,9 +8,45 @@
 import Foundation
 import SwiftUI
 
-class PlayProjectViewModel: PlayProjectViewModeling {
+enum PlayProjectViewEvent {
+    case playTap
+    case nextTap
+    case prevTap
+    case editTap
+    case likeTap
+    case backTap
+}
+
+struct PlayProjectViewState: BaseViewState {
+    var indicatorViewState: IndicatorViewState
+    var project: Project
+    
+    
+    var isPlaying: Bool = false
+    var currentTime: Double = 0
+    var totalTime: Double = 100
+    var liked: Bool = false
+    var formatTime: String = ""
+    var isList: Bool = false
+}
+
+protocol PlayProjectViewModel: ObservableObject {
+    var state: PlayProjectViewState { get }
+
+    func handle(_ event: PlayProjectViewEvent)
+}
+
+class PlayProjectViewModelImp: PlayProjectViewModel {
     @Environment(\.router) var router: Router
-    @Published var state: PlayProjectViewState
+    @Published var state: PlayProjectViewState = .init(indicatorViewState: .display, project: .init(metronomeBpm: 0, name: "name"))
+    
+    let projectProvider: ProjectProvider
+    let projectsListProvider: ProjectsListProvider
+    
+    init(projectProvider: ProjectProvider, projectsListProvider: ProjectsListProvider) {
+        self.projectProvider = projectProvider
+        self.projectsListProvider = projectsListProvider
+    }
     
     func handle(_ event: PlayProjectViewEvent) {
         switch event {
@@ -25,26 +61,14 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         case .likeTap:
             likeTap()
         case .backTap:
-            backTap()
+            toMainView()
         }
     }
     
-    // MARK: Init
-    // Переделать под провайдер
-    init(
-        project: Project = .init(metronomeBpm: 100, name: "name"),
-        projectList: [Project] = []
-    ) {
-        let isList = projectList.count > 1
-        self.projectList = projectList
-        currentProjectIndex = projectList.firstIndex(of: project) ?? 0
-        state = .init(project: project, totalTime: 30, liked: false, formatTime: "00:00", isList: isList)
-    }
-    
     // MARK: Private fields
-    private var timer: Timer?
-    private var projectList: [Project]
-    private var currentProjectIndex: Int
+    private var timer: Timer? = nil
+    private var projectList: [Project] = []
+    private var currentProjectIndex: Int = 0
     
     // MARK: Private methods
     private func playTap() {
@@ -88,12 +112,6 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         // TODO: Добавить изменение модели через какой-то сервис
     }
     
-    private func backTap() {
-        while router.path.count != 0 {
-          router.path.removeLast()
-        }
-    }
-    
     private func startPlayback() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] _ in
             guard let self = self, state.isPlaying else { return }
@@ -120,5 +138,13 @@ class PlayProjectViewModel: PlayProjectViewModeling {
         let minutes = totalSeconds / 60
         let seconds = totalSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // MARK: Routing
+    
+    private func toMainView() {
+        while router.path.count != 0 {
+          router.path.removeLast()
+        }
     }
 }

@@ -10,6 +10,10 @@ import SwiftUI
 struct MainView<ViewModel: MainViewModel>: View {
     @ObservedObject var viewModel: ViewModel
     
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
+    
     @State private var currentPosition: CGSize = .zero
     @State private var newPosition: CGSize = .zero
     @State private var screenBounds: CGRect = .zero
@@ -124,7 +128,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 ProgressView()
             case .error:
                 Button {
-                    viewModel.loadData()
+                    viewModel.handle(.onLoadData)
                 } label: {
                     Image(systemName: "arrow.clockwise.circle.fill")
                         .font(.system(size: 20))
@@ -133,7 +137,7 @@ struct MainView<ViewModel: MainViewModel>: View {
         }
         .onAppear {
             // TODO: Таймер ожидания загрузки
-            viewModel.loadData()
+            viewModel.handle(.onLoadData)
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct TrackListView: View {
     @StateObject var viewModel = TrackListViewModel()
@@ -55,7 +56,7 @@ struct TrackListView: View {
             })
             .navigationDestination(isPresented: $isShowingPlayProjectView) {
                 if let projectToPlay = selectedProject {
-                    PlayProjectView(projectId: "0", viewModel: PlayProjectViewModel(project: projectToPlay, projectList: viewModel.projects))
+                    PlayProjectView(projectId: "0", viewModel: PlayProjectViewModelImp(projectProvider: ProjectProviderImp(projectDataStorage: ProjectDataStorageImp(realmManager: try? Realm())), projectsListProvider: ProjectsListProviderImp(projectDataStorage: ProjectDataStorageImp(realmManager: try? Realm()))))
                         .navigationBarBackButtonHidden()
                 }
             }

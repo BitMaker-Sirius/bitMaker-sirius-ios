@@ -8,12 +8,43 @@
 import Foundation
 import SwiftUI
 
+enum ProjectEditorViewEvent {
+    case tapBackButton
+    case tapVisualizationButton
+    case tapAddSounds
+    case tapButton
+    case tapChervon
+}
 
-final class TrackEditorViewModel: TrackEditorViewModeling {
+struct ProjectEditorViewState: BaseViewState {
+    var indicatorViewState: IndicatorViewState
+    var project: Project
+    
+    var shouldShowPause: Bool
+    var pauseState: String
+    var isChervonDown: Bool
+    var chervonDirection: String
+    var choosenSoundId: String?
+    var soundsArray: [Sound]
+}
+
+protocol ProjectEditorViewModel: ObservableObject {
+    var state: ProjectEditorViewState { get }
+    
+    func handle(_ event: ProjectEditorViewEvent)
+    
+    func setSelectedSound(at index: String)
+    
+    func areUuidsSimilar(id1: String, id2: String) -> Bool
+}
+
+final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     @Environment(\.router) var router: Router
     
     @Published
-    var state = TrackEditorViewState(
+    var state = ProjectEditorViewState(
+        indicatorViewState: .display,
+        project: Project(metronomeBpm: 100, name: "name"),
         shouldShowPause: false,
         pauseState: "play.fill",
         isChervonDown: false,
@@ -30,8 +61,14 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
         ]
     )
     
-    func handle(_ event: PlayTrackViewEvent) {
+    func handle(_ event: ProjectEditorViewEvent) {
         switch event {
+        case .tapBackButton:
+            toMainView()
+        case .tapVisualizationButton:
+            toPlayProjectView()
+        case .tapAddSounds:
+            toSoundsListView()
         case .tapButton:
             state.shouldShowPause.toggle()
             state.pauseState = (state.shouldShowPause ? "pause.fill": "play.fill")
@@ -65,5 +102,19 @@ final class TrackEditorViewModel: TrackEditorViewModeling {
     
     func isSoundSelected(_ sound: Sound) -> Bool {
         return selectedSounds.contains(where: { $0.name == sound.name })
+    }
+    
+    // MARK: Routing
+    
+    func toMainView() {
+        router.path.removeLast()
+    }
+    
+    func toPlayProjectView() {
+        router.path.append(Route.playProject(projectId: state.project.id))
+    }
+    
+    func toSoundsListView() {
+        router.path.append(Route.soundsList(projectId: state.project.id))
     }
 }

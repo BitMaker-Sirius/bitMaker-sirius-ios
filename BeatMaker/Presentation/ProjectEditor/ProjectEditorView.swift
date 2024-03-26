@@ -7,18 +7,22 @@
 
 import SwiftUI
 
-struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
+struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     // Если передали nil, то создание трека, иначе редактирование
-    var projectId: String?
-    @StateObject var viewModel: ViewModel
-    @Environment(\.dismiss) private var dismiss
+    let projectId: String?
+    @ObservedObject var viewModel: ViewModel
+    
+    init(projectId: String?, viewModel: ViewModel) {
+        self.projectId = projectId
+        self.viewModel = viewModel
+    }
     
     let tactCount: Int = 10
     var tickHeight: CGFloat = 20
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
-    @State  var progressValue: Float = 0.5
+    @State private var progressValue: Float = 0.5
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTreckView = false
     @State private var isShowingAllTreckListView = false
@@ -32,8 +36,30 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
     ]
     
     var body: some View {
-        
         VStack {
+            HStack {
+                Button {
+                    viewModel.handle(.tapBackButton)
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color.onBackgroundColor)
+                }
+                
+                Spacer()
+                
+                Text(viewModel.state.project.name)
+                
+                Spacer()
+                
+                Button {
+                    viewModel.handle(.tapVisualizationButton)
+                } label: {
+                    Text("Визуализация")
+                        .foregroundColor(Color.onBackgroundColor)
+                }
+            }
+            .padding(.horizontal, 15)
+            
             ProgressView(value: progressValue)
                 .progressViewStyle(LinearProgressViewStyle(tint: Color.onBackgroundColor))
                 .padding(.horizontal, 40)
@@ -154,7 +180,7 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                         Spacer()
                         
                         Button(action: {
-                            isShowingAllTreckListView.toggle()
+                            viewModel.handle(.tapAddSounds)
                         }) {
                             Image(systemName: "plus.circle")
                                 .resizable()
@@ -162,7 +188,6 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                                 .frame(width: 30, height: 40)
                                 .foregroundColor(Color.onBackgroundColor)
                         }
-                        
                     }
                     .allowsHitTesting(!isShowingUsedTreckView)
                     .padding(.horizontal, 70)
@@ -188,31 +213,12 @@ struct TrackEditorView<ViewModel: TrackEditorViewModeling>: View {
                 
             }
         }
-        
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action: {
-            dismiss()
-        }) {
-            Image(systemName: "chevron.left")
-                .foregroundColor(Color.onBackgroundColor)
-        } ,
-                            trailing: Button(action: {
-            isVisualize.toggle()
-        }) {
-            Text("Визуализация")
-                .foregroundColor(Color.onBackgroundColor)
-        } )
-        .navigationDestination(isPresented: $isVisualize) {
-            PlayProjectView(projectId: "0", viewModel: PlayProjectViewModel(project: Project(metronomeBpm: 120, name: "HYPEEEE")))
-        }
-        .navigationDestination(isPresented: $isShowingAllTreckListView) {
-            SoundListView(viewModel: SoundListViewModel(editorViewModel: TrackEditorViewModel(), addedToTrackSounds: []))
-        }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
 #Preview {
-    TrackEditorView(viewModel: TrackEditorViewModel())
+    ProjectEditorView(projectId: nil, viewModel: ProjectEditorViewModelImp())
 }
 
 //TODO: поставить заглушки на другие звуки во время записи

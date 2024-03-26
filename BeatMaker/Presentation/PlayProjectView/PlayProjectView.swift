@@ -7,37 +7,16 @@
 
 import SwiftUI
 
-enum PlayProjectViewEvent {
-    case playTap
-    case nextTap
-    case prevTap
-    case editTap
-    case likeTap
-    case backTap
-}
-
-struct PlayProjectViewState {
-    var project: Project
-    var isPlaying: Bool = false
-    var currentTime: Double = 0
-    var totalTime: Double
-    var liked: Bool
-    var formatTime: String
-    var isList: Bool
-}
-
-protocol PlayProjectViewModeling: ObservableObject {
-    var state: PlayProjectViewState { get }
-
-    func handle(_ event: PlayProjectViewEvent)
-}
-
-struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
+struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
     let projectId: String
-    @StateObject var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
-    @State
-    private var sliderValue: CGFloat = .zero {
+    init(projectId: String, viewModel: ViewModel) {
+        self.projectId = projectId
+        self.viewModel = viewModel
+    }
+    
+    @State private var sliderValue: CGFloat = .zero {
         didSet {
 
         }
@@ -133,6 +112,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModeling>: View {
                 }.padding(.horizontal, 32)
             }.padding(.bottom, 24)
         }
-        .navigationBarBackButtonHidden()
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
