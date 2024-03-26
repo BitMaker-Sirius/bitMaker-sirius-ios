@@ -14,6 +14,7 @@
 		007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */; };
 		20F6F4DE2BB35B3800D0D4DC /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4DD2BB35B3800D0D4DC /* NetworkManagerErrors.swift */; };
 		20F6F4E22BB36E5200D0D4DC /* ImageDataStorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E12BB36E5200D0D4DC /* ImageDataStorageEntity.swift */; };
+		20F6F4E42BB3855300D0D4DC /* AudioDataStorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */; };
 		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
@@ -96,6 +97,7 @@
 		007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorViewModelProtocol.swift; sourceTree = "<group>"; };
 		20F6F4DD2BB35B3800D0D4DC /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		20F6F4E12BB36E5200D0D4DC /* ImageDataStorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataStorageEntity.swift; sourceTree = "<group>"; };
+		20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDataStorageEntity.swift; sourceTree = "<group>"; };
 		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			children = (
 				5EAF763C2BAF0F9A00C4B065 /* AudioDataStorage.swift */,
 				5ECAFA632BADDC8E00FAA2F3 /* AudioDataStorageImp.swift */,
+				20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */,
 			);
 			path = AudioDataStorage;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				5EAF76342BAF0CAF00C4B065 /* ImageDataStorage.swift in Sources */,
 				728CE1322BAAE90D00542975 /* SoundListViewModel.swift in Sources */,
 				007AE1192BB196D200E4367E /* UsedSoundsListView.swift in Sources */,
+				20F6F4E42BB3855300D0D4DC /* AudioDataStorageEntity.swift in Sources */,
 				5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */,
 				728CE1232BAADD5B00542975 /* TrackEditorViewModel.swift in Sources */,
 				63E2782A2BAD55CB00BC4E75 /* SoundSettingsGraphView.swift in Sources */,

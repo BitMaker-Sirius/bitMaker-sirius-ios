@@ -11,8 +11,7 @@ final class ImageDataStorageImp: ImageDataStorage {
     
     func get(by id: String, completion: @escaping (Result<ImageDataStorageEntity, DataStorageError>) -> Void) {
         
-        let filePath: URL
-        filePath = getPath().appendingPathComponent("\(String(describing: id)).png")
+        let filePath = getFilePath(withId: id)
             
         do {
             let data = try Data(contentsOf: filePath)
@@ -28,8 +27,7 @@ final class ImageDataStorageImp: ImageDataStorage {
     
     func getAll(completion: @escaping (Result<[ImageDataStorageEntity], DataStorageError>) -> Void) {
         
-        let filePath: URL
-        filePath = getPath()
+        let filePath = getPath()
         
         var allImagesArray: [ImageDataStorageEntity] = []
         
@@ -41,7 +39,7 @@ final class ImageDataStorageImp: ImageDataStorage {
                     switch result {
                     case .success(let imageEntity):
                         allImagesArray.append(imageEntity)
-                    case .failure(let error):
+                    case .failure(_):
                         print("IMAGEDATASTORAGE: can't get UIImage \(imageId) from file storage")
                     }
                 }
@@ -63,9 +61,8 @@ final class ImageDataStorageImp: ImageDataStorage {
             return
         }
         
-        let filePath: URL
-        let imageId = id != nil ? id : UUID().uuidString
-        filePath = getPath().appendingPathComponent("\(String(describing: imageId)).png")
+        let imageId = (id != nil) ? id : UUID().uuidString
+        let filePath = getFilePath(withId: imageId!)
             
         do {
             try imageData.write(to: filePath)
@@ -80,8 +77,7 @@ final class ImageDataStorageImp: ImageDataStorage {
     
     func delete(by id: String, completion: @escaping (_ isCompleted: Bool) -> Void) {
         
-        let filePath: URL
-        filePath = getPath().appendingPathComponent("\(String(describing: id)).png")
+        let filePath = getFilePath(withId: id)
             
         do {
             try FileManager.default.removeItem(at: filePath)
@@ -93,9 +89,12 @@ final class ImageDataStorageImp: ImageDataStorage {
     }
     
     private func getPath() -> URL {
-        
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return documentsDirectory.appendingPathComponent("Images")
+    }
+    
+    private func getFilePath(withId id: String) -> URL {
+        getPath().appendingPathComponent("\(String(describing: id)).png")
     }
     
     private func createPathIfDontExists() {

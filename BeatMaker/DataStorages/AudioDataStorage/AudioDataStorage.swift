@@ -7,4 +7,4 @@
 
 import AVFoundation
 
-protocol AudioDataStorage: DataStorage where DataType == AVAudioFile {}
+protocol AudioDataStorage: DataStorage where DataType == AudioDataStorageEntity {}
