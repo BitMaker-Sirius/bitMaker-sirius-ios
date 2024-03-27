@@ -92,14 +92,15 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         case .tapBackButton:
             saveData()
             toMainView()
-            state.project = nil
+            stopProcess()
         case .tapVisualizationButton:
             saveData()
             toPlayProjectView()
-            state.project = nil
+            stopProcess()
         case .tapAddSounds:
             saveData()
             toSoundsListView()
+            stopProcess()
         case .tapPlay:
             playTap()
         case .tapChervon:
@@ -174,22 +175,27 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
     }
     
-    // MARK: Routing
-    
-    func toMainView() {
+    private func stopProcess() {
         if state.isPlaying {
             playTap()
         }
         
+        if state.isRecording {
+            recordTap()
+        }
+        
+        state.project = nil
+    }
+    
+    // MARK: Routing
+    
+    func toMainView() {
         while router.path.count != 0 {
             router.path.removeLast()
         }
     }
     
     func toPlayProjectView() {
-        if state.isPlaying {
-            playTap()
-        }        
         guard let id = state.project?.id else {
             return
         }
@@ -198,9 +204,6 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func toSoundsListView() {
-        if state.isPlaying {
-            playTap()
-        }
         guard let id = state.project?.id else {
             return
         }
