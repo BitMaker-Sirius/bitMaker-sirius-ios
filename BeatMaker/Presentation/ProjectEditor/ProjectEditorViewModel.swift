@@ -157,7 +157,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     // MARK: Routing
     
     func toMainView() {
-        router.path.removeLast()
+        while router.path.count != 0 {
+            router.path.removeLast()
+        }
     }
     
     func toPlayProjectView() {

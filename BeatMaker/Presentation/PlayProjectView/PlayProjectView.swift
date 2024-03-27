@@ -24,94 +24,120 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundColor.edgesIgnoringSafeArea(.all)
-            
-            VStack(alignment: .center, spacing: 0) {
-                HStack(alignment: .center) {
-                    Button(action: {
+            switch viewModel.state.indicatorViewState {
+            case .display:
+                ZStack {
+                    Color.backgroundColor.edgesIgnoringSafeArea(.all)
+                    
+                    VStack(alignment: .center, spacing: 0) {
+                        HStack(alignment: .center) {
+                            Button(action: {
+                                viewModel.handle(.backTap)
+                            }) {
+                                Image.backArrow.resizable().frame(width: 20, height: 20)
+                                    .offset(x: 2)
+                                    .padding(8).background(Color.backgroundColor)
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                            }
+                            
+                            Spacer()
+                            
+                            Button {
+                                viewModel.handle(.editTap)
+                            } label: {
+                                Image.options.resizable().frame(width: 16, height: 16)
+                                    .padding(12).background(Color.backgroundColor)
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                            }
+                        }.padding(.horizontal, 24).padding(.top, 12)
+                        
+                        Spacer()
+                        
+                        Text(viewModel.state.project?.name ?? "")
+                            .padding(.top, 12)
+                        
+                        Spacer()
+                        
+                        HStack(alignment: .center, spacing: 12) {
+                            Text(viewModel.state.formatTime)
+                                .frame(width: 50, height: 20, alignment: .leading)
+                            ProgressView(value: viewModel.state.currentTime, total: viewModel.state.totalTime)
+                                .progressViewStyle(LinearProgressViewStyle())
+                                .padding()
+                            Button {
+                                viewModel.handle(.likeTap)
+                            } label: {
+                                (viewModel.state.liked ? Image("heart-filled_icon") : Image("heart_icon"))
+                                    .resizable().frame(width: 20, height: 20)
+                            }
+                        }.padding(30)
+                        
+                        HStack(alignment: .center) {
+                            if viewModel.state.isList {
+                                Button {
+                                    viewModel.handle(.prevTap)
+                                } label: {
+                                    Image.next.resizable().frame(width: 18, height: 18)
+                                        .rotationEffect(Angle(degrees: 180))
+                                        .padding(24).background(Color.backgroundColor)
+                                        .clipShape(Circle())
+                                        .shadow(color: Color.onBackgroundColor, radius: 5)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            Button {
+                                viewModel.handle(.playTap)
+                            } label: {
+                                (viewModel.state.isPlaying ? Image.pause : Image.play)
+                                    .resizable().frame(width: 24, height: 27)
+                                    .padding(34).background(Color.onBackgroundColor)
+                                    .clipShape(Circle())
+                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                            }
+                            
+                            Spacer()
+                            
+                            // warning stable fields
+                            if viewModel.state.isList {
+                                Button {
+                                    viewModel.handle(.nextTap)
+                                } label: {
+                                    Image.next.resizable().frame(width: 18, height: 18)
+                                        .padding(24).background(Color.backgroundColor)
+                                        .clipShape(Circle())
+                                        .shadow(color: Color.onBackgroundColor, radius: 5)
+                                }
+                            }
+                        }.padding(.horizontal, 32)
+                    }.padding(.bottom, 24)
+                }
+            case .loading:
+                ProgressView()
+            case .error:
+                HStack {
+                    Button {
                         viewModel.handle(.backTap)
-                    }) {
-                        Image.backArrow.resizable().frame(width: 20, height: 20)
-                            .offset(x: 2)
-                            .padding(8).background(Color.backgroundColor)
-                            .cornerRadius(20)
-                            .shadow(color: Color.onBackgroundColor, radius: 5)
+                    } label: {
+                        Image(systemName: "arrowshape.backward.circle")
+                            .font(.system(size: 40))
                     }
-                    
-                    Spacer()
                     
                     Button {
-                        viewModel.handle(.editTap)
+                        viewModel.handle(.onLoadData(projectId: projectId))
                     } label: {
-                        Image.options.resizable().frame(width: 16, height: 16)
-                            .padding(12).background(Color.backgroundColor)
-                            .cornerRadius(20)
-                            .shadow(color: Color.onBackgroundColor, radius: 5)
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .font(.system(size: 40))
                     }
-                }.padding(.horizontal, 24).padding(.top, 12)
-                
-                Spacer()
-                
-                Text(viewModel.state.project.name)
-                    .padding(.top, 12)
-                
-                Spacer()
-                
-                HStack(alignment: .center, spacing: 12) {
-                    Text(viewModel.state.formatTime)
-                        .frame(width: 50, height: 20, alignment: .leading)
-                    ProgressView(value: viewModel.state.currentTime, total: viewModel.state.totalTime)
-                        .progressViewStyle(LinearProgressViewStyle())
-                        .padding()
-                    Button {
-                        viewModel.handle(.likeTap)
-                    } label: {
-                        (viewModel.state.liked ? Image("heart-filled_icon") : Image("heart_icon"))
-                            .resizable().frame(width: 20, height: 20)
-                    }
-                }.padding(30)
-                
-                HStack(alignment: .center) {
-                    if viewModel.state.isList {
-                        Button {
-                            viewModel.handle(.prevTap)
-                        } label: {
-                            Image.next.resizable().frame(width: 18, height: 18)
-                                .rotationEffect(Angle(degrees: 180))
-                                .padding(24).background(Color.backgroundColor)
-                                .clipShape(Circle())
-                                .shadow(color: Color.onBackgroundColor, radius: 5)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        viewModel.handle(.playTap)
-                    } label: {
-                        (viewModel.state.isPlaying ? Image.pause : Image.play)
-                            .resizable().frame(width: 24, height: 27)
-                            .padding(34).background(Color.onBackgroundColor)
-                            .clipShape(Circle())
-                            .shadow(color: Color.onBackgroundColor, radius: 5)
-                    }
-                    
-                    Spacer()
-                    
-                    // warning stable fields
-                    if viewModel.state.isList {
-                        Button {
-                            viewModel.handle(.nextTap)
-                        } label: {
-                            Image.next.resizable().frame(width: 18, height: 18)
-                                .padding(24).background(Color.backgroundColor)
-                                .clipShape(Circle())
-                                .shadow(color: Color.onBackgroundColor, radius: 5)
-                        }
-                    }
-                }.padding(.horizontal, 32)
-            }.padding(.bottom, 24)
+                }
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear {
+            viewModel.handle(.onLoadData(projectId: projectId))
+        }
     }
 }
