@@ -35,4 +35,7 @@ final class UsedTreckViewModel: UsedTreckViewModeling {
         self.state = state
     }
     
+    func updateTracks(_ tracks: [Track]) {
+        state.usedSoundsArray = tracks
+    }
 }
