@@ -8,7 +8,7 @@
 import AVFoundation
 
 protocol NetworkManager {
-    // Реализация походов в сеть
-    func fetchData(fromStringURL stringUrl: String, complition: @escaping (Result<Data, NetworkManagerErrors>) -> ())
-    func fetchRandomImageFromApi(complition: @escaping (Result<Data, NetworkManagerErrors>) -> ())
+    
+    func fetchData(fromStringURL stringUrl: String, completion: @escaping (Result<Data, NetworkManagerErrors>) -> ())
+    func fetchRandomImageFromApi(completion: @escaping (Result<Data, NetworkManagerErrors>) -> ())
 }

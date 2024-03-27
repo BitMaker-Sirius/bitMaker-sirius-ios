@@ -36,7 +36,7 @@ final class AudioDataStorageImp: AudioDataStorage {
                     case .success(let soundEntity):
                         allSoundsDataArray.append(soundEntity)
                     case .failure(_):
-                        print("AUDIODATASTORAGE: can't get UIImage \(soundId) from file storage")
+                        print("AUDIODATASTORAGE: can't get data \(soundId) from file storage")
                     }
                 }
             }
@@ -57,7 +57,7 @@ final class AudioDataStorageImp: AudioDataStorage {
         do {
             try Data(contentsOf: data.soundUrl).write(to: filePath)
         } catch {
-            print("AUDIODATASTORAGE: can't write UIImage \(String(describing: soundId)) to Files")
+            print("AUDIODATASTORAGE: can't write Data \(String(describing: soundId)) to Files")
             completion(nil, false)
             return
         }
@@ -77,18 +77,41 @@ final class AudioDataStorageImp: AudioDataStorage {
             completion(false)
         }
     }
+}
+
+extension AudioDataStorage {
     
-    private func getPath() -> URL {
+    func save(by id: String?, _ data: Data, completion: @escaping (_ id: String?, _ isCompleted: Bool) -> Void) {
         
+        createPathIfDontExists()
+        
+        let soundId = (id != nil) ? id : UUID().uuidString
+        let filePath = getFilePath(withId: soundId!)
+        
+        do {
+            try data.write(to: filePath)
+        } catch {
+            print("AUDIODATASTORAGE: can't write Data \(String(describing: soundId)) to Files")
+            completion(nil, false)
+            return
+        }
+        
+        completion(soundId, true)
+    }
+}
+    
+private extension AudioDataStorage {
+    func getPath() -> URL {
+    
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return documentsDirectory.appendingPathComponent("Sounds")
     }
     
-    private func getFilePath(withId id: String) -> URL {
+    func getFilePath(withId id: String) -> URL {
         getPath().appendingPathComponent("\(String(describing: id)).mp3")
     }
     
-    private func createPathIfDontExists() {
+    func createPathIfDontExists() {
         
         let path = getPath().path()
        

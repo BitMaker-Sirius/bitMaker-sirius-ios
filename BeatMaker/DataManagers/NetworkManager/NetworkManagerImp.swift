@@ -9,56 +9,56 @@ import Foundation
 
 final class NetworkManagerImp: NetworkManager {
     
-    func fetchData(fromStringURL stringUrl: String, complition: @escaping (Result<Data, NetworkManagerErrors>) -> ()) {
+    func fetchData(fromStringURL stringUrl: String, completion: @escaping (Result<Data, NetworkManagerErrors>) -> ()) {
         
         guard let url = URL(string: stringUrl) else {
-            complition(Result.failure(NetworkManagerErrors.invalidURL))
+            completion(Result.failure(NetworkManagerErrors.invalidURL))
             return
         }
         
         getData(fromURL: url) { result in
-            complition(result)
+            completion(result)
         }
     }
     
-    func fetchRandomImageFromApi(complition: @escaping (Result<Data, NetworkManagerErrors>) -> ()) {
+    func fetchRandomImageFromApi(completion: @escaping (Result<Data, NetworkManagerErrors>) -> ()) {
         
         guard let randomImageUrl = URL(string: "https://random-image-pepebigotes.vercel.app/api/random-image") else {
-            complition(Result.failure(NetworkManagerErrors.invalidURL))
+            completion(Result.failure(NetworkManagerErrors.invalidURL))
             return
         }
         
         getData(fromURL: randomImageUrl) { result in
-            complition(result)
+            completion(result)
         }
     }
     
-    private func getData(fromURL url: URL, complition: @escaping (Result<Data, NetworkManagerErrors>) -> ()) {
+    private func getData(fromURL url: URL, completion: @escaping (Result<Data, NetworkManagerErrors>) -> ()) {
         
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let err = error {
                 print(err.localizedDescription)
-                complition(Result.failure(NetworkManagerErrors.fetchError))
+                completion(Result.failure(NetworkManagerErrors.fetchError))
                 return
             }
             
             guard let data = data else {
-                complition(Result.failure(NetworkManagerErrors.fetchError))
+                completion(Result.failure(NetworkManagerErrors.fetchError))
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                complition(Result.failure(NetworkManagerErrors.brokenResponse))
+                completion(Result.failure(NetworkManagerErrors.brokenResponse))
                 return
             }
             
             if httpResponse.statusCode != 200 {
-                complition(Result.failure(NetworkManagerErrors.notOKResponseStatus))
+                completion(Result.failure(NetworkManagerErrors.notOKResponseStatus))
                 return
             }
             
-            complition(Result.success(data))
+            completion(Result.success(data))
             return
         }
         
