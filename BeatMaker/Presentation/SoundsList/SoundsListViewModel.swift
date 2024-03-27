@@ -10,17 +10,18 @@ import SwiftUI
 
 enum SoundsListViewEvent {
     case tapBackButton
-    case tapAddToTrackButton
+    case tapAddToTrackButton(sound: Sound)
     case tapAddNewSoundButton
     case tapOnCellPlayButton
     case tapOnCell
-    case deleteSound
+    case deleteSound(sound: Sound)
     case editSoundName
     case editSoundEmoji
 }
 
 struct SoundsListViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
+    var project: Project?
     var soundsList: [Sound]
     
 //    var addedToTrackSounds: [Sound]
@@ -35,7 +36,11 @@ protocol SoundsListViewModel: ObservableObject {
 
 class SoundsListViewModelImp: SoundsListViewModel {
     @Environment(\.router) var router: Router
-    @Published var state = SoundsListViewState(indicatorViewState: .display, soundsList: [])
+    @Published var state = SoundsListViewState(
+        indicatorViewState: .display,
+        project: nil,
+        soundsList: []
+    )
     
     let projectProvider: ProjectProvider
     let soundsListProvider: SoundsListProvider
@@ -49,10 +54,10 @@ class SoundsListViewModelImp: SoundsListViewModel {
         switch event {
         case .tapBackButton:
             toProjectEditorView()
-        case .deleteSound:
-            deleteSound()
-        case .tapAddToTrackButton:
-            tapAddToTrackButton()
+        case .deleteSound(let sound):
+            deleteSound(sound: sound)
+        case .tapAddToTrackButton(let sound):
+            addToTrackButton(sound: sound)
         case .tapAddNewSoundButton:
             tapAddNewSoundButton()
         case .tapOnCellPlayButton:
@@ -66,16 +71,32 @@ class SoundsListViewModelImp: SoundsListViewModel {
         }
     }
     
-    private func deleteSound() {
-        
+    private func deleteSound(sound: Sound) {
+        soundsListProvider.delete(by: sound.id) { [weak self] isCompleted in
+            if isCompleted {
+                if let index = self?.state.soundsList.firstIndex(where: { $0.id == sound.id }) {
+                    self?.state.soundsList.remove(at: index)
+                }
+            }
+        }
     }
     
-    private func tapAddToTrackButton() {
-        
+    private func addToTrackButton(sound: Sound) {
+        state.project?.preparedSounds.append(sound)
     }
     
     private func tapAddNewSoundButton() {
+        let sound = Sound(audioFileId: nil, name: String(UUID().uuidString.prefix(5)), emoji: ["🤪", "😎", "🤩", "🥳", "🥹", "😇", "🤯", "🤔"].randomElement() ?? "😎")
         
+        soundsListProvider.add(
+            sound: sound
+        ) { [weak self] isCompleted in
+            if isCompleted {
+                self?.state.soundsList.append(sound)
+            } else {
+                // Обработка ошибки
+            }
+        }
     }
     
     private func tapOnCellPlayButton() {
@@ -93,6 +114,32 @@ class SoundsListViewModelImp: SoundsListViewModel {
     private func editSoundEmoji() {
         
     }
+    
+    private func loadData(projectId: String) {
+        state.indicatorViewState = .loading
+        
+        projectProvider.loadData(by: projectId) { [weak self] result in
+            switch result {
+            case .success(let project):
+                self?.state.project = project
+                self?.state.indicatorViewState = .display
+            case .failure(_):
+                self?.state.indicatorViewState = .error
+            }
+        }
+        
+        soundsListProvider.loadData { [weak self] result in
+            switch result {
+            case .success(let soundsList):
+                self?.state.soundsList = soundsList
+                self?.state.indicatorViewState = .display
+            case .failure(_):
+                self?.state.indicatorViewState = .error
+            }
+        }
+    }
+    
+    // MARK: Routing
     
     private func toProjectEditorView() {
         router.path.removeLast()

@@ -44,11 +44,23 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                 
                 addNewSoundsButton
                 
-                LazyVStack{
+                LazyVStack {
                     ForEach(viewModel.state.soundsList) { sound in
                         soundCell(withSound: sound)
                             .contextMenu {
-                                longTapOnSoundCellMenu
+//                                Group {
+                                    Button("Поменять эмодзи", systemImage: "music.note") {
+                                        viewModel.handle(.editSoundEmoji)
+                                    }
+                                    
+                                    Button("Поменять название", systemImage: "pencil") {
+                                        viewModel.handle(.editSoundName)
+                                    }
+                                    
+                                    Button("Удалить", systemImage: "trash", role: .destructive) {
+                                        viewModel.handle(.deleteSound(sound: sound))
+                                    }
+//                                }
                             }
                     }
                 }
@@ -86,9 +98,12 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
             
             Spacer()
         }
-        .modifier(CellBackground())
+        .frame(maxWidth: .infinity)
+        .frame(height: 75)
+        .background(viewModel.state.project?.preparedSounds.contains(sound) == true ? Color.gray.opacity(0.1) : Color.gray.opacity(0.3))
+        .clipShape(.rect(cornerRadius: 10))
         .onTapGesture {
-            viewModel.handle(SoundsListViewEvent.tapOnCell)
+            viewModel.handle(SoundsListViewEvent.tapAddToTrackButton(sound: sound))
         }
     }
     
@@ -99,36 +114,10 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
         } label: {
             Text("Добавить звуки в библитеку всех звуков")
         }
-        .modifier(CellBackground())
+        .frame(maxWidth: .infinity)
+        .frame(height: 75)
+        .background(.gray.opacity(0.3))
+        .clipShape(.rect(cornerRadius: 10))
         .padding([.leading, .trailing])
-    }
-    
-    // group of buttons from ContextMenu of sound cell
-     var longTapOnSoundCellMenu: some View {
-        Group {
-            Button("Поменять эмодзи", systemImage: "music.note") {
-                viewModel.handle(.editSoundEmoji)
-            }
-            
-            Button("Поменять название", systemImage: "pencil") {
-                viewModel.handle(.editSoundName)
-            }
-            
-            Button("Удалить", systemImage: "trash", role: .destructive) {
-                viewModel.handle(.deleteSound)
-            }
-        }
-    }
-    
-    // modifier of setting background of cell
-    struct CellBackground: ViewModifier {
-        func body(content: Content) -> some View {
-            content
-                .frame(maxWidth: .infinity)
-                .frame(height: 75)
-                .background(.gray.opacity(0.3))
-                .background(.gray.opacity(0.3))
-                .clipShape(.rect(cornerRadius: 10))
-        }
     }
 }
