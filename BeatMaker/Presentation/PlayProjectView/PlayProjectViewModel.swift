@@ -185,23 +185,22 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
             switch result {
             case .success(let project):
                 self?.state.project = project
-                self?.state.indicatorViewState = .display
+                self?.countTotalTime()
+                
+                self?.projectsListProvider.loadData { result in
+                    switch result {
+                    case .success(let projectsList):
+                        self?.state.projectsList = projectsList
+                        self?.state.isList = self?.state.projectsList.count ?? 0 > 1
+                        self?.state.indicatorViewState = .display
+                    case .failure(_):
+                        self?.state.indicatorViewState = .error
+                    }
+                }
             case .failure(_):
                 self?.state.indicatorViewState = .error
             }
         }
-        
-        projectsListProvider.loadData { [weak self] result in
-            switch result {
-            case .success(let projectsList):
-                self?.state.projectsList = projectsList
-                self?.state.indicatorViewState = .display
-            case .failure(_):
-                self?.state.indicatorViewState = .error
-            }
-        }
-        
-        state.isList = state.projectsList.count > 1
     }
     
     // MARK: Routing

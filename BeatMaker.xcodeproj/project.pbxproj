@@ -460,9 +460,9 @@
 			isa = PBXGroup;
 			children = (
 				007AE1172BB196A900E4367E /* UsedSoundsList */,
+				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
 				007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */,
 				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
-				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -511,6 +511,23 @@
 				63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		63C562942BB42D090066B453 /* TrackVisualization */ = {
+			isa = PBXGroup;
+			children = (
+				63C562952BB42D2C0066B453 /* TrackVisualizationViewModel.swift */,
+				63C562972BB42D4A0066B453 /* TrackVisualizationView.swift */,
+			);
+			path = TrackVisualization;
+			sourceTree = "<group>";
+		};
+		63C562992BB461DA0066B453 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				63C562942BB42D090066B453 /* TrackVisualization */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		63CD48BD2BB18C210033CF77 /* Main */ = {
@@ -647,6 +664,7 @@
 		728CE12B2BAAE0D600542975 /* PlayProjectView */ = {
 			isa = PBXGroup;
 			children = (
+				63C562992BB461DA0066B453 /* Subviews */,
 				728CE12C2BAAE0E800542975 /* PlayProjectView.swift */,
 				728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */,
 			);
