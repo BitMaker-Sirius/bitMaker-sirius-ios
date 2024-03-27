@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 enum ProjectEditorViewEvent {
+    case onLoadData(projectId: String?)
+    
     case tapBackButton
     case tapVisualizationButton
     case tapAddSounds
@@ -18,7 +20,7 @@ enum ProjectEditorViewEvent {
 
 struct ProjectEditorViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
-    var project: Project
+    var project: Project?
     
     var shouldShowPause: Bool
     var pauseState: String
@@ -40,11 +42,9 @@ protocol ProjectEditorViewModel: ObservableObject {
 
 final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     @Environment(\.router) var router: Router
-    
-    @Published
-    var state = ProjectEditorViewState(
-        indicatorViewState: .display,
-        project: Project(metronomeBpm: 100, name: "name"),
+    @Published var state = ProjectEditorViewState(
+        indicatorViewState: .loading,
+        project: nil,
         shouldShowPause: false,
         pauseState: "play.fill",
         isChervonDown: false,
@@ -61,13 +61,24 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         ]
     )
     
+    let projectProvider: ProjectProvider
+    
+    init(projectProvider: ProjectProvider) {
+        self.projectProvider = projectProvider
+    }
+    
     func handle(_ event: ProjectEditorViewEvent) {
         switch event {
+        case .onLoadData(projectId: let projectId):
+            loadData(projectId: projectId)
         case .tapBackButton:
+            saveData()
             toMainView()
         case .tapVisualizationButton:
+            saveData()
             toPlayProjectView()
         case .tapAddSounds:
+            saveData()
             toSoundsListView()
         case .tapButton:
             state.shouldShowPause.toggle()
@@ -86,10 +97,6 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         return id1 == id2
     }
     
-    init() {
-        self.state = state
-    }
-    
     @Published var selectedSounds: [Sound] = []
     
     func addOrRemoveSound(_ sound: Sound) {
@@ -104,6 +111,47 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         return selectedSounds.contains(where: { $0.name == sound.name })
     }
     
+    func loadData(projectId: String?) {
+        state.indicatorViewState = .loading
+        
+        guard state.project == nil else {
+            state.indicatorViewState = .display
+            return
+        }
+        
+        guard let projectId else {
+            projectProvider.create(project: .init(metronomeBpm: 100, name: UUID().uuidString)) { [weak self] project, isCompleted in
+                if isCompleted {
+                    self?.state.project = project
+                    self?.state.indicatorViewState = .display
+                } else {
+                    self?.state.indicatorViewState = .error
+                }
+            }
+            return
+        }
+        
+        projectProvider.loadData(by: projectId) { [weak self] result in
+            switch result {
+            case .success(let project):
+                self?.state.project = project
+                self?.state.indicatorViewState = .display
+            case .failure(_):
+                self?.state.indicatorViewState = .error
+            }
+        }
+    }
+    
+    func saveData() {
+        guard let project = state.project else {
+            return
+        }
+        
+        projectProvider.saveData(project: project) { _ in
+            // Обработать ошибку
+        }
+    }
+    
     // MARK: Routing
     
     func toMainView() {
@@ -111,10 +159,18 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func toPlayProjectView() {
-        router.path.append(Route.playProject(projectId: state.project.id))
+        guard let id = state.project?.id else {
+            return
+        }
+        
+        router.path.append(Route.playProject(projectId: id))
     }
     
     func toSoundsListView() {
-        router.path.append(Route.soundsList(projectId: state.project.id))
+        guard let id = state.project?.id else {
+            return
+        }
+        
+        router.path.append(Route.soundsList(projectId: id))
     }
 }

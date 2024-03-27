@@ -64,11 +64,21 @@ struct MainView<ViewModel: MainViewModel>: View {
                         .padding(.bottom, 300)
                         
                         VStack {
-                            Text("Мои треки")
-                                .font(.largeTitle)
-                                .bold()
-                                .padding(.top, 20)
-                                .padding(.leading, -150)
+                            HStack(alignment: .lastTextBaseline) {
+                                Text("Мои треки")
+                                    .font(.largeTitle)
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Button {
+                                    viewModel.handle(.tapEditing)
+                                } label: {
+                                    Text("редактировать")
+                                        .foregroundStyle(viewModel.state.isEditing ? .gray : .blue)
+                                }
+                            }
+                            .padding()
                             
                             if !viewModel.state.projectsList.isEmpty {
                                 ForEach(viewModel.state.projectsList, id: \.id) { project in
@@ -131,7 +141,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                     viewModel.handle(.onLoadData)
                 } label: {
                     Image(systemName: "arrow.clockwise.circle.fill")
-                        .font(.system(size: 20))
+                        .font(.system(size: 40))
                 }
             }
         }

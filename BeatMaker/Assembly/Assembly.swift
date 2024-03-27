@@ -41,7 +41,7 @@ final class Assembly {
     }()
     
     private lazy var projectEditorViewModel: ProjectEditorViewModelImp = {
-        ProjectEditorViewModelImp()
+        ProjectEditorViewModelImp(projectProvider: projectProvider)
     }()
     
     private lazy var playProjectViewModel: PlayProjectViewModelImp = {
@@ -86,7 +86,7 @@ final class Assembly {
     
     // MARK: DataStorages
     
-    private lazy var projectDataStorage: any ProjectDataStorage = {
+    lazy var projectDataStorage: any ProjectDataStorage = {
         ProjectDataStorageImp(realmManager: realmManager)
     }()
     
@@ -105,7 +105,7 @@ final class Assembly {
     // MARK: DataManagers
     
     private lazy var realmManager: Realm? = {
-        try? Realm()
+        try? Realm(configuration: .init(deleteRealmIfMigrationNeeded: true))
     }()
     
     // FileManager

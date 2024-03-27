@@ -13,7 +13,6 @@ final class ProjectObject: Object {
     @Persisted var metronomeBpm: Int
     @Persisted var name: String
     @Persisted var image: String?
-    @Persisted var updateDate: Date?
     @Persisted var preparedSounds: List<SoundObject>
     @Persisted var tracks: List<TrackObject>
     
@@ -23,7 +22,6 @@ final class ProjectObject: Object {
         self.metronomeBpm = project.metronomeBpm
         self.name = project.name
         self.image = project.image
-        self.updateDate = project.updateDate
         preparedSounds.append(objectsIn: project.preparedSounds.compactMap { SoundObject(from: $0) })
         tracks.append(objectsIn: project.tracks.map { TrackObject(from: $0) })
     }

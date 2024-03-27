@@ -12,13 +12,15 @@ enum MainViewEvent {
     case onLoadData
     
     case tapCreateProjectButton
-    case tapEditProjectButton(projectId: String)
-    case tapPlayProjectButton(projectId: String)
+    case tapRightProjectButton(projectId: String)
+    case tapEditing
+    case tapDeleteButton(projectId: String)
 }
 
 struct MainViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var projectsList: [Project]
+    var isEditing: Bool
 }
 
 protocol MainViewModel: ObservableObject {
@@ -31,7 +33,8 @@ final class MainViewModelImp: MainViewModel {
     @Environment(\.router) var router: Router
     @Published var state = MainViewState(
         indicatorViewState: .loading,
-        projectsList: []
+        projectsList: [],
+        isEditing: false
     )
     
     let projectsListProvider: ProjectsListProvider
@@ -51,10 +54,16 @@ final class MainViewModelImp: MainViewModel {
             loadData()
         case .tapCreateProjectButton:
             toProjectEditorView(with: nil)
-        case .tapPlayProjectButton(let projectId):
-            toPlayProjectView(with: projectId)
-        case .tapEditProjectButton(projectId: let projectId):
-            toProjectEditorView(with: projectId)
+        case .tapRightProjectButton(let projectId):
+            if state.isEditing {
+                toProjectEditorView(with: projectId)
+            } else {
+                toPlayProjectView(with: projectId)
+            }
+        case .tapEditing:
+            state.isEditing.toggle()
+        case .tapDeleteButton(let projectId):
+            delete(by: projectId)
         }
     }
     
@@ -68,6 +77,18 @@ final class MainViewModelImp: MainViewModel {
                 self?.state.indicatorViewState = .display
             case .failure(_):
                 self?.state.indicatorViewState = .error
+            }
+        }
+    }
+    
+    private func delete(by projectId: String) {
+        projectsListProvider.delete(by: projectId) { [weak self] isCompleted in
+            if isCompleted {
+                guard let index = self?.state.projectsList.firstIndex(where: { $0.id == projectId }) else {
+                    return
+                }
+                
+                self?.state.projectsList.remove(at: index)
             }
         }
     }

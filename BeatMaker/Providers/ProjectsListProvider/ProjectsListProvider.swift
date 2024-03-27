@@ -9,4 +9,6 @@ import SwiftUI
 
 protocol ProjectsListProvider {
     func loadData(completion: @escaping (Result<[Project], DataStorageError>) -> Void)
+    
+    func delete(by projectId: String, completion: @escaping (_ isCompleted: Bool) -> Void)
 }

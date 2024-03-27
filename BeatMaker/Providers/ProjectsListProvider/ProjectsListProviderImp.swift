@@ -26,4 +26,10 @@ final class ProjectsListProviderImp: ProjectsListProvider {
             completion(result)
         }
     }
+    
+    func delete(by projectId: String, completion: @escaping (_ isCompleted: Bool) -> Void) {
+        projectDataStorage.delete(by: projectId) { isCompleted in
+            completion(isCompleted)
+        }
+    }
 }
