@@ -14,28 +14,48 @@ enum ConstantsForView {
     static let defaultName = "sound"
 }
 
-struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
+struct SoundsListView<ViewModel: SoundsListViewModel>: View {
+    let projectId: String
+    @ObservedObject var viewModel: ViewModel
     
-    @StateObject  var viewModel: ViewModel
+    init(projectId: String, viewModel: ViewModel) {
+        self.projectId = projectId
+        self.viewModel = viewModel
+    }
+    
     // useless propertie, just for mock
-    @State  var username: String = ""
+    @State var username: String = ""
     
     var body: some View {
-        
-        ScrollView {
-            
-            addNewSoundsButton
-            
-            LazyVStack{
-                ForEach(viewModel.state.allSounds) { sound in
-                    soundCell(withSound: sound)
-                        .contextMenu {
-                            longTapOnSoundCellMenu
-                        }
+        VStack {
+            HStack {
+                Button {
+                    viewModel.handle(.tapBackButton)
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color.onBackgroundColor)
                 }
+                
+                Spacer()
             }
-            .padding([.leading, .trailing])
+            .padding(.horizontal, 15)
+            
+            ScrollView {
+                
+                addNewSoundsButton
+                
+                LazyVStack{
+                    ForEach(viewModel.state.soundsList) { sound in
+                        soundCell(withSound: sound)
+                            .contextMenu {
+                                longTapOnSoundCellMenu
+                            }
+                    }
+                }
+                .padding([.leading, .trailing])
+            }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     @ViewBuilder
@@ -57,7 +77,7 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
             Spacer()
             
             Button {
-                viewModel.handle(AllSoundsViewEvent.tapOnCellPlayButton)
+                viewModel.handle(SoundsListViewEvent.tapOnCellPlayButton)
             } label: {
                 Image(systemName: "play.circle")
                     .resizable()
@@ -68,14 +88,14 @@ struct SoundListView<ViewModel: AllSoundsViewModelProtocol>: View {
         }
         .modifier(CellBackground())
         .onTapGesture {
-            viewModel.handle(AllSoundsViewEvent.tapOnCell)
+            viewModel.handle(SoundsListViewEvent.tapOnCell)
         }
     }
     
     // button of adding new sound to list of all sounds
      var addNewSoundsButton: some View {
         Button {
-            viewModel.handle(AllSoundsViewEvent.tapAddNewSoundButton)
+            viewModel.handle(SoundsListViewEvent.tapAddNewSoundButton)
         } label: {
             Text("Добавить звуки в библитеку всех звуков")
         }

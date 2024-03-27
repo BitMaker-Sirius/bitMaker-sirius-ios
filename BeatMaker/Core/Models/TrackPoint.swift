@@ -12,7 +12,11 @@ struct TrackPoint {
     let volume: Double?
     let pitch: Double?
     
-    init (startTime: TimeInterval, volume: Double?, pitch: Double?) {
+    init(
+        startTime: TimeInterval,
+        volume: Double?,
+        pitch: Double?
+    ) {
         self.startTime = startTime
         self.volume = volume
         self.pitch = pitch

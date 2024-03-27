@@ -19,6 +19,8 @@ import SwiftUI
             assembly.projectEditorView(projectId: projectId)
         case .playProject(projectId: let projectId):
             assembly.playProjectView(projectId: projectId)
+        case .soundsList(projectId: let projectId):
+            assembly.soundsListView(projectId: projectId)
         }
     }
 }

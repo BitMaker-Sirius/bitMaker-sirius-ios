@@ -13,19 +13,14 @@ final class Project: ObservableObject, Identifiable, Hashable {
     let metronomeBpm: Int
     @Published var name: String
     @Published var image: String?
-    @Published var updateDate: Date?
     @Published var preparedSounds: [Sound]
     @Published var tracks: [Track]
-    
-    /// Свойство для управления воспроизведением
-    @Published var isPlaying: Bool = false
     
     /// Используется при создании Project, сам назначает id
     init(
         metronomeBpm: Int,
         name: String,
         image: String? = nil,
-        updateDate: Date? = nil,
         preparedSounds: [Sound] = [],
         tracks: [Track] = []
     ) {
@@ -33,7 +28,6 @@ final class Project: ObservableObject, Identifiable, Hashable {
         self.metronomeBpm = metronomeBpm
         self.name = name
         self.image = image
-        self.updateDate = updateDate
         self.preparedSounds = preparedSounds
         self.tracks = tracks
     }
@@ -48,7 +42,6 @@ final class Project: ObservableObject, Identifiable, Hashable {
             metronomeBpm: project.metronomeBpm,
             name: project.name,
             image: project.image,
-            updateDate: project.updateDate,
             preparedSounds: project.preparedSounds,
             tracks: project.tracks
         )
@@ -60,7 +53,6 @@ final class Project: ObservableObject, Identifiable, Hashable {
         self.metronomeBpm = projectObject.metronomeBpm
         self.name = projectObject.name
         self.image = projectObject.image
-        self.updateDate = projectObject.updateDate
         self.preparedSounds = projectObject.preparedSounds.compactMap { Sound(from: $0) }
         self.tracks = projectObject.tracks.map { Track(from: $0) }
     }
@@ -70,7 +62,6 @@ final class Project: ObservableObject, Identifiable, Hashable {
         metronomeBpm: Int,
         name: String,
         image: String?,
-        updateDate: Date?,
         preparedSounds: [Sound],
         tracks: [Track]
     ) {
@@ -78,7 +69,6 @@ final class Project: ObservableObject, Identifiable, Hashable {
         self.metronomeBpm = metronomeBpm
         self.name = name
         self.image = image
-        self.updateDate = updateDate
         self.preparedSounds = preparedSounds
         self.tracks = tracks
     }

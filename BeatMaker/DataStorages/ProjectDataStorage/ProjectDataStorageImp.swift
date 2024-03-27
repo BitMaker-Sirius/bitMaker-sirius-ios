@@ -61,12 +61,14 @@ final class ProjectDataStorageImp: ProjectDataStorage {
             }
         } else {
             realmManager.writeAsync {
+                let projectObject = ProjectObject(from: data)
+                
                 realmManager.add(
-                    ProjectObject(from: data),
+                    projectObject,
                     update: .all
                 )
                 
-                completion(data.id, true)
+                completion(projectObject.id, true)
             }
         }
     }

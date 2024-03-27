@@ -19,12 +19,16 @@ final class Assembly {
         MainView(viewModel: mainViewModel)
     }
     
-    func projectEditorView(projectId: String?) -> TrackEditorView<some TrackEditorViewModeling> {
-        TrackEditorView(projectId: projectId, viewModel: self.projectEditorViewModel)
+    func projectEditorView(projectId: String?) -> ProjectEditorView<some ProjectEditorViewModel> {
+        ProjectEditorView(projectId: projectId, viewModel: self.projectEditorViewModel)
     }
     
-    func playProjectView(projectId: String) -> PlayProjectView<some PlayProjectViewModeling> {
+    func playProjectView(projectId: String) -> PlayProjectView<some PlayProjectViewModel> {
         PlayProjectView(projectId: projectId, viewModel: self.playProjectViewModel)
+    }
+    
+    func soundsListView(projectId: String) -> SoundsListView<some SoundsListViewModel> {
+        SoundsListView(projectId: projectId, viewModel: soundsListViewModel)
     }
     
     // MARK: ViewModels
@@ -36,12 +40,20 @@ final class Assembly {
         )
     }()
     
-    private lazy var projectEditorViewModel: TrackEditorViewModel = {
-        TrackEditorViewModel()
+    private lazy var projectEditorViewModel: ProjectEditorViewModelImp = {
+        ProjectEditorViewModelImp(projectProvider: projectProvider)
     }()
     
-    private lazy var playProjectViewModel: PlayProjectViewModel = {
-        PlayProjectViewModel(project: Project(metronomeBpm: 120, name: "Test"))
+    private lazy var playProjectViewModel: PlayProjectViewModelImp = {
+        PlayProjectViewModelImp(
+            projectProvider: projectProvider,
+            projectsListProvider: projectsListProvider, 
+            projectPlaybackService: projectPlaybackService
+        )
+    }()
+    
+    private lazy var soundsListViewModel: SoundsListViewModelImp = {
+        SoundsListViewModelImp(projectProvider: projectProvider, soundsListProvider: soundsListProvider)
     }()
     
     // MARK: Providers
@@ -74,7 +86,7 @@ final class Assembly {
     
     // MARK: DataStorages
     
-    private lazy var projectDataStorage: any ProjectDataStorage = {
+    lazy var projectDataStorage: any ProjectDataStorage = {
         ProjectDataStorageImp(realmManager: realmManager)
     }()
     
@@ -93,7 +105,7 @@ final class Assembly {
     // MARK: DataManagers
     
     private lazy var realmManager: Realm? = {
-        try? Realm()
+        try? Realm(configuration: .init(deleteRealmIfMigrationNeeded: true))
     }()
     
     // FileManager
