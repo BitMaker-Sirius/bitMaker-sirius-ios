@@ -11,14 +11,12 @@
 		007AE11B2BB196D900E4367E /* UsedSoundsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */; };
 		007AE11E2BB1ACB300E4367E /* ButtomSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */; };
 		007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11F2BB1AD3700E4367E /* TrackView.swift */; };
-		007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */; };
 		20F6F4DE2BB35B3800D0D4DC /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4DD2BB35B3800D0D4DC /* NetworkManagerErrors.swift */; };
 		20F6F4E22BB36E5200D0D4DC /* ImageDataStorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E12BB36E5200D0D4DC /* ImageDataStorageEntity.swift */; };
 		20F6F4E42BB3855300D0D4DC /* AudioDataStorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */; };
 		20F6F4E92BB38A2400D0D4DC /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E82BB38A2400D0D4DC /* FileManagerProtocol.swift */; };
 		20F6F4EB2BB38A3300D0D4DC /* FileManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4EA2BB38A3300D0D4DC /* FileManagerImp.swift */; };
 		20F6F4ED2BB38D1900D0D4DC /* FileManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4EC2BB38D1900D0D4DC /* FileManagerErrors.swift */; };
-		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
 		5EAF76262BAEC0D900C4B065 /* ProjectsListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76252BAEC0D900C4B065 /* ProjectsListProvider.swift */; };
@@ -101,14 +99,12 @@
 		007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedSoundsListViewModel.swift; sourceTree = "<group>"; };
 		007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSoundView.swift; sourceTree = "<group>"; };
 		007AE11F2BB1AD3700E4367E /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
-		007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorViewModelProtocol.swift; sourceTree = "<group>"; };
 		20F6F4DD2BB35B3800D0D4DC /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		20F6F4E12BB36E5200D0D4DC /* ImageDataStorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataStorageEntity.swift; sourceTree = "<group>"; };
 		20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDataStorageEntity.swift; sourceTree = "<group>"; };
 		20F6F4E82BB38A2400D0D4DC /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
 		20F6F4EA2BB38A3300D0D4DC /* FileManagerImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerImp.swift; sourceTree = "<group>"; };
 		20F6F4EC2BB38D1900D0D4DC /* FileManagerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerErrors.swift; sourceTree = "<group>"; };
-		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
 		5EAF76252BAEC0D900C4B065 /* ProjectsListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListProvider.swift; sourceTree = "<group>"; };
@@ -207,15 +203,6 @@
 				007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */,
 			);
 			path = UsedSoundsList;
-			sourceTree = "<group>";
-		};
-		007AE11C2BB1AC9C00E4367E /* ComponentView */ = {
-			isa = PBXGroup;
-			children = (
-				007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */,
-				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
-			);
-			path = ComponentView;
 			sourceTree = "<group>";
 		};
 		20F6F4E72BB38A1600D0D4DC /* FileManager */ = {
@@ -516,8 +503,6 @@
 		63C562942BB42D090066B453 /* TrackVisualization */ = {
 			isa = PBXGroup;
 			children = (
-				63C562952BB42D2C0066B453 /* TrackVisualizationViewModel.swift */,
-				63C562972BB42D4A0066B453 /* TrackVisualizationView.swift */,
 			);
 			path = TrackVisualization;
 			sourceTree = "<group>";
