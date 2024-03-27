@@ -17,7 +17,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
         self.viewModel = viewModel
     }
     
-    let tactCount: Int = 10
+    let tactCount: Int = 9
     var tickHeight: CGFloat = 20
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1

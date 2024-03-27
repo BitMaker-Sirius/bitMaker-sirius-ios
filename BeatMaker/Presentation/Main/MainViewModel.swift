@@ -96,7 +96,6 @@ final class MainViewModelImp: MainViewModel {
     }
     
     private func stopProcess() {
-        state.projectsList = []
         state.isEditing = false
     }
     
