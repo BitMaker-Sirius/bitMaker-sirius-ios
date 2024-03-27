@@ -74,9 +74,11 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         case .tapBackButton:
             saveData()
             toMainView()
+            state.project = nil
         case .tapVisualizationButton:
             saveData()
             toPlayProjectView()
+            state.project = nil
         case .tapAddSounds:
             saveData()
             toSoundsListView()
