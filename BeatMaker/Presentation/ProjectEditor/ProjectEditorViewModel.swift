@@ -187,30 +187,6 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         state.project = nil
     }
     
-    // MARK: Routing
-    
-    func toMainView() {
-        while router.path.count != 0 {
-            router.path.removeLast()
-        }
-    }
-    
-    func toPlayProjectView() {
-        guard let id = state.project?.id else {
-            return
-        }
-        
-        router.path.append(Route.playProject(projectId: id))
-    }
-    
-    func toSoundsListView() {
-        guard let id = state.project?.id else {
-            return
-        }
-        
-        router.path.append(Route.soundsList(projectId: id))
-    }
-    
     private func countTotalTime() {
         let totalBars = 20
         state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(state.project?.metronomeBpm ?? 120)
@@ -291,5 +267,29 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         if !state.isRecording {
             addNewTrackIfNeeded()
         }
+    }
+    
+    // MARK: Routing
+    
+    func toMainView() {
+        while router.path.count != 0 {
+            router.path.removeLast()
+        }
+    }
+    
+    func toPlayProjectView() {
+        guard let id = state.project?.id else {
+            return
+        }
+        
+        router.path.append(Route.playProject(projectId: id))
+    }
+    
+    func toSoundsListView() {
+        guard let id = state.project?.id else {
+            return
+        }
+        
+        router.path.append(Route.soundsList(projectId: id))
     }
 }
