@@ -52,6 +52,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         Spacer()
                         
                         Text(viewModel.state.project?.name ?? "")
+                            .bold()
                         
                         Spacer()
                         
