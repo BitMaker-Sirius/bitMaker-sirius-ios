@@ -35,7 +35,7 @@ struct ProjectEditorViewState: BaseViewState {
     var chervonDirection: String
     var choosenSoundId: String?
     var soundsArray: [Sound]
-    var usedTreckViewModel = UsedTreckViewModel()
+    var usedTreckViewModel: UsedTreckViewModel
 }
 
 protocol ProjectEditorViewModel: ObservableObject {
@@ -66,7 +66,8 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
             Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
             Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
-        ]
+        ],
+        usedTreckViewModel: UsedTreckViewModel()
     )
     
     let projectProvider: ProjectProvider
@@ -107,8 +108,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         case .tapPlay:
             playTap()
         case .tapChervon:
-            state.isChervonDown.toggle()
-            state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")
+            openTrackListTap()
         case .recordTap:
             recordTap()
         }
@@ -211,6 +211,22 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         } else {
             stopPlayback()
         }
+    }
+    
+    private func openTrackListTap() {
+        if state.isChervonDown {
+            state.project?.tracks = state.usedTreckViewModel.state.usedSoundsArray
+        } else {
+            if state.isRecording {
+                recordTap()
+            }
+            if state.isPlaying {
+                playTap()
+            }
+            state.usedTreckViewModel.updateTracks(state.project?.tracks ?? [])
+        }
+        state.isChervonDown.toggle()
+        state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")
     }
     
     private func startPlayback() {

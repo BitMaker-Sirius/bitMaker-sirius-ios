@@ -13,15 +13,15 @@ enum UsedTreckViewEvent {
 }
 
 struct UsedTreckViewState {
-    var shouldDeleteTreck: Bool
-    var isDelete: String
-    var choosenSoundId: String?
-    var usedSoundsArray: [Track]
+    var shouldDeleteTreck: Bool = false
+    var isDelete: String = "trash.fill"
+    var choosenSoundId: String? = nil
+    var usedSoundsArray: [Track] = []
 }
 
 protocol UsedTreckViewModeling: ObservableObject {
-    var state: UsedTreckViewState {get set}
-    func shouldDeleteTreck(index: String)
+    var state: UsedTreckViewState {get }
+    func shouldDeleteTreck(id: String)
     func updateTracks(_ tracks: [Track])
 }
 
@@ -33,55 +33,61 @@ struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(viewModel.state.usedSoundsArray, id: \.self) { track in
-                    HStack {
-                        TrackView(sound: track.sound ?? Sound(audioFileId: nil, name: "hype"))
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .frame(height: 35)
-                                .foregroundColor(.gray)
-                                .padding(.trailing, 0)
-                            
+            VStack {
+                if viewModel.state.usedSoundsArray.isEmpty {
+                    Text("Записанных звуков нет")
+                } else {
+                    ScrollView {
+                        ForEach(viewModel.state.usedSoundsArray, id: \.self) { track in
                             HStack {
-                                ForEach(0..<8) {_ in
+                                TrackView(sound: track.sound ?? Sound(audioFileId: nil, name: "hype"))
+                                
+                                ZStack {
                                     RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 10, height: 35)
-                                        .foregroundColor(.black)
-                                    Spacer()
+                                        .frame(height: 35)
+                                        .foregroundColor(.gray)
+                                        .padding(.trailing, 0)
+                                    
+                                    HStack {
+                                        ForEach(0..<8) {_ in
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .frame(width: 10, height: 35)
+                                                .foregroundColor(.black)
+                                            Spacer()
+                                        }
+                                    }
                                 }
+                                .padding(.leading, 5)
+                                .padding(.trailing, 5)
+                                
+                                
+                                Button(action: {
+                                    print("trash")
+                                    viewModel.shouldDeleteTreck(id: track.id)
+                                }) {
+                                    HStack {
+                                        Image(systemName: "trash")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(Color.onBackgroundColor)
+                                    }
+                                }
+                                
+                            }
+                            .onTapGesture {
+                                
                             }
                         }
-                        .padding(.leading, 5)
-                        .padding(.trailing, 5)
-                        
-                        
-                        Button(action: {
-                            print("trash")
-                            viewModel.shouldDeleteTreck(index: track.sound?.id ?? "0")
-                        }) {
-                            HStack {
-                                Image(systemName: "trash")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color.onBackgroundColor)
-                            }
-                        }
-                        
-                    }
-                    .onTapGesture {
-                        
                     }
                 }
             }
             .padding()
-            .frame(maxHeight: 300)
+            .frame(idealHeight: 0, maxHeight: 300)
             .background(Color.backgroundColorForScreen)
             .cornerRadius(15)
+            .shadow(radius: 2)
             Spacer()
-            
         }
     }
 }
