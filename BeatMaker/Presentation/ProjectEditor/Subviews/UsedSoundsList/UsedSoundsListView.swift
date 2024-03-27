@@ -22,6 +22,7 @@ struct UsedTreckViewState {
 protocol UsedTreckViewModeling: ObservableObject {
     var state: UsedTreckViewState {get set}
     func shouldDeleteTreck(index: String)
+    func updateTracks(_ tracks: [Track])
 }
 
 struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
