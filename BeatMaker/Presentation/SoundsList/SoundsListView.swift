@@ -28,17 +28,28 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
             switch viewModel.state.indicatorViewState {
             case .display:
                 VStack {
-                    HStack {
-                        Button {
-                            viewModel.handle(.tapBackButton)
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(Color.onBackgroundColor)
+                    ZStack {
+                        HStack {
+                            Button {
+                                viewModel.handle(.tapBackButton)
+                            } label: {
+                                Image(systemName: "chevron.left")
+                                    .font(.title2)
+                                    .foregroundColor(Color.onBackgroundColor)
+                            }
+                            
+                            Spacer()
                         }
                         
                         Spacer()
+
+                        Text("Библиотека звуков")
+                            .bold()
+
+                        Spacer()
                     }
                     .padding(.horizontal, 15)
+
                     
                     ScrollView {
                         
