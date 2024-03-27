@@ -110,11 +110,8 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     
                     ZStack {
                         VStack {
-                            Rectangle()
-                                .frame(width: 330, height: 330)
-                                .foregroundColor(Color.backgroundColor)
-                                .cornerRadius(12)
-                                .padding(.horizontal, 15)
+                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel())
+                                .allowsHitTesting(!isShowingUsedTreckView)
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             
                             HStack {
