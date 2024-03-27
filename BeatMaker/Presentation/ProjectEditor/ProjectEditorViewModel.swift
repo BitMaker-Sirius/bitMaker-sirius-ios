@@ -274,6 +274,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     private func recordTap() {
         state.isRecording.toggle()
+        if !state.isPlaying {
+            playTap()
+        }
         if !state.isRecording {
             addNewTrackIfNeeded()
         }

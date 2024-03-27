@@ -27,7 +27,7 @@ struct PlayProjectViewState: BaseViewState {
     var currentTime: Double = 0
     var totalTime: Double = 100
     var liked: Bool = false
-    var formatTime: String = ""
+    var formatTime: String = "00:00"
     var isList: Bool = false
 }
 
@@ -179,7 +179,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     }
     
     func loadData(projectId: String) {
-        state.indicatorViewState = .loading
+        self.state = .init(indicatorViewState: .loading, projectsList: [])
         
         projectProvider.loadData(by: projectId) { [weak self] result in
             switch result {
@@ -192,6 +192,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
                     case .success(let projectsList):
                         self?.state.projectsList = projectsList
                         self?.state.isList = self?.state.projectsList.count ?? 0 > 1
+                        self?.currentProjectIndex = projectsList.firstIndex(where: { $0.id == projectId }) ?? 0
                         self?.state.indicatorViewState = .display
                     case .failure(_):
                         self?.state.indicatorViewState = .error
