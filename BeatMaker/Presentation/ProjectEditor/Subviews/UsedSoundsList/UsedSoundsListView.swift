@@ -13,7 +13,7 @@ enum UsedTrackViewEvent {
 }
 
 struct UsedTrackViewState {
-    var shouldDeleteTreck: Bool = false
+    var shouldDeleteTrack: Bool = false
     var isDelete: String = "trash.fill"
     var choosenSoundId: String? = nil
     var usedSoundsArray: [Track] = []
@@ -21,7 +21,7 @@ struct UsedTrackViewState {
 
 protocol UsedTrackViewModeling: ObservableObject {
     var state: UsedTrackViewState {get }
-    func shouldDeleteTreck(id: String)
+    func shouldDeleteTrack(id: String)
     func updateTracks(_ tracks: [Track])
 }
 
@@ -63,7 +63,7 @@ struct UsedTrackView<ViewModel: UsedTrackViewModeling>: View {
                                 
                                 Button(action: {
                                     print("trash")
-                                    viewModel.shouldDeleteTreck(id: track.id)
+                                    viewModel.shouldDeleteTrack(id: track.id)
                                 }) {
                                     HStack {
                                         Image(systemName: "trash")

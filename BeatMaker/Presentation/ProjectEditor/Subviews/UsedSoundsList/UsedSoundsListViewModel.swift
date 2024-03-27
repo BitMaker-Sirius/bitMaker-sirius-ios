@@ -14,7 +14,7 @@ final class UsedTrackViewModel: UsedTrackViewModeling {
     @Published
     var state = UsedTrackViewState()
     
-    func shouldDeleteTreck(id: String) {
+    func shouldDeleteTrack(id: String) {
         guard let index = state.usedSoundsArray.firstIndex(where: {$0.id == id}) else {
             return
         }

@@ -25,7 +25,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     @State private var projectName: String = ""
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTrackView = false
-    @State private var isShowingAllTreckListView = false
+    @State private var isShowingAllTrackListView = false
     @State private var isBlurEnabled = false
     
     let columns: [GridItem] = [
@@ -198,7 +198,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         .blur(radius: isShowingUsedTrackView ? 3 : 0)
                         
                         if isShowingUsedTrackView {
-                            UsedTrackView(viewModel: viewModel.state.usedTreckViewModel)
+                            UsedTrackView(viewModel: viewModel.state.usedTrackViewModel)
                                 .onTapGesture {
                                     
                                 }
