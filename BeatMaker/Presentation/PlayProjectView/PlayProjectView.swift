@@ -73,7 +73,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                     .resizable().frame(width: 20, height: 20)
                             }
                         }.padding(30)
-                        
                         HStack(alignment: .center) {
                             if viewModel.state.isList {
                                 Button {

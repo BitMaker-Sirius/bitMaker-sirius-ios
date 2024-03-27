@@ -90,17 +90,20 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         case .onLoadData(projectId: let projectId):
             loadData(projectId: projectId)
         case .tapBackButton:
-            saveData()
-            toMainView()
             stopProcess()
+            saveData() { [weak self] _ in
+                self?.toMainView()
+            }
         case .tapVisualizationButton:
-            saveData()
-            toPlayProjectView()
             stopProcess()
+            saveData() { [weak self] projectId in
+                self?.toPlayProjectView(projectId: projectId)
+            }
         case .tapAddSounds:
-            saveData()
-            toSoundsListView()
             stopProcess()
+            saveData() { [weak self] projectId in
+                self?.toSoundsListView(projectId: projectId)
+            }
         case .tapPlay:
             playTap()
         case .tapChervon:
@@ -143,9 +146,10 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 240, name: UUID().uuidString)) { [weak self] project, isCompleted in
+            projectProvider.create(project: .init(metronomeBpm: 100, name: UUID().uuidString)) { [weak self] project, isCompleted in
                 if isCompleted {
                     self?.state.project = project
+                    self?.countTotalTime()
                     self?.state.indicatorViewState = .display
                 } else {
                     self?.state.indicatorViewState = .error
@@ -158,6 +162,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             switch result {
             case .success(let project):
                 self?.state.project = project
+                self?.countTotalTime()
                 self?.state.indicatorViewState = .display
             case .failure(_):
                 self?.state.indicatorViewState = .error
@@ -165,13 +170,20 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
     }
     
-    func saveData() {
+    func saveData(transition: @escaping ((_ projectId: String) -> Void)) {
         guard let project = state.project else {
             return
         }
         
-        projectProvider.saveData(project: project) { _ in
-            // Обработать ошибку
+        state.indicatorViewState = .loading
+        
+        projectProvider.saveData(project: project) { [weak self] _ in
+            let projectId = self?.state.project?.id
+            self?.state.project = nil
+            
+            if let projectId {
+                transition(projectId)
+            }
         }
     }
     
@@ -183,8 +195,6 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         if state.isRecording {
             recordTap()
         }
-        
-        state.project = nil
     }
     
     private func countTotalTime() {
@@ -277,19 +287,11 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
     }
     
-    func toPlayProjectView() {
-        guard let id = state.project?.id else {
-            return
-        }
-        
-        router.path.append(Route.playProject(projectId: id))
+    func toPlayProjectView(projectId: String) {
+        router.path.append(Route.playProject(projectId: projectId))
     }
     
-    func toSoundsListView() {
-        guard let id = state.project?.id else {
-            return
-        }
-        
-        router.path.append(Route.soundsList(projectId: id))
+    func toSoundsListView(projectId: String) {
+        router.path.append(Route.soundsList(projectId: projectId))
     }
 }

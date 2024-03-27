@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TrackPoint {
+struct TrackPoint: Hashable {
     let startTime: TimeInterval
     let volume: Double?
     let pitch: Double?
