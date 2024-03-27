@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Constants for view
-enum ConstantsForView {
+fileprivate enum ConstantsForView {
     static let ImageSize: CGFloat = 40
     static let defaultEmoji = "\u{1f600}"
     static let defaultName = "sound"
@@ -23,51 +23,73 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
         self.viewModel = viewModel
     }
     
-    // useless propertie, just for mock
-    @State var username: String = ""
-    
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    viewModel.handle(.tapBackButton)
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(Color.onBackgroundColor)
-                }
-                
-                Spacer()
-            }
-            .padding(.horizontal, 15)
-            
-            ScrollView {
-                
-                addNewSoundsButton
-                
-                LazyVStack {
-                    ForEach(viewModel.state.soundsList) { sound in
-                        soundCell(withSound: sound)
-                            .contextMenu {
-//                                Group {
-                                    Button("Поменять эмодзи", systemImage: "music.note") {
-                                        viewModel.handle(.editSoundEmoji)
+        ZStack {
+            switch viewModel.state.indicatorViewState {
+            case .display:
+                VStack {
+                    HStack {
+                        Button {
+                            viewModel.handle(.tapBackButton)
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(Color.onBackgroundColor)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 15)
+                    
+                    ScrollView {
+                        
+                        addNewSoundsButton
+                        
+                        LazyVStack {
+                            ForEach(viewModel.state.soundsList) { sound in
+                                soundCell(withSound: sound)
+                                    .contextMenu {
+                                        Button("Поменять эмодзи", systemImage: "music.note") {
+                                            viewModel.handle(.editSoundEmoji)
+                                        }
+                                        
+                                        Button("Поменять название", systemImage: "pencil") {
+                                            viewModel.handle(.editSoundName)
+                                        }
+                                        
+                                        Button("Удалить", systemImage: "trash", role: .destructive) {
+                                            viewModel.handle(.deleteSound(sound: sound))
+                                        }
                                     }
-                                    
-                                    Button("Поменять название", systemImage: "pencil") {
-                                        viewModel.handle(.editSoundName)
-                                    }
-                                    
-                                    Button("Удалить", systemImage: "trash", role: .destructive) {
-                                        viewModel.handle(.deleteSound(sound: sound))
-                                    }
-//                                }
                             }
+                        }
+                        .padding([.leading, .trailing])
                     }
                 }
-                .padding([.leading, .trailing])
+            case .loading:
+                ProgressView()
+            case .error:
+                HStack {
+                    Button {
+                        viewModel.handle(.tapBackButton)
+                    } label: {
+                        Image(systemName: "arrowshape.backward.circle")
+                            .font(.system(size: 40))
+                    }
+                    
+                    Button {
+                        viewModel.handle(.onLoadData(projectId: projectId))
+                    } label: {
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .font(.system(size: 40))
+                    }
+                }
             }
+                
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear {
+            viewModel.handle(.onLoadData(projectId: projectId))
+        }
     }
     
     @ViewBuilder

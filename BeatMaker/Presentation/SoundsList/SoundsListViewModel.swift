@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 enum SoundsListViewEvent {
+    case onLoadData(projectId: String)
+    
     case tapBackButton
     case tapAddToTrackButton(sound: Sound)
     case tapAddNewSoundButton
@@ -52,7 +54,10 @@ class SoundsListViewModelImp: SoundsListViewModel {
     
     func handle(_ event: SoundsListViewEvent) {
         switch event {
+        case .onLoadData(let projectId):
+            loadData(projectId: projectId)
         case .tapBackButton:
+            saveData()
             toProjectEditorView()
         case .deleteSound(let sound):
             deleteSound(sound: sound)
@@ -136,6 +141,16 @@ class SoundsListViewModelImp: SoundsListViewModel {
             case .failure(_):
                 self?.state.indicatorViewState = .error
             }
+        }
+    }
+    
+    private func saveData() {
+        guard let project = state.project else {
+            return
+        }
+        
+        projectProvider.saveData(project: project) { isCompleted in
+            // Обработать
         }
     }
     
