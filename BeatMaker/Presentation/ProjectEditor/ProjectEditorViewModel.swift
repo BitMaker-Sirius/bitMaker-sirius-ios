@@ -115,6 +115,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func setSelectedSound(at id: String) {
+        if state.isRecording {
+            addNewTrackIfNeeded()
+        }
         state.choosenSoundId = id
         state.selectedSound = state.soundsArray.first { $0.id == id }
     }
