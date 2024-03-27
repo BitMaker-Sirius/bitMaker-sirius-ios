@@ -57,8 +57,9 @@ class SoundsListViewModelImp: SoundsListViewModel {
         case .onLoadData(let projectId):
             loadData(projectId: projectId)
         case .tapBackButton:
-            saveData()
-            toProjectEditorView()
+            saveData() { [weak self] in
+                self?.toProjectEditorView()
+            }
         case .deleteSound(let sound):
             deleteSound(sound: sound)
         case .tapAddToTrackButton(let sound):
@@ -124,33 +125,38 @@ class SoundsListViewModelImp: SoundsListViewModel {
         state.indicatorViewState = .loading
         
         projectProvider.loadData(by: projectId) { [weak self] result in
+            guard let self else {
+                return
+            }
+            
             switch result {
             case .success(let project):
-                self?.state.project = project
-                self?.state.indicatorViewState = .display
+                state.project = project
+                
+                soundsListProvider.loadData { result in
+                    switch result {
+                    case .success(let soundsList):
+                        self.state.soundsList = soundsList
+                        self.state.indicatorViewState = .display
+                    case .failure(_):
+                        self.state.indicatorViewState = .error
+                    }
+                }
             case .failure(_):
-                self?.state.indicatorViewState = .error
-            }
-        }
-        
-        soundsListProvider.loadData { [weak self] result in
-            switch result {
-            case .success(let soundsList):
-                self?.state.soundsList = soundsList
-                self?.state.indicatorViewState = .display
-            case .failure(_):
-                self?.state.indicatorViewState = .error
+                state.indicatorViewState = .error
             }
         }
     }
     
-    private func saveData() {
+    private func saveData(transition: @escaping (() -> Void)) {
         guard let project = state.project else {
             return
         }
         
+        state.indicatorViewState = .loading
+        
         projectProvider.saveData(project: project) { isCompleted in
-            // Обработать
+            transition()
         }
     }
     

@@ -146,7 +146,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 100, name: UUID().uuidString)) { [weak self] project, isCompleted in
+            projectProvider.create(project: .init(metronomeBpm: 130, name: UUID().uuidString)) { [weak self] project, isCompleted in
                 if isCompleted {
                     self?.state.project = project
                     self?.countTotalTime()
