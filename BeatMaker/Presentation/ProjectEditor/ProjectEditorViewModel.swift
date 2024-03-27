@@ -180,7 +180,10 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         if state.isPlaying {
             playTap()
         }
-        router.path.removeLast()
+        
+        while router.path.count != 0 {
+            router.path.removeLast()
+        }
     }
     
     func toPlayProjectView() {

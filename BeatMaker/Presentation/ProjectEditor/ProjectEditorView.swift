@@ -158,12 +158,11 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 Button(action: {
                                     viewModel.handle(.recordTap)
                                 }) {
-                                    Image(systemName: "stop.circle")
+                                    Image(systemName: "record.circle")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 40, height: 40)
-                                        .foregroundColor(Color.onBackgroundColor)
-                                    
+                                        .foregroundColor(viewModel.state.isRecording ? .red : Color.onBackgroundColor)                                    
                                 }
                                 Spacer()
                                 

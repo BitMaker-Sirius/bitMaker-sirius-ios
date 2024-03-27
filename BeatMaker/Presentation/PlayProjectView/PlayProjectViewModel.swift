@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 enum PlayProjectViewEvent {
+    case onLoadData(projectId: String)
     case playTap
     case nextTap
     case prevTap
@@ -19,7 +20,8 @@ enum PlayProjectViewEvent {
 
 struct PlayProjectViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
-    var project: Project
+    var project: Project?
+    var projectsList: [Project]
     
     var isPlaying: Bool = false
     var currentTime: Double = 0
@@ -37,7 +39,11 @@ protocol PlayProjectViewModel: ObservableObject {
 
 class PlayProjectViewModelImp: PlayProjectViewModel {
     @Environment(\.router) var router: Router
-    @Published var state: PlayProjectViewState = .init(indicatorViewState: .display, project: .init(metronomeBpm: 0, name: "name"))
+    @Published var state: PlayProjectViewState = .init(
+        indicatorViewState: .loading,
+        project: .init(metronomeBpm: 0, name: "name"),
+        projectsList: []
+    )
     
     let projectProvider: ProjectProvider
     let projectsListProvider: ProjectsListProvider
@@ -55,6 +61,8 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     
     func handle(_ event: PlayProjectViewEvent) {
         switch event {
+        case .onLoadData(let projectId):
+            loadData(projectId: projectId)
         case .playTap:
             playTap()
         case .nextTap:
@@ -62,17 +70,18 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         case .prevTap:
             prevTap()
         case .editTap:
-            editTap()
+            stopPlayback()
+            toProjectEditor()
         case .likeTap:
             likeTap()
         case .backTap:
+            stopPlayback()
             toMainView()
         }
     }
     
     // MARK: Private fields
     private var playbackTimer: Timer? = nil
-    private var projectList: [Project] = []
     private var currentProjectIndex: Int = 0
     
     // MARK: Settings fields
@@ -80,8 +89,12 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     
     // MARK: Private methods
     private func countTotalTime() {
+        guard let metronomeBpm = state.project?.metronomeBpm else {
+            return
+        }
+        
         let totalBars = 20
-        state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(state.project.metronomeBpm)
+        state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(metronomeBpm)
     }
     
     private func playTap() {
@@ -97,15 +110,15 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     private func nextTap() {
         guard state.isList else { return }
         stopPlayback()
-        currentProjectIndex = (currentProjectIndex + 1) % projectList.count
+        currentProjectIndex = (currentProjectIndex + 1) % state.projectsList.count
         updateCurrentProject()
     }
     
     private func prevTap() {
-        guard state.isList else { return }
+        guard state.isList, let project = state.project else { return }
         stopPlayback()
-        projectPlaybackService.stop(state.project)
-        currentProjectIndex = (currentProjectIndex - 1 + projectList.count) % projectList.count
+        projectPlaybackService.stop(project)
+        currentProjectIndex = (currentProjectIndex - 1 + state.projectsList.count) % state.projectsList.count
         updateCurrentProject()
     }
     
@@ -114,7 +127,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     }
     
     private func updateCurrentProject() {
-        let newProject = projectList[currentProjectIndex]
+        let newProject = state.projectsList[currentProjectIndex]
         state.project = newProject
         state.currentTime = 0
         state.formatTime = formatTime(0)
@@ -129,25 +142,29 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     }
     
     private func startPlayback() {
-        projectPlaybackService.play(state.project)
+        guard let project = state.project else { return }
+        projectPlaybackService.play(project)
         playbackTimer?.invalidate()
         playbackTimer = Timer.scheduledTimer(timeInterval: timerPlus, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
     }
     
     @objc private func updateCurrentTime() {
+        guard let project = state.project else { return }
+        
         if state.currentTime < state.totalTime {
             state.currentTime += timerPlus
             state.formatTime = formatTime(state.currentTime)
         } else {
-            projectPlaybackService.stop(state.project)
-            projectPlaybackService.play(state.project)
+            projectPlaybackService.stop(project)
+            projectPlaybackService.play(project)
             state.currentTime = 0
             state.formatTime = formatTime(state.currentTime)
         }
     }
     
     private func stopPlayback() {
-        projectPlaybackService.stop(state.project)
+        guard let project = state.project else { return }
+        projectPlaybackService.stop(project)
         playbackTimer?.invalidate()
         playbackTimer = nil
         state.currentTime = 0
@@ -161,11 +178,45 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
+    func loadData(projectId: String) {
+        state.indicatorViewState = .loading
+        
+        projectProvider.loadData(by: projectId) { [weak self] result in
+            switch result {
+            case .success(let project):
+                self?.state.project = project
+                self?.state.indicatorViewState = .display
+            case .failure(_):
+                self?.state.indicatorViewState = .error
+            }
+        }
+        
+        projectsListProvider.loadData { [weak self] result in
+            switch result {
+            case .success(let projectsList):
+                self?.state.projectsList = projectsList
+                self?.state.indicatorViewState = .display
+            case .failure(_):
+                self?.state.indicatorViewState = .error
+            }
+        }
+        
+        state.isList = state.projectsList.count > 1
+    }
+    
     // MARK: Routing
     
     private func toMainView() {
         while router.path.count != 0 {
           router.path.removeLast()
         }
+    }
+    
+    private func toProjectEditor() {
+        guard let projectId = state.project?.id else {
+            return
+        }
+        
+        router.path.append(Route.projectEditor(projectId: projectId))
     }
 }
