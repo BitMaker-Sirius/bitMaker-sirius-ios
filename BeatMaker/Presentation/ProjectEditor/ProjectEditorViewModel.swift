@@ -14,20 +14,28 @@ enum ProjectEditorViewEvent {
     case tapBackButton
     case tapVisualizationButton
     case tapAddSounds
-    case tapButton
+    case tapPlay
     case tapChervon
+    case recordTap
 }
 
 struct ProjectEditorViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
     
-    var shouldShowPause: Bool
+    var currentTime: Double = 0
+    var totalTime: Double = 100
+    var isPlaying: Bool
+    var isRecording: Bool = false
+    var selectedSound: Sound?
+    var trackPointList: [TrackPoint] = []
+    var trackList: [Track] = []
     var pauseState: String
     var isChervonDown: Bool
     var chervonDirection: String
     var choosenSoundId: String?
     var soundsArray: [Sound]
+    var usedTreckViewModel = UsedTreckViewModel()
 }
 
 protocol ProjectEditorViewModel: ObservableObject {
@@ -38,6 +46,8 @@ protocol ProjectEditorViewModel: ObservableObject {
     func setSelectedSound(at index: String)
     
     func areUuidsSimilar(id1: String, id2: String) -> Bool
+    
+    func handleCoordinateChange(_ point: CGPoint)
 }
 
 final class ProjectEditorViewModelImp: ProjectEditorViewModel {
@@ -45,26 +55,34 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     @Published var state = ProjectEditorViewState(
         indicatorViewState: .loading,
         project: nil,
-        shouldShowPause: false,
+        isPlaying: false,
         pauseState: "play.fill",
         isChervonDown: false,
         chervonDirection: "chevron.down",
         choosenSoundId: nil,
         soundsArray: [
-            Sound(audioFileId: nil, name: "baraban", emoji: "\u{1f600}"),
-            Sound(audioFileId: nil, name: "baraban1", emoji: "\u{1f601}"),
-            Sound(audioFileId: nil, name: "baraban2", emoji: "\u{1f602}"),
-            Sound(audioFileId: nil, name: "baraban3", emoji: "\u{1f603}"),
-            Sound(audioFileId: nil, name: "baraban4", emoji: "\u{1f614}"),
-            Sound(audioFileId: nil, name: "baraban5", emoji: "\u{1f605}"),
-            Sound(audioFileId: nil, name: "baraban6", emoji: "\u{1f606}")
+            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
+            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
+            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
+            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
+            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
         ]
     )
     
     let projectProvider: ProjectProvider
     
+    private let timerPlus = 0.2
+    private var playbackTimer: Timer? = nil
+    let soundPlaybackService: SoundPlaybackService
+    let trackPlaybackService: any TrackPlaybackService
+    let projectPlaybackService: any ProjectPlaybackService
+
     init(projectProvider: ProjectProvider) {
+        soundPlaybackService = SoundPlaybackServiceImp()
+        trackPlaybackService = TrackPlaybackServiceImp(soundPlaybackService: soundPlaybackService)
+        projectPlaybackService = ProjectPlaybackServiceImp(trackPlaybackService: trackPlaybackService)
         self.projectProvider = projectProvider
+        countTotalTime()
     }
     
     func handle(_ event: ProjectEditorViewEvent) {
@@ -82,17 +100,19 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         case .tapAddSounds:
             saveData()
             toSoundsListView()
-        case .tapButton:
-            state.shouldShowPause.toggle()
-            state.pauseState = (state.shouldShowPause ? "pause.fill": "play.fill")
+        case .tapPlay:
+            playTap()
         case .tapChervon:
             state.isChervonDown.toggle()
             state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")
+        case .recordTap:
+            recordTap()
         }
     }
     
     func setSelectedSound(at id: String) {
         state.choosenSoundId = id
+        state.selectedSound = state.soundsArray.first { $0.id == id }
     }
     
     func areUuidsSimilar(id1: String, id2: String) -> Bool {
@@ -122,7 +142,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 100, name: UUID().uuidString)) { [weak self] project, isCompleted in
+            projectProvider.create(project: .init(metronomeBpm: 240, name: UUID().uuidString)) { [weak self] project, isCompleted in
                 if isCompleted {
                     self?.state.project = project
                     self?.state.indicatorViewState = .display
@@ -157,10 +177,16 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     // MARK: Routing
     
     func toMainView() {
+        if state.isPlaying {
+            playTap()
+        }
         router.path.removeLast()
     }
     
     func toPlayProjectView() {
+        if state.isPlaying {
+            playTap()
+        }        
         guard let id = state.project?.id else {
             return
         }
@@ -169,10 +195,95 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func toSoundsListView() {
+        if state.isPlaying {
+            playTap()
+        }
         guard let id = state.project?.id else {
             return
         }
         
         router.path.append(Route.soundsList(projectId: id))
+    }
+    
+    private func countTotalTime() {
+        let totalBars = 20
+        state.totalTime = TimeInterval(totalBars) * 60 / TimeInterval(state.project?.metronomeBpm ?? 120)
+    }
+    
+    private func playTap() {
+        state.isPlaying.toggle()
+        state.pauseState = (state.isPlaying ? "pause.fill": "play.fill")
+        
+        if state.isPlaying {
+            startPlayback()
+        } else {
+            stopPlayback()
+        }
+    }
+    
+    private func startPlayback() {
+        guard let project = state.project else {
+            return
+        }
+        projectPlaybackService.play(project)
+        playbackTimer?.invalidate()
+        playbackTimer = Timer.scheduledTimer(timeInterval: timerPlus, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateCurrentTime() {
+        guard let project = state.project else {
+            return
+        }
+        if state.currentTime < state.totalTime {
+            state.currentTime += timerPlus
+        } else {
+            projectPlaybackService.stop(project)
+            projectPlaybackService.play(project)
+            state.currentTime = 0
+        }
+    }
+    
+    private func addNewTrackIfNeeded() {
+        if !state.trackPointList.isEmpty {
+            let track = Track(sound: state.selectedSound, points: state.trackPointList)
+            state.project?.tracks.append(track)
+        }
+        state.trackPointList = []
+    }
+    
+    private func stopPlayback() {
+        guard let project = state.project else {
+            return
+        }
+        projectPlaybackService.stop(project)
+        playbackTimer?.invalidate()
+        playbackTimer = nil
+        state.currentTime = 0
+    }
+    
+    func handleCoordinateChange(_ point: CGPoint) {
+        guard let sound = state.selectedSound, let soundUrl = Bundle.main.url(forResource: sound.audioFileId, withExtension: "mp3") else {
+            return
+        }
+        let volume = Double(point.y)
+        let pitch = Double(point.x)
+        soundPlaybackService.playSound(url: soundUrl, atTime: 0, volume: Float(volume), pitch: Float(pitch))
+        
+        if state.isRecording {
+            state.trackPointList.append(.init(startTime: state.currentTime, volume: volume, pitch: pitch))
+        }
+        
+        print(state.currentTime, point.y, point.x)
+    }
+    
+    func updateTracks() {
+        state.usedTreckViewModel.updateTracks([])
+    }
+    
+    private func recordTap() {
+        state.isRecording.toggle()
+        if !state.isRecording {
+            addNewTrackIfNeeded()
+        }
     }
 }

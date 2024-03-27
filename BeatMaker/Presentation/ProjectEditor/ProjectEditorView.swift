@@ -22,7 +22,6 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
-    @State private var progressValue: Float = 0.5
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTreckView = false
     @State private var isShowingAllTreckListView = false
@@ -63,8 +62,8 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     }
                     .padding(.horizontal, 15)
                     
-                    ProgressView(value: progressValue)
-                        .progressViewStyle(LinearProgressViewStyle(tint: Color.onBackgroundColor))
+                    ProgressView(value: viewModel.state.currentTime, total: viewModel.state.totalTime)
+                        .progressViewStyle(LinearProgressViewStyle(tint: viewModel.state.isRecording ? .red : Color.onBackgroundColor))
                         .padding(.horizontal, 40)
                         .padding(.top, 15)
                     
@@ -110,7 +109,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     
                     ZStack {
                         VStack {
-                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel())
+                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(delegate: viewModel))
                                 .allowsHitTesting(!isShowingUsedTreckView)
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             
@@ -157,6 +156,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             Spacer()
                             HStack {
                                 Button(action: {
+                                    viewModel.handle(.recordTap)
                                 }) {
                                     Image(systemName: "stop.circle")
                                         .resizable()
@@ -168,7 +168,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 Spacer()
                                 
                                 Button(action: {
-                                    viewModel.handle(.tapButton)
+                                    viewModel.handle(.tapPlay)
                                 }) {
                                     Image(systemName: viewModel.state.pauseState)
                                         .resizable()
@@ -197,7 +197,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         .animation(.default)
                         
                         if isShowingUsedTreckView {
-                            UsedTreckView(viewModel: UsedTreckViewModel())
+                            UsedTreckView(viewModel: viewModel.state.usedTreckViewModel)
                                 .onTapGesture {
                                     
                                 }
