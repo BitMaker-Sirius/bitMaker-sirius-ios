@@ -53,15 +53,15 @@ final class MainViewModelImp: MainViewModel {
         case .onLoadData:
             loadData()
         case .tapCreateProjectButton:
-            stopProcess()
             toProjectEditorView(with: nil)
-        case .tapRightProjectButton(let projectId):
             stopProcess()
+        case .tapRightProjectButton(let projectId):
             if state.isEditing {
                 toProjectEditorView(with: projectId)
             } else {
                 toPlayProjectView(with: projectId)
             }
+            stopProcess()
         case .tapEditing:
             state.isEditing.toggle()
         case .tapDeleteButton(let projectId):
