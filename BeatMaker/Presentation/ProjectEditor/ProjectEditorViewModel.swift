@@ -182,7 +182,6 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         
         projectProvider.saveData(project: project) { [weak self] _ in
             let projectId = self?.state.project?.id
-            self?.state.project = nil
             
             if let projectId {
                 transition(projectId)
@@ -311,12 +310,16 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     // MARK: Routing
     
     func toMainView() {
+        state.project = nil
+        
         while router.path.count != 0 {
             router.path.removeLast()
         }
     }
     
     func toPlayProjectView(projectId: String) {
+        state.project = nil
+        
         router.path.append(Route.playProject(projectId: projectId))
     }
     
