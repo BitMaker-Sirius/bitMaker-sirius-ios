@@ -22,8 +22,9 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
+    @State private var projectName: String = ""
     @State private var isVisualize: Bool = false
-    @State private var isShowingUsedTreckView = false
+    @State private var isShowingUsedTrackView = false
     @State private var isShowingAllTreckListView = false
     @State private var isBlurEnabled = false
     
@@ -35,7 +36,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     ]
     
     var body: some View {
-        ZStack {
+        GeometryReader { _ in
             switch viewModel.state.indicatorViewState {
             case .display:
                 VStack {
@@ -44,6 +45,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             viewModel.handle(.tapBackButton)
                         } label: {
                             Image(systemName: "chevron.left")
+                                .font(.title2)
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                         
@@ -56,7 +58,8 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         Button {
                             viewModel.handle(.tapVisualizationButton)
                         } label: {
-                            Text("Визуализация")
+                            Image(systemName: "waveform")
+                                .font(.title2)
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                     }
@@ -70,7 +73,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     VStack {
                         HStack {
                             Button(action: {
-                                isShowingUsedTreckView.toggle()
+                                isShowingUsedTrackView.toggle()
                                 isBlurEnabled.toggle()
                                 viewModel.handle(.tapChervon)
                             }) {
@@ -110,7 +113,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     ZStack {
                         VStack {
                             SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(delegate: viewModel))
-                                .allowsHitTesting(!isShowingUsedTreckView)
+                                .allowsHitTesting(!isShowingUsedTrackView)
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             
                             HStack {
@@ -125,7 +128,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                         .fontWeight(.thin)
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
-                                .allowsHitTesting(!isShowingUsedTreckView)
+                                .allowsHitTesting(!isShowingUsedTrackView)
                             }
                             .padding(.horizontal, 15)
                             .padding(.top, 15)
@@ -139,7 +142,6 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     .padding(.horizontal, 15)
                                     .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                                 
-                                
                                 LazyVGrid(columns: columns) {
                                     ForEach(viewModel.state.soundsArray, id: \.self) {sound in
                                         ButtomSoundView(sound: sound) {
@@ -149,7 +151,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     }
                                     .padding(.top, 5)
                                 }
-                                .allowsHitTesting(!isShowingUsedTreckView)
+                                .allowsHitTesting(!isShowingUsedTrackView)
                                 .padding(.horizontal, 25)
                             }
                             
@@ -162,7 +164,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 40, height: 40)
-                                        .foregroundColor(viewModel.state.isRecording ? .red : Color.onBackgroundColor)                                    
+                                        .foregroundColor(viewModel.state.isRecording ? .red : Color.onBackgroundColor)
                                 }
                                 Spacer()
                                 
@@ -188,28 +190,27 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
                             }
-                            .allowsHitTesting(!isShowingUsedTreckView)
+                            .allowsHitTesting(!isShowingUsedTrackView)
                             .padding(.horizontal, 70)
                             .padding(.bottom, 15)
                         }
-                        .blur(radius: isShowingUsedTreckView ? 3 : 0)
-                        .animation(.default)
+                        .blur(radius: isShowingUsedTrackView ? 3 : 0)
                         
-                        if isShowingUsedTreckView {
-                            UsedTreckView(viewModel: viewModel.state.usedTreckViewModel)
+                        if isShowingUsedTrackView {
+                            UsedTrackView(viewModel: viewModel.state.usedTreckViewModel)
                                 .onTapGesture {
                                     
                                 }
-                                .padding(.horizontal, 50)
+//                                .padding(.horizontal, 50)
                         }
                     }
                     .background(Color.backgroundColorForScreen)
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        if self.isShowingUsedTreckView == true {
+                        if self.isShowingUsedTrackView == true {
                             viewModel.handle(.tapChervon)
                         }
-                        self.isShowingUsedTreckView = false
+                        self.isShowingUsedTrackView = false
                         
                     }
                 }
@@ -233,6 +234,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                 }
             }
         }
+        .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             viewModel.handle(.onLoadData(projectId: projectId))

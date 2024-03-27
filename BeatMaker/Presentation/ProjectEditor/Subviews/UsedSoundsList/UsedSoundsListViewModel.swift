@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 
-final class UsedTreckViewModel: UsedTreckViewModeling {
+final class UsedTrackViewModel: UsedTrackViewModeling {
     
     @Published
-    var state = UsedTreckViewState()
+    var state = UsedTrackViewState()
     
     func shouldDeleteTreck(id: String) {
         guard let index = state.usedSoundsArray.firstIndex(where: {$0.id == id}) else {

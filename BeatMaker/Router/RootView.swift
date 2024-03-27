@@ -16,6 +16,7 @@ struct RootView: View {
                 .navigationDestination(for: Route.self) { route in
                     router.viewForRoute(route)
                 }
+                .transition(.identity)
         }
     }
 }

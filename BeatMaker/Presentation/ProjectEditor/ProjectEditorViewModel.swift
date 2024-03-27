@@ -35,7 +35,7 @@ struct ProjectEditorViewState: BaseViewState {
     var chervonDirection: String
     var choosenSoundId: String?
     var soundsArray: [Sound]
-    var usedTreckViewModel: UsedTreckViewModel
+    var usedTreckViewModel: UsedTrackViewModel
 }
 
 protocol ProjectEditorViewModel: ObservableObject {
@@ -67,7 +67,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
             Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
         ],
-        usedTreckViewModel: UsedTreckViewModel()
+        usedTreckViewModel: UsedTrackViewModel()
     )
     
     let projectProvider: ProjectProvider
@@ -198,6 +198,13 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         if state.isRecording {
             recordTap()
         }
+        
+        state.isChervonDown = false
+        state.chervonDirection = "chevron.down"
+        
+        soundPlaybackService.stopAllSounds()
+        
+        state.choosenSoundId = nil
     }
     
     private func countTotalTime() {

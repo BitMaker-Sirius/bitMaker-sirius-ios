@@ -30,28 +30,30 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                     Color.backgroundColor.edgesIgnoringSafeArea(.all)
                     
                     VStack(alignment: .center, spacing: 0) {
-                        HStack(alignment: .center) {
-                            Button(action: {
+                        HStack {
+                            Button {
                                 viewModel.handle(.backTap)
-                            }) {
-                                Image.backArrow.resizable().frame(width: 20, height: 20)
-                                    .offset(x: 2)
-                                    .padding(8).background(Color.backgroundColor)
-                                    .cornerRadius(20)
-                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                            } label: {
+                                Image(systemName: "chevron.left")
+                                    .font(.title2)
+                                    .foregroundColor(Color.onBackgroundColor)
                             }
+                            
+                            Spacer()
+                            
+                            Text(viewModel.state.project?.name ?? "")
                             
                             Spacer()
                             
                             Button {
                                 viewModel.handle(.editTap)
                             } label: {
-                                Image.options.resizable().frame(width: 16, height: 16)
-                                    .padding(12).background(Color.backgroundColor)
-                                    .cornerRadius(20)
-                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                                Image(systemName: "pencil")
+                                    .font(.title2)
+                                    .foregroundColor(Color.onBackgroundColor)
                             }
-                        }.padding(.horizontal, 24).padding(.top, 12)
+                        }
+                        .padding(.horizontal, 15)
                         
                         Spacer()
                         

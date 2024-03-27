@@ -8,24 +8,24 @@
 import Foundation
 import SwiftUI
 
-enum UsedTreckViewEvent {
+enum UsedTrackViewEvent {
     case tapButton
 }
 
-struct UsedTreckViewState {
+struct UsedTrackViewState {
     var shouldDeleteTreck: Bool = false
     var isDelete: String = "trash.fill"
     var choosenSoundId: String? = nil
     var usedSoundsArray: [Track] = []
 }
 
-protocol UsedTreckViewModeling: ObservableObject {
-    var state: UsedTreckViewState {get }
+protocol UsedTrackViewModeling: ObservableObject {
+    var state: UsedTrackViewState {get }
     func shouldDeleteTreck(id: String)
     func updateTracks(_ tracks: [Track])
 }
 
-struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
+struct UsedTrackView<ViewModel: UsedTrackViewModeling>: View {
     
     @ObservedObject
     var viewModel: ViewModel
@@ -83,7 +83,7 @@ struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
                 }
             }
             .padding()
-            .frame(idealHeight: 0, maxHeight: 300)
+            .frame(minHeight: 10)
             .background(Color.backgroundColorForScreen)
             .cornerRadius(15)
             .shadow(radius: 2)
@@ -92,8 +92,8 @@ struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
     }
 }
 
-struct UsedTreckView_Previews: PreviewProvider {
+struct UsedTrackView_Previews: PreviewProvider {
     static var previews: some View {
-        UsedTreckView(viewModel: UsedTreckViewModel())
+        UsedTrackView(viewModel: UsedTrackViewModel())
     }
 }

@@ -33,8 +33,13 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                             viewModel.handle(.tapBackButton)
                         } label: {
                             Image(systemName: "chevron.left")
+                                .font(.title2)
                                 .foregroundColor(Color.onBackgroundColor)
                         }
+                        
+                        Spacer()
+                        
+                        Text(viewModel.state.project?.name ?? "")
                         
                         Spacer()
                     }
