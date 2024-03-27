@@ -7,4 +7,4 @@
 
 import SwiftUI
 
-protocol ImageDataStorage: DataStorage where DataType == Image {}
+protocol ImageDataStorage: DataStorage where DataType == ImageDataStorageEntity {}
