@@ -22,7 +22,7 @@ struct TrackVisualizationView<ViewModel: PlayProjectViewModel>: View {
                 ForEach(track.points, id: \.startTime) { point in
                     if viewModel.state.isPlaying && point.startTime <= viewModel.state.currentTime && viewModel.state.currentTime <= point.startTime + 5 {
                         Text((track.sound?.emoji) ?? "😇")
-                            .font(.system(size: max(40, (point.volume ?? 10) * 100)))
+                            .font(.system(size: max(80, (point.volume ?? 10) * 200)))
                             .offset(
                                 x: CGFloat.random(in: -(zStackSize.width / 2)...(zStackSize.width / 2)),
                                 y: CGFloat.random(in: -(zStackSize.height / 2)...(zStackSize.height / 2))

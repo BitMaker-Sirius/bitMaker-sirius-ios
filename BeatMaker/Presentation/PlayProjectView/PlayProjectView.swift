@@ -57,10 +57,9 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                         }.padding(.horizontal, 24).padding(.top, 12)
 
                         Spacer()
-                        
-                        Text(viewModel.state.project?.name ?? "")
-                            .padding(.top, 12)
-                        
+                        if let tracks = viewModel.state.project?.tracks {
+                            TrackVisualizationView(viewModel: viewModel)
+                        }
                         Spacer()
                         HStack(alignment: .center, spacing: 12) {
                             Text(viewModel.state.formatTime)
@@ -107,10 +106,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                         .padding(.horizontal, 40)
                     }
                     .padding(.bottom, 15)
-                    if let tracks = viewModel.state.project?.tracks {
-//                            TrackVisualizationView(tracks: tracks, currentTime: viewModel)
-                        TrackVisualizationView(viewModel: viewModel)
-                    }
                 }
             case .loading:
                 ProgressView()
