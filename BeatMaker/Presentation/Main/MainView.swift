@@ -16,6 +16,10 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
     
     private var startHeight: CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return 200
+        }
+        
         return min(
             CGFloat(
                 self.viewModel.state.projectsList.count * Constants.trackRowHeight
@@ -27,6 +31,10 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
     
     private var maxHeight: CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return 200
+        }
+        
         return min(
             CGFloat(
                 self.viewModel.state.projectsList.count * Constants.trackRowHeight
@@ -37,7 +45,7 @@ struct MainView<ViewModel: MainViewModel>: View {
         )
     }
     
-    @State private var currentHeight: CGFloat = 0.0
+    @State var currentHeight: CGFloat = 0.0
     
     @State private var timer = Timer.publish(
         every: AnimationProperties.timeDuration,
@@ -177,7 +185,10 @@ struct MainView<ViewModel: MainViewModel>: View {
                     ForEach(viewModel.state.projectsList, id: \.id) { project in
                         ProjectRow(
                             parentViewModel: viewModel,
-                            project: project
+                            project: project,
+                            onSuccessfullyDeleted: {
+                                self.currentHeight = getActualTrackListHeight()
+                            }
                         )
                         .frame(height: 56)
                         .backgroundColor(colorScheme)
@@ -187,10 +198,11 @@ struct MainView<ViewModel: MainViewModel>: View {
                 HStack {
                     Text("Самое время сделать трек!")
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 75)
                 }
+                .ignoresSafeArea()
             }
         }
-        
         .ignoresSafeArea(edges: .bottom)
         .backgroundColor(colorScheme)
         .onAppear() {
@@ -223,9 +235,24 @@ struct MainView<ViewModel: MainViewModel>: View {
             animator.animate()
         })
     }
+    
+    private func getActualTrackListHeight() -> CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return 200
+        }
+        
+        return min(
+            CGFloat(
+                self.viewModel.state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (self.viewModel.state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height / 2)
+        )
+    }
 }
 
-private enum Constants {
+enum Constants {
     static let trackRowHeight = 56
     static let listTitleHeight = 130
     static let spacerHeight = 8

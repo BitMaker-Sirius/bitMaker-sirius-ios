@@ -10,6 +10,7 @@ import SwiftUI
 struct ProjectRow<ParentViewModel: MainViewModel>: View {
     @ObservedObject var parentViewModel: ParentViewModel
     @ObservedObject var project: Project
+    let onSuccessfullyDeleted: () -> Void
     
     var body: some View {
         HStack {
@@ -32,7 +33,12 @@ struct ProjectRow<ParentViewModel: MainViewModel>: View {
                         .gesture(
                             TapGesture()
                                 .onEnded {
-                                    parentViewModel.handle(.tapDeleteButton(projectId: project.id))
+                                    parentViewModel.handle(
+                                        .tapDeleteButton(
+                                            projectId: project.id,
+                                            onSuccessfullyDeleted: onSuccessfullyDeleted
+                                        )
+                                    )
                                 }
                         )
                         .padding()

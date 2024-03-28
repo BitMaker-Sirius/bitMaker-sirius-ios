@@ -14,7 +14,7 @@ enum MainViewEvent {
     case tapCreateProjectButton
     case tapRightProjectButton(projectId: String)
     case tapEditing
-    case tapDeleteButton(projectId: String)
+    case tapDeleteButton(projectId: String, onSuccessfullyDeleted: () -> Void)
 }
 
 struct MainViewState: BaseViewState {
@@ -64,8 +64,8 @@ final class MainViewModelImp: MainViewModel {
             stopProcess()
         case .tapEditing:
             state.isEditing.toggle()
-        case .tapDeleteButton(let projectId):
-            delete(by: projectId)
+        case .tapDeleteButton(let projectId, let onSuccessfullyDeleted):
+            delete(by: projectId, onSuccessfullyDeleted)
         }
     }
     
@@ -83,7 +83,7 @@ final class MainViewModelImp: MainViewModel {
         }
     }
     
-    private func delete(by projectId: String) {
+    private func delete(by projectId: String, _ onSuccessfullyDeleted: @escaping () -> Void) {
         projectsListProvider.delete(by: projectId) { [weak self] isCompleted in
             if isCompleted {
                 guard let index = self?.state.projectsList.firstIndex(where: { $0.id == projectId }) else {
@@ -91,6 +91,8 @@ final class MainViewModelImp: MainViewModel {
                 }
                 
                 self?.state.projectsList.remove(at: index)
+                onSuccessfullyDeleted()
+                
             }
         }
     }
