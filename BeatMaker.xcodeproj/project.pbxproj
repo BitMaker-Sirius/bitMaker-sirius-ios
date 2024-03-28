@@ -94,7 +94,9 @@
 		72CA28F22BB1EBFA0048B253 /* sms-for-samsung.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28EE2BB1EBFA0048B253 /* sms-for-samsung.mp3 */; };
 		72CA28F42BB2081B0048B253 /* s6-edge-sms.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */; };
 		72CA28F62BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */; };
-		E98046BF2BB59B01004EBBD7 /* BeatMakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046BE2BB59B01004EBBD7 /* BeatMakerTests.swift */; };
+		E98046C62BB5AC32004EBBD7 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */; };
+		E98046C82BB5AC77004EBBD7 /* ProjectEditorViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */; };
+		E98046CA2BB5ACF3004EBBD7 /* SoundsListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,7 +200,9 @@
 		72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "s6-edge-sms.mp3"; sourceTree = "<group>"; };
 		72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "long-sound-on-sms-11-seconds-about-china.mp3"; sourceTree = "<group>"; };
 		E98046BC2BB59B01004EBBD7 /* BeatMakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeatMakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E98046BE2BB59B01004EBBD7 /* BeatMakerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerTests.swift; sourceTree = "<group>"; };
+		E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
+		E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorViewTests.swift; sourceTree = "<group>"; };
+		E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsListViewTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -735,7 +739,9 @@
 		E98046BD2BB59B01004EBBD7 /* BeatMakerTests */ = {
 			isa = PBXGroup;
 			children = (
-				E98046BE2BB59B01004EBBD7 /* BeatMakerTests.swift */,
+				E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */,
+				E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */,
+				E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */,
 			);
 			path = BeatMakerTests;
 			sourceTree = "<group>";
@@ -939,7 +945,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98046BF2BB59B01004EBBD7 /* BeatMakerTests.swift in Sources */,
+				E98046C82BB5AC77004EBBD7 /* ProjectEditorViewTests.swift in Sources */,
+				E98046CA2BB5ACF3004EBBD7 /* SoundsListViewTests.swift in Sources */,
+				E98046C62BB5AC32004EBBD7 /* MainViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

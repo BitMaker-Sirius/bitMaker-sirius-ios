@@ -1,5 +1,5 @@
 //
-//  BeatMakerTests.swift
+//  SoundsListViewTests.swift
 //  BeatMakerTests
 //
 //  Created by Павел on 28.03.2024.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import BeatMaker
 
-final class BeatMakerTests: XCTestCase {
+final class SoundsListViewTests: XCTestCase {
     var router: Router!
 
     override func setUpWithError() throws {
@@ -17,19 +17,6 @@ final class BeatMakerTests: XCTestCase {
 
     override func tearDownWithError() throws {
         router = nil
-    }
-    
-    func testProjectsListNotEditingAtStart() {
-        let mainView = router.assembly.mainView()
-        
-        XCTAssertFalse(mainView.viewModel.state.isEditing)
-    }
-    
-    func testPlayPauseTrack() {
-        let projectEditorView = router.assembly.projectEditorView(projectId: nil)
-        projectEditorView.viewModel.handle(.tapPlay)
-        
-        XCTAssert(projectEditorView.viewModel.state.pauseState == "stop.fill")
     }
     
     func testSoundIconInSoundsList() {
