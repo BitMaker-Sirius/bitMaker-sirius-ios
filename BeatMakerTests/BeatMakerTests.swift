@@ -19,9 +19,28 @@ final class BeatMakerTests: XCTestCase {
         router = nil
     }
     
-    func testTrackWasAdded() {
+    func testProjectsListNotEditingAtStart() {
         let mainView = router.assembly.mainView()
         
-        XCTAssert(!mainView.viewModel.state.isEditing)
+        XCTAssertFalse(mainView.viewModel.state.isEditing)
+    }
+    
+    func testPlayPauseTrack() {
+        let projectEditorView = router.assembly.projectEditorView(projectId: nil)
+        projectEditorView.viewModel.handle(.tapPlay)
+        
+        XCTAssert(projectEditorView.viewModel.state.pauseState == "stop.fill")
+    }
+    
+    func testSoundIconInSoundsList() {
+        let mainView = router.assembly.mainView()
+        guard let project = mainView.viewModel.state.projectsList.first
+        else { return }
+        
+        let soundsListView = router.assembly.soundsListView(projectId: project.id)
+        guard let sound = soundsListView.viewModel.state.soundsList.first
+        else { return }
+        
+        XCTAssertTrue(["🤪", "😎", "🤩", "🥳", "🥹", "😇", "🤯", "🤔"].contains(where: { sound.emoji == $0 }))
     }
 }
