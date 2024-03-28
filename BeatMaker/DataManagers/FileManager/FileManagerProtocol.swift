@@ -11,9 +11,12 @@ import AVFoundation
 
 protocol FileManagerProtocol {
 
+    var imageCache:  [String: UIImage] { get set }
+    
     func getUIImage(withID id: String, completion: @escaping (Result<UIImage, FileManagersErrors>) -> () )
     func saveUIImage(withID id: String, image: UIImage, completion: @escaping (Result<String?, FileManagersErrors>) -> () )
     
+    func readAllImages(completion:  @escaping ([ImageDataStorageEntity]) -> () ) 
     func getAllVAudioFiles(completion: @escaping (Result<[String: AVAudioFile], FileManagersErrors>) -> () )
     func getAudioURl(withId id: String) -> URL 
     func getAvailableFirebaseSoundsList() -> [FirebaseAudioInfo: String]
