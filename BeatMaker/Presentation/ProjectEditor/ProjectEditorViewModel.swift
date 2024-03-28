@@ -241,7 +241,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     private func playTap() {
         state.isPlaying.toggle()
-        state.pauseState = (state.isPlaying ? "pause.fill": "play.fill")
+        state.pauseState = (state.isPlaying ? "stop.fill": "play.fill")
         
         if state.isPlaying {
             startPlayback()

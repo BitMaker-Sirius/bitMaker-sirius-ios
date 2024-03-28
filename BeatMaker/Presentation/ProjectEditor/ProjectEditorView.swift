@@ -128,14 +128,6 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     .bold()
                                 
                                 Spacer()
-                                
-                                Button(action: {
-                                }) {
-                                    Text("редактировать")
-                                        .fontWeight(.thin)
-                                        .foregroundColor(Color.onBackgroundColor)
-                                }
-                                .allowsHitTesting(!isShowingUsedTrackView)
                             }
                             .padding(.horizontal, 15)
                             .padding(.top, 15)
@@ -169,20 +161,17 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     viewModel.handle(.recordTap)
                                 }) {
                                     Image(systemName: "record.circle")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
+                                        .font(.system(size: 40))
                                         .foregroundColor(viewModel.state.isRecording ? .red : Color.onBackgroundColor)
                                 }
+                                
                                 Spacer()
                                 
                                 Button(action: {
                                     viewModel.handle(.tapPlay)
                                 }) {
                                     Image(systemName: viewModel.state.pauseState)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
+                                        .font(.system(size: 60))
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
                                 
@@ -192,14 +181,12 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     viewModel.handle(.tapAddSounds)
                                 }) {
                                     Image(systemName: "plus.circle")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 30, height: 40)
+                                        .font(.system(size: 40))
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
                             }
                             .allowsHitTesting(!isShowingUsedTrackView)
-                            .padding(.horizontal, 70)
+                            .padding(.horizontal, 40)
                             .padding(.bottom, 15)
                         }
                         .blur(radius: isShowingUsedTrackView ? 3 : 0)
