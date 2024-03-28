@@ -12,6 +12,8 @@ final class SoundObject: Object {
     @Persisted var audioFileId: String?
     @Persisted var name: String
     @Persisted var emoji: String?
+    @Persisted var networkUrl: String?
+    @Persisted var storageUrl: String?
     
     convenience init?(from sound: Sound?) {
         self.init()

@@ -61,11 +61,13 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         chervonDirection: "chevron.down",
         choosenSoundId: nil,
         soundsArray: [
-            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
-            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
-            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
-            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
-            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
+//            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
+//            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
+//            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
         ]
     )
     
@@ -162,16 +164,6 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             case .failure(_):
                 self?.state.indicatorViewState = .error
             }
-        }
-    }
-    
-    func saveData() {
-        guard let project = state.project else {
-            return
-        }
-        
-        projectProvider.saveData(project: project) { _ in
-            // Обработать ошибку
         }
     }
     

@@ -141,7 +141,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 
                                 
                                 LazyVGrid(columns: columns) {
-                                    ForEach(viewModel.state.soundsArray, id: \.self) {sound in
+                                    ForEach(viewModel.state.project?.preparedSounds ?? viewModel.state.soundsArray, id: \.self) {sound in
                                         ButtomSoundView(sound: sound) {
                                             viewModel.setSelectedSound(at: sound.id)
                                         }

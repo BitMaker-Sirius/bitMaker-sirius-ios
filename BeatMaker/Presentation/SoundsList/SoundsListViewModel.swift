@@ -7,32 +7,28 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 enum SoundsListViewEvent {
     case onLoadData(projectId: String)
     
     case tapBackButton
-    case tapAddToTrackButton(sound: Sound)
-    case tapAddNewSoundButton
-    case tapOnCellPlayButton
-    case tapOnCell
-    case deleteSound(sound: Sound)
-    case editSoundName
-    case editSoundEmoji
+    case tapOnCellPlayButton(url: String)
+    case tapOnCellDownloadButton(sound: Sound)
+    case tapOnCell(sound: Sound)
 }
 
 struct SoundsListViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
     var soundsList: [Sound]
-    
-//    var addedToTrackSounds: [Sound]
-//    var editingSoundId: UUID?
+    var allAvailableSounds: [Sound]
+    var isAlertPresented: Bool
+    var nameInAlert: String
 }
 
 protocol SoundsListViewModel: ObservableObject {
-    var state: SoundsListViewState { get }
-
+    var state: SoundsListViewState { get set }
     func handle(_ event: SoundsListViewEvent)
 }
 
@@ -41,15 +37,64 @@ class SoundsListViewModelImp: SoundsListViewModel {
     @Published var state = SoundsListViewState(
         indicatorViewState: .display,
         project: nil,
-        soundsList: []
+        soundsList: [], 
+        allAvailableSounds: [],
+        isAlertPresented: false,
+        nameInAlert: ""
     )
     
     let projectProvider: ProjectProvider
-    let soundsListProvider: SoundsListProvider
+    private let soundsListProvider: SoundsListProvider
     
-    init(projectProvider: ProjectProvider, soundsListProvider: SoundsListProvider) {
+    private let soundPlaybackService: SoundPlaybackService
+    private let fileManager: FileManagerProtocol
+    
+    init(projectProvider: ProjectProvider,
+         soundsListProvider: SoundsListProvider,
+         soundPlaybackService: SoundPlaybackService,
+         fileManager: FileManagerProtocol) {
+        
         self.projectProvider = projectProvider
         self.soundsListProvider = soundsListProvider
+        self.soundPlaybackService = soundPlaybackService
+        self.fileManager = fileManager
+        
+        soundsListProvider.loadData { [weak self] result in
+            guard let self else {
+                return
+            }
+            switch result{
+            case .success(let soundArray):
+                for storedSound in soundArray {
+                    for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
+                        if storedSound.name == key {
+                            state.allAvailableSounds.append(storedSound)
+                        }
+                    }
+                }
+            case .failure(_):
+                for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
+                    let emoji = String(UnicodeScalar(Array(0x1F601...0x1F64F).randomElement()!)!)
+                    let id = UUID().uuidString
+                    state.allAvailableSounds.append(Sound(audioFileId: id, name: key, emoji: emoji, networkUrl: value, storageUrl: nil))
+                }
+            }
+        }
+        
+        for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
+            if !state.allAvailableSounds.contains(where: { $0.name == key }) {
+                let emoji = String(UnicodeScalar(Array(0x1F601...0x1F64F).randomElement()!)!)
+                let id = UUID().uuidString
+                let newSound = Sound(audioFileId: id, name: key, emoji: emoji, networkUrl: value, storageUrl: nil)
+                state.allAvailableSounds.append(newSound)
+                soundsListProvider.add(sound: newSound) { isCompleted in
+                    
+                }
+            }
+        }
+
+        
+        state.allAvailableSounds.sort(by: { $0.id > $1.id })
     }
     
     func handle(_ event: SoundsListViewEvent) {
@@ -59,65 +104,48 @@ class SoundsListViewModelImp: SoundsListViewModel {
         case .tapBackButton:
             saveData()
             toProjectEditorView()
-        case .deleteSound(let sound):
-            deleteSound(sound: sound)
-        case .tapAddToTrackButton(let sound):
-            addToTrackButton(sound: sound)
-        case .tapAddNewSoundButton:
-            tapAddNewSoundButton()
-        case .tapOnCellPlayButton:
-            tapOnCellPlayButton()
-        case .tapOnCell:
-            tapOnCell()
-        case .editSoundName:
-            editSoundName()
-        case .editSoundEmoji:
-            editSoundEmoji()
+        case .tapOnCellPlayButton(let url):
+            tapOnCellPlayButton(url: url)
+        case .tapOnCell(let sound):
+            tapOnCell(sound: sound)
+        case .tapOnCellDownloadButton(let sound):
+            tapOnCellDownloadButton(sound: sound)
         }
     }
     
-    private func deleteSound(sound: Sound) {
-        soundsListProvider.delete(by: sound.id) { [weak self] isCompleted in
-            if isCompleted {
-                if let index = self?.state.soundsList.firstIndex(where: { $0.id == sound.id }) {
-                    self?.state.soundsList.remove(at: index)
-                }
+    private func tapOnCellPlayButton(url: String) {
+        
+        if let urlFromString = URL(string: url) {
+            soundPlaybackService.playSound(url: urlFromString, atTime: TimeInterval(), volume: 0.25, pitch: 0)
+        }
+    }
+    
+    private func tapOnCellDownloadButton(sound: Sound) {
+        
+        guard let url = sound.networkUrl, let urlFromString = URL(string: url) else {
+            return
+        }
+        
+        fileManager.getAVAudioFile(withID: sound.id, fromUrl: urlFromString) { [weak self] _ in
+            guard let self else {
+                return
             }
+            
+            let localUrl = fileManager.getAudioURl(withId: sound.id)
+            state.allAvailableSounds[state.allAvailableSounds.firstIndex(where: { $0.id == sound.id})!].storageUrl = localUrl.absoluteString
+            objectWillChange.send()
+            print(localUrl.absoluteString)
         }
     }
     
-    private func addToTrackButton(sound: Sound) {
-        state.project?.preparedSounds.append(sound)
-    }
-    
-    private func tapAddNewSoundButton() {
-        let sound = Sound(audioFileId: nil, name: String(UUID().uuidString.prefix(5)), emoji: ["🤪", "😎", "🤩", "🥳", "🥹", "😇", "🤯", "🤔"].randomElement() ?? "😎")
-        
-        soundsListProvider.add(
-            sound: sound
-        ) { [weak self] isCompleted in
-            if isCompleted {
-                self?.state.soundsList.append(sound)
-            } else {
-                // Обработка ошибки
-            }
+    private func tapOnCell(sound: Sound) {
+
+        objectWillChange.send()
+        if let index = state.project?.preparedSounds.firstIndex(where: { $0.id == sound.id}) {
+            state.project?.preparedSounds.removeAll{ $0.audioFileId == sound.audioFileId }
+        } else {
+            state.project?.preparedSounds.append(sound)
         }
-    }
-    
-    private func tapOnCellPlayButton() {
-        
-    }
-    
-    private func tapOnCell() {
-        
-    }
-    
-    private func editSoundName() {
-        
-    }
-    
-    private func editSoundEmoji() {
-        
     }
     
     private func loadData(projectId: String) {
@@ -127,6 +155,10 @@ class SoundsListViewModelImp: SoundsListViewModel {
             switch result {
             case .success(let project):
                 self?.state.project = project
+                project.preparedSounds.forEach({ sound in
+                    print(sound.name)
+                    print(sound.emoji)
+                })
                 self?.state.indicatorViewState = .display
             case .failure(_):
                 self?.state.indicatorViewState = .error
@@ -147,6 +179,12 @@ class SoundsListViewModelImp: SoundsListViewModel {
     private func saveData() {
         guard let project = state.project else {
             return
+        }
+        
+        for someSound in state.allAvailableSounds {
+            soundsListProvider.add(sound: someSound) { isCompleted in
+                
+            }
         }
         
         projectProvider.saveData(project: project) { isCompleted in

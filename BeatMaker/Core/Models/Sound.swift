@@ -13,6 +13,8 @@ final class Sound: ObservableObject, Identifiable, Hashable {
     let audioFileId: String?
     @Published var name: String
     @Published var emoji: String?
+    let networkUrl: String?
+    var storageUrl: String?
     
     /// Свойство для управления воспроизведением
     @Published var isPlaying: Bool = false
@@ -21,12 +23,16 @@ final class Sound: ObservableObject, Identifiable, Hashable {
     init(
         audioFileId: String?,
         name: String,
-        emoji: String? = nil
+        emoji: String? = nil,
+        networkUrl: String? = nil,
+        storageUrl: String? = nil
     ) {
         self.id = UUID().uuidString
         self.audioFileId = audioFileId
         self.name = name
         self.emoji = emoji
+        self.networkUrl = networkUrl
+        self.storageUrl = storageUrl
     }
     
     /// Используется при обновлении Sound
@@ -38,7 +44,9 @@ final class Sound: ObservableObject, Identifiable, Hashable {
             id: id,
             audioFileId: sound.audioFileId,
             name: sound.name,
-            emoji: sound.emoji
+            emoji: sound.emoji,
+            networkUrl: sound.networkUrl,
+            storageUrl: sound.storageUrl
         )
     }
     
@@ -52,18 +60,24 @@ final class Sound: ObservableObject, Identifiable, Hashable {
         self.audioFileId = soundObject.audioFileId
         self.name = soundObject.name
         self.emoji = soundObject.emoji
+        self.networkUrl = soundObject.networkUrl
+        self.storageUrl = soundObject.storageUrl
     }
     
     private init(
         id: String,
         audioFileId: String?,
         name: String,
-        emoji: String?
+        emoji: String?,
+        networkUrl: String?,
+        storageUrl: String?
     ) {
         self.id = id
         self.audioFileId = audioFileId
         self.name = name
         self.emoji = emoji
+        self.networkUrl = networkUrl
+        self.storageUrl = storageUrl
     }
     
     static func == (lhs: Sound, rhs: Sound) -> Bool {
