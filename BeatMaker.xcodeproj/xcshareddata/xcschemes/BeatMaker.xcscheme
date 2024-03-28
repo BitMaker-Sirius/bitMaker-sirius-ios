@@ -22,10 +22,10 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <AutocreatedTestPlanReference>
             </AutocreatedTestPlanReference>
          </BuildActionEntry>
@@ -46,6 +46,17 @@
                BlueprintIdentifier = "E98046BB2BB59B01004EBBD7"
                BuildableName = "BeatMakerTests.xctest"
                BlueprintName = "BeatMakerTests"
+               ReferencedContainer = "container:BeatMaker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E9C4D6E62BB5E54E00E74E73"
+               BuildableName = "BeatMakerUITests.xctest"
+               BlueprintName = "BeatMakerUITests"
                ReferencedContainer = "container:BeatMaker.xcodeproj">
             </BuildableReference>
          </TestableReference>
