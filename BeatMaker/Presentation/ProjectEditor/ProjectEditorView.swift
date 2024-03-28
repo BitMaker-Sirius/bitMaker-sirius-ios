@@ -23,6 +23,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     var barHeight: CGFloat = 1
     
     @State private var proxyProjectName: String = ""
+    @State private var proxyIsNeedProjectRenameAlert: Bool = false
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTrackView = false
     @State private var isShowingAllTrackListView = false
@@ -43,6 +44,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     HStack {
                         Button {
                             viewModel.handle(.tapBackButton)
+                            proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "chevron.left")
                                 .font(.title2)
@@ -54,11 +56,13 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 viewModel.handle(.onChangeName(projectName: proxyProjectName))
                             })
                             .disableAutocorrection(true)
+                            .textInputAutocapitalization(.never)
                         
                         Spacer()
                         
                         Button {
                             viewModel.handle(.tapVisualizationButton)
+                            proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "waveform")
                                 .font(.title2)
@@ -214,7 +218,6 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             viewModel.handle(.tapChervon)
                         }
                         self.isShowingUsedTrackView = false
-                        
                     }
                 }
                 .onAppear {
@@ -243,6 +246,16 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     }
                 }
             }
+        }
+        .alert("Введите название проекта", isPresented: $proxyIsNeedProjectRenameAlert) {
+            TextField("Название проекта", text: $proxyProjectName)
+                .onChange(of: proxyProjectName, { oldValue, newValue in
+                    viewModel.handle(.onChangeName(projectName: proxyProjectName))
+                })
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            
+            Button("Принять") { viewModel.handle(.onCheckName) }
         }
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)

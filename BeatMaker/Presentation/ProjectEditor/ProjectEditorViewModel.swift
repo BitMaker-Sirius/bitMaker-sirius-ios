@@ -11,6 +11,7 @@ import SwiftUI
 enum ProjectEditorViewEvent {
     case onLoadData(projectId: String?)
     case onChangeName(projectName: String)
+    case onCheckName
     
     case tapBackButton
     case tapVisualizationButton
@@ -23,6 +24,7 @@ enum ProjectEditorViewEvent {
 struct ProjectEditorViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
+    var isNeedProjectRenameAlert: Bool
     
     var currentTime: Double = 0
     var totalTime: Double = 100
@@ -56,6 +58,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     @Published var state = ProjectEditorViewState(
         indicatorViewState: .loading,
         project: nil,
+        isNeedProjectRenameAlert: false,
         isPlaying: false,
         pauseState: "play.fill",
         isChervonDown: false,
@@ -93,12 +96,24 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             loadData(projectId: projectId)
         case .onChangeName(projectName: let projectName):
             changeName(projectName: projectName)
+        case .onCheckName:
+            checkName()
         case .tapBackButton:
+            if state.project?.name == "" {
+                state.isNeedProjectRenameAlert = true
+                return
+            }
+            
             stopProcess()
             saveData() { [weak self] _ in
                 self?.toMainView()
             }
         case .tapVisualizationButton:
+            if state.project?.name == "" {
+                state.isNeedProjectRenameAlert = true
+                return
+            }
+            
             stopProcess()
             saveData() { [weak self] projectId in
                 self?.toPlayProjectView(projectId: projectId)
@@ -194,6 +209,12 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     func changeName(projectName: String) {
         state.project?.name = projectName
+    }
+    
+    func checkName() {
+        if state.project?.name != "" {
+            state.isNeedProjectRenameAlert = false
+        }
     }
     
     private func stopProcess() {

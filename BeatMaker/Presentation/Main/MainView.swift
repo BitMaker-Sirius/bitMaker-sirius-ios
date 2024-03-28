@@ -87,6 +87,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 }
             }
         }
+        .transition(.identity)
         .onAppear {
             // TODO: Таймер ожидания загрузки
             viewModel.handle(.onLoadData)
