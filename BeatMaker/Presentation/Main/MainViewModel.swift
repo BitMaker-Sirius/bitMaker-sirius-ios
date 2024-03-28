@@ -15,11 +15,15 @@ enum MainViewEvent {
     case tapRightProjectButton(projectId: String)
     case tapEditing
     case tapDeleteButton(projectId: String)
+    
+    case scrollUp(delta: CGFloat)
+    case scrollDown(delta: CGFloat)
 }
 
 struct MainViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var projectsList: [Project]
+    var projectsListHeight: CGFloat
     var isEditing: Bool
 }
 
@@ -34,6 +38,7 @@ final class MainViewModelImp: MainViewModel {
     @Published var state = MainViewState(
         indicatorViewState: .loading,
         projectsList: [],
+        projectsListHeight: 0,
         isEditing: false
     )
     
@@ -50,22 +55,36 @@ final class MainViewModelImp: MainViewModel {
     
     func handle(_ event: MainViewEvent) {
         switch event {
-        case .onLoadData:
-            loadData()
-        case .tapCreateProjectButton:
-            toProjectEditorView(with: nil)
-            stopProcess()
-        case .tapRightProjectButton(let projectId):
-            if state.isEditing {
-                toProjectEditorView(with: projectId)
-            } else {
-                toPlayProjectView(with: projectId)
-            }
-            stopProcess()
-        case .tapEditing:
-            state.isEditing.toggle()
-        case .tapDeleteButton(let projectId):
-            delete(by: projectId)
+            case .onLoadData:
+                loadData()
+            case .tapCreateProjectButton:
+                toProjectEditorView(with: nil)
+                stopProcess()
+            case .tapRightProjectButton(let projectId):
+                if state.isEditing {
+                    toProjectEditorView(with: projectId)
+                } else {
+                    toPlayProjectView(with: projectId)
+                }
+                stopProcess()
+            case .tapEditing:
+                state.isEditing.toggle()
+            case .tapDeleteButton(let projectId):
+                delete(by: projectId)
+            case .scrollDown(let delta):
+                state.projectsListHeight = CGFloat(
+                    max(
+                        state.projectsListHeight - delta,
+                        startHeight
+                    )
+                )
+            case .scrollUp(let delta):
+                state.projectsListHeight = CGFloat(
+                    min(
+                        state.projectsListHeight + delta,
+                        maxHeight
+                    )
+                )
         }
     }
     
@@ -74,11 +93,12 @@ final class MainViewModelImp: MainViewModel {
         
         projectsListProvider.loadData { [weak self] result in
             switch result {
-            case .success(let projectsList):
-                self?.state.projectsList = projectsList
-                self?.state.indicatorViewState = .display
-            case .failure(_):
-                self?.state.indicatorViewState = .error
+                case .success(let projectsList):
+                    self?.state.projectsList = projectsList
+                    self?.state.indicatorViewState = .display
+                    self?.state.projectsListHeight = self?.getActualTrackListHeight() ?? 0
+                case .failure(_):
+                    self?.state.indicatorViewState = .error
             }
         }
     }
@@ -91,8 +111,54 @@ final class MainViewModelImp: MainViewModel {
                 }
                 
                 self?.state.projectsList.remove(at: index)
+                self?.state.projectsListHeight = self?.getActualTrackListHeight() ?? 0
             }
         }
+    }
+    
+    private func getActualTrackListHeight() -> CGFloat {
+        if state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height / 2)
+        )
+    }
+    
+    private var startHeight: CGFloat {
+        if state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height / 2)
+        )
+    }
+    
+    private var maxHeight: CGFloat {
+        if state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height)
+        )
     }
     
     private func stopProcess() {
