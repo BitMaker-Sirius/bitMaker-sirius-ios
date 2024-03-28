@@ -79,7 +79,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     let projectProvider: ProjectProvider
     
     private let timerPlus = 0.2
-    private var playbackTimer: Timer? = nil
+    private var playbackTimer: Timer? = nil //
     let soundPlaybackService: SoundPlaybackService
     let trackPlaybackService: any TrackPlaybackService
     let projectPlaybackService: any ProjectPlaybackService

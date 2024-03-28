@@ -21,7 +21,7 @@ struct PlayProjectViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
     var projectsList: [Project]
-    
+
     var isPlaying: Bool = false
     var currentTime: Double = 0
     var totalTime: Double = 100
@@ -98,6 +98,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         state.isPlaying.toggle()
         // TODO: Добавить остановку/запуск музыки через какой-то сервис
         if state.isPlaying {
+            
             startPlayback()
         } else {
             stopPlayback()
@@ -176,7 +177,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     }
     
     func loadData(projectId: String) {
-        self.state = .init(indicatorViewState: .loading, projectsList: [])
+        self.state = .init(indicatorViewState: .loading, projectsList: []/*, emojiViewStates: []*/)
         
         projectProvider.loadData(by: projectId) { [weak self] result in
             switch result {
