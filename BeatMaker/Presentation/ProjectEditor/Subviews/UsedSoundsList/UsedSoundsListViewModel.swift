@@ -9,26 +9,16 @@ import Foundation
 import SwiftUI
 
 
-final class UsedTreckViewModel: UsedTreckViewModeling {
+final class UsedTrackViewModel: UsedTrackViewModeling {
     
     @Published
-    var state = UsedTreckViewState(
-        shouldDeleteTreck: false,
-        isDelete: "trash.fill",
-        choosenSoundId: nil,
-        usedSoundsArray: [
-            Track(sound: Sound(audioFileId: nil, name: "baraban0", emoji: "\u{1f600}"), points: []),
-            Track(sound: Sound(audioFileId: nil, name: "baraban1", emoji: "\u{1f601}"), points: []),
-            Track(sound: Sound(audioFileId: nil, name: "baraban2", emoji: "\u{1f602}"), points: []),
-            Track(sound: Sound(audioFileId: nil, name: "baraban3", emoji: "\u{1f603}"), points: [])
-        ]
-    )
+    var state = UsedTrackViewState()
     
-    func shouldDeleteTreck(index: String) {
-        if Int(index)! >= 0 && Int(index)! < state.usedSoundsArray.count {
-            state.usedSoundsArray.remove(at: Int(index)!)
+    func shouldDeleteTrack(id: String) {
+        guard let index = state.usedSoundsArray.firstIndex(where: {$0.id == id}) else {
+            return
         }
-        
+        state.usedSoundsArray.remove(at: index)
     }
     
     init() {

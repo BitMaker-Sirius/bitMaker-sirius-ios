@@ -44,13 +44,13 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
         VStack {
             VStack {
                 // Отображаем координаты выбранной точки у самой точки
-                if soundSettingsGraphViewModel.state.selectedPoint != .zero {
-                    Text("Тон: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Громкость: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
-                        .font(customFont: .subtitle, size: 15)
-                        .padding(5)
-                        .background(Color.white)
-                        .cornerRadius(5)
-                }
+                Text("Тон: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Громкость: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
+                    .font(customFont: .subtitle, size: 15)
+                    .padding(5)
+                    .background(Color.white)
+                    .cornerRadius(5)
+                
+                
                 ZStack {
                     // Рисуем координатную ось
                     Path { path in
@@ -96,7 +96,7 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
                 }
                 .onAppear {
                     // Устанавливаем начальное положение точки в соответствии с начальными значениями Pitch и Volume
-                    soundSettingsGraphViewModel.state.selectedPoint = CGPoint(x: 0, y: 10)
+                    soundSettingsGraphViewModel.state.selectedPoint = CGPoint(x: 0, y: 0)
                 }
             }
         }

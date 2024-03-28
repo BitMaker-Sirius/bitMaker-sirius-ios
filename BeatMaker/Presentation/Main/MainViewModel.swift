@@ -54,12 +54,14 @@ final class MainViewModelImp: MainViewModel {
             loadData()
         case .tapCreateProjectButton:
             toProjectEditorView(with: nil)
+            stopProcess()
         case .tapRightProjectButton(let projectId):
             if state.isEditing {
                 toProjectEditorView(with: projectId)
             } else {
                 toPlayProjectView(with: projectId)
             }
+            stopProcess()
         case .tapEditing:
             state.isEditing.toggle()
         case .tapDeleteButton(let projectId):
@@ -91,6 +93,10 @@ final class MainViewModelImp: MainViewModel {
                 self?.state.projectsList.remove(at: index)
             }
         }
+    }
+    
+    private func stopProcess() {
+        state.isEditing = false
     }
     
     // MARK: Routing

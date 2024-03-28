@@ -7,37 +7,43 @@
 
 import SwiftUI
 
-protocol TrackVisualizationViewModeling {
-    
-}
-
 struct TrackVisualizationView<ViewModel: PlayProjectViewModel>: View {
     @ObservedObject var viewModel: ViewModel
-//    @State var tracks: [Track]
-//    @State var project: [Project]
-//    @State var playbackTimer: Timer
+    @State private var zStackSize: CGSize = .zero
+    
+    var debug: String {
+        "\(zStackSize)"
+    }
+
+
     var body: some View {
-        Text("\((viewModel.state.project?.tracks.count)!)")
-        Text("\(viewModel.state.currentTime)")
-        ForEach(viewModel.state.project!.tracks, id: \.self) { track in
-            Text((track.sound?.emoji) ?? "don't have an emoji")
-            ForEach(track.points, id: \.startTime) { point in
-                Text("\(point.startTime)")
+        ZStack {
+            ForEach(viewModel.state.project!.tracks, id: \.self) { track in
+                ForEach(track.points, id: \.startTime) { point in
+                    if viewModel.state.isPlaying && point.startTime <= viewModel.state.currentTime && viewModel.state.currentTime <= point.startTime + 5 {
+                        Text((track.sound?.emoji) ?? "😇")
+                            .font(.system(size: max(40, (point.volume ?? 10) * 100)))
+                            .offset(
+                                x: CGFloat.random(in: -(zStackSize.width / 2)...(zStackSize.width / 2)),
+                                y: CGFloat.random(in: -(zStackSize.height / 2)...(zStackSize.height / 2))
+                            )
+                            .opacity(max(0.6, (point.pitch! + 2400) / (2400 + 2400)))
+                            .animation(.easeInOut(duration: 2))
+                    }                    
+                }
             }
-//            Text("\(track.points.count)")
-//                .font(.largeTitle)
-//            ForEach(track.points, id: \.self) { point in
-//                Text("\(point.volume)")
-//                    .font(.largeTitle)
-//            }
-            
-//            ForEach(track.points, id: \.self) { point in
-//
-//            }
         }
+        .frame(maxWidth: 500, maxHeight: 500)
+        .background(
+            GeometryReader(content: { geometry in
+                Path { _ in
+                    DispatchQueue.main.async  {
+                        self.zStackSize = geometry.size
+                        print(self.zStackSize)
+                    }
+                }
+            })
+        )
     }
 }
 
-//#Preview {
-//    TrackVisualizationView(tracks: "1")
-//}

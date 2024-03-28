@@ -22,12 +22,12 @@ struct PlayProjectViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
     var projectsList: [Project]
-    
+
     var isPlaying: Bool = false
     var currentTime: Double = 0
     var totalTime: Double = 100
     var liked: Bool = false
-    var formatTime: String = ""
+    var formatTime: String = "00:00"
     var isList: Bool = false
 }
 
@@ -101,6 +101,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         state.isPlaying.toggle()
         // TODO: Добавить остановку/запуск музыки через какой-то сервис
         if state.isPlaying {
+            
             startPlayback()
         } else {
             stopPlayback()
@@ -179,29 +180,29 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
     }
     
     func loadData(projectId: String) {
-        state.indicatorViewState = .loading
+        self.state = .init(indicatorViewState: .loading, projectsList: []/*, emojiViewStates: []*/)
         
         projectProvider.loadData(by: projectId) { [weak self] result in
             switch result {
             case .success(let project):
                 self?.state.project = project
-                self?.state.indicatorViewState = .display
+                self?.countTotalTime()
+                
+                self?.projectsListProvider.loadData { result in
+                    switch result {
+                    case .success(let projectsList):
+                        self?.state.projectsList = projectsList
+                        self?.state.isList = self?.state.projectsList.count ?? 0 > 1
+                        self?.currentProjectIndex = projectsList.firstIndex(where: { $0.id == projectId }) ?? 0
+                        self?.state.indicatorViewState = .display
+                    case .failure(_):
+                        self?.state.indicatorViewState = .error
+                    }
+                }
             case .failure(_):
                 self?.state.indicatorViewState = .error
             }
         }
-        
-        projectsListProvider.loadData { [weak self] result in
-            switch result {
-            case .success(let projectsList):
-                self?.state.projectsList = projectsList
-                self?.state.indicatorViewState = .display
-            case .failure(_):
-                self?.state.indicatorViewState = .error
-            }
-        }
-        
-        state.isList = state.projectsList.count > 1
     }
     
     // MARK: Routing

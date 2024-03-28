@@ -26,4 +26,17 @@ final class SoundsListProviderImp: SoundsListProvider {
             completion(result)
         }
     }
+    
+    func delete(by soundId: String, completion: @escaping (_ isCompleted: Bool) -> Void) {
+        soundDataStorage.delete(by: soundId) { isCompleted in
+            completion(isCompleted)
+        }
+    }
+    
+    func add(sound: Sound, completion: @escaping (_ isCompleted: Bool) -> Void) {
+        // Пока замоканное сохранение
+        soundDataStorage.save(by: sound.id, sound) { id, isCompleted in
+            completion(isCompleted)
+        }
+    }
 }

@@ -10,6 +10,8 @@ import SwiftUI
 
 enum ProjectEditorViewEvent {
     case onLoadData(projectId: String?)
+    case onChangeName(projectName: String)
+    case onCheckName
     
     case tapBackButton
     case tapVisualizationButton
@@ -22,6 +24,7 @@ enum ProjectEditorViewEvent {
 struct ProjectEditorViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
+    var isNeedProjectRenameAlert: Bool
     
     var currentTime: Double = 0
     var totalTime: Double = 100
@@ -35,7 +38,7 @@ struct ProjectEditorViewState: BaseViewState {
     var chervonDirection: String
     var choosenSoundId: String?
     var soundsArray: [Sound]
-    var usedTreckViewModel = UsedTreckViewModel()
+    var usedTrackViewModel: UsedTrackViewModel
 }
 
 protocol ProjectEditorViewModel: ObservableObject {
@@ -55,6 +58,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     @Published var state = ProjectEditorViewState(
         indicatorViewState: .loading,
         project: nil,
+        isNeedProjectRenameAlert: false,
         isPlaying: false,
         pauseState: "play.fill",
         isChervonDown: false,
@@ -66,7 +70,8 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
             Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
             Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
-        ]
+        ],
+        usedTrackViewModel: UsedTrackViewModel()
     )
     
     let projectProvider: ProjectProvider
@@ -89,28 +94,48 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         switch event {
         case .onLoadData(projectId: let projectId):
             loadData(projectId: projectId)
+        case .onChangeName(projectName: let projectName):
+            changeName(projectName: projectName)
+        case .onCheckName:
+            checkName()
         case .tapBackButton:
-            saveData()
-            toMainView()
-            state.project = nil
+            if state.project?.name == "" {
+                state.isNeedProjectRenameAlert = true
+                return
+            }
+            
+            stopProcess()
+            saveData() { [weak self] _ in
+                self?.toMainView()
+            }
         case .tapVisualizationButton:
-            saveData()
-            toPlayProjectView()
-            state.project = nil
+            if state.project?.name == "" {
+                state.isNeedProjectRenameAlert = true
+                return
+            }
+            
+            stopProcess()
+            saveData() { [weak self] projectId in
+                self?.toPlayProjectView(projectId: projectId)
+            }
         case .tapAddSounds:
-            saveData()
-            toSoundsListView()
+            stopProcess()
+            saveData() { [weak self] projectId in
+                self?.toSoundsListView(projectId: projectId)
+            }
         case .tapPlay:
             playTap()
         case .tapChervon:
-            state.isChervonDown.toggle()
-            state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")
+            openTrackListTap()
         case .recordTap:
             recordTap()
         }
     }
     
     func setSelectedSound(at id: String) {
+        if state.isRecording {
+            addNewTrackIfNeeded()
+        }
         state.choosenSoundId = id
         state.selectedSound = state.soundsArray.first { $0.id == id }
     }
@@ -142,9 +167,10 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 240, name: UUID().uuidString)) { [weak self] project, isCompleted in
+            projectProvider.create(project: .init(metronomeBpm: 130, name: "")) { [weak self] project, isCompleted in
                 if isCompleted {
                     self?.state.project = project
+                    self?.countTotalTime()
                     self?.state.indicatorViewState = .display
                 } else {
                     self?.state.indicatorViewState = .error
@@ -157,6 +183,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             switch result {
             case .success(let project):
                 self?.state.project = project
+                self?.countTotalTime()
                 self?.state.indicatorViewState = .display
             case .failure(_):
                 self?.state.indicatorViewState = .error
@@ -164,48 +191,48 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
     }
     
-    func saveData() {
+    func saveData(transition: @escaping ((_ projectId: String) -> Void)) {
         guard let project = state.project else {
             return
         }
         
-        projectProvider.saveData(project: project) { _ in
-            // Обработать ошибку
+        state.indicatorViewState = .loading
+        
+        projectProvider.saveData(project: project) { [weak self] _ in
+            let projectId = self?.state.project?.id
+            
+            if let projectId {
+                transition(projectId)
+            }
         }
     }
     
-    // MARK: Routing
+    func changeName(projectName: String) {
+        state.project?.name = projectName
+    }
     
-    func toMainView() {
+    func checkName() {
+        if state.project?.name != "" {
+            state.isNeedProjectRenameAlert = false
+        }
+    }
+    
+    private func stopProcess() {
         if state.isPlaying {
             playTap()
         }
         
-        while router.path.count != 0 {
-            router.path.removeLast()
-        }
-    }
-    
-    func toPlayProjectView() {
-        if state.isPlaying {
-            playTap()
-        }        
-        guard let id = state.project?.id else {
-            return
+        if state.isRecording {
+            recordTap()
         }
         
-        router.path.append(Route.playProject(projectId: id))
-    }
-    
-    func toSoundsListView() {
-        if state.isPlaying {
-            playTap()
-        }
-        guard let id = state.project?.id else {
-            return
-        }
+        state.isChervonDown = false
+        state.chervonDirection = "chevron.down"
         
-        router.path.append(Route.soundsList(projectId: id))
+        soundPlaybackService.stopAllSounds()
+        
+        state.choosenSoundId = nil
+        state.selectedSound = nil
     }
     
     private func countTotalTime() {
@@ -215,13 +242,29 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     private func playTap() {
         state.isPlaying.toggle()
-        state.pauseState = (state.isPlaying ? "pause.fill": "play.fill")
+        state.pauseState = (state.isPlaying ? "stop.fill": "play.fill")
         
         if state.isPlaying {
             startPlayback()
         } else {
             stopPlayback()
         }
+    }
+    
+    private func openTrackListTap() {
+        if state.isChervonDown {
+            state.project?.tracks = state.usedTrackViewModel.state.usedSoundsArray
+        } else {
+            if state.isRecording {
+                recordTap()
+            }
+            if state.isPlaying {
+                playTap()
+            }
+            state.usedTrackViewModel.updateTracks(state.project?.tracks ?? [])
+        }
+        state.isChervonDown.toggle()
+        state.chervonDirection = (state.isChervonDown ? "chevron.up" : "chevron.down")
     }
     
     private func startPlayback() {
@@ -280,13 +323,36 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func updateTracks() {
-        state.usedTreckViewModel.updateTracks([])
+        state.usedTrackViewModel.updateTracks([])
     }
     
     private func recordTap() {
         state.isRecording.toggle()
+        if !state.isPlaying {
+            playTap()
+        }
         if !state.isRecording {
             addNewTrackIfNeeded()
         }
+    }
+    
+    // MARK: Routing
+    
+    func toMainView() {
+        state.project = nil
+        
+        while router.path.count != 0 {
+            router.path.removeLast()
+        }
+    }
+    
+    func toPlayProjectView(projectId: String) {
+        state.project = nil
+        
+        router.path.append(Route.playProject(projectId: projectId))
+    }
+    
+    func toSoundsListView(projectId: String) {
+        router.path.append(Route.soundsList(projectId: projectId))
     }
 }

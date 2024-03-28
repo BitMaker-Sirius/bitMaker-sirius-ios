@@ -8,24 +8,24 @@
 import Foundation
 import SwiftUI
 
-enum UsedTreckViewEvent {
+enum UsedTrackViewEvent {
     case tapButton
 }
 
-struct UsedTreckViewState {
-    var shouldDeleteTreck: Bool
-    var isDelete: String
-    var choosenSoundId: String?
-    var usedSoundsArray: [Track]
+struct UsedTrackViewState {
+    var shouldDeleteTrack: Bool = false
+    var isDelete: String = "trash.fill"
+    var choosenSoundId: String? = nil
+    var usedSoundsArray: [Track] = []
 }
 
-protocol UsedTreckViewModeling: ObservableObject {
-    var state: UsedTreckViewState {get set}
-    func shouldDeleteTreck(index: String)
+protocol UsedTrackViewModeling: ObservableObject {
+    var state: UsedTrackViewState {get }
+    func shouldDeleteTrack(id: String)
     func updateTracks(_ tracks: [Track])
 }
 
-struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
+struct UsedTrackView<ViewModel: UsedTrackViewModeling>: View {
     
     @ObservedObject
     var viewModel: ViewModel
@@ -33,61 +33,67 @@ struct UsedTreckView<ViewModel: UsedTreckViewModeling>: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(viewModel.state.usedSoundsArray, id: \.self) { track in
-                    HStack {
-                        TrackView(sound: track.sound ?? Sound(audioFileId: nil, name: "hype"))
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .frame(height: 35)
-                                .foregroundColor(.gray)
-                                .padding(.trailing, 0)
-                            
+            VStack {
+                if viewModel.state.usedSoundsArray.isEmpty {
+                    Text("Записанных звуков нет")
+                } else {
+                    ScrollView {
+                        ForEach(viewModel.state.usedSoundsArray, id: \.self) { track in
                             HStack {
-                                ForEach(0..<8) {_ in
+                                TrackView(sound: track.sound ?? Sound(audioFileId: nil, name: "hype"))
+                                
+                                ZStack {
                                     RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 10, height: 35)
-                                        .foregroundColor(.black)
-                                    Spacer()
+                                        .frame(height: 35)
+                                        .foregroundColor(.gray)
+                                        .padding(.trailing, 0)
+                                    
+                                    HStack {
+                                        ForEach(0..<8) {_ in
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .frame(width: 10, height: 35)
+                                                .foregroundColor(.black)
+                                            Spacer()
+                                        }
+                                    }
                                 }
+                                .padding(.leading, 5)
+                                .padding(.trailing, 5)
+                                
+                                
+                                Button(action: {
+                                    print("trash")
+                                    viewModel.shouldDeleteTrack(id: track.id)
+                                }) {
+                                    HStack {
+                                        Image(systemName: "trash")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(Color.onBackgroundColor)
+                                    }
+                                }
+                                
+                            }
+                            .onTapGesture {
+                                
                             }
                         }
-                        .padding(.leading, 5)
-                        .padding(.trailing, 5)
-                        
-                        
-                        Button(action: {
-                            print("trash")
-                            viewModel.shouldDeleteTreck(index: track.sound?.id ?? "0")
-                        }) {
-                            HStack {
-                                Image(systemName: "trash")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color.onBackgroundColor)
-                            }
-                        }
-                        
-                    }
-                    .onTapGesture {
-                        
                     }
                 }
             }
             .padding()
-            .frame(maxHeight: 300)
+            .frame(minHeight: 10)
             .background(Color.backgroundColorForScreen)
             .cornerRadius(15)
+            .shadow(radius: 2)
             Spacer()
-            
         }
     }
 }
 
-struct UsedTreckView_Previews: PreviewProvider {
+struct UsedTrackView_Previews: PreviewProvider {
     static var previews: some View {
-        UsedTreckView(viewModel: UsedTreckViewModel())
+        UsedTrackView(viewModel: UsedTrackViewModel())
     }
 }

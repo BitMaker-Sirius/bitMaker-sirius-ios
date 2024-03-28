@@ -30,32 +30,31 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                     Color.backgroundColor.edgesIgnoringSafeArea(.all)
                     
                     VStack(alignment: .center, spacing: 0) {
-                        HStack(alignment: .center) {
-                            Button(action: {
+                        HStack {
+                            Button {
                                 viewModel.handle(.backTap)
-                            }) {
-                                Image.backArrow.resizable().frame(width: 20, height: 20)
-                                    .offset(x: 2)
-                                    .padding(8).background(Color.backgroundColor)
-                                    .cornerRadius(20)
-                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                            } label: {
+                                Image(systemName: "chevron.left")
+                                    .font(.title2)
+                                    .foregroundColor(Color.onBackgroundColor)
                             }
+                            
+                            Spacer()
+                            
+                            Text(viewModel.state.project?.name ?? "")
+                                .bold()
                             
                             Spacer()
                             
                             Button {
                                 viewModel.handle(.editTap)
                             } label: {
-                                Image.options.resizable().frame(width: 16, height: 16)
-                                    .padding(12).background(Color.backgroundColor)
-                                    .cornerRadius(20)
-                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                                Image(systemName: "pencil")
+                                    .font(.title2)
+                                    .foregroundColor(Color.onBackgroundColor)
                             }
                         }.padding(.horizontal, 24).padding(.top, 12)
-                        if let tracks = viewModel.state.project?.tracks {
-//                            TrackVisualizationView(tracks: tracks, currentTime: viewModel)
-                            TrackVisualizationView(viewModel: viewModel)
-                        }
+
                         Spacer()
                         
                         Text(viewModel.state.project?.name ?? "")
@@ -81,24 +80,20 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                 Button {
                                     viewModel.handle(.prevTap)
                                 } label: {
-                                    Image.next.resizable().frame(width: 18, height: 18)
-                                        .rotationEffect(Angle(degrees: 180))
-                                        .padding(24).background(Color.backgroundColor)
-                                        .clipShape(Circle())
-                                        .shadow(color: Color.onBackgroundColor, radius: 5)
+                                    Image(systemName: "backward.end.circle")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(Color.onBackgroundColor)
                                 }
                             }
                             
                             Spacer()
                             
-                            Button {
+                            Button(action: {
                                 viewModel.handle(.playTap)
-                            } label: {
-                                (viewModel.state.isPlaying ? Image.pause : Image.play)
-                                    .resizable().frame(width: 24, height: 27)
-                                    .padding(34).background(Color.onBackgroundColor)
-                                    .clipShape(Circle())
-                                    .shadow(color: Color.onBackgroundColor, radius: 5)
+                            }) {
+                                (viewModel.state.isPlaying ? Image(systemName: "stop.fill") : Image(systemName: "play.fill"))
+                                    .font(.system(size: 60))
+                                    .foregroundColor(Color.onBackgroundColor)
                             }
                             
                             Spacer()
@@ -108,14 +103,19 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                 Button {
                                     viewModel.handle(.nextTap)
                                 } label: {
-                                    Image.next.resizable().frame(width: 18, height: 18)
-                                        .padding(24).background(Color.backgroundColor)
-                                        .clipShape(Circle())
-                                        .shadow(color: Color.onBackgroundColor, radius: 5)
+                                    Image(systemName: "forward.end.circle")
+                                        .font(.system(size: 40))
+                                        .foregroundColor(Color.onBackgroundColor)
                                 }
                             }
-                        }.padding(.horizontal, 32)
-                    }.padding(.bottom, 24)
+                        }
+                        .padding(.horizontal, 40)
+                    }
+                    .padding(.bottom, 15)
+                    if let tracks = viewModel.state.project?.tracks {
+//                            TrackVisualizationView(tracks: tracks, currentTime: viewModel)
+                        TrackVisualizationView(viewModel: viewModel)
+                    }
                 }
             case .loading:
                 ProgressView()
