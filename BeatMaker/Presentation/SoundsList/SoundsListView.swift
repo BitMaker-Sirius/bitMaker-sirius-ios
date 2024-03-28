@@ -55,8 +55,6 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                     
                     ScrollView {
                         
-//                        addNewSoundsButton
-                        
                         LazyVStack {
                             ForEach(viewModel.state.allAvailableSounds, id: \.self) { sound in
                                 soundCell(withSound: sound)

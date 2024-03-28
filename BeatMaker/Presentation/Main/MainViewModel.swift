@@ -16,6 +16,9 @@ enum MainViewEvent {
     case tapEditing
     case tapDeleteButton(projectId: String)
     
+    case tapListenProject(projectId: String)
+    case tapEditProject(projectId: String)
+    
     case scrollUp(delta: CGFloat)
     case scrollDown(delta: CGFloat)
 }
@@ -25,6 +28,7 @@ struct MainViewState: BaseViewState {
     var projectsList: [Project]
     var projectsListHeight: CGFloat
     var isEditing: Bool
+    var allImages: [String: UIImage]
 }
 
 protocol MainViewModel: ObservableObject {
@@ -39,56 +43,83 @@ final class MainViewModelImp: MainViewModel {
         indicatorViewState: .loading,
         projectsList: [],
         projectsListHeight: 0,
-        isEditing: false
+        isEditing: false,
+        allImages: [:]
     )
     
+
     let projectsListProvider: ProjectsListProvider
     let projectPlaybackService: any ProjectPlaybackService
+    let fileManager: FileManagerProtocol
     
     init(
         projectsListProvider: ProjectsListProvider,
-        projectPlaybackService: any ProjectPlaybackService
+        projectPlaybackService: any ProjectPlaybackService,
+        fileManager: FileManagerProtocol
     ) {
         self.projectsListProvider = projectsListProvider
         self.projectPlaybackService = projectPlaybackService
+        self.fileManager = fileManager
+        fileManager.readAllImages{ [weak self] array in
+            guard let self else {
+                return
+            }
+            for element in array {
+                self.state.allImages[element.id] = element.image
+            }
+        }
     }
     
     func handle(_ event: MainViewEvent) {
         switch event {
-            case .onLoadData:
-                loadData()
-            case .tapCreateProjectButton:
-                toProjectEditorView(with: nil)
-                stopProcess()
-            case .tapRightProjectButton(let projectId):
-                if state.isEditing {
-                    toProjectEditorView(with: projectId)
-                } else {
-                    toPlayProjectView(with: projectId)
-                }
-                stopProcess()
-            case .tapEditing:
-                state.isEditing.toggle()
-            case .tapDeleteButton(let projectId):
-                delete(by: projectId)
-            case .scrollDown(let delta):
-                state.projectsListHeight = CGFloat(
-                    max(
-                        state.projectsListHeight - delta,
-                        startHeight
-                    )
+        case .onLoadData:
+            loadData()
+        case .tapCreateProjectButton:
+            toProjectEditorView(with: nil)
+            stopProcess()
+        case .tapListenProject(projectId: let projectId):
+            toPlayProjectView(with: projectId)
+        case .tapEditProject(projectId: let projectId):
+            toProjectEditorView(with: projectId)
+        case .tapRightProjectButton(let projectId):
+            if state.isEditing {
+                toProjectEditorView(with: projectId)
+            } else {
+                toPlayProjectView(with: projectId)
+            }
+            stopProcess()
+        case .tapEditing:
+            state.isEditing.toggle()
+        case .tapDeleteButton(let projectId):
+            delete(by: projectId)
+        case .scrollDown(let delta):
+            state.projectsListHeight = CGFloat(
+                max(
+                    state.projectsListHeight - delta,
+                    startHeight
                 )
-            case .scrollUp(let delta):
-                state.projectsListHeight = CGFloat(
-                    min(
-                        state.projectsListHeight + delta,
-                        maxHeight
-                    )
+            )
+        case .scrollUp(let delta):
+            state.projectsListHeight = CGFloat(
+                min(
+                    state.projectsListHeight + delta,
+                    maxHeight
                 )
+            )
         }
     }
     
     private func loadData() {
+        
+        fileManager.readAllImages{ [weak self] array in
+            guard let self else {
+                return
+            }
+            for element in array {
+                self.state.allImages[element.id] = element.image
+            }
+        }
+        
         state.indicatorViewState = .loading
         
         projectsListProvider.loadData { [weak self] result in

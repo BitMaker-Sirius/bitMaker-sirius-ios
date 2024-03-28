@@ -211,6 +211,18 @@ final class FileManagerImp: FileManagerProtocol {
         }
     }
     
+    func readAllImages(completion:  @escaping ([ImageDataStorageEntity]) -> () ) {
+        
+        imageDataStorage.getAll { result in
+            switch result{
+            case .success(let array):
+                completion(array)
+            case .failure(_):
+                completion([])
+            }
+        }
+    }
+    
     func fetchAudioFromURL(url: String, completion: @escaping (Result<Data, FileManagersErrors>) -> ()) {
         
         networkService.fetchData(fromStringURL: url) { networkResult in

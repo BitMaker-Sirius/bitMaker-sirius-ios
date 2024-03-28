@@ -72,6 +72,7 @@
 		63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */; };
 		63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */; };
 		63B8E6992BADC916001F3BE2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8E6962BADC916001F3BE2 /* CustomFonts.swift */; };
+		63C562982BB42D4A0066B453 /* TrackVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C562972BB42D4A0066B453 /* TrackVisualizationView.swift */; };
 		63CD48BE2BB18C210033CF77 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48BB2BB18C210033CF77 /* MainView.swift */; };
 		63CD48BF2BB18C210033CF77 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48BC2BB18C210033CF77 /* MainViewModel.swift */; };
 		63CD48C12BB1B3A40033CF77 /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CD48C02BB1B3A40033CF77 /* ProjectRowView.swift */; };
@@ -177,6 +178,7 @@
 		63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		63B8E6952BADC916001F3BE2 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		63B8E6962BADC916001F3BE2 /* CustomFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
+		63C562972BB42D4A0066B453 /* TrackVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVisualizationView.swift; sourceTree = "<group>"; };
 		63CD48BB2BB18C210033CF77 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		63CD48BC2BB18C210033CF77 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		63CD48C02BB1B3A40033CF77 /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 		5EE603B42BB362AD00CC7440 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				63C562942BB42D090066B453 /* TrackVisualization */,
 				007AE1172BB196A900E4367E /* UsedSoundsList */,
 				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
 				007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */,
@@ -551,16 +554,9 @@
 		63C562942BB42D090066B453 /* TrackVisualization */ = {
 			isa = PBXGroup;
 			children = (
+				63C562972BB42D4A0066B453 /* TrackVisualizationView.swift */,
 			);
 			path = TrackVisualization;
-			sourceTree = "<group>";
-		};
-		63C562992BB461DA0066B453 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				63C562942BB42D090066B453 /* TrackVisualization */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		63CD48BD2BB18C210033CF77 /* Main */ = {
@@ -690,7 +686,6 @@
 		728CE12B2BAAE0D600542975 /* PlayProjectView */ = {
 			isa = PBXGroup;
 			children = (
-				63C562992BB461DA0066B453 /* Subviews */,
 				728CE12C2BAAE0E800542975 /* PlayProjectView.swift */,
 				728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */,
 			);
@@ -914,6 +909,7 @@
 				5EF976662BB216600015A54C /* BaseViewState.swift in Sources */,
 				728CE1102BAAD06600542975 /* Project.swift in Sources */,
 				5ECAFA5F2BADA78500FAA2F3 /* ImageDataStorageImp.swift in Sources */,
+				63C562982BB42D4A0066B453 /* TrackVisualizationView.swift in Sources */,
 				5EE603B32BB3448500CC7440 /* Route.swift in Sources */,
 				5ECAFA5D2BADA78500FAA2F3 /* RecordingServiceImp.swift in Sources */,
 				5ECAFA582BADA78500FAA2F3 /* NetworkManager.swift in Sources */,
