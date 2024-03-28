@@ -9,15 +9,43 @@ import SwiftUI
 
 struct MainView<ViewModel: MainViewModel>: View {
     @ObservedObject var viewModel: ViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
     
-    @State private var currentPosition: CGSize = .zero
-    @State private var newPosition: CGSize = .zero
-    @State private var screenBounds: CGRect = .zero
-    @State private var boundsPosition: CGSize = .zero
+    private var startHeight: CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                self.viewModel.state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (self.viewModel.state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height / 2)
+        )
+    }
+    
+    private var maxHeight: CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                self.viewModel.state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (self.viewModel.state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height)
+        )
+    }
+    
+    @State var currentHeight: CGFloat = 0.0
     
     @State private var timer = Timer.publish(
         every: AnimationProperties.timeDuration,
@@ -28,9 +56,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     @ObservedObject private var animator = CircleAnimator(
         colors: GtadientColors.all
     )
-    
-    private let heightLimit: CGFloat = 100
-    
+        
     var body: some View {
         ZStack {
             switch viewModel.state.indicatorViewState {
@@ -45,94 +71,18 @@ struct MainView<ViewModel: MainViewModel>: View {
                         }
                         .blur(radius: AnimationProperties.blurRadius)
                         
-                        Button {
-                            viewModel.handle(.tapCreateProjectButton)
-                        } label: {
-                            HStack {
-                                Image(systemName: "arrowtriangle.right.fill")
-                                    .foregroundColor(.black)
-                                    .padding(.leading)
-                                Text("Новый трек")
-                                    .bold()
-                                    .foregroundStyle(.black)
-                                    .padding()
-                                
-                            }
-                            .background(Color.white)
-                            .cornerRadius(30)
-                        }
-                        .padding(.bottom, 300)
+                        createTrackButton
                         
                         VStack {
-                            HStack(alignment: .lastTextBaseline) {
-                                Text("Мои треки")
-                                    .font(.largeTitle)
-                                    .bold()
-                                
-                                Spacer()
-                                
-                                Button {
-                                    viewModel.handle(.tapEditing)
-                                } label: {
-                                    Text("редактировать")
-                                        .foregroundStyle(viewModel.state.isEditing ? .gray : .blue)
-                                }
-                            }
-                            .padding()
+                            Spacer()
                             
-                            if !viewModel.state.projectsList.isEmpty {
-                                ForEach(viewModel.state.projectsList, id: \.id) { project in
-                                    ProjectRow(
-                                        parentViewModel: viewModel,
-                                        project: project
-                                    )
-                                }
-                            } else {
-                                HStack {
-                                    Text("Самое время сделать трек!")
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                }
-                            }
+                            myTracksList
                         }
-                        .onAppear() {
-                            currentPosition = .zero
-                            newPosition = .zero
-                            setTravelLimits()
-                            limitTravel()
-                        }
-                        .background(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .padding(.top, UIScreen.main.bounds.height / 2)
-                        .offset(y: currentPosition.height)
-                        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onChanged { value in
-                                currentPosition = CGSize(width: 0, height: value.translation.height + newPosition.height)
-                                limitTravel()
-                            }
-                            .onEnded { value in
-                                currentPosition = CGSize(width: 0, height: value.translation.height + newPosition.height)
-                                limitTravel()
-                                newPosition = currentPosition
-                            }
-                        )
+                        .ignoresSafeArea(edges: .bottom)
                     }
-                    .background(GtadientColors.backgroundColor)
-                    .onDisappear {
-                        timer.upstream.connect().cancel()
-                    }
-                    .onAppear {
-                        animateCircles()
-                        timer = Timer.publish(
-                            every: AnimationProperties.timeDuration,
-                            on: .main,
-                            in: .common
-                        )
-                        .autoconnect()
-                    }
-                    .onReceive(timer) { _ in
-                        animateCircles()
-                    }
+                    .ignoresSafeArea(edges: .bottom)
                 }
+                .ignoresSafeArea(edges: .bottom)
                 .frame(height: UIScreen.main.bounds.height)
             case .loading:
                 ProgressView()
@@ -151,17 +101,110 @@ struct MainView<ViewModel: MainViewModel>: View {
         }
     }
     
-    private func setTravelLimits() {
-        screenBounds = UIScreen.main.bounds
-        boundsPosition.width = screenBounds.width
-        boundsPosition.height = (screenBounds.height / 2) - heightLimit
+    private var createTrackButton: some View {
+        Button {
+            viewModel.handle(.tapCreateProjectButton)
+        } label: {
+            HStack {
+                Image(systemName: "arrowtriangle.right.fill")
+                    .foregroundColor(.black)
+                    .padding(.leading)
+                Text(L10n.Main.newProject)
+                    .bold()
+                    .foregroundStyle(.black)
+                    .padding()
+                
+            }
+            .background(Color.white)
+            .cornerRadius(30)
+        }
+        .padding(.bottom, 300)
     }
-      
-    private func limitTravel() {
-        currentPosition.height = currentPosition.height > boundsPosition.height ? boundsPosition.height : currentPosition.height
-        currentPosition.height = currentPosition.height < -boundsPosition.height ? -boundsPosition.height : currentPosition.height
-        currentPosition.width = currentPosition.width > boundsPosition.width ? boundsPosition.width : currentPosition.width
-        currentPosition.width = currentPosition.width < -boundsPosition.width ? -boundsPosition.width : currentPosition.width
+    
+    private var myTracksList: some View {
+        VStack {
+            HStack(alignment: .lastTextBaseline) {
+                Text(L10n.Main.myTracks)
+                    .font(.largeTitle)
+                    .bold()
+                
+                Spacer()
+                
+                Button {
+                    viewModel.handle(.tapEditing)
+                } label: {
+                    Text(L10n.Main.edit)
+                        .foregroundStyle(viewModel.state.isEditing ? .gray : .blue)
+                }
+            }
+            .padding()
+            .backgroundColor(colorScheme)
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                .onChanged { value in
+                    let delta = abs(value.translation.height)
+                    
+                    if value.translation.height >= 0 {
+                        viewModel.handle(.scrollDown(delta: delta))
+                    } else {
+                        viewModel.handle(.scrollUp(delta: delta))
+                    }
+                }
+                .onEnded { value in
+                    let delta = abs(value.translation.height)
+                    
+                    if value.translation.height > 0 {
+                        viewModel.handle(.scrollDown(delta: delta))
+                    } else {
+                        viewModel.handle(.scrollUp(delta: delta))
+                    }
+                }
+            )
+            
+            if !viewModel.state.projectsList.isEmpty {
+                ScrollView {
+                    ForEach(viewModel.state.projectsList, id: \.id) { project in
+                        ProjectRow(
+                            parentViewModel: viewModel,
+                            project: project
+                        )
+                        .frame(height: 56)
+                        .backgroundColor(colorScheme)
+                    }
+                }
+            } else {
+                HStack {
+                    Text("Самое время сделать трек!")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 75)
+                }
+                .ignoresSafeArea()
+            }
+        }
+        .ignoresSafeArea(edges: .bottom)
+        .backgroundColor(colorScheme)
+        .onAppear() {
+//            currentHeight = startHeight
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        
+        .frame(height: viewModel.state.projectsListHeight)
+
+        .onDisappear {
+            timer.upstream.connect().cancel()
+        }
+        .onAppear {
+            animateCircles()
+            timer = Timer.publish(
+                every: AnimationProperties.timeDuration,
+                on: .main,
+                in: .common
+            )
+            .autoconnect()
+        }
+        .onReceive(timer) { _ in
+            animateCircles()
+        }
+        .ignoresSafeArea(edges: .bottom)
     }
     
     private func animateCircles() {
@@ -169,6 +212,28 @@ struct MainView<ViewModel: MainViewModel>: View {
             animator.animate()
         })
     }
+    
+    private func getActualTrackListHeight() -> CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                self.viewModel.state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (self.viewModel.state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height / 2)
+        )
+    }
+}
+
+enum Constants {
+    static let trackRowHeight = 56
+    static let emptyTrackListHeight: CGFloat = 200
+    static let listTitleHeight = 130
+    static let spacerHeight = 8
 }
 
 // MARK: GtadientColors
@@ -188,6 +253,17 @@ fileprivate enum GtadientColors {
                 red: 0.003799867816,
                 green: 0.01174801588,
                 blue: 0.07808648795,
+                alpha: 1
+            )
+        )
+    }
+    
+    static var backgroundColorDarkTheme: Color {
+        Color(
+            #colorLiteral(
+                red: 1,
+                green: 1,
+                blue: 1,
                 alpha: 1
             )
         )
@@ -273,5 +349,14 @@ fileprivate struct MovingCircle: Shape {
         )
         
         return path
+    }
+}
+
+extension View {
+    func backgroundColor(_ colorScheme: ColorScheme) -> some View {
+        self.background(
+            colorScheme == .dark ?
+            GtadientColors.backgroundColor : GtadientColors.backgroundColorDarkTheme
+        )
     }
 }

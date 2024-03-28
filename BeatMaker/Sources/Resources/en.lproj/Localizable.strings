@@ -1,0 +1,19 @@
+// Main
+
+"main.new-project" = "New track";
+"main.my-tracks" = "My tracks";
+"main.edit" = "edit";
+
+// ProjectEditor
+
+"project-editor.project-name-placeholder" = "Project name";
+"project-editor.volume" = "Volume";
+"project-editor.pitch" = "Pitch";
+"project-editor.all-sounds" = "Selected sounds";
+
+"project-editor.alert.change-project-name" = "Enter the project name";
+"project-editor.alert.accept" = "Confirm";
+
+// SoundsList
+
+"sounds-list.title" = "Sounds library";

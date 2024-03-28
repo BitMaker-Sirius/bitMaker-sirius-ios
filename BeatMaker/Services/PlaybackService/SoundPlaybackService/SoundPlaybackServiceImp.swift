@@ -38,7 +38,23 @@ final class SoundPlaybackServiceImp: SoundPlaybackService {
             let buffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: audioFrameCount)
             try file.read(into: buffer!)
             
-            player.scheduleBuffer(buffer!, at: AVAudioTime(sampleTime: timeInSamples, atRate: Double(file.fileFormat.sampleRate)), options: [], completionHandler: nil)
+            player.scheduleBuffer(buffer!, at: AVAudioTime(sampleTime: timeInSamples, atRate: Double(file.fileFormat.sampleRate)), options: [], completionHandler: { [weak self, weak player, weak timePitch] in
+                guard let self = self, let player = player, let timePitch = timePitch else { return }
+
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.audioEngine.detach(player)
+                    self.audioEngine.detach(timePitch)
+                    if let playerIndex = self.playerNodes.firstIndex(of: player) {
+                        self.playerNodes.remove(at: playerIndex)
+                    }
+                    if let effectIndex = self.timePitchEffects.firstIndex(of: timePitch) {
+                        self.timePitchEffects.remove(at: effectIndex)
+                    }
+                }
+
+            })
             
             if !audioEngine.isRunning {
                 try audioEngine.start()

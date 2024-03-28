@@ -102,8 +102,9 @@ class SoundsListViewModelImp: SoundsListViewModel {
         case .onLoadData(let projectId):
             loadData(projectId: projectId)
         case .tapBackButton:
-            saveData()
-            toProjectEditorView()
+            saveData() { [weak self] in
+                self?.toProjectEditorView()
+            }
         case .tapOnCellPlayButton(let url):
             tapOnCellPlayButton(url: url)
         case .tapOnCell(let sound):
@@ -139,10 +140,9 @@ class SoundsListViewModelImp: SoundsListViewModel {
     }
     
     private func tapOnCell(sound: Sound) {
-
         objectWillChange.send()
-        if let index = state.project?.preparedSounds.firstIndex(where: { $0.id == sound.id}) {
-            state.project?.preparedSounds.removeAll{ $0.audioFileId == sound.audioFileId }
+        if state.project?.preparedSounds.contains(where: { $0.id == sound.id}) == true {
+            state.project?.preparedSounds.removeAll { $0.id == sound.id }
         } else {
             state.project?.preparedSounds.append(sound)
         }
@@ -152,34 +152,35 @@ class SoundsListViewModelImp: SoundsListViewModel {
         state.indicatorViewState = .loading
         
         projectProvider.loadData(by: projectId) { [weak self] result in
+            guard let self else {
+                return
+            }
+            
             switch result {
             case .success(let project):
-                self?.state.project = project
-                project.preparedSounds.forEach({ sound in
-                    print(sound.name)
-                    print(sound.emoji)
-                })
-                self?.state.indicatorViewState = .display
+                state.project = project
+                
+                soundsListProvider.loadData { result in
+                    switch result {
+                    case .success(let soundsList):
+                        self.state.soundsList = soundsList
+                        self.state.indicatorViewState = .display
+                    case .failure(_):
+                        self.state.indicatorViewState = .error
+                    }
+                }
             case .failure(_):
-                self?.state.indicatorViewState = .error
-            }
-        }
-        
-        soundsListProvider.loadData { [weak self] result in
-            switch result {
-            case .success(let soundsList):
-                self?.state.soundsList = soundsList
-                self?.state.indicatorViewState = .display
-            case .failure(_):
-                self?.state.indicatorViewState = .error
+                state.indicatorViewState = .error
             }
         }
     }
     
-    private func saveData() {
+    private func saveData(transition: @escaping (() -> Void)) {
         guard let project = state.project else {
             return
         }
+        
+        state.indicatorViewState = .loading
         
         for someSound in state.allAvailableSounds {
             soundsListProvider.add(sound: someSound) { isCompleted in
@@ -188,7 +189,7 @@ class SoundsListViewModelImp: SoundsListViewModel {
         }
         
         projectProvider.saveData(project: project) { isCompleted in
-            // Обработать
+            transition()
         }
     }
     

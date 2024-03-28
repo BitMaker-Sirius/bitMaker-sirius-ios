@@ -11,14 +11,15 @@
 		007AE11B2BB196D900E4367E /* UsedSoundsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */; };
 		007AE11E2BB1ACB300E4367E /* ButtomSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */; };
 		007AE1202BB1AD3700E4367E /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE11F2BB1AD3700E4367E /* TrackView.swift */; };
-		007AE1332BB237C800E4367E /* TrackEditorViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */; };
 		20F6F4DE2BB35B3800D0D4DC /* NetworkManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4DD2BB35B3800D0D4DC /* NetworkManagerErrors.swift */; };
 		20F6F4E22BB36E5200D0D4DC /* ImageDataStorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E12BB36E5200D0D4DC /* ImageDataStorageEntity.swift */; };
 		20F6F4E42BB3855300D0D4DC /* AudioDataStorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */; };
 		20F6F4E92BB38A2400D0D4DC /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E82BB38A2400D0D4DC /* FileManagerProtocol.swift */; };
 		20F6F4EB2BB38A3300D0D4DC /* FileManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4EA2BB38A3300D0D4DC /* FileManagerImp.swift */; };
 		20F6F4ED2BB38D1900D0D4DC /* FileManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4EC2BB38D1900D0D4DC /* FileManagerErrors.swift */; };
-		20FEC69C2BADD2930045C1FF /* SoundListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */; };
+		5E5985BE2BB57C4E00677753 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E5985B22BB57C4D00677753 /* Localizable.strings */; };
+		5E5985BF2BB57C4E00677753 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 5E5985B42BB57C4D00677753 /* Localizable.stringsdict */; };
+		5E5985C22BB57C4E00677753 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5985BA2BB57C4E00677753 /* Strings.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
 		5EAF76262BAEC0D900C4B065 /* ProjectsListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76252BAEC0D900C4B065 /* ProjectsListProvider.swift */; };
@@ -82,7 +83,6 @@
 		728CE11E2BAADCCC00542975 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE11D2BAADCCC00542975 /* Sound.swift */; };
 		728CE1212BAADD3000542975 /* ProjectEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1202BAADD3000542975 /* ProjectEditorView.swift */; };
 		728CE1232BAADD5B00542975 /* ProjectEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1222BAADD5B00542975 /* ProjectEditorViewModel.swift */; };
-		728CE1272BAADEE700542975 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1292BAADEE700542975 /* Localizable.strings */; };
 		728CE12D2BAAE0E800542975 /* PlayProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE12C2BAAE0E800542975 /* PlayProjectView.swift */; };
 		728CE12F2BAAE75000542975 /* PlayProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */; };
 		728CE1322BAAE90D00542975 /* SoundsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1312BAAE90D00542975 /* SoundsListViewModel.swift */; };
@@ -101,14 +101,17 @@
 		007AE11A2BB196D900E4367E /* UsedSoundsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedSoundsListViewModel.swift; sourceTree = "<group>"; };
 		007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSoundView.swift; sourceTree = "<group>"; };
 		007AE11F2BB1AD3700E4367E /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
-		007AE1322BB237C800E4367E /* TrackEditorViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEditorViewModelProtocol.swift; sourceTree = "<group>"; };
 		20F6F4DD2BB35B3800D0D4DC /* NetworkManagerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerErrors.swift; sourceTree = "<group>"; };
 		20F6F4E12BB36E5200D0D4DC /* ImageDataStorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataStorageEntity.swift; sourceTree = "<group>"; };
 		20F6F4E32BB3855300D0D4DC /* AudioDataStorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDataStorageEntity.swift; sourceTree = "<group>"; };
 		20F6F4E82BB38A2400D0D4DC /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
 		20F6F4EA2BB38A3300D0D4DC /* FileManagerImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerImp.swift; sourceTree = "<group>"; };
 		20F6F4EC2BB38D1900D0D4DC /* FileManagerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerErrors.swift; sourceTree = "<group>"; };
-		20FEC69B2BADD2930045C1FF /* SoundListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundListViewModelProtocol.swift; sourceTree = "<group>"; };
+		5E5985B32BB57C4D00677753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E5985B52BB57C4D00677753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = Base; path = Base.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		5E5985BA2BB57C4E00677753 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		5E5985C52BB57CEF00677753 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E5985C62BB57CF000677753 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
 		5EAF76252BAEC0D900C4B065 /* ProjectsListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListProvider.swift; sourceTree = "<group>"; };
@@ -172,8 +175,6 @@
 		728CE11D2BAADCCC00542975 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		728CE1202BAADD3000542975 /* ProjectEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorView.swift; sourceTree = "<group>"; };
 		728CE1222BAADD5B00542975 /* ProjectEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorViewModel.swift; sourceTree = "<group>"; };
-		728CE1282BAADEE700542975 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		728CE12A2BAADEEC00542975 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		728CE12C2BAAE0E800542975 /* PlayProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayProjectView.swift; sourceTree = "<group>"; };
 		728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayProjectViewModel.swift; sourceTree = "<group>"; };
 		728CE1312BAAE90D00542975 /* SoundsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsListViewModel.swift; sourceTree = "<group>"; };
@@ -209,15 +210,6 @@
 			path = UsedSoundsList;
 			sourceTree = "<group>";
 		};
-		007AE11C2BB1AC9C00E4367E /* ComponentView */ = {
-			isa = PBXGroup;
-			children = (
-				007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */,
-				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
-			);
-			path = ComponentView;
-			sourceTree = "<group>";
-		};
 		20F6F4E72BB38A1600D0D4DC /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +229,23 @@
 				5ECAFA3E2BADA78500FAA2F3 /* VisualizationService */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5E5985B02BB57C4D00677753 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5E5985B22BB57C4D00677753 /* Localizable.strings */,
+				5E5985B42BB57C4D00677753 /* Localizable.stringsdict */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5E5985B92BB57C4E00677753 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				5E5985BA2BB57C4E00677753 /* Strings.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		5EAF761C2BAEBED100C4B065 /* ProjectProvider */ = {
@@ -460,9 +469,9 @@
 			isa = PBXGroup;
 			children = (
 				007AE1172BB196A900E4367E /* UsedSoundsList */,
+				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
 				007AE11D2BB1ACB300E4367E /* ButtomSoundView.swift */,
 				007AE11F2BB1AD3700E4367E /* TrackView.swift */,
-				63E278282BAD559500BC4E75 /* SoundSettingsGraph */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -511,6 +520,21 @@
 				63B8E6942BADC915001F3BE2 /* Manrope-Light.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		63C562942BB42D090066B453 /* TrackVisualization */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TrackVisualization;
+			sourceTree = "<group>";
+		};
+		63C562992BB461DA0066B453 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				63C562942BB42D090066B453 /* TrackVisualization */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		63CD48BD2BB18C210033CF77 /* Main */ = {
@@ -563,7 +587,6 @@
 				5E45CB342BAD06B700E14B41 /* Services */,
 				72CA28EF2BB1EBFA0048B253 /* sounds */,
 				728CE1C12BAD812B00542975 /* Utilities */,
-				728CE1242BAADE3300542975 /* Localization */,
 				728CE1372BAAF61400542975 /* Sources */,
 				728CE1072BAACA0100542975 /* Preview Content */,
 			);
@@ -636,17 +659,10 @@
 			path = ProjectEditor;
 			sourceTree = "<group>";
 		};
-		728CE1242BAADE3300542975 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				728CE1292BAADEE700542975 /* Localizable.strings */,
-			);
-			path = Localization;
-			sourceTree = "<group>";
-		};
 		728CE12B2BAAE0D600542975 /* PlayProjectView */ = {
 			isa = PBXGroup;
 			children = (
+				63C562992BB461DA0066B453 /* Subviews */,
 				728CE12C2BAAE0E800542975 /* PlayProjectView.swift */,
 				728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */,
 			);
@@ -665,6 +681,8 @@
 		728CE1372BAAF61400542975 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5E5985B92BB57C4E00677753 /* Generated */,
+				5E5985B02BB57C4D00677753 /* Resources */,
 				63B8E6932BADC8F9001F3BE2 /* Fonts */,
 				728CE1052BAACA0100542975 /* Assets.xcassets */,
 			);
@@ -760,11 +778,12 @@
 			files = (
 				63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */,
 				63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */,
+				5E5985BE2BB57C4E00677753 /* Localizable.strings in Resources */,
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
 				72CA28F22BB1EBFA0048B253 /* sms-for-samsung.mp3 in Resources */,
+				5E5985BF2BB57C4E00677753 /* Localizable.stringsdict in Resources */,
 				72CA28F42BB2081B0048B253 /* s6-edge-sms.mp3 in Resources */,
 				72CA28F02BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 in Resources */,
-				728CE1272BAADEE700542975 /* Localizable.strings in Resources */,
 				72CA28F62BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 in Resources */,
 				72CA28F12BB1EBFA0048B253 /* iphone-sms.mp3 in Resources */,
 				728CE1062BAACA0100542975 /* Assets.xcassets in Resources */,
@@ -785,6 +804,7 @@
 				728CE12D2BAAE0E800542975 /* PlayProjectView.swift in Sources */,
 				5ECAFA542BADA78500FAA2F3 /* SamplingService.swift in Sources */,
 				728CE1C42BAD812B00542975 /* ImageExtension.swift in Sources */,
+				5E5985C22BB57C4E00677753 /* Strings.swift in Sources */,
 				5ECAFA622BADA78500FAA2F3 /* DataStorage.swift in Sources */,
 				5ECAFA5A2BADA78500FAA2F3 /* VisualizationService.swift in Sources */,
 				5EE603B22BB3448500CC7440 /* Router+EnvironmentValues.swift in Sources */,
@@ -858,13 +878,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		728CE1292BAADEE700542975 /* Localizable.strings */ = {
+		5E5985B22BB57C4D00677753 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				728CE1282BAADEE700542975 /* en */,
-				728CE12A2BAADEEC00542975 /* ru */,
+				5E5985B32BB57C4D00677753 /* Base */,
+				5E5985C52BB57CEF00677753 /* en */,
+				5E5985C62BB57CF000677753 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		5E5985B42BB57C4D00677753 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E5985B52BB57C4D00677753 /* Base */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

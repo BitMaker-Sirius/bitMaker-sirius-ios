@@ -32,7 +32,11 @@ struct ProjectRow<ParentViewModel: MainViewModel>: View {
                         .gesture(
                             TapGesture()
                                 .onEnded {
-                                    parentViewModel.handle(.tapDeleteButton(projectId: project.id))
+                                    parentViewModel.handle(
+                                        .tapDeleteButton(
+                                            projectId: project.id
+                                        )
+                                    )
                                 }
                         )
                         .padding()
