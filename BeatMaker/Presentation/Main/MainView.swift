@@ -101,7 +101,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 Image(systemName: "arrowtriangle.right.fill")
                     .foregroundColor(.black)
                     .padding(.leading)
-                Text("Новый трек")
+                Text(L10n.Main.newProject)
                     .bold()
                     .foregroundStyle(.black)
                     .padding()
@@ -116,7 +116,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     private var myTracksList: some View {
         VStack {
             HStack(alignment: .lastTextBaseline) {
-                Text("Мои треки")
+                Text(L10n.Main.myTracks)
                     .font(.largeTitle)
                     .bold()
                 
@@ -125,7 +125,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 Button {
                     viewModel.handle(.tapEditing)
                 } label: {
-                    Text("редактировать")
+                    Text(L10n.Main.edit)
                         .foregroundStyle(viewModel.state.isEditing ? .gray : .blue)
                 }
             }
