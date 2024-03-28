@@ -232,6 +232,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         soundPlaybackService.stopAllSounds()
         
         state.choosenSoundId = nil
+        state.selectedSound = nil
     }
     
     private func countTotalTime() {
