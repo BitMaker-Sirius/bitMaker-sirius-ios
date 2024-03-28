@@ -15,7 +15,7 @@ final class TrackPlaybackServiceImp: TrackPlaybackService {
     }
     
     func play(_ data: Track) {
-        guard let sound = data.sound, let soundUrl = Bundle.main.url(forResource: sound.audioFileId, withExtension: "mp3"), !data.isMute else { return }
+        guard let sound = data.sound, let storageUrl = sound.storageUrl, let soundUrl = URL(string: storageUrl), !data.isMute else { return }
         
         data.points.forEach { point in
             let volume = Float(point.volume ?? 1.0)

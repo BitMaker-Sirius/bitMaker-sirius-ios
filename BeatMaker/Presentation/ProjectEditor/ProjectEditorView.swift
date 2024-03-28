@@ -142,7 +142,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                                 
                                 LazyVGrid(columns: columns) {
-                                    ForEach(viewModel.state.soundsArray, id: \.self) {sound in
+                                    ForEach(viewModel.state.project?.preparedSounds ?? viewModel.state.soundsArray, id: \.self) {sound in
                                         ButtomSoundView(sound: sound) {
                                             viewModel.setSelectedSound(at: sound.id)
                                         }

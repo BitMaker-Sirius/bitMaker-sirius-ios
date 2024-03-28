@@ -65,11 +65,13 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         chervonDirection: "chevron.down",
         choosenSoundId: nil,
         soundsArray: [
-            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
-            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
-            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
-            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
-            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
+//            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
+//            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
+//            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
         ],
         usedTrackViewModel: UsedTrackViewModel()
     )
@@ -88,6 +90,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         projectPlaybackService = ProjectPlaybackServiceImp(trackPlaybackService: trackPlaybackService)
         self.projectProvider = projectProvider
         countTotalTime()
+        if let array = state.project?.preparedSounds {
+            selectedSounds = array
+        }
     }
     
     func handle(_ event: ProjectEditorViewEvent) {
@@ -137,7 +142,8 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             addNewTrackIfNeeded()
         }
         state.choosenSoundId = id
-        state.selectedSound = state.soundsArray.first { $0.id == id }
+        state.selectedSound = state.project?.preparedSounds.first { $0.id == id }
+//        state.selectedSound = state.soundsArray.first { $0.id == id }
     }
     
     func areUuidsSimilar(id1: String, id2: String) -> Bool {
@@ -162,7 +168,20 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         state.indicatorViewState = .loading
         
         guard state.project == nil else {
-            state.indicatorViewState = .display
+            guard let id = state.project?.id else {
+                return
+            }
+            
+            projectProvider.loadData(by: id) { [weak self] result in
+                switch result {
+                case .success(let project):
+                    self?.state.project = project
+                    self?.countTotalTime()
+                    self?.state.indicatorViewState = .display
+                case .failure(_):
+                    self?.state.indicatorViewState = .error
+                }
+            }
             return
         }
         
@@ -303,7 +322,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func handleCoordinateChange(_ point: CGPoint) {
-        guard let sound = state.selectedSound, let soundUrl = Bundle.main.url(forResource: sound.audioFileId, withExtension: "mp3") else {
+        guard let sound = state.selectedSound, let storageUrl = sound.storageUrl, let soundUrl = URL(string: storageUrl) else {
             return
         }
         let volume = Double(point.y)
