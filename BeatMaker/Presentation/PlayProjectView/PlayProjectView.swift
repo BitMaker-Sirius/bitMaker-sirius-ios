@@ -35,13 +35,14 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                 viewModel.handle(.backTap)
                             } label: {
                                 Image(systemName: "chevron.left")
-                                    .font(.title2)
+                                    .font(.system(size: 30))
                                     .foregroundColor(Color.onBackgroundColor)
                             }
                             
                             Spacer()
                             
                             Text(viewModel.state.project?.name ?? "")
+                                .font(.system(size: 20))
                                 .bold()
                             
                             Spacer()
@@ -50,7 +51,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                 viewModel.handle(.editTap)
                             } label: {
                                 Image(systemName: "pencil")
-                                    .font(.title2)
+                                    .font(.system(size: 30))
                                     .foregroundColor(Color.onBackgroundColor)
                             }
                         }.padding(.horizontal, 24).padding(.top, 12)
@@ -67,12 +68,6 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                             ProgressView(value: viewModel.state.currentTime, total: viewModel.state.totalTime)
                                 .progressViewStyle(LinearProgressViewStyle())
                                 .padding()
-                            Button {
-                                viewModel.handle(.likeTap)
-                            } label: {
-                                (viewModel.state.liked ? Image("heart-filled_icon") : Image("heart_icon"))
-                                    .resizable().frame(width: 20, height: 20)
-                            }
                         }.padding(30)
 
                         HStack(alignment: .center) {

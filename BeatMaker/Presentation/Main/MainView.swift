@@ -16,6 +16,10 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
     
     private var startHeight: CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
         return min(
             CGFloat(
                 self.viewModel.state.projectsList.count * Constants.trackRowHeight
@@ -27,6 +31,10 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
     
     private var maxHeight: CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
         return min(
             CGFloat(
                 self.viewModel.state.projectsList.count * Constants.trackRowHeight
@@ -37,7 +45,7 @@ struct MainView<ViewModel: MainViewModel>: View {
         )
     }
     
-    @State private var currentHeight: CGFloat = 0.0
+    @State var currentHeight: CGFloat = 0.0
     
     @State private var timer = Timer.publish(
         every: AnimationProperties.timeDuration,
@@ -101,7 +109,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 Image(systemName: "arrowtriangle.right.fill")
                     .foregroundColor(.black)
                     .padding(.leading)
-                Text("Новый трек")
+                Text(L10n.Main.newProject)
                     .bold()
                     .foregroundStyle(.black)
                     .padding()
@@ -116,7 +124,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     private var myTracksList: some View {
         VStack {
             HStack(alignment: .lastTextBaseline) {
-                Text("Мои треки")
+                Text(L10n.Main.myTracks)
                     .font(.largeTitle)
                     .bold()
                 
@@ -125,7 +133,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 Button {
                     viewModel.handle(.tapEditing)
                 } label: {
-                    Text("редактировать")
+                    Text(L10n.Main.edit)
                         .foregroundStyle(viewModel.state.isEditing ? .gray : .blue)
                 }
             }
@@ -136,38 +144,18 @@ struct MainView<ViewModel: MainViewModel>: View {
                     let delta = abs(value.translation.height)
                     
                     if value.translation.height >= 0 {
-                        currentHeight = CGFloat(
-                            max(
-                                currentHeight - delta,
-                                startHeight
-                            )
-                        )
+                        viewModel.handle(.scrollDown(delta: delta))
                     } else {
-                        currentHeight = CGFloat(
-                            min(
-                                currentHeight + delta,
-                                maxHeight
-                            )
-                        )
+                        viewModel.handle(.scrollUp(delta: delta))
                     }
                 }
                 .onEnded { value in
                     let delta = abs(value.translation.height)
                     
                     if value.translation.height > 0 {
-                        currentHeight = CGFloat(
-                            max(
-                                currentHeight - delta,
-                                startHeight
-                            )
-                        )
+                        viewModel.handle(.scrollDown(delta: delta))
                     } else {
-                        currentHeight = CGFloat(
-                            min(
-                                currentHeight + delta,
-                                maxHeight
-                            )
-                        )
+                        viewModel.handle(.scrollUp(delta: delta))
                     }
                 }
             )
@@ -187,18 +175,19 @@ struct MainView<ViewModel: MainViewModel>: View {
                 HStack {
                     Text("Самое время сделать трек!")
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 75)
                 }
+                .ignoresSafeArea()
             }
         }
-        
         .ignoresSafeArea(edges: .bottom)
         .backgroundColor(colorScheme)
         .onAppear() {
-            currentHeight = startHeight
+//            currentHeight = startHeight
         }
         .clipShape(RoundedRectangle(cornerRadius: 16))
         
-        .frame(height: currentHeight)
+        .frame(height: viewModel.state.projectsListHeight)
 
         .onDisappear {
             timer.upstream.connect().cancel()
@@ -223,10 +212,26 @@ struct MainView<ViewModel: MainViewModel>: View {
             animator.animate()
         })
     }
+    
+    private func getActualTrackListHeight() -> CGFloat {
+        if self.viewModel.state.projectsList.isEmpty {
+            return Constants.emptyTrackListHeight
+        }
+        
+        return min(
+            CGFloat(
+                self.viewModel.state.projectsList.count * Constants.trackRowHeight
+                + Constants.spacerHeight * (self.viewModel.state.projectsList.count - 1)
+                + Constants.listTitleHeight
+            ),
+            CGFloat(UIScreen.main.bounds.height / 2)
+        )
+    }
 }
 
-private enum Constants {
+enum Constants {
     static let trackRowHeight = 56
+    static let emptyTrackListHeight: CGFloat = 200
     static let listTitleHeight = 130
     static let spacerHeight = 8
 }

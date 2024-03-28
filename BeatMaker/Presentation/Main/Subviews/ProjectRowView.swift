@@ -20,7 +20,7 @@ struct ProjectRow<ParentViewModel: MainViewModel>: View {
                     .padding()
                 
                 // TODO: Реализовать подгрузку картинки
-                Text(["🤪", "😎", "🤩", "🥳", "🥹", "😇", "🤯", "🤔"].randomElement() ?? "😎")
+                Text("😎")
                     .frame(width: 35, height: 35, alignment: .center)
                     .blur(radius: parentViewModel.state.isEditing ? 3 : 0)
                     .padding()
@@ -32,7 +32,11 @@ struct ProjectRow<ParentViewModel: MainViewModel>: View {
                         .gesture(
                             TapGesture()
                                 .onEnded {
-                                    parentViewModel.handle(.tapDeleteButton(projectId: project.id))
+                                    parentViewModel.handle(
+                                        .tapDeleteButton(
+                                            projectId: project.id
+                                        )
+                                    )
                                 }
                         )
                         .padding()

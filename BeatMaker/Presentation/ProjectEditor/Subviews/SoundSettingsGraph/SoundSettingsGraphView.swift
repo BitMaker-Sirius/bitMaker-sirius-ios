@@ -42,13 +42,13 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
     
     var body: some View {
         VStack {
-            VStack {
+//            VStack {
                 // Отображаем координаты выбранной точки у самой точки
-                Text("Тон: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Громкость: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
-                    .font(customFont: .subtitle, size: 15)
-                    .padding(5)
-                    .background(Color.white)
-                    .cornerRadius(5)
+//                Text("Тон: \(Int(soundSettingsGraphViewModel.state.selectedPoint.x)), Громкость: \(Int(soundSettingsGraphViewModel.state.selectedPoint.y))")
+//                    .font(customFont: .subtitle, size: 15)
+//                    .padding(5)
+//                    .background(Color.white)
+//                    .cornerRadius(5)
                 
                 
                 ZStack {
@@ -62,10 +62,10 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
                     }.stroke(Color(red: 122/255, green: 138/255, blue: 169/255), lineWidth: 1)
                     
                     // Подписи к осям
-                    Text("Pitch")
+                    Text(L10n.ProjectEditor.pitch)
                         .font(customFont: .subtitle, size: 15)
                         .position(x: soundSettingsGraphViewModel.viewState.graphWidth - 30, y: soundSettingsGraphViewModel.viewState.graphHeight/2 + 20)
-                    Text("Volume")
+                    Text(L10n.ProjectEditor.volume)
                         .font(customFont: .subtitle, size: 15)
                         .position(x: soundSettingsGraphViewModel.viewState.graphWidth/2 - 50, y: 15)
                     Circle()
@@ -98,7 +98,7 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
                     // Устанавливаем начальное положение точки в соответствии с начальными значениями Pitch и Volume
                     soundSettingsGraphViewModel.state.selectedPoint = CGPoint(x: 0, y: 0)
                 }
-            }
+//            }
         }
     }
 }

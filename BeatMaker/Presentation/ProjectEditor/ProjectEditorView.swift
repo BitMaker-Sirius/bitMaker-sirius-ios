@@ -47,14 +47,15 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "chevron.left")
-                                .font(.title2)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                         
-                        TextField("Название проекта", text: $proxyProjectName)
+                        TextField(L10n.ProjectEditor.projectNamePlaceholder, text: $proxyProjectName)
                             .onChange(of: proxyProjectName, { oldValue, newValue in
                                 viewModel.handle(.onChangeName(projectName: proxyProjectName))
                             })
+                            .font(.system(size: 20))
                             .disableAutocorrection(true)
                             .textInputAutocapitalization(.never)
                         
@@ -65,7 +66,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "waveform")
-                                .font(.title2)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                     }
@@ -124,7 +125,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             
                             HStack {
-                                Text("Звуки")
+                                Text(L10n.ProjectEditor.allSounds)
                                     .bold()
                                 
                                 Spacer()
@@ -142,7 +143,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                                 
                                 LazyVGrid(columns: columns) {
-                                    ForEach(viewModel.state.soundsArray, id: \.self) {sound in
+                                    ForEach(viewModel.state.project?.preparedSounds ?? viewModel.state.soundsArray, id: \.self) {sound in
                                         ButtomSoundView(sound: sound) {
                                             viewModel.setSelectedSound(at: sound.id)
                                         }
@@ -234,15 +235,15 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                 }
             }
         }
-        .alert("Введите название проекта", isPresented: $proxyIsNeedProjectRenameAlert) {
-            TextField("Название проекта", text: $proxyProjectName)
+        .alert(L10n.ProjectEditor.Alert.changeProjectName, isPresented: $proxyIsNeedProjectRenameAlert) {
+            TextField(L10n.ProjectEditor.projectNamePlaceholder, text: $proxyProjectName)
                 .onChange(of: proxyProjectName, { oldValue, newValue in
                     viewModel.handle(.onChangeName(projectName: proxyProjectName))
                 })
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
             
-            Button("Принять") { viewModel.handle(.onCheckName) }
+            Button(L10n.ProjectEditor.Alert.accept) { viewModel.handle(.onCheckName) }
         }
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)
