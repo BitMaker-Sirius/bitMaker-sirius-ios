@@ -120,7 +120,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     
                     ZStack {
                         VStack {
-                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(delegate: viewModel))
+                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(handle: viewModel.handleCoordinateChange))
                                 .allowsHitTesting(!isShowingUsedTrackView)
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             

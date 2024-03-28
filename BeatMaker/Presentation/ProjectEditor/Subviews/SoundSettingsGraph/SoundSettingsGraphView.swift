@@ -105,6 +105,6 @@ struct SoundSettingsGraphView<ViewModel: SoundSettingsGraphViewModeling>: View{
 
 struct SoundSettingsGraph_Previews: PreviewProvider {
     static var previews: some View {
-        SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel())
+        SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(handle: { point in }))
     }
 }
