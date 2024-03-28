@@ -167,15 +167,10 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 130, name: "")) { [weak self] project, isCompleted in
-                if isCompleted {
-                    self?.state.project = project
-                    self?.countTotalTime()
-                    self?.state.indicatorViewState = .display
-                } else {
-                    self?.state.indicatorViewState = .error
-                }
-            }
+            state.project = .init(metronomeBpm: 130, name: "")
+            countTotalTime()
+            state.indicatorViewState = .display
+            
             return
         }
         
