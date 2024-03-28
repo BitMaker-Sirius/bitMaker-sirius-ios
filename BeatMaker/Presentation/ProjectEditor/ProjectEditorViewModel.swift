@@ -78,7 +78,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     let projectProvider: ProjectProvider
     
-    private let timerPlus = 0.2
+    private let timerPlus = 0.1
     private var playbackTimer: Timer? = nil
     let soundPlaybackService: SoundPlaybackService
     let trackPlaybackService: any TrackPlaybackService
@@ -267,7 +267,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     private func openTrackListTap() {
         if state.isChervonDown {
-            state.project?.tracks = state.usedTrackViewModel.state.usedSoundsArray
+            state.project?.tracks = state.usedTrackViewModel.state.usedTacksArray
         } else {
             if state.isRecording {
                 recordTap()
@@ -347,6 +347,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         if !state.isRecording {
             addNewTrackIfNeeded()
+            stopPlayback()
+            startPlayback()
+            state.isPlaying = true
         }
     }
     

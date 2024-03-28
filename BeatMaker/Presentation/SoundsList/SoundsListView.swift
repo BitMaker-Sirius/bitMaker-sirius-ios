@@ -161,6 +161,7 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
             Capsule(style: .continuous)
                 .stroke(viewModel.state.project?.preparedSounds.contains(sound) == true ? Color.backgroundColor : .clear, lineWidth: 3)
                 )
+        .background()
         .onTapGesture {
             if sound.storageUrl != nil {
                 viewModel.handle(SoundsListViewEvent.tapOnCell(sound: sound))

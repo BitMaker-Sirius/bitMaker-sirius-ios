@@ -12,15 +12,14 @@ struct ButtomSoundView: View {
     @State var sound:Sound
     var buttonClicked: (() -> Void)?
     var body: some View {
-        VStack {
-            Button(action: {
-                buttonClicked?()
-            }) {
-                Text(sound.emoji ?? "")
-            }
-            Text(sound.name)
-                .font(customFont: .subtitle, size: 11)
-                .foregroundColor(Color.onBackgroundColor)
+        Button(action: {
+            buttonClicked?()
+        }) {
+            Text(sound.emoji ?? "")
         }
+        .padding()
+        .background(Color.backgroundColor)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(color: Color.onBackgroundColor, radius: 1)
     }
 }

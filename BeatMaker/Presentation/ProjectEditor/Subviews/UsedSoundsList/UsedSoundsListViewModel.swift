@@ -15,10 +15,10 @@ final class UsedTrackViewModel: UsedTrackViewModeling {
     var state = UsedTrackViewState()
     
     func shouldDeleteTrack(id: String) {
-        guard let index = state.usedSoundsArray.firstIndex(where: {$0.id == id}) else {
+        guard let index = state.usedTacksArray.firstIndex(where: {$0.id == id}) else {
             return
         }
-        state.usedSoundsArray.remove(at: index)
+        state.usedTacksArray.remove(at: index)
     }
     
     init() {
@@ -26,6 +26,6 @@ final class UsedTrackViewModel: UsedTrackViewModeling {
     }
     
     func updateTracks(_ tracks: [Track]) {
-        state.usedSoundsArray = tracks
+        state.usedTacksArray = tracks
     }
 }

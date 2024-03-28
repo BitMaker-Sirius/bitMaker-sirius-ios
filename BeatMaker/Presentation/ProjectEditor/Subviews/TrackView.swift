@@ -14,9 +14,10 @@ struct TrackView: View {
     var body: some View {
         VStack {
             Text(sound.emoji ?? "")
-            Text(sound.name)
-                .font(customFont: .subtitle, size: 11)
-                .foregroundColor(Color.onBackgroundColor)
         }
+//        .padding(7)
+//        .background()
+//        .clipShape(RoundedRectangle(cornerRadius: 8))
+//        .shadow(radius: 1)
     }
 }
