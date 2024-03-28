@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 import AVFoundation
 
+struct FirebaseAudioInfo: Hashable {
+    let name: String
+    let emoji: String
+}
+
 final class FileManagerImp: FileManagerProtocol {
     
     var imageCache: [String: UIImage] = [:]
@@ -23,13 +28,13 @@ final class FileManagerImp: FileManagerProtocol {
         "s6-edge-sms",
     ]
     
-    private let firebaseSoundsStringURLs: [String: String] = [
-        "bell": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/bell.mp3?alt=media&token=8ab5f9d0-7d7e-4d14-b1a5-313b70ecaf55",
-        "kick": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/kick.mp3?alt=media&token=6a420876-bf5b-48e4-99eb-59e2fde5635c",
-        "pulse": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/pulse.mp3?alt=media&token=824237fd-264b-4af7-b459-beada300de10",
-        "quack": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/quack.mp3?alt=media&token=f90b1583-fbe9-48ee-a16b-b6821dce9e5b",
-        "snap": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snap.mp3?alt=media&token=61cd6ca6-4464-43ac-9572-159ca14319ba",
-        "snare": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snare.mp3?alt=media&token=ff4ceafc-25a9-45f1-b6f6-fb00f6c809a5"
+    private let firebaseSoundsStringURLs: [FirebaseAudioInfo: String] = [
+        FirebaseAudioInfo(name: "bell", emoji: "\u{1F496}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/bell.mp3?alt=media&token=8ab5f9d0-7d7e-4d14-b1a5-313b70ecaf55",
+        FirebaseAudioInfo(name: "kick", emoji: "\u{1F447}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/kick.mp3?alt=media&token=6a420876-bf5b-48e4-99eb-59e2fde5635c",
+        FirebaseAudioInfo(name: "pulse", emoji: "\u{1F448}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/pulse.mp3?alt=media&token=824237fd-264b-4af7-b459-beada300de10",
+        FirebaseAudioInfo(name: "quack", emoji: "\u{1F699}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/quack.mp3?alt=media&token=f90b1583-fbe9-48ee-a16b-b6821dce9e5b",
+        FirebaseAudioInfo(name: "snap", emoji: "\u{1F490}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snap.mp3?alt=media&token=61cd6ca6-4464-43ac-9572-159ca14319ba",
+        FirebaseAudioInfo(name: "snare", emoji: "\u{1F476}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snare.mp3?alt=media&token=ff4ceafc-25a9-45f1-b6f6-fb00f6c809a5"
     ]
     
     init(networkService: NetworkManager, audioDataStorage: any AudioDataStorage, imageDataStorage: any ImageDataStorage) {
@@ -241,7 +246,7 @@ final class FileManagerImp: FileManagerProtocol {
         
     }
     
-    func getAvailableFirebaseSoundsList() -> [String: String] {
+    func getAvailableFirebaseSoundsList() -> [FirebaseAudioInfo: String] {
         return firebaseSoundsStringURLs
     }
     

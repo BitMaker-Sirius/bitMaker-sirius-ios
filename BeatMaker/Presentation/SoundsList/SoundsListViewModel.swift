@@ -68,7 +68,7 @@ class SoundsListViewModelImp: SoundsListViewModel {
             case .success(let soundArray):
                 for storedSound in soundArray {
                     for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
-                        if storedSound.name == key {
+                        if storedSound.name == key.name {
                             state.allAvailableSounds.append(storedSound)
                             print("\(key) from realm")
                         }
@@ -79,25 +79,22 @@ class SoundsListViewModelImp: SoundsListViewModel {
                 for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
                     let emoji = String(UnicodeScalar(Array(0x1F601...0x1F64F).randomElement()!)!)
                     let id = UUID().uuidString
-                    state.allAvailableSounds.append(Sound(audioFileId: id, name: key, emoji: emoji, networkUrl: value, storageUrl: nil))
+                    state.allAvailableSounds.append(Sound(audioFileId: id, name: key.name, emoji: key.emoji, networkUrl: value, storageUrl: nil))
                     print("\(key) from net")
                 }
             }
         }
         
         for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
-            if !state.allAvailableSounds.contains(where: { $0.name == key }) {
+            if !state.allAvailableSounds.contains(where: { $0.name == key.name }) {
                 let emoji = String(UnicodeScalar(Array(0x1F601...0x1F64F).randomElement()!)!)
                 let id = UUID().uuidString
-                let newSound = Sound(audioFileId: id, name: key, emoji: emoji, networkUrl: value, storageUrl: nil)
+                let newSound = Sound(audioFileId: id, name: key.name, emoji: key.emoji, networkUrl: value, storageUrl: nil)
                 state.allAvailableSounds.append(newSound)
             }
         }
         
         state.allAvailableSounds.sort(by: { $0.id > $1.id })
-        for int in state.allAvailableSounds {
-            print("\(int.storageUrl) + \(int.networkUrl)")
-        }
     }
     
     func handle(_ event: SoundsListViewEvent) {
@@ -187,8 +184,7 @@ class SoundsListViewModelImp: SoundsListViewModel {
         state.indicatorViewState = .loading
         
         for someSound in state.allAvailableSounds {
-            soundsListProvider.add(sound: someSound) { isCompleted in
-                print("STROREEEEE: \(someSound.storageUrl)")
+            soundsListProvider.add(sound: someSound) { _ in
             }
         }
         

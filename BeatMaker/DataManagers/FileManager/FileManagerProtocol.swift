@@ -16,7 +16,7 @@ protocol FileManagerProtocol {
     
     func getAllVAudioFiles(completion: @escaping (Result<[String: AVAudioFile], FileManagersErrors>) -> () )
     func getAudioURl(withId id: String) -> URL 
-    func getAvailableFirebaseSoundsList() -> [String: String]
+    func getAvailableFirebaseSoundsList() -> [FirebaseAudioInfo: String]
     func fetchAudioFromURL(url: String, completion: @escaping (Result<Data, FileManagersErrors>) -> ())
     func getAVAudioFile(withID id: String, fromUrl url: URL, completion: @escaping (Result<AVAudioFile, FileManagersErrors>) -> ())
 //    func saveAVAudioFile(withID id: String, audio: AVAudioFile, completion: @escaping (Result<String, FileManagersErrors>) -> () )
