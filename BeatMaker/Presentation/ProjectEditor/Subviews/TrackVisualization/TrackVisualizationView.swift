@@ -7,12 +7,37 @@
 
 import SwiftUI
 
-struct TrackVisualizationView: View {
+protocol TrackVisualizationViewModeling {
+    
+}
+
+struct TrackVisualizationView<ViewModel: PlayProjectViewModel>: View {
+    @ObservedObject var viewModel: ViewModel
+//    @State var tracks: [Track]
+//    @State var project: [Project]
+//    @State var playbackTimer: Timer
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("\((viewModel.state.project?.tracks.count)!)")
+        Text("\(viewModel.state.currentTime)")
+        ForEach(viewModel.state.project!.tracks, id: \.self) { track in
+            Text((track.sound?.emoji) ?? "don't have an emoji")
+            ForEach(track.points, id: \.startTime) { point in
+                Text("\(point.startTime)")
+            }
+//            Text("\(track.points.count)")
+//                .font(.largeTitle)
+//            ForEach(track.points, id: \.self) { point in
+//                Text("\(point.volume)")
+//                    .font(.largeTitle)
+//            }
+            
+//            ForEach(track.points, id: \.self) { point in
+//
+//            }
+        }
     }
 }
 
-#Preview {
-    TrackVisualizationView()
-}
+//#Preview {
+//    TrackVisualizationView(tracks: "1")
+//}

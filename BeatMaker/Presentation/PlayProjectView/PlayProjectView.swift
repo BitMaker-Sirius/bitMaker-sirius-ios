@@ -52,14 +52,16 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                     .shadow(color: Color.onBackgroundColor, radius: 5)
                             }
                         }.padding(.horizontal, 24).padding(.top, 12)
-                        
+                        if let tracks = viewModel.state.project?.tracks {
+//                            TrackVisualizationView(tracks: tracks, currentTime: viewModel)
+                            TrackVisualizationView(viewModel: viewModel)
+                        }
                         Spacer()
                         
                         Text(viewModel.state.project?.name ?? "")
                             .padding(.top, 12)
                         
                         Spacer()
-                        
                         HStack(alignment: .center, spacing: 12) {
                             Text(viewModel.state.formatTime)
                                 .frame(width: 50, height: 20, alignment: .leading)
@@ -73,7 +75,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                     .resizable().frame(width: 20, height: 20)
                             }
                         }.padding(30)
-                        
+
                         HStack(alignment: .center) {
                             if viewModel.state.isList {
                                 Button {
