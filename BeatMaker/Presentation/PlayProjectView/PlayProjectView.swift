@@ -58,6 +58,8 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                         
                         Spacer()
                         
+                        SpeechVizualizationView(projectId: projectId, viewModel: viewModel)
+                        
                         Text(viewModel.state.project?.name ?? "")
                             .padding(.top, 12)
                         

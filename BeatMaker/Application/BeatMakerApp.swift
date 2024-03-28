@@ -14,6 +14,7 @@ struct BeatMakerApp: App {
     var body: some Scene {
         WindowGroup {
             router.assembly.rootView()
+//            SpeechVizualizationView()
         }
     }
 }
