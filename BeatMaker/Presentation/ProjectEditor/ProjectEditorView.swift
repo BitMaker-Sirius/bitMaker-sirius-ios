@@ -47,7 +47,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "chevron.left")
-                                .font(.title2)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                         
@@ -55,6 +55,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             .onChange(of: proxyProjectName, { oldValue, newValue in
                                 viewModel.handle(.onChangeName(projectName: proxyProjectName))
                             })
+                            .font(.system(size: 20))
                             .disableAutocorrection(true)
                             .textInputAutocapitalization(.never)
                         
@@ -65,7 +66,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "waveform")
-                                .font(.title2)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                     }

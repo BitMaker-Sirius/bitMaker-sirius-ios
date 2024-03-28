@@ -34,7 +34,7 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                                 viewModel.handle(.tapBackButton)
                             } label: {
                                 Image(systemName: "chevron.left")
-                                    .font(.title2)
+                                    .font(.system(size: 30))
                                     .foregroundColor(Color.onBackgroundColor)
                             }
                             
@@ -45,6 +45,7 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                         Spacer()
 
                         Text(L10n.SoundsList.title)
+                            .font(.system(size: 20))
                             .bold()
 
                         Spacer()

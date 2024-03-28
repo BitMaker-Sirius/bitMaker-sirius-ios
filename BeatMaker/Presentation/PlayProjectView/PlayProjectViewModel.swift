@@ -14,7 +14,6 @@ enum PlayProjectViewEvent {
     case nextTap
     case prevTap
     case editTap
-    case likeTap
     case backTap
 }
 
@@ -72,8 +71,6 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         case .editTap:
             stopPlayback()
             toProjectEditor()
-        case .likeTap:
-            likeTap()
         case .backTap:
             stopPlayback()
             toMainView()
