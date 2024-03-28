@@ -1,0 +1,19 @@
+// Main
+
+"main.new-project" = "Новый трек";
+"main.my-tracks" = "Мои треки";
+"main.edit" = "редактировать";
+
+// ProjectEditor
+
+"project-editor.project-name-placeholder" = "Название проекта";
+"project-editor.volume" = "Громкость";
+"project-editor.pitch" = "Тон";
+"project-editor.all-sounds" = "Выбранные звуки";
+
+"project-editor.alert.change-project-name" = "Введите название проекта";
+"project-editor.alert.accept" = "Принять";
+
+// SoundsList
+
+"sounds-list.title" = "Библиотека звуков";

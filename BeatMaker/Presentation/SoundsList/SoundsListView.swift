@@ -34,16 +34,18 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                                 viewModel.handle(.tapBackButton)
                             } label: {
                                 Image(systemName: "chevron.left")
-                                    .font(.title2)
+                                    .font(.system(size: 30))
                                     .foregroundColor(Color.onBackgroundColor)
                             }
                             
                             Spacer()
                         }
                         
+                        
                         Spacer()
 
-                        Text("Библиотека звуков")
+                        Text(L10n.SoundsList.title)
+                            .font(.system(size: 20))
                             .bold()
 
                         Spacer()
@@ -53,24 +55,26 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                     
                     ScrollView {
                         
-                        addNewSoundsButton
+//                        addNewSoundsButton
                         
                         LazyVStack {
-                            ForEach(viewModel.state.soundsList) { sound in
+                            ForEach(viewModel.state.allAvailableSounds, id: \.self) { sound in
                                 soundCell(withSound: sound)
-                                    .contextMenu {
-                                        Button("Поменять эмодзи", systemImage: "music.note") {
-                                            viewModel.handle(.editSoundEmoji)
-                                        }
-                                        
-                                        Button("Поменять название", systemImage: "pencil") {
-                                            viewModel.handle(.editSoundName)
-                                        }
-                                        
-                                        Button("Удалить", systemImage: "trash", role: .destructive) {
-                                            viewModel.handle(.deleteSound(sound: sound))
-                                        }
-                                    }
+//                                    .contentShape(ContentShapeKinds.contextMenuPreview,
+//                                                  Capsule(style: .continuous)
+//                                    )
+//                                    .contextMenu {
+//                                        Button("Поменять эмодзи", systemImage: "music.note") {
+//                                            viewModel.handle(.editSoundEmoji)
+//                                        }
+//                                        
+//                                        Button("Поменять название", systemImage: "pencil") {
+//                                            viewModel.handle(.editSoundName(sound: sound))
+//                                        }
+////                                        Button("Удалить", systemImage: "trash", role: .destructive) {
+////                                            viewModel.handle(.deleteSound(sound: sound))
+////                                        } 
+//                                    }
                             }
                         }
                         .padding([.leading, .trailing])
@@ -106,51 +110,62 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
     @ViewBuilder
     func soundCell(withSound sound: Sound) -> some View {
         
-        HStack {
+        HStack(alignment: .center, spacing: 5) {
+            
             Spacer()
             
             Text(sound.emoji ?? ConstantsForView.defaultEmoji)
                 .font(.system(size: ConstantsForView.ImageSize))
-            
             Spacer()
-            
-            VStack {
-                Text(sound.name)
-                Text("Нажмите для добавления")
-            }
-            
-            Spacer()
-            
-            Button {
-                viewModel.handle(SoundsListViewEvent.tapOnCellPlayButton)
-            } label: {
-                Image(systemName: "play.circle")
-                    .resizable()
-                    .frame(width: ConstantsForView.ImageSize, height: ConstantsForView.ImageSize)
+            HStack() {
+                VStack(alignment: .listRowSeparatorLeading) {
+                    Text(sound.name)
+                        .font(.system(size: 18))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.onBackgroundColor)
+                        .padding(.top, 10)
+                    
+                    Text(sound.storageUrl != nil ? (viewModel.state.project?.preparedSounds.contains(sound) == true ? "Нажмите для удаления" : "Нажмите для добавления") : "Загрузите звук")
+                        .font(.system(size: 14))
+                        .fontWeight(.thin)
+                        .foregroundColor(Color.onBackgroundColor)
+                    
+                }
+                
+                Spacer()
+                
+                HStack(alignment: .center) {
+                    Button {
+                        if let url = sound.storageUrl {
+                            viewModel.handle(SoundsListViewEvent.tapOnCellPlayButton(url: url))
+                        } else {
+                            viewModel.handle(SoundsListViewEvent.tapOnCellDownloadButton(sound: sound))
+                        }
+                        
+                    } label: {
+                        Image(systemName: viewModel.state.allAvailableSounds.first(where: { $0.id == sound.id })?.storageUrl != nil ? "play.circle" : "icloud.and.arrow.down")
+                            .resizable()
+                            .frame(width: sound.storageUrl != nil ?  ConstantsForView.ImageSize : 30, height: sound.storageUrl != nil ?  ConstantsForView.ImageSize : 30)
+                            .foregroundColor(Color.onBackgroundColor)
+                    }
+                }
+                .frame(width: ConstantsForView.ImageSize, height: ConstantsForView.ImageSize)
             }
             
             Spacer()
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 75)
-        .background(viewModel.state.project?.preparedSounds.contains(sound) == true ? Color.gray.opacity(0.1) : Color.gray.opacity(0.3))
-        .clipShape(.rect(cornerRadius: 10))
+        .frame(height: 76)
+        .foregroundColor(.purple)
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(viewModel.state.project?.preparedSounds.contains(sound) == true ? Color.backgroundColor : .clear, lineWidth: 3)
+                )
         .onTapGesture {
-            viewModel.handle(SoundsListViewEvent.tapAddToTrackButton(sound: sound))
+            if sound.storageUrl != nil {
+                viewModel.handle(SoundsListViewEvent.tapOnCell(sound: sound))
+            }
         }
-    }
-    
-    // button of adding new sound to list of all sounds
-     var addNewSoundsButton: some View {
-        Button {
-            viewModel.handle(SoundsListViewEvent.tapAddNewSoundButton)
-        } label: {
-            Text("Добавить звуки в библитеку всех звуков")
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 75)
-        .background(.gray.opacity(0.3))
-        .clipShape(.rect(cornerRadius: 10))
-        .padding([.leading, .trailing])
+        .padding(.vertical, 2)
     }
 }

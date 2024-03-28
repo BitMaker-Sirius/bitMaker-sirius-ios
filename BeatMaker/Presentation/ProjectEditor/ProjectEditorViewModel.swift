@@ -11,6 +11,7 @@ import SwiftUI
 enum ProjectEditorViewEvent {
     case onLoadData(projectId: String?)
     case onChangeName(projectName: String)
+    case onCheckName
     
     case tapBackButton
     case tapVisualizationButton
@@ -23,6 +24,7 @@ enum ProjectEditorViewEvent {
 struct ProjectEditorViewState: BaseViewState {
     var indicatorViewState: IndicatorViewState
     var project: Project?
+    var isNeedProjectRenameAlert: Bool
     
     var currentTime: Double = 0
     var totalTime: Double = 100
@@ -56,17 +58,20 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     @Published var state = ProjectEditorViewState(
         indicatorViewState: .loading,
         project: nil,
+        isNeedProjectRenameAlert: false,
         isPlaying: false,
         pauseState: "play.fill",
         isChervonDown: false,
         chervonDirection: "chevron.down",
         choosenSoundId: nil,
         soundsArray: [
-            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
-            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
-            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
-            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
-            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "long-sound-on-sms-11-seconds-about-china", name: "china", emoji: "\u{1F1E8}\u{1F1F3}"),
+//            Sound(audioFileId: "iphone-sms", name: "iphone-sms", emoji: "\u{1F4F1}"),
+//            Sound(audioFileId: "sms-for-samsung", name: "sms-for-samsung", emoji: "\u{1F4F1}"),
+//            Sound(audioFileId: "alarm-ringing-for-sms", name: "alarm-ringing-for-sms", emoji: "\u{23F0}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
+//            Sound(audioFileId: "s6-edge-sms", name: "s6-edge-sms", emoji: "\u{1F4E7}"),
         ],
         usedTrackViewModel: UsedTrackViewModel()
     )
@@ -85,6 +90,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         projectPlaybackService = ProjectPlaybackServiceImp(trackPlaybackService: trackPlaybackService)
         self.projectProvider = projectProvider
         countTotalTime()
+        if let array = state.project?.preparedSounds {
+            selectedSounds = array
+        }
     }
     
     func handle(_ event: ProjectEditorViewEvent) {
@@ -93,12 +101,24 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             loadData(projectId: projectId)
         case .onChangeName(projectName: let projectName):
             changeName(projectName: projectName)
+        case .onCheckName:
+            checkName()
         case .tapBackButton:
+            if state.project?.name == "" {
+                state.isNeedProjectRenameAlert = true
+                return
+            }
+            
             stopProcess()
             saveData() { [weak self] _ in
                 self?.toMainView()
             }
         case .tapVisualizationButton:
+            if state.project?.name == "" {
+                state.isNeedProjectRenameAlert = true
+                return
+            }
+            
             stopProcess()
             saveData() { [weak self] projectId in
                 self?.toPlayProjectView(projectId: projectId)
@@ -122,7 +142,8 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             addNewTrackIfNeeded()
         }
         state.choosenSoundId = id
-        state.selectedSound = state.soundsArray.first { $0.id == id }
+        state.selectedSound = state.project?.preparedSounds.first { $0.id == id }
+//        state.selectedSound = state.soundsArray.first { $0.id == id }
     }
     
     func areUuidsSimilar(id1: String, id2: String) -> Bool {
@@ -147,20 +168,28 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         state.indicatorViewState = .loading
         
         guard state.project == nil else {
-            state.indicatorViewState = .display
+            guard let id = state.project?.id else {
+                return
+            }
+            
+            projectProvider.loadData(by: id) { [weak self] result in
+                switch result {
+                case .success(let project):
+                    self?.state.project = project
+                    self?.countTotalTime()
+                    self?.state.indicatorViewState = .display
+                case .failure(_):
+                    self?.state.indicatorViewState = .error
+                }
+            }
             return
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 130, name: "")) { [weak self] project, isCompleted in
-                if isCompleted {
-                    self?.state.project = project
-                    self?.countTotalTime()
-                    self?.state.indicatorViewState = .display
-                } else {
-                    self?.state.indicatorViewState = .error
-                }
-            }
+            state.project = .init(metronomeBpm: 130, name: "")
+            countTotalTime()
+            state.indicatorViewState = .display
+            
             return
         }
         
@@ -196,6 +225,12 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         state.project?.name = projectName
     }
     
+    func checkName() {
+        if state.project?.name != "" {
+            state.isNeedProjectRenameAlert = false
+        }
+    }
+    
     private func stopProcess() {
         if state.isPlaying {
             playTap()
@@ -211,6 +246,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         soundPlaybackService.stopAllSounds()
         
         state.choosenSoundId = nil
+        state.selectedSound = nil
     }
     
     private func countTotalTime() {
@@ -220,7 +256,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     
     private func playTap() {
         state.isPlaying.toggle()
-        state.pauseState = (state.isPlaying ? "pause.fill": "play.fill")
+        state.pauseState = (state.isPlaying ? "stop.fill": "play.fill")
         
         if state.isPlaying {
             startPlayback()
@@ -286,7 +322,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func handleCoordinateChange(_ point: CGPoint) {
-        guard let sound = state.selectedSound, let soundUrl = Bundle.main.url(forResource: sound.audioFileId, withExtension: "mp3") else {
+        guard let sound = state.selectedSound, let storageUrl = sound.storageUrl, let soundUrl = URL(string: storageUrl) else {
             return
         }
         let volume = Double(point.y)

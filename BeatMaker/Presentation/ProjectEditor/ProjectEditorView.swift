@@ -23,6 +23,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     var barHeight: CGFloat = 1
     
     @State private var proxyProjectName: String = ""
+    @State private var proxyIsNeedProjectRenameAlert: Bool = false
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTrackView = false
     @State private var isShowingAllTrackListView = false
@@ -43,25 +44,29 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     HStack {
                         Button {
                             viewModel.handle(.tapBackButton)
+                            proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "chevron.left")
-                                .font(.title2)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                         
-                        TextField("Название проекта", text: $proxyProjectName)
+                        TextField(L10n.ProjectEditor.projectNamePlaceholder, text: $proxyProjectName)
                             .onChange(of: proxyProjectName, { oldValue, newValue in
                                 viewModel.handle(.onChangeName(projectName: proxyProjectName))
                             })
+                            .font(.system(size: 20))
                             .disableAutocorrection(true)
+                            .textInputAutocapitalization(.never)
                         
                         Spacer()
                         
                         Button {
                             viewModel.handle(.tapVisualizationButton)
+                            proxyIsNeedProjectRenameAlert = viewModel.state.isNeedProjectRenameAlert
                         } label: {
                             Image(systemName: "waveform")
-                                .font(.title2)
+                                .font(.system(size: 30))
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                     }
@@ -120,18 +125,10 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             
                             HStack {
-                                Text("Звуки")
+                                Text(L10n.ProjectEditor.allSounds)
                                     .bold()
                                 
                                 Spacer()
-                                
-                                Button(action: {
-                                }) {
-                                    Text("редактировать")
-                                        .fontWeight(.thin)
-                                        .foregroundColor(Color.onBackgroundColor)
-                                }
-                                .allowsHitTesting(!isShowingUsedTrackView)
                             }
                             .padding(.horizontal, 15)
                             .padding(.top, 15)
@@ -146,7 +143,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                                 
                                 LazyVGrid(columns: columns) {
-                                    ForEach(viewModel.state.soundsArray, id: \.self) {sound in
+                                    ForEach(viewModel.state.project?.preparedSounds ?? viewModel.state.soundsArray, id: \.self) {sound in
                                         ButtomSoundView(sound: sound) {
                                             viewModel.setSelectedSound(at: sound.id)
                                         }
@@ -165,20 +162,17 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     viewModel.handle(.recordTap)
                                 }) {
                                     Image(systemName: "record.circle")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
+                                        .font(.system(size: 40))
                                         .foregroundColor(viewModel.state.isRecording ? .red : Color.onBackgroundColor)
                                 }
+                                
                                 Spacer()
                                 
                                 Button(action: {
                                     viewModel.handle(.tapPlay)
                                 }) {
                                     Image(systemName: viewModel.state.pauseState)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
+                                        .font(.system(size: 60))
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
                                 
@@ -188,14 +182,12 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                     viewModel.handle(.tapAddSounds)
                                 }) {
                                     Image(systemName: "plus.circle")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 30, height: 40)
+                                        .font(.system(size: 40))
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
                             }
                             .allowsHitTesting(!isShowingUsedTrackView)
-                            .padding(.horizontal, 70)
+                            .padding(.horizontal, 40)
                             .padding(.bottom, 15)
                         }
                         .blur(radius: isShowingUsedTrackView ? 3 : 0)
@@ -214,7 +206,6 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             viewModel.handle(.tapChervon)
                         }
                         self.isShowingUsedTrackView = false
-                        
                     }
                 }
                 .onAppear {
@@ -243,6 +234,16 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     }
                 }
             }
+        }
+        .alert(L10n.ProjectEditor.Alert.changeProjectName, isPresented: $proxyIsNeedProjectRenameAlert) {
+            TextField(L10n.ProjectEditor.projectNamePlaceholder, text: $proxyProjectName)
+                .onChange(of: proxyProjectName, { oldValue, newValue in
+                    viewModel.handle(.onChangeName(projectName: proxyProjectName))
+                })
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            
+            Button(L10n.ProjectEditor.Alert.accept) { viewModel.handle(.onCheckName) }
         }
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)

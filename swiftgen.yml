@@ -1,0 +1,9 @@
+input_dir: BeatMaker/Sources/Resources
+output_dir: BeatMaker/Sources/Generated
+strings:
+    inputs:
+        - Base.lproj/Localizable.strings
+        - Base.lproj/Localizable.stringsdict
+    outputs:
+        templatePath: SwiftgenTemplates/swiftgen-strings-custom-template.stencil
+        output: Strings.swift

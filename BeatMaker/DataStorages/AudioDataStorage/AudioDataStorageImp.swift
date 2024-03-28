@@ -100,9 +100,9 @@ extension AudioDataStorage {
     }
 }
     
-private extension AudioDataStorage {
-    func getPath() -> URL {
+extension AudioDataStorage {
     
+    func getPath() -> URL {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return documentsDirectory.appendingPathComponent("Sounds")
     }

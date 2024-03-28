@@ -28,7 +28,7 @@ final class Assembly {
     }
     
     func soundsListView(projectId: String) -> SoundsListView<some SoundsListViewModel> {
-        SoundsListView(projectId: projectId, viewModel: soundsListViewModel)
+        SoundsListView(projectId: projectId, viewModel: self.soundsListViewModel)
     }
     
     // MARK: ViewModels
@@ -53,7 +53,7 @@ final class Assembly {
     }()
     
     private lazy var soundsListViewModel: SoundsListViewModelImp = {
-        SoundsListViewModelImp(projectProvider: projectProvider, soundsListProvider: soundsListProvider)
+        SoundsListViewModelImp(projectProvider: projectProvider, soundsListProvider: soundsListProvider, soundPlaybackService: soundPlaybackService, fileManager: fileManager)
     }()
     
     // MARK: Providers
@@ -94,7 +94,7 @@ final class Assembly {
         SoundDataStorageImp(realmManager: realmManager)
     }()
     
-    private lazy var aundioDataStorage: any AudioDataStorage = {
+    private lazy var audioDataStorage: any AudioDataStorage = {
         AudioDataStorageImp()
     }()
     
@@ -108,6 +108,11 @@ final class Assembly {
         try? Realm(configuration: .init(deleteRealmIfMigrationNeeded: true))
     }()
     
-    // FileManager
-    // NetworkManager
+    private lazy var fileManager: any FileManagerProtocol = {
+        FileManagerImp(networkService: networkManager, audioDataStorage: audioDataStorage, imageDataStorage: imageDataStorage)
+    }()
+    
+    private lazy var networkManager: any NetworkManager = {
+        NetworkManagerImp()
+    }()
 }

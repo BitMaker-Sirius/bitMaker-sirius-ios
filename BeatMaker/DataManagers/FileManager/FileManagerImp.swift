@@ -9,8 +9,13 @@ import Foundation
 import UIKit
 import AVFoundation
 
-final class FileManagerImp: FileManagerProtocol {
+struct FirebaseAudioInfo: Hashable {
+    let name: String
+    let emoji: String
+}
 
+final class FileManagerImp: FileManagerProtocol {
+    
     var imageCache: [String: UIImage] = [:]
     var audioCache: [String: AVAudioFile] = [:]
     
@@ -18,14 +23,18 @@ final class FileManagerImp: FileManagerProtocol {
     private let audioDataStorage: any AudioDataStorage
     private let imageDataStorage: any ImageDataStorage
     
-    private let defaultSoundsStringURLs: [String: String] = [
-        "bell": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/bell.mp3?alt=media&token=8ab5f9d0-7d7e-4d14-b1a5-313b70ecaf55",
-        "kick": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/kick.mp3?alt=media&token=6a420876-bf5b-48e4-99eb-59e2fde5635c",
-        "pulse": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/pulse.mp3?alt=media&token=824237fd-264b-4af7-b459-beada300de10",
-        "quack": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/quack.mp3?alt=media&token=f90b1583-fbe9-48ee-a16b-b6821dce9e5b",
-        "snap": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snap.mp3?alt=media&token=61cd6ca6-4464-43ac-9572-159ca14319ba",
-        "snare": "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snare.mp3?alt=media&token=ff4ceafc-25a9-45f1-b6f6-fb00f6c809a5",
-        "example long song": "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3"
+    private let bundleSounds: [String] = [
+        "iphone-sms",
+        "s6-edge-sms",
+    ]
+    
+    private let firebaseSoundsStringURLs: [FirebaseAudioInfo: String] = [
+        FirebaseAudioInfo(name: "bell", emoji: "\u{1f6ce}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/bell.mp3?alt=media&token=8ab5f9d0-7d7e-4d14-b1a5-313b70ecaf55",
+        FirebaseAudioInfo(name: "kick", emoji: "\u{1f94a}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/kick.mp3?alt=media&token=6a420876-bf5b-48e4-99eb-59e2fde5635c",
+        FirebaseAudioInfo(name: "pulse", emoji: "\u{1f916}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/pulse.mp3?alt=media&token=824237fd-264b-4af7-b459-beada300de10",
+        FirebaseAudioInfo(name: "duck quack", emoji: "\u{1f986}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/quack.mp3?alt=media&token=f90b1583-fbe9-48ee-a16b-b6821dce9e5b",
+        FirebaseAudioInfo(name: "snap", emoji: "\u{1fa87}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snap.mp3?alt=media&token=61cd6ca6-4464-43ac-9572-159ca14319ba",
+        FirebaseAudioInfo(name: "snare", emoji: "\u{1f941}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snare.mp3?alt=media&token=ff4ceafc-25a9-45f1-b6f6-fb00f6c809a5"
     ]
     
     init(networkService: NetworkManager, audioDataStorage: any AudioDataStorage, imageDataStorage: any ImageDataStorage) {
@@ -33,6 +42,15 @@ final class FileManagerImp: FileManagerProtocol {
         self.networkService = networkService
         self.audioDataStorage = audioDataStorage
         self.imageDataStorage = imageDataStorage
+    }
+    
+    func getAudioURl(withId id: String) -> URL {
+        
+        if bundleSounds.contains(id) {
+            return Bundle.main.url(forResource: id, withExtension: "mp3")!
+        } else {
+            return audioDataStorage.getFilePath(withId: id)
+        }
     }
     
     func saveUIImage(withID id: String, image: UIImage, completion: @escaping (Result<String?, FileManagersErrors>) -> () ) {
@@ -193,7 +211,7 @@ final class FileManagerImp: FileManagerProtocol {
         }
     }
     
-    private func fetchAudioFromURL(url: String, completion: @escaping (Result<Data, FileManagersErrors>) -> ()) {
+    func fetchAudioFromURL(url: String, completion: @escaping (Result<Data, FileManagersErrors>) -> ()) {
         
         networkService.fetchData(fromStringURL: url) { networkResult in
             switch networkResult {
@@ -223,17 +241,26 @@ final class FileManagerImp: FileManagerProtocol {
         }
     }
     
+    func fetchSoundToStorage(withUrl: String, completion: @escaping (Result<[URL], FileManagersErrors>) -> ()) {
+        
+        
+    }
+    
+    func getAvailableFirebaseSoundsList() -> [FirebaseAudioInfo: String] {
+        return firebaseSoundsStringURLs
+    }
+    
     func fetchAllSoundsToStorage(completion: @escaping (Result<[String: AVAudioFile], FileManagersErrors>) -> ()) {
         
-        for key in defaultSoundsStringURLs.keys {
-            if let stringURL = defaultSoundsStringURLs[key] {
+        for key in firebaseSoundsStringURLs.keys {
+            if let stringURL = firebaseSoundsStringURLs[key] {
                 fetchAudioFromURL(url: stringURL) { result in
                     switch result {
                     case .success(let data):
                         let soundId = UUID().uuidString
                         self.saveAVAudioFileFromData(withId: soundId, data: data) { saveResult in
                             switch saveResult{
-                            case .success(let url):
+                            case .success(_):
                                 print("saved")
                             case .failure(let error):
                                 print("\(error): cant save mp3 from url \(stringURL)")

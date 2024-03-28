@@ -20,6 +20,9 @@
 		20F6F4E92BB38A2400D0D4DC /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4E82BB38A2400D0D4DC /* FileManagerProtocol.swift */; };
 		20F6F4EB2BB38A3300D0D4DC /* FileManagerImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4EA2BB38A3300D0D4DC /* FileManagerImp.swift */; };
 		20F6F4ED2BB38D1900D0D4DC /* FileManagerErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6F4EC2BB38D1900D0D4DC /* FileManagerErrors.swift */; };
+		5E5985BE2BB57C4E00677753 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E5985B22BB57C4D00677753 /* Localizable.strings */; };
+		5E5985BF2BB57C4E00677753 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 5E5985B42BB57C4D00677753 /* Localizable.stringsdict */; };
+		5E5985C22BB57C4E00677753 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5985BA2BB57C4E00677753 /* Strings.swift */; };
 		5EAF761B2BAE523100C4B065 /* ProjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */; };
 		5EAF761E2BAEBF9700C4B065 /* ProjectProviderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */; };
 		5EAF76262BAEC0D900C4B065 /* ProjectsListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF76252BAEC0D900C4B065 /* ProjectsListProvider.swift */; };
@@ -52,6 +55,7 @@
 		5ECF79F62BB0A0150014896D /* TrackPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECF79F52BB0A0150014896D /* TrackPlaybackService.swift */; };
 		5ECF79F82BB0A0550014896D /* ProjectPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECF79F72BB0A0550014896D /* ProjectPlaybackService.swift */; };
 		5ECF79FA2BB0A08E0014896D /* SoundPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECF79F92BB0A08E0014896D /* SoundPlaybackService.swift */; };
+		5ECF9BAC2BB5900A002F49F8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ECF9BAB2BB5900A002F49F8 /* Launch Screen.storyboard */; };
 		5ED47CE32BACEA10008B4D31 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE22BACEA10008B4D31 /* Track.swift */; };
 		5ED47CE52BACEA65008B4D31 /* TrackPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */; };
 		5EE603B02BB3448500CC7440 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE603AC2BB3448500CC7440 /* RootView.swift */; };
@@ -83,7 +87,6 @@
 		728CE11E2BAADCCC00542975 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE11D2BAADCCC00542975 /* Sound.swift */; };
 		728CE1212BAADD3000542975 /* ProjectEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1202BAADD3000542975 /* ProjectEditorView.swift */; };
 		728CE1232BAADD5B00542975 /* ProjectEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1222BAADD5B00542975 /* ProjectEditorViewModel.swift */; };
-		728CE1272BAADEE700542975 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 728CE1292BAADEE700542975 /* Localizable.strings */; };
 		728CE12D2BAAE0E800542975 /* PlayProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE12C2BAAE0E800542975 /* PlayProjectView.swift */; };
 		728CE12F2BAAE75000542975 /* PlayProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */; };
 		728CE1322BAAE90D00542975 /* SoundsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CE1312BAAE90D00542975 /* SoundsListViewModel.swift */; };
@@ -95,7 +98,20 @@
 		72CA28F22BB1EBFA0048B253 /* sms-for-samsung.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28EE2BB1EBFA0048B253 /* sms-for-samsung.mp3 */; };
 		72CA28F42BB2081B0048B253 /* s6-edge-sms.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */; };
 		72CA28F62BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */; };
+		E98046C62BB5AC32004EBBD7 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */; };
+		E98046C82BB5AC77004EBBD7 /* ProjectEditorViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */; };
+		E98046CA2BB5ACF3004EBBD7 /* SoundsListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E98046C02BB59B01004EBBD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 728CE0F62BAAC9FF00542975 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 728CE0FD2BAAC9FF00542975;
+			remoteInfo = BeatMaker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		007AE1182BB196D200E4367E /* UsedSoundsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedSoundsListView.swift; sourceTree = "<group>"; };
@@ -111,6 +127,11 @@
 		20F6F4E82BB38A2400D0D4DC /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
 		20F6F4EA2BB38A3300D0D4DC /* FileManagerImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerImp.swift; sourceTree = "<group>"; };
 		20F6F4EC2BB38D1900D0D4DC /* FileManagerErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerErrors.swift; sourceTree = "<group>"; };
+		5E5985B32BB57C4D00677753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E5985B52BB57C4D00677753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = Base; path = Base.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		5E5985BA2BB57C4E00677753 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		5E5985C52BB57CEF00677753 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E5985C62BB57CF000677753 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EAF761A2BAE523100C4B065 /* ProjectProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProvider.swift; sourceTree = "<group>"; };
 		5EAF761D2BAEBF9700C4B065 /* ProjectProviderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProviderImp.swift; sourceTree = "<group>"; };
 		5EAF76252BAEC0D900C4B065 /* ProjectsListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListProvider.swift; sourceTree = "<group>"; };
@@ -144,6 +165,7 @@
 		5ECF79F52BB0A0150014896D /* TrackPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPlaybackService.swift; sourceTree = "<group>"; };
 		5ECF79F72BB0A0550014896D /* ProjectPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPlaybackService.swift; sourceTree = "<group>"; };
 		5ECF79F92BB0A08E0014896D /* SoundPlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlaybackService.swift; sourceTree = "<group>"; };
+		5ECF9BAB2BB5900A002F49F8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		5ED47CE22BACEA10008B4D31 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		5ED47CE42BACEA65008B4D31 /* TrackPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPoint.swift; sourceTree = "<group>"; };
 		5EE603AC2BB3448500CC7440 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -174,8 +196,6 @@
 		728CE11D2BAADCCC00542975 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		728CE1202BAADD3000542975 /* ProjectEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorView.swift; sourceTree = "<group>"; };
 		728CE1222BAADD5B00542975 /* ProjectEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorViewModel.swift; sourceTree = "<group>"; };
-		728CE1282BAADEE700542975 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		728CE12A2BAADEEC00542975 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		728CE12C2BAAE0E800542975 /* PlayProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayProjectView.swift; sourceTree = "<group>"; };
 		728CE12E2BAAE75000542975 /* PlayProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayProjectViewModel.swift; sourceTree = "<group>"; };
 		728CE1312BAAE90D00542975 /* SoundsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsListViewModel.swift; sourceTree = "<group>"; };
@@ -187,6 +207,10 @@
 		72CA28EE2BB1EBFA0048B253 /* sms-for-samsung.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sms-for-samsung.mp3"; sourceTree = "<group>"; };
 		72CA28F32BB2081B0048B253 /* s6-edge-sms.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "s6-edge-sms.mp3"; sourceTree = "<group>"; };
 		72CA28F52BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "long-sound-on-sms-11-seconds-about-china.mp3"; sourceTree = "<group>"; };
+		E98046BC2BB59B01004EBBD7 /* BeatMakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeatMakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
+		E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorViewTests.swift; sourceTree = "<group>"; };
+		E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsListViewTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +220,13 @@
 			files = (
 				5EF976532BB0FCB30015A54C /* RealmSwift in Frameworks */,
 				5EF976512BB0FCB30015A54C /* Realm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98046B92BB59B01004EBBD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +270,23 @@
 				5ECAFA3E2BADA78500FAA2F3 /* VisualizationService */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5E5985B02BB57C4D00677753 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5E5985B22BB57C4D00677753 /* Localizable.strings */,
+				5E5985B42BB57C4D00677753 /* Localizable.stringsdict */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5E5985B92BB57C4E00677753 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				5E5985BA2BB57C4E00677753 /* Strings.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		5EAF761C2BAEBED100C4B065 /* ProjectProvider */ = {
@@ -554,6 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				728CE1002BAAC9FF00542975 /* BeatMaker */,
+				E98046BD2BB59B01004EBBD7 /* BeatMakerTests */,
 				728CE0FF2BAAC9FF00542975 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -562,6 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				728CE0FE2BAAC9FF00542975 /* BeatMaker.app */,
+				E98046BC2BB59B01004EBBD7 /* BeatMakerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -581,7 +631,6 @@
 				5E45CB342BAD06B700E14B41 /* Services */,
 				72CA28EF2BB1EBFA0048B253 /* sounds */,
 				728CE1C12BAD812B00542975 /* Utilities */,
-				728CE1242BAADE3300542975 /* Localization */,
 				728CE1372BAAF61400542975 /* Sources */,
 				728CE1072BAACA0100542975 /* Preview Content */,
 			);
@@ -654,14 +703,6 @@
 			path = ProjectEditor;
 			sourceTree = "<group>";
 		};
-		728CE1242BAADE3300542975 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				728CE1292BAADEE700542975 /* Localizable.strings */,
-			);
-			path = Localization;
-			sourceTree = "<group>";
-		};
 		728CE12B2BAAE0D600542975 /* PlayProjectView */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,8 +725,11 @@
 		728CE1372BAAF61400542975 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5E5985B92BB57C4E00677753 /* Generated */,
+				5E5985B02BB57C4D00677753 /* Resources */,
 				63B8E6932BADC8F9001F3BE2 /* Fonts */,
 				728CE1052BAACA0100542975 /* Assets.xcassets */,
+				5ECF9BAB2BB5900A002F49F8 /* Launch Screen.storyboard */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -712,6 +756,16 @@
 			path = sounds;
 			sourceTree = "<group>";
 		};
+		E98046BD2BB59B01004EBBD7 /* BeatMakerTests */ = {
+			isa = PBXGroup;
+			children = (
+				E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */,
+				E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */,
+				E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */,
+			);
+			path = BeatMakerTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -736,6 +790,24 @@
 			productReference = 728CE0FE2BAAC9FF00542975 /* BeatMaker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E98046BB2BB59B01004EBBD7 /* BeatMakerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98046C42BB59B01004EBBD7 /* Build configuration list for PBXNativeTarget "BeatMakerTests" */;
+			buildPhases = (
+				E98046B82BB59B01004EBBD7 /* Sources */,
+				E98046B92BB59B01004EBBD7 /* Frameworks */,
+				E98046BA2BB59B01004EBBD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E98046C12BB59B01004EBBD7 /* PBXTargetDependency */,
+			);
+			name = BeatMakerTests;
+			productName = BeatMakerTests;
+			productReference = E98046BC2BB59B01004EBBD7 /* BeatMakerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -743,11 +815,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					728CE0FD2BAAC9FF00542975 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					E98046BB2BB59B01004EBBD7 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 728CE0FD2BAAC9FF00542975;
 					};
 				};
 			};
@@ -769,6 +845,7 @@
 			projectRoot = "";
 			targets = (
 				728CE0FD2BAAC9FF00542975 /* BeatMaker */,
+				E98046BB2BB59B01004EBBD7 /* BeatMakerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -781,14 +858,23 @@
 				00E4C0BB2BB57B7A007C3E89 /* mockSound.caf in Resources */,
 				63B8E6972BADC916001F3BE2 /* Manrope-Light.ttf in Resources */,
 				63B8E6982BADC916001F3BE2 /* Manrope-Bold.ttf in Resources */,
+				5E5985BE2BB57C4E00677753 /* Localizable.strings in Resources */,
 				728CE1092BAACA0100542975 /* Preview Assets.xcassets in Resources */,
 				72CA28F22BB1EBFA0048B253 /* sms-for-samsung.mp3 in Resources */,
+				5E5985BF2BB57C4E00677753 /* Localizable.stringsdict in Resources */,
+				5ECF9BAC2BB5900A002F49F8 /* Launch Screen.storyboard in Resources */,
 				72CA28F42BB2081B0048B253 /* s6-edge-sms.mp3 in Resources */,
 				72CA28F02BB1EBFA0048B253 /* alarm-ringing-for-sms.mp3 in Resources */,
-				728CE1272BAADEE700542975 /* Localizable.strings in Resources */,
 				72CA28F62BB208A20048B253 /* long-sound-on-sms-11-seconds-about-china.mp3 in Resources */,
 				72CA28F12BB1EBFA0048B253 /* iphone-sms.mp3 in Resources */,
 				728CE1062BAACA0100542975 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98046BA2BB59B01004EBBD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,6 +892,7 @@
 				728CE12D2BAAE0E800542975 /* PlayProjectView.swift in Sources */,
 				5ECAFA542BADA78500FAA2F3 /* SamplingService.swift in Sources */,
 				728CE1C42BAD812B00542975 /* ImageExtension.swift in Sources */,
+				5E5985C22BB57C4E00677753 /* Strings.swift in Sources */,
 				5ECAFA622BADA78500FAA2F3 /* DataStorage.swift in Sources */,
 				5ECAFA5A2BADA78500FAA2F3 /* VisualizationService.swift in Sources */,
 				5EE603B22BB3448500CC7440 /* Router+EnvironmentValues.swift in Sources */,
@@ -878,16 +965,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E98046B82BB59B01004EBBD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98046C82BB5AC77004EBBD7 /* ProjectEditorViewTests.swift in Sources */,
+				E98046CA2BB5ACF3004EBBD7 /* SoundsListViewTests.swift in Sources */,
+				E98046C62BB5AC32004EBBD7 /* MainViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E98046C12BB59B01004EBBD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 728CE0FD2BAAC9FF00542975 /* BeatMaker */;
+			targetProxy = E98046C02BB59B01004EBBD7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		728CE1292BAADEE700542975 /* Localizable.strings */ = {
+		5E5985B22BB57C4D00677753 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				728CE1282BAADEE700542975 /* en */,
-				728CE12A2BAADEEC00542975 /* ru */,
+				5E5985B32BB57C4D00677753 /* Base */,
+				5E5985C52BB57CEF00677753 /* en */,
+				5E5985C62BB57CF000677753 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		5E5985B42BB57C4D00677753 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E5985B52BB57C4D00677753 /* Base */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1023,6 +1137,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1056,6 +1171,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1070,6 +1186,59 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E98046C22BB59B01004EBBD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S3KD837NRD;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pavel.BeatMakerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeatMaker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BeatMaker";
+			};
+			name = Debug;
+		};
+		E98046C32BB59B01004EBBD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S3KD837NRD;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pavel.BeatMakerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeatMaker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BeatMaker";
 			};
 			name = Release;
 		};
@@ -1090,6 +1259,15 @@
 			buildConfigurations = (
 				728CE10D2BAACA0100542975 /* Debug */,
 				728CE10E2BAACA0100542975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E98046C42BB59B01004EBBD7 /* Build configuration list for PBXNativeTarget "BeatMakerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E98046C22BB59B01004EBBD7 /* Debug */,
+				E98046C32BB59B01004EBBD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
