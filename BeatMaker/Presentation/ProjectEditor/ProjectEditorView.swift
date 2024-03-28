@@ -22,7 +22,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
     var tickWidth: CGFloat = 1
     var barHeight: CGFloat = 1
     
-    @State private var projectName: String = ""
+    @State private var proxyProjectName: String = ""
     @State private var isVisualize: Bool = false
     @State private var isShowingUsedTrackView = false
     @State private var isShowingAllTrackListView = false
@@ -49,10 +49,11 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 .foregroundColor(Color.onBackgroundColor)
                         }
                         
-                        Spacer()
-                        
-                        Text(viewModel.state.project?.name ?? "")
-                            .bold()
+                        TextField("Название проекта", text: $proxyProjectName)
+                            .onSubmit {
+                                viewModel.handle(.onChangeName(projectName: proxyProjectName))
+                            }
+                            .disableAutocorrection(true)
                         
                         Spacer()
                         
@@ -87,6 +88,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             .padding(.leading,10)
                             
                             Spacer()
+                            
                             ZStack {
                                 HStack {
                                     ForEach(1..<tactCount) { _ in
@@ -157,6 +159,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             }
                             
                             Spacer()
+                            
                             HStack {
                                 Button(action: {
                                     viewModel.handle(.recordTap)
@@ -202,7 +205,6 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                 .onTapGesture {
                                     
                                 }
-//                                .padding(.horizontal, 50)
                         }
                     }
                     .background(Color.backgroundColorForScreen)
@@ -214,6 +216,13 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         self.isShowingUsedTrackView = false
                         
                     }
+                }
+                .onAppear {
+                    guard let projectName = viewModel.state.project?.name else {
+                        return
+                    }
+                    
+                    proxyProjectName = projectName
                 }
             case .loading:
                 ProgressView()

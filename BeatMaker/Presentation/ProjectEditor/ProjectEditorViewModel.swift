@@ -10,6 +10,7 @@ import SwiftUI
 
 enum ProjectEditorViewEvent {
     case onLoadData(projectId: String?)
+    case onChangeName(projectName: String)
     
     case tapBackButton
     case tapVisualizationButton
@@ -90,6 +91,8 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         switch event {
         case .onLoadData(projectId: let projectId):
             loadData(projectId: projectId)
+        case .onChangeName(projectName: let projectName):
+            changeName(projectName: projectName)
         case .tapBackButton:
             stopProcess()
             saveData() { [weak self] _ in
@@ -149,7 +152,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         }
         
         guard let projectId else {
-            projectProvider.create(project: .init(metronomeBpm: 130, name: UUID().uuidString)) { [weak self] project, isCompleted in
+            projectProvider.create(project: .init(metronomeBpm: 130, name: "")) { [weak self] project, isCompleted in
                 if isCompleted {
                     self?.state.project = project
                     self?.countTotalTime()
@@ -187,6 +190,10 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
                 transition(projectId)
             }
         }
+    }
+    
+    func changeName(projectName: String) {
+        state.project?.name = projectName
     }
     
     private func stopProcess() {
