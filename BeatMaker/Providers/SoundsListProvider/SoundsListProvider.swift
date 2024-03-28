@@ -13,4 +13,6 @@ protocol SoundsListProvider {
     func add(sound: Sound, completion: @escaping (_ isCompleted: Bool) -> Void)
     
     func delete(by soundId: String, completion: @escaping (_ isCompleted: Bool) -> Void)
+    
+    func save(soundsList: [Sound], competion: @escaping (_ isCompleted: Bool) -> Void)
 }

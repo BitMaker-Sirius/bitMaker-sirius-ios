@@ -26,5 +26,7 @@ final class SoundObject: Object {
         self.audioFileId = sound.audioFileId
         self.name = sound.name
         self.emoji = sound.emoji
+        self.networkUrl = sound.networkUrl
+        self.storageUrl = sound.storageUrl
     }
 }

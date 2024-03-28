@@ -63,20 +63,24 @@ class SoundsListViewModelImp: SoundsListViewModel {
             guard let self else {
                 return
             }
+            
             switch result{
             case .success(let soundArray):
                 for storedSound in soundArray {
                     for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
                         if storedSound.name == key {
                             state.allAvailableSounds.append(storedSound)
+                            print("\(key) from realm")
                         }
                     }
+                    
                 }
             case .failure(_):
                 for (key, value) in fileManager.getAvailableFirebaseSoundsList() {
                     let emoji = String(UnicodeScalar(Array(0x1F601...0x1F64F).randomElement()!)!)
                     let id = UUID().uuidString
                     state.allAvailableSounds.append(Sound(audioFileId: id, name: key, emoji: emoji, networkUrl: value, storageUrl: nil))
+                    print("\(key) from net")
                 }
             }
         }
@@ -87,14 +91,13 @@ class SoundsListViewModelImp: SoundsListViewModel {
                 let id = UUID().uuidString
                 let newSound = Sound(audioFileId: id, name: key, emoji: emoji, networkUrl: value, storageUrl: nil)
                 state.allAvailableSounds.append(newSound)
-                soundsListProvider.add(sound: newSound) { isCompleted in
-                    
-                }
             }
         }
-
         
         state.allAvailableSounds.sort(by: { $0.id > $1.id })
+        for int in state.allAvailableSounds {
+            print("\(int.storageUrl) + \(int.networkUrl)")
+        }
     }
     
     func handle(_ event: SoundsListViewEvent) {
@@ -176,6 +179,7 @@ class SoundsListViewModelImp: SoundsListViewModel {
     }
     
     private func saveData(transition: @escaping (() -> Void)) {
+        
         guard let project = state.project else {
             return
         }
@@ -184,12 +188,18 @@ class SoundsListViewModelImp: SoundsListViewModel {
         
         for someSound in state.allAvailableSounds {
             soundsListProvider.add(sound: someSound) { isCompleted in
-                
+                print("STROREEEEE: \(someSound.storageUrl)")
             }
         }
         
-        projectProvider.saveData(project: project) { isCompleted in
-            transition()
+        projectProvider.saveData(project: project) { [weak self] isCompleted in
+            guard let self else {
+                return
+            }
+            
+            soundsListProvider.save(soundsList: state.allAvailableSounds) { isCompleted in
+                transition()
+            }
         }
     }
     

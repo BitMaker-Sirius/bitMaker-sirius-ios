@@ -39,4 +39,29 @@ final class SoundsListProviderImp: SoundsListProvider {
             completion(isCompleted)
         }
     }
+    
+    func save(soundsList: [Sound], competion: @escaping (_ isCompleted: Bool) -> Void) {
+        soundsList.enumerated().forEach { index, sound in
+            soundDataStorage.get(by: sound.id) { [weak self] result in
+                guard let self else {
+                    return
+                }
+                
+                switch result {
+                case .success(let storageSound):
+                    soundDataStorage.save(by: sound.id, .init(id: sound.id, sound: sound)) { id, isCompleted in
+                        if index == soundsList.count - 1 {
+                            competion(true)
+                        }
+                    }
+                case .failure(let storageSound):
+                    soundDataStorage.save(by: nil, .init(id: sound.id, sound: sound)) { id, isCompleted in
+                        if index == soundsList.count - 1 {
+                            competion(true)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

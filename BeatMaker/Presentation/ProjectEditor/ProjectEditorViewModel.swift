@@ -90,6 +90,9 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
         projectPlaybackService = ProjectPlaybackServiceImp(trackPlaybackService: trackPlaybackService)
         self.projectProvider = projectProvider
         countTotalTime()
+        if let array = state.project?.preparedSounds {
+            selectedSounds = array
+        }
     }
     
     func handle(_ event: ProjectEditorViewEvent) {
@@ -139,7 +142,8 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
             addNewTrackIfNeeded()
         }
         state.choosenSoundId = id
-        state.selectedSound = state.soundsArray.first { $0.id == id }
+        state.selectedSound = state.project?.preparedSounds.first { $0.id == id }
+//        state.selectedSound = state.soundsArray.first { $0.id == id }
     }
     
     func areUuidsSimilar(id1: String, id2: String) -> Bool {
@@ -323,7 +327,7 @@ final class ProjectEditorViewModelImp: ProjectEditorViewModel {
     }
     
     func handleCoordinateChange(_ point: CGPoint) {
-        guard let sound = state.selectedSound, let soundUrl = Bundle.main.url(forResource: sound.audioFileId, withExtension: "mp3") else {
+        guard let sound = state.selectedSound, let storageUrl = sound.storageUrl, let soundUrl = URL(string: storageUrl) else {
             return
         }
         let volume = Double(point.y)
