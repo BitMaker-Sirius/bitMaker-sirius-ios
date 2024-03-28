@@ -43,7 +43,7 @@ struct SoundsListView<ViewModel: SoundsListViewModel>: View {
                         
                         Spacer()
 
-                        Text("Библиотека звуков")
+                        Text(L10n.SoundsList.title)
                             .bold()
 
                         Spacer()
