@@ -31,13 +31,13 @@ struct SpeechVizualizationView<ViewModel: PlayProjectViewModel>: View {
         on: .main,
         in: .common
     ).autoconnect()
-
+    
     
     @State var isRecord = false
     @State var isPlaying = false
     @State var data: [Float] = Array(repeating: 0, count: ConstantsBar.barAmount)
         .map { _ in Float.random(in: 1 ... ConstantsBar.magnitudeLimit) }
-
+    
     var body: some View {
         VStack {
             VStack(spacing: 0) {
@@ -77,7 +77,7 @@ struct SpeechVizualizationView<ViewModel: PlayProjectViewModel>: View {
         .chartYAxis(.hidden)
         .frame(height: 100)
     }
-
+    
     func updateData(_: Date) {
         if viewModel.state.isPlaying  {
             withAnimation(.easeOut(duration: 0.08)) {
@@ -86,15 +86,6 @@ struct SpeechVizualizationView<ViewModel: PlayProjectViewModel>: View {
                 }
             }
         }
-    }
-
-    func playButtonTapped() {
-        if viewModel.state.isPlaying  {
-            audioProcessing.player.pause()
-        } else {
-            audioProcessing.player.play()
-        }
-                isPlaying.toggle()
     }
 }
 

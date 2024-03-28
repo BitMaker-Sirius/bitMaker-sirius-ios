@@ -17,6 +17,7 @@ final class ProjectPlaybackServiceImp: ProjectPlaybackService {
     func play(_ data: Project) {
         data.tracks.forEach { track in
             trackPlaybackService.play(track)
+            ///
         }
     }
     

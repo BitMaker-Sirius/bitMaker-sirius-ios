@@ -15,14 +15,17 @@ enum SpeechVizualizationViewEvent {
 
 struct SpeechVizualizationViewState {
     var isPlayng: Bool = false
+    var project: Project?
 }
 
 protocol SpeechVizualizationViewModel: ObservableObject {
+    
+    var state: SpeechVizualizationViewState { get }
 }
 
 class SpeechVizualizationViewModelImp {
     
-    @Published var state = SpeechVizualizationViewState(isPlayng: false)
+    @Published var state: SpeechVizualizationViewState = .init() 
     static var shared: SpeechVizualizationViewModelImp = .init()
     
     private var engine = AVAudioEngine()
@@ -90,6 +93,17 @@ class SpeechVizualizationViewModelImp {
         vDSP_vsmul(&magnitudes, 1, &scalingFactor, &normalizedMagnitudes, 1, UInt(ConstantsBar.barAmount))
         
         return normalizedMagnitudes
+    }
+    
+    func startMusic() {
+        let audioFile = try! AVAudioFile(forReading: Bundle.main.url(forResource: "mockSound", withExtension: "caf")!)
+        audioFile.framePosition = 0
+        player.scheduleFile(audioFile, at: nil, completionHandler: nil)
+        player.play()
+    }
+    
+    func stopMusic() {
+        player.stop()
     }
     
     
