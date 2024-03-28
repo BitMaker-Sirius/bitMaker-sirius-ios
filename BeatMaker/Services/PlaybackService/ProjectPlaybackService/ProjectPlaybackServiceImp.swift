@@ -16,14 +16,19 @@ final class ProjectPlaybackServiceImp: ProjectPlaybackService {
     
     func play(_ data: Project) {
         data.tracks.forEach { track in
-            trackPlaybackService.play(track)
-            ///
+            trackPlaybackService.play(track)///
+            ///if tracks.isSpeech == true {
+            ///audioProcessing.startMusic() - здесь по сути надо
+            ///}
         }
     }
     
     func stop(_ data: Project) {
         data.tracks.forEach { track in
-            trackPlaybackService.stop(track)
+            trackPlaybackService.stop(track)///
+            ///if tracks.isSpeech == true {
+            ///audioProcessing.stopMusic() - здесь по сути надо
+            ///}
         }
     }
 }

@@ -147,7 +147,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         projectPlaybackService.play(project)
         playbackTimer?.invalidate()
         playbackTimer = Timer.scheduledTimer(timeInterval: timerPlus, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
-        audioProcessing.startMusic()
+        audioProcessing.startMusic() //!
     }
     
     @objc private func updateCurrentTime() {
@@ -171,7 +171,7 @@ class PlayProjectViewModelImp: PlayProjectViewModel {
         playbackTimer = nil
         state.currentTime = 0
         state.formatTime = formatTime(state.currentTime)
-        audioProcessing.stopMusic()
+        audioProcessing.stopMusic() //!
     }
     
     private func formatTime(_ time: Double) -> String {

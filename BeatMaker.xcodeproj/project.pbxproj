@@ -525,6 +525,7 @@
 		63C562992BB461DA0066B453 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				00E4C0B32BB57024007C3E89 /* SpeechVizualization */,
 				63C562942BB42D090066B453 /* TrackVisualization */,
 			);
 			path = Subviews;
@@ -598,7 +599,6 @@
 		728CE1132BAAD9C700542975 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				00E4C0B32BB57024007C3E89 /* SpeechVizualization */,
 				5EF976622BB215770015A54C /* Base */,
 				63CD48BD2BB18C210033CF77 /* Main */,
 				728CE11F2BAADD1D00542975 /* ProjectEditor */,

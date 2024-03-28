@@ -36,7 +36,7 @@ struct SpeechVizualizationView<ViewModel: PlayProjectViewModel>: View {
     @State var isRecord = false
     @State var isPlaying = false
     @State var data: [Float] = Array(repeating: 0, count: ConstantsBar.barAmount)
-        .map { _ in Float.random(in: 1 ... ConstantsBar.magnitudeLimit) }
+        .map { _ in Float.random(in: 1 ... 1) }
     
     var body: some View {
         VStack {
