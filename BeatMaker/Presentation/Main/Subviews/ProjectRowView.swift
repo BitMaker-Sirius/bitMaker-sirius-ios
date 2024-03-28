@@ -10,7 +10,6 @@ import SwiftUI
 struct ProjectRow<ParentViewModel: MainViewModel>: View {
     @ObservedObject var parentViewModel: ParentViewModel
     @ObservedObject var project: Project
-    let onSuccessfullyDeleted: () -> Void
     
     var body: some View {
         HStack {
@@ -35,8 +34,7 @@ struct ProjectRow<ParentViewModel: MainViewModel>: View {
                                 .onEnded {
                                     parentViewModel.handle(
                                         .tapDeleteButton(
-                                            projectId: project.id,
-                                            onSuccessfullyDeleted: onSuccessfullyDeleted
+                                            projectId: project.id
                                         )
                                     )
                                 }

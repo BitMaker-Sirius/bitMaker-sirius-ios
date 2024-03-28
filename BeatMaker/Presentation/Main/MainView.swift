@@ -17,7 +17,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     
     private var startHeight: CGFloat {
         if self.viewModel.state.projectsList.isEmpty {
-            return 200
+            return Constants.emptyTrackListHeight
         }
         
         return min(
@@ -32,7 +32,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     
     private var maxHeight: CGFloat {
         if self.viewModel.state.projectsList.isEmpty {
-            return 200
+            return Constants.emptyTrackListHeight
         }
         
         return min(
@@ -144,38 +144,18 @@ struct MainView<ViewModel: MainViewModel>: View {
                     let delta = abs(value.translation.height)
                     
                     if value.translation.height >= 0 {
-                        currentHeight = CGFloat(
-                            max(
-                                currentHeight - delta,
-                                startHeight
-                            )
-                        )
+                        viewModel.handle(.scrollDown(delta: delta))
                     } else {
-                        currentHeight = CGFloat(
-                            min(
-                                currentHeight + delta,
-                                maxHeight
-                            )
-                        )
+                        viewModel.handle(.scrollUp(delta: delta))
                     }
                 }
                 .onEnded { value in
                     let delta = abs(value.translation.height)
                     
                     if value.translation.height > 0 {
-                        currentHeight = CGFloat(
-                            max(
-                                currentHeight - delta,
-                                startHeight
-                            )
-                        )
+                        viewModel.handle(.scrollDown(delta: delta))
                     } else {
-                        currentHeight = CGFloat(
-                            min(
-                                currentHeight + delta,
-                                maxHeight
-                            )
-                        )
+                        viewModel.handle(.scrollUp(delta: delta))
                     }
                 }
             )
@@ -185,10 +165,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                     ForEach(viewModel.state.projectsList, id: \.id) { project in
                         ProjectRow(
                             parentViewModel: viewModel,
-                            project: project,
-                            onSuccessfullyDeleted: {
-                                self.currentHeight = getActualTrackListHeight()
-                            }
+                            project: project
                         )
                         .frame(height: 56)
                         .backgroundColor(colorScheme)
@@ -206,11 +183,11 @@ struct MainView<ViewModel: MainViewModel>: View {
         .ignoresSafeArea(edges: .bottom)
         .backgroundColor(colorScheme)
         .onAppear() {
-            currentHeight = startHeight
+//            currentHeight = startHeight
         }
         .clipShape(RoundedRectangle(cornerRadius: 16))
         
-        .frame(height: currentHeight)
+        .frame(height: viewModel.state.projectsListHeight)
 
         .onDisappear {
             timer.upstream.connect().cancel()
@@ -238,7 +215,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     
     private func getActualTrackListHeight() -> CGFloat {
         if self.viewModel.state.projectsList.isEmpty {
-            return 200
+            return Constants.emptyTrackListHeight
         }
         
         return min(
@@ -254,6 +231,7 @@ struct MainView<ViewModel: MainViewModel>: View {
 
 enum Constants {
     static let trackRowHeight = 56
+    static let emptyTrackListHeight: CGFloat = 200
     static let listTitleHeight = 130
     static let spacerHeight = 8
 }
