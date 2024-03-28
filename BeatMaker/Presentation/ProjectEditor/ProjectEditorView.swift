@@ -50,9 +50,9 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         }
                         
                         TextField("Название проекта", text: $proxyProjectName)
-                            .onSubmit {
+                            .onChange(of: proxyProjectName, { oldValue, newValue in
                                 viewModel.handle(.onChangeName(projectName: proxyProjectName))
-                            }
+                            })
                             .disableAutocorrection(true)
                         
                         Spacer()
