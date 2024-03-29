@@ -34,7 +34,10 @@ final class FileManagerImp: FileManagerProtocol {
         FirebaseAudioInfo(name: "pulse", emoji: "\u{1f916}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/pulse.mp3?alt=media&token=824237fd-264b-4af7-b459-beada300de10",
         FirebaseAudioInfo(name: "duck quack", emoji: "\u{1f986}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/quack.mp3?alt=media&token=f90b1583-fbe9-48ee-a16b-b6821dce9e5b",
         FirebaseAudioInfo(name: "snap", emoji: "\u{1fa87}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snap.mp3?alt=media&token=61cd6ca6-4464-43ac-9572-159ca14319ba",
-        FirebaseAudioInfo(name: "snare", emoji: "\u{1f941}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snare.mp3?alt=media&token=ff4ceafc-25a9-45f1-b6f6-fb00f6c809a5"
+        FirebaseAudioInfo(name: "snare", emoji: "\u{1f941}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/snare.mp3?alt=media&token=ff4ceafc-25a9-45f1-b6f6-fb00f6c809a5",
+        FirebaseAudioInfo(name: "guitar", emoji: "\u{1f3b8}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/guitar.mp3?alt=media&token=5aaeb70b-bb96-466a-a3a9-19c4a881ebe0",
+        FirebaseAudioInfo(name: "piano", emoji: "\u{1f3b9}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/piano.mp3?alt=media&token=f15aabc9-9c95-41cf-b9ba-3a45683f5af0",
+        FirebaseAudioInfo(name: "trumpet ", emoji: "\u{1f3ba}"): "https://firebasestorage.googleapis.com/v0/b/sirius-bitbeat.appspot.com/o/trumpet.mp3?alt=media&token=823774ad-483b-4938-bbb4-ebc3cc2d19d2",
     ]
     
     init(networkService: NetworkManager, audioDataStorage: any AudioDataStorage, imageDataStorage: any ImageDataStorage) {

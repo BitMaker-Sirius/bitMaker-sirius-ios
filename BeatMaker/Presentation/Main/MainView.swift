@@ -185,6 +185,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 .ignoresSafeArea()
             }
         }
+        .padding([.leading, .trailing])
         .ignoresSafeArea(edges: .bottom)
         .backgroundColor(colorScheme)
         .onAppear() {
