@@ -168,6 +168,8 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             Spacer()
                             
                             HStack {
+                                Spacer()
+                                
                                 Button(action: {
                                     viewModel.handle(.recordTap)
                                 }) {

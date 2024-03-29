@@ -180,11 +180,13 @@ struct MainView<ViewModel: MainViewModel>: View {
                 HStack {
                     Text("Самое время сделать трек!")
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.bottom, 75)
+                        .padding(.bottom, 90)
                 }
                 .ignoresSafeArea()
+                .padding(.bottom, 0)
             }
         }
+        .padding([.leading, .trailing])
         .ignoresSafeArea(edges: .bottom)
         .backgroundColor(colorScheme)
         .onAppear() {
@@ -303,6 +305,7 @@ struct MainView<ViewModel: MainViewModel>: View {
         .onTapGesture {
             viewModel.handle(.tapEditProject(projectId: project.id))
         }
+        .background()
     }
 }
 
