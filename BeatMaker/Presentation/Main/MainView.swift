@@ -180,9 +180,10 @@ struct MainView<ViewModel: MainViewModel>: View {
                 HStack {
                     Text("Самое время сделать трек!")
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.bottom, 75)
+                        .padding(.bottom, 90)
                 }
                 .ignoresSafeArea()
+                .padding(.bottom, 0)
             }
         }
         .padding([.leading, .trailing])
