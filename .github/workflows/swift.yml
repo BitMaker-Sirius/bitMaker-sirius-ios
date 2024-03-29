@@ -26,7 +26,7 @@ jobs:
         run: xcodebuild build -project BeatMaker.xcodeproj -scheme BeatMaker clean build -sdk iphoneos CODE_SIGNING_ALLOWED=No
         
       - name: Unit Tests
-        run: xcodebuild test-without-building -scheme BeatMaker -project BeatMaker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
+        run: xcodebuild test -scheme BeatMaker -project BeatMaker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
 
       - name: Lint code
         run: git diff --cached --name-only | grep "\.swift" | while read filename; do swiftlint lint --path "$filename"; done

@@ -36,12 +36,13 @@ final class Assembly {
     private lazy var mainViewModel: MainViewModelImp = {
         MainViewModelImp(
             projectsListProvider: projectsListProvider,
-            projectPlaybackService: projectPlaybackService
+            projectPlaybackService: projectPlaybackService,
+            fileManager: fileManager
         )
     }()
     
     private lazy var projectEditorViewModel: ProjectEditorViewModelImp = {
-        ProjectEditorViewModelImp(projectProvider: projectProvider)
+        ProjectEditorViewModelImp(projectProvider: projectProvider, fileManager: fileManager)
     }()
     
     private lazy var playProjectViewModel: PlayProjectViewModelImp = {

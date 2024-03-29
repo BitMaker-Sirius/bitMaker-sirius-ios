@@ -30,9 +30,9 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
     private let maxVolumeValue: CGFloat = 1
     
     weak var delegate: (any ProjectEditorViewModel)?
-    
-    init(delegate: (any ProjectEditorViewModel)? = nil) {
-        self.delegate = delegate
+    var handle: (CGPoint) -> Void
+    init(handle: @escaping (CGPoint) -> Void) {
+        self.handle = handle
         self.state = state
         self.viewState = viewState
     }
@@ -41,7 +41,7 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
         state.pitch = min(max(mapXToValue(currentPoint.x), -pitchValue), pitchValue)
         state.volume = min(max(mapYToValue(currentPoint.y), minVolumeValue), maxVolumeValue)
         state.selectedPoint = CGPoint(x: state.pitch, y: state.volume)
-        delegate?.handleCoordinateChange(state.selectedPoint)
+        handle(state.selectedPoint)
     }
     
     func mapValueToX() -> CGFloat {
