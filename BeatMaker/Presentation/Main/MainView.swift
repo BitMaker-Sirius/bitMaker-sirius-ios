@@ -79,6 +79,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                         .blur(radius: AnimationProperties.blurRadius)
                         
                         createTrackButton
+                        .accessibilityIdentifier("createTrackButton")
                         
                         VStack {
                             Spacer()

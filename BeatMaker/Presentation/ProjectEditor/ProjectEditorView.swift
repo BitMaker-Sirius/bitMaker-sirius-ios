@@ -220,6 +220,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     
                     proxyProjectName = projectName
                 }
+                .accessibilityIdentifier("projectEditorView")
             case .loading:
                 ProgressView()
             case .error:

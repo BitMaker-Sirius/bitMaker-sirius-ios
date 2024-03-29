@@ -99,10 +99,23 @@
 		E98046C62BB5AC32004EBBD7 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */; };
 		E98046C82BB5AC77004EBBD7 /* ProjectEditorViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */; };
 		E98046CA2BB5ACF3004EBBD7 /* SoundsListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */; };
+		E9C4D6EA2BB5E54E00E74E73 /* BeatMakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D6E92BB5E54E00E74E73 /* BeatMakerUITests.swift */; };
+		E9C4D6EC2BB5E54E00E74E73 /* BeatMakerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4D6EB2BB5E54E00E74E73 /* BeatMakerUITestsLaunchTests.swift */; };
+		E9C4D6F42BB5EAD700E74E73 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E9C4D6F32BB5EAD700E74E73 /* Realm */; };
+		E9C4D6F62BB5EADA00E74E73 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9C4D6F52BB5EADA00E74E73 /* RealmSwift */; };
+		E9C4D6F82BB5EAE100E74E73 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E9C4D6F72BB5EAE100E74E73 /* Realm */; };
+		E9C4D6FA2BB5EAE100E74E73 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9C4D6F92BB5EAE100E74E73 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		E98046C02BB59B01004EBBD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 728CE0F62BAAC9FF00542975 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 728CE0FD2BAAC9FF00542975;
+			remoteInfo = BeatMaker;
+		};
+		E9C4D6ED2BB5E54E00E74E73 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 728CE0F62BAAC9FF00542975 /* Project object */;
 			proxyType = 1;
@@ -207,6 +220,9 @@
 		E98046C52BB5AC32004EBBD7 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		E98046C72BB5AC77004EBBD7 /* ProjectEditorViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditorViewTests.swift; sourceTree = "<group>"; };
 		E98046C92BB5ACF3004EBBD7 /* SoundsListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsListViewTests.swift; sourceTree = "<group>"; };
+		E9C4D6E72BB5E54E00E74E73 /* BeatMakerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeatMakerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C4D6E92BB5E54E00E74E73 /* BeatMakerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerUITests.swift; sourceTree = "<group>"; };
+		E9C4D6EB2BB5E54E00E74E73 /* BeatMakerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatMakerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +239,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C4D6FA2BB5EAE100E74E73 /* RealmSwift in Frameworks */,
+				E9C4D6F82BB5EAE100E74E73 /* Realm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C4D6E42BB5E54E00E74E73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9C4D6F62BB5EADA00E74E73 /* RealmSwift in Frameworks */,
+				E9C4D6F42BB5EAD700E74E73 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,7 +610,9 @@
 			children = (
 				728CE1002BAAC9FF00542975 /* BeatMaker */,
 				E98046BD2BB59B01004EBBD7 /* BeatMakerTests */,
+				E9C4D6E82BB5E54E00E74E73 /* BeatMakerUITests */,
 				728CE0FF2BAAC9FF00542975 /* Products */,
+				E9C4D6F22BB5EAD700E74E73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -592,6 +621,7 @@
 			children = (
 				728CE0FE2BAAC9FF00542975 /* BeatMaker.app */,
 				E98046BC2BB59B01004EBBD7 /* BeatMakerTests.xctest */,
+				E9C4D6E72BB5E54E00E74E73 /* BeatMakerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -744,6 +774,22 @@
 			path = BeatMakerTests;
 			sourceTree = "<group>";
 		};
+		E9C4D6E82BB5E54E00E74E73 /* BeatMakerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E9C4D6E92BB5E54E00E74E73 /* BeatMakerUITests.swift */,
+				E9C4D6EB2BB5E54E00E74E73 /* BeatMakerUITestsLaunchTests.swift */,
+			);
+			path = BeatMakerUITests;
+			sourceTree = "<group>";
+		};
+		E9C4D6F22BB5EAD700E74E73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -782,9 +828,35 @@
 				E98046C12BB59B01004EBBD7 /* PBXTargetDependency */,
 			);
 			name = BeatMakerTests;
+			packageProductDependencies = (
+				E9C4D6F72BB5EAE100E74E73 /* Realm */,
+				E9C4D6F92BB5EAE100E74E73 /* RealmSwift */,
+			);
 			productName = BeatMakerTests;
 			productReference = E98046BC2BB59B01004EBBD7 /* BeatMakerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E9C4D6E62BB5E54E00E74E73 /* BeatMakerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9C4D6F12BB5E54E00E74E73 /* Build configuration list for PBXNativeTarget "BeatMakerUITests" */;
+			buildPhases = (
+				E9C4D6E32BB5E54E00E74E73 /* Sources */,
+				E9C4D6E42BB5E54E00E74E73 /* Frameworks */,
+				E9C4D6E52BB5E54E00E74E73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9C4D6EE2BB5E54E00E74E73 /* PBXTargetDependency */,
+			);
+			name = BeatMakerUITests;
+			packageProductDependencies = (
+				E9C4D6F32BB5EAD700E74E73 /* Realm */,
+				E9C4D6F52BB5EADA00E74E73 /* RealmSwift */,
+			);
+			productName = BeatMakerUITests;
+			productReference = E9C4D6E72BB5E54E00E74E73 /* BeatMakerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -800,6 +872,10 @@
 						CreatedOnToolsVersion = 14.3;
 					};
 					E98046BB2BB59B01004EBBD7 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 728CE0FD2BAAC9FF00542975;
+					};
+					E9C4D6E62BB5E54E00E74E73 = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = 728CE0FD2BAAC9FF00542975;
 					};
@@ -824,6 +900,7 @@
 			targets = (
 				728CE0FD2BAAC9FF00542975 /* BeatMaker */,
 				E98046BB2BB59B01004EBBD7 /* BeatMakerTests */,
+				E9C4D6E62BB5E54E00E74E73 /* BeatMakerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -849,6 +926,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E98046BA2BB59B01004EBBD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C4D6E52BB5E54E00E74E73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -951,6 +1035,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9C4D6E32BB5E54E00E74E73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9C4D6EA2BB5E54E00E74E73 /* BeatMakerUITests.swift in Sources */,
+				E9C4D6EC2BB5E54E00E74E73 /* BeatMakerUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -958,6 +1051,11 @@
 			isa = PBXTargetDependency;
 			target = 728CE0FD2BAAC9FF00542975 /* BeatMaker */;
 			targetProxy = E98046C02BB59B01004EBBD7 /* PBXContainerItemProxy */;
+		};
+		E9C4D6EE2BB5E54E00E74E73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 728CE0FD2BAAC9FF00542975 /* BeatMaker */;
+			targetProxy = E9C4D6ED2BB5E54E00E74E73 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1218,6 +1316,57 @@
 			};
 			name = Release;
 		};
+		E9C4D6EF2BB5E54E00E74E73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RJHU68G7B9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pavel.BeatMakerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BeatMaker;
+			};
+			name = Debug;
+		};
+		E9C4D6F02BB5E54E00E74E73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RJHU68G7B9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pavel.BeatMakerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BeatMaker;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1248,6 +1397,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E9C4D6F12BB5E54E00E74E73 /* Build configuration list for PBXNativeTarget "BeatMakerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9C4D6EF2BB5E54E00E74E73 /* Debug */,
+				E9C4D6F02BB5E54E00E74E73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1268,6 +1426,26 @@
 			productName = Realm;
 		};
 		5EF976522BB0FCB30015A54C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		E9C4D6F32BB5EAD700E74E73 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E9C4D6F52BB5EADA00E74E73 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		E9C4D6F72BB5EAE100E74E73 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E9C4D6F92BB5EAE100E74E73 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5EF9764F2BB0FCB20015A54C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

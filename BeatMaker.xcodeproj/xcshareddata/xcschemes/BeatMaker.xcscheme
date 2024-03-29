@@ -49,6 +49,17 @@
                ReferencedContainer = "container:BeatMaker.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E9C4D6E62BB5E54E00E74E73"
+               BuildableName = "BeatMakerUITests.xctest"
+               BlueprintName = "BeatMakerUITests"
+               ReferencedContainer = "container:BeatMaker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
