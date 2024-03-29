@@ -20,7 +20,7 @@ struct TrackVisualizationView<ViewModel: PlayProjectViewModel>: View {
         ZStack {
             ForEach(viewModel.state.project!.tracks, id: \.self) { track in
                 ForEach(track.points, id: \.startTime) { point in
-                    if viewModel.state.isPlaying && point.startTime <= viewModel.state.currentTime && viewModel.state.currentTime <= point.startTime + 5 {
+                    if viewModel.state.isPlaying && point.startTime <= viewModel.state.currentTime && viewModel.state.currentTime <= point.startTime + 2 {
                         Text((track.sound?.emoji) ?? "😇")
                             .font(.system(size: max(80, (point.volume ?? 10) * 200)))
                             .offset(
