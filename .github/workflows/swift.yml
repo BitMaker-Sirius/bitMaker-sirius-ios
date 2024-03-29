@@ -21,9 +21,6 @@ jobs:
 
       - name: Install Swiftformat
         run: brew install swiftlint
-
-      - name: Build
-        run: xcodebuild build -project BeatMaker.xcodeproj -scheme BeatMaker clean build -sdk iphoneos CODE_SIGNING_ALLOWED=No
         
       - name: Unit Tests
         run: xcodebuild test -scheme BeatMaker -project BeatMaker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
