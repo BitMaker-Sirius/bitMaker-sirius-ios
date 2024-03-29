@@ -305,6 +305,7 @@ struct MainView<ViewModel: MainViewModel>: View {
         .onTapGesture {
             viewModel.handle(.tapEditProject(projectId: project.id))
         }
+        .background()
     }
 }
 
