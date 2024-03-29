@@ -49,6 +49,7 @@ class SoundSettingsGraphViewModel: SoundSettingsGraphViewModeling {
     }
     
     func mapValueToY() -> CGFloat {
+        print(viewState.graphHeight - (state.selectedPoint.y / maxVolumeValue * viewState.graphHeight))
         return viewState.graphHeight - (state.selectedPoint.y / maxVolumeValue * viewState.graphHeight)
     }
     
