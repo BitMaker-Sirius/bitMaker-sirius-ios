@@ -54,16 +54,13 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                     .font(.system(size: 30))
                                     .foregroundColor(Color.onBackgroundColor)
                             }
+                        }.padding(.horizontal, 24).padding(.top, 12)
+
+                        Spacer()
+                        if let tracks = viewModel.state.project?.tracks {
+                            TrackVisualizationView(viewModel: viewModel)
                         }
-                        .padding(.horizontal, 15)
-                        
                         Spacer()
-                        
-                        Text(viewModel.state.project?.name ?? "")
-                            .padding(.top, 12)
-                        
-                        Spacer()
-                        
                         HStack(alignment: .center, spacing: 12) {
                             Text(viewModel.state.formatTime)
                                 .frame(width: 50, height: 20, alignment: .leading)
@@ -71,7 +68,7 @@ struct PlayProjectView<ViewModel: PlayProjectViewModel>: View {
                                 .progressViewStyle(LinearProgressViewStyle())
                                 .padding()
                         }.padding(30)
-                        
+
                         HStack(alignment: .center) {
                             if viewModel.state.isList {
                                 Button {

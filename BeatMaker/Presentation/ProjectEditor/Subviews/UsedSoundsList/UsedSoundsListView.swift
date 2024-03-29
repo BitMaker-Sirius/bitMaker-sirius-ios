@@ -16,7 +16,7 @@ struct UsedTrackViewState {
     var shouldDeleteTrack: Bool = false
     var isDelete: String = "trash.fill"
     var choosenSoundId: String? = nil
-    var usedSoundsArray: [Track] = []
+    var usedTacksArray: [Track] = []
 }
 
 protocol UsedTrackViewModeling: ObservableObject {
@@ -29,36 +29,37 @@ struct UsedTrackView<ViewModel: UsedTrackViewModeling>: View {
     
     @ObservedObject
     var viewModel: ViewModel
-    
+    let totalTime: Double
     
     var body: some View {
         VStack {
             VStack {
-                if viewModel.state.usedSoundsArray.isEmpty {
+                if viewModel.state.usedTacksArray.isEmpty {
                     Text("Записанных звуков нет")
                 } else {
                     ScrollView {
-                        ForEach(viewModel.state.usedSoundsArray, id: \.self) { track in
+                        ForEach(viewModel.state.usedTacksArray, id: \.self) { track in
                             HStack {
                                 TrackView(sound: track.sound ?? Sound(audioFileId: nil, name: "hype"))
                                 
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(height: 35)
-                                        .foregroundColor(.gray)
-                                        .padding(.trailing, 0)
+                                GeometryReader { geometry in
+                                    ZStack(alignment: .leading) {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .frame(height: 35)
+                                            .foregroundColor(.gray.opacity(0.3))
+                                        
+                                            ForEach(track.points, id: \.self) { point in
+                                                RoundedRectangle(cornerRadius: 5)
+                                                    .frame(width: 5, height: 35)
+                                                    .foregroundColor(.black)
+                                                    .offset(x: CGFloat(point.startTime / totalTime) * (geometry.size.width), y: 0)
+                                            }
+                                        
                                     
-                                    HStack {
-                                        ForEach(0..<8) {_ in
-                                            RoundedRectangle(cornerRadius: 5)
-                                                .frame(width: 10, height: 35)
-                                                .foregroundColor(.black)
-                                            Spacer()
-                                        }
                                     }
                                 }
-                                .padding(.leading, 5)
-                                .padding(.trailing, 5)
+                                .frame(height: 35)
+                                .padding(.horizontal, 5)
                                 
                                 
                                 Button(action: {
@@ -73,7 +74,6 @@ struct UsedTrackView<ViewModel: UsedTrackViewModeling>: View {
                                             .foregroundColor(Color.onBackgroundColor)
                                     }
                                 }
-                                
                             }
                             .onTapGesture {
                                 
@@ -94,6 +94,6 @@ struct UsedTrackView<ViewModel: UsedTrackViewModeling>: View {
 
 struct UsedTrackView_Previews: PreviewProvider {
     static var previews: some View {
-        UsedTrackView(viewModel: UsedTrackViewModel())
+        UsedTrackView(viewModel: UsedTrackViewModel(), totalTime: 9)
     }
 }

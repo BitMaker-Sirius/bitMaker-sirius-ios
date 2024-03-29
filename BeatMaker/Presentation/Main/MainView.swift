@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/// Constants for view
+fileprivate enum ConstantsForView {
+    static let ImageSize: CGFloat = 40
+    static let defaultEmoji = "\u{1f600}"
+    static let defaultName = "sound"
+}
+
 struct MainView<ViewModel: MainViewModel>: View {
     @ObservedObject var viewModel: ViewModel
     @Environment(\.colorScheme) var colorScheme
@@ -164,23 +171,23 @@ struct MainView<ViewModel: MainViewModel>: View {
             if !viewModel.state.projectsList.isEmpty {
                 ScrollView {
                     ForEach(viewModel.state.projectsList, id: \.id) { project in
-                        ProjectRow(
-                            parentViewModel: viewModel,
-                            project: project
-                        )
-                        .frame(height: 56)
+                        Spacer()
+                        projectCell(withProject: project)
                         .backgroundColor(colorScheme)
+                        Spacer()
                     }
                 }
             } else {
                 HStack {
                     Text("Самое время сделать трек!")
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.bottom, 75)
+                        .padding(.bottom, 90)
                 }
                 .ignoresSafeArea()
+                .padding(.bottom, 0)
             }
         }
+        .padding([.leading, .trailing])
         .ignoresSafeArea(edges: .bottom)
         .backgroundColor(colorScheme)
         .onAppear() {
@@ -227,6 +234,79 @@ struct MainView<ViewModel: MainViewModel>: View {
             ),
             CGFloat(UIScreen.main.bounds.height / 2)
         )
+    }
+    
+    private func getImagePath(imageId id: String) -> String {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+         return documentsDirectory.appendingPathComponent("Images")
+            .appendingPathComponent("\(String(describing: id)).png").absoluteString
+    }
+    
+    @ViewBuilder
+    func projectCell(withProject project: Project) -> some View {
+        
+        HStack(alignment: .center, spacing: 5) {
+            
+            Spacer()
+            
+            if let imageId = project.image {
+                Image(uiImage: viewModel.state.allImages[imageId] ?? UIImage(systemName: "rectangle.fill.badge.xmark")!)
+                    .resizable()
+                    .frame(width: ConstantsForView.ImageSize+20, height: ConstantsForView.ImageSize+20)
+                    .cornerRadius(ConstantsForView.ImageSize/2+10)
+            } else {
+                Image(uiImage: UIImage(systemName: "rectangle.fill.badge.xmark")!)
+                    .resizable()
+                    .frame(width: ConstantsForView.ImageSize+20, height: ConstantsForView.ImageSize+20)
+                    .cornerRadius(ConstantsForView.ImageSize/2+10)
+            }
+
+            Spacer()
+            HStack() {
+                VStack(alignment: .listRowSeparatorLeading) {
+                    Text(project.name)
+                        .font(.system(size: 18))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.onBackgroundColor)
+                        .padding(.top, 10)
+                    
+                    Text("Нажмите для редактирования")
+                        .font(.system(size: 14))
+                        .fontWeight(.thin)
+                        .foregroundColor(Color.onBackgroundColor)
+                    
+                }
+                
+                Spacer()
+                
+                HStack(alignment: .center) {
+                    Button {
+                        if viewModel.state.isEditing {
+                            viewModel.handle(.tapDeleteButton(projectId: project.id))
+                        } else {
+                            viewModel.handle(.tapListenProject(projectId: project.id))
+                        }
+                        
+                    } label: {
+                        Image(systemName: viewModel.state.isEditing ? "trash.circle" : "play.circle")
+                            .resizable()
+                            .frame(width: ConstantsForView.ImageSize, height: ConstantsForView.ImageSize)
+                            .foregroundColor(Color.onBackgroundColor)
+                    }
+                }
+                .frame(width: ConstantsForView.ImageSize, height: ConstantsForView.ImageSize)
+            }
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 76)
+        .foregroundColor(.purple)
+        .padding(.vertical, 2)
+        .onTapGesture {
+            viewModel.handle(.tapEditProject(projectId: project.id))
+        }
+        .background()
     }
 }
 

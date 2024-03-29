@@ -120,7 +120,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                     
                     ZStack {
                         VStack {
-                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(delegate: viewModel))
+                            SoundSettingsGraphView(soundSettingsGraphViewModel: SoundSettingsGraphViewModel(handle: viewModel.handleCoordinateChange))
                                 .allowsHitTesting(!isShowingUsedTrackView)
                                 .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
                             
@@ -134,30 +134,42 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                             .padding(.top, 15)
                             .padding(.bottom, 5)
                             
-                            ZStack {
-                                Rectangle()
-                                    .frame(height: 100)
-                                    .foregroundColor(Color.backgroundColor)
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 15)
-                                    .shadow(color: Color.onBackgroundColor.opacity(0.1), radius: 2, x: 0, y: 4)
+                            
                                 
                                 LazyVGrid(columns: columns) {
                                     ForEach(viewModel.state.project?.preparedSounds ?? viewModel.state.soundsArray, id: \.self) {sound in
                                         ButtomSoundView(sound: sound) {
                                             viewModel.setSelectedSound(at: sound.id)
                                         }
-                                        .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.onBackgroundColor.opacity(1) : Color.onBackgroundColor.opacity(0), radius: 8, x: 0, y: 0)
+                                        .shadow(color: viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? Color.onBackgroundColor.opacity(0.6) : Color.onBackgroundColor.opacity(0), radius: 12, x: 0, y: 0)
+                                        .scaleEffect(viewModel.areUuidsSimilar(id1: sound.id, id2: viewModel.state.choosenSoundId ?? "") ? 1.1 : 1)
                                     }
                                     .padding(.top, 5)
+                                    Button(action: {
+                                        viewModel.handle(.tapAddSounds)
+                                    }) {
+                                        Image(systemName: "plus")
+                                            .font(.system(size: 35))
+                                            .foregroundColor(Color.onBackgroundColor)
+                                    }
+                                    .padding(7)
+                                    .background(Color.backgroundColor)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .shadow(color: Color.onBackgroundColor, radius: 1)
+                                    .offset(y: 3)
                                 }
+                                .padding(25)
+                                .background(Color.backgroundColor)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .allowsHitTesting(!isShowingUsedTrackView)
                                 .padding(.horizontal, 25)
-                            }
+                            
                             
                             Spacer()
                             
                             HStack {
+                                Spacer()
+                                
                                 Button(action: {
                                     viewModel.handle(.recordTap)
                                 }) {
@@ -175,16 +187,9 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                                         .font(.system(size: 60))
                                         .foregroundColor(Color.onBackgroundColor)
                                 }
+                                .frame(width: 50, height: 50)
                                 
                                 Spacer()
-                                
-                                Button(action: {
-                                    viewModel.handle(.tapAddSounds)
-                                }) {
-                                    Image(systemName: "plus.circle")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(Color.onBackgroundColor)
-                                }
                             }
                             .allowsHitTesting(!isShowingUsedTrackView)
                             .padding(.horizontal, 40)
@@ -193,7 +198,7 @@ struct ProjectEditorView<ViewModel: ProjectEditorViewModel>: View {
                         .blur(radius: isShowingUsedTrackView ? 3 : 0)
                         
                         if isShowingUsedTrackView {
-                            UsedTrackView(viewModel: viewModel.state.usedTrackViewModel)
+                            UsedTrackView(viewModel: viewModel.state.usedTrackViewModel, totalTime: viewModel.state.totalTime)
                                 .onTapGesture {
                                     
                                 }
