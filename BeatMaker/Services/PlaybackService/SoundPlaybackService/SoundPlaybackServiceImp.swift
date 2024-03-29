@@ -12,6 +12,8 @@ final class SoundPlaybackServiceImp: SoundPlaybackService {
     private var playerNodes: [AVAudioPlayerNode]
     private var timePitchEffects: [AVAudioUnitTimePitch]
     
+    let audioProcessing = SpeechVizualizationViewModelImp.shared
+    
     init() {
         audioEngine = AVAudioEngine()
         playerNodes = []
@@ -67,12 +69,14 @@ final class SoundPlaybackServiceImp: SoundPlaybackService {
         } catch {
             print("Error playing sound: \(error)")
         }
+        print(url)
     }
     
     func stopAllSounds() {
         playerNodes.forEach { player in
             player.stop()
             audioEngine.detach(player)
+            audioProcessing.stopMusic()
         }
         timePitchEffects.forEach { effect in
             audioEngine.detach(effect)

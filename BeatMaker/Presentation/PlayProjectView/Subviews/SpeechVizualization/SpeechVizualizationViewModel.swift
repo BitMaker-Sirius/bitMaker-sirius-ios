@@ -95,8 +95,10 @@ class SpeechVizualizationViewModelImp {
         return normalizedMagnitudes
     }
     
-    func startMusic() {
-        let audioFile = try! AVAudioFile(forReading: Bundle.main.url(forResource: "mockSound", withExtension: "caf")!)
+    
+    // url in the future
+    func startMusic(url :String = "mockSound") {
+        let audioFile = try! AVAudioFile(forReading: Bundle.main.url(forResource: url, withExtension: "caf")!)
         audioFile.framePosition = 0
         player.scheduleFile(audioFile, at: nil, completionHandler: nil)
         player.play()

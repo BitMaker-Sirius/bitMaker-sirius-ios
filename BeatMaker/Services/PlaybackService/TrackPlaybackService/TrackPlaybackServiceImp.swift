@@ -10,6 +10,8 @@ import AVFoundation
 final class TrackPlaybackServiceImp: TrackPlaybackService {
     private let soundPlaybackService: SoundPlaybackService
     
+    let audioProcessing = SpeechVizualizationViewModelImp.shared
+    
     init(soundPlaybackService: SoundPlaybackService) {
         self.soundPlaybackService = soundPlaybackService
     }
@@ -21,6 +23,8 @@ final class TrackPlaybackServiceImp: TrackPlaybackService {
             let volume = Float(point.volume ?? 1.0)
             let pitch = Float(point.pitch ?? 0.0)
             soundPlaybackService.playSound(url: soundUrl, atTime: point.startTime, volume: volume, pitch: pitch)
+//            audioProcessing.startMusic()
+            
         }
     }
     
